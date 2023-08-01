@@ -1,0 +1,74 @@
+% Allow easy definition of starred version of commands
+% Ref: https://tex.stackexchange.com/questions/202504/macro-to-add-starred-version-of-command
+\usepackage{suffix}
+
+% Allow definition of environments with extra final code
+\usepackage{environ}
+
+% Insert a prefix-argument-postfix text only if argument is non-empty
+% Needs to use a savebox to avoid evaluating the argument multiple times
+\makeatletter
+\newsavebox{\boxifnotempty}
+\newcommand{\displayifnotempty}[3]{\sbox\boxifnotempty{#2}\setbox0=\hbox{\usebox{\boxifnotempty}\unskip}%
+\ifdim\wd0=0pt
+\else
+ #1\usebox{\boxifnotempty}#3%
+\fi%
+}
+\newcommand{\ifempty}[2]{\setbox0=\hbox{#1\unskip}%
+\ifdim\wd0=0pt%
+ #2%
+\fi%
+}
+\newcommand{\ifnotempty}[2]{\setbox0=\hbox{#1\unskip}%
+\ifdim\wd0>0pt%
+ #2%
+\fi%
+}
+\makeatother
+
+%introduce the algorithmic environment and the algorithm floats
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+%macros for storing definitions across compilations
+\usepackage{scrlfile}
+
+\makeatletter
+%mark a definition to be stored in the aux file
+\newcommand*\newstoreddef[1]{
+  \BeforeClosingMainAux{%
+    \immediate\write\@auxout{%
+      \string\restoredef{#1}{\csname #1\endcsname}%
+    }%
+  }%
+}
+%used by the aux file to restore the definition
+\newcommand*{\restoredef}[2]{% used at the aux file
+  \expandafter\gdef\csname stored@#1\endcsname{#2}%
+}
+%show the stored definition (user command to ask for the value)
+\newcommand*{\storeddef}[1]{
+  \@ifundefined{stored@#1}{0}{\csname stored@#1\endcsname}%
+}
+\makeatother
+
+%Add values to non-counter definitions (works with non-integers)
+\newcommand{\addtovar}[2]{\pgfmathparse{#1+#2}\xdef#1{\pgfmathresult}}
+\newcommand{\zerovar}[1]{\xdef#1{0}}
+
+%Insert content of a PGF variable 
+\newcommand{\pgfprint}[1]{\pgfmathparse{#1}\pgfmathresult}
+
+%Package to get PDF page numbers
+\usepackage{pageslts}
+%\pagenumbering{arabic}
+%Output content of enviroment both to the document and to the log file
+%In the log file, the content is marked by start/end delimiters, and
+%macros are not expanded.
+\NewEnviron{tee}{\BODY\typeout{Marker Tee [start] ^^J \BODY ^^JMaker Tee [end]}}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% End: 

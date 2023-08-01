@@ -1,0 +1,69 @@
+\usepackage{cite}
+
+%advanced typesetting
+\usepackage{microtype}
+
+%extensions for tables
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{makecell} %introduces \thead and \makecell
+
+%compact paragraph title
+\newcommand{\myparagraph}[1]{\textbf{\emph{#1}}.}
+%\newcommand{\subparagraph}[1]{\emph{#1}.}
+
+%provide options for changing spacing in enumeration environments
+\ifcsname labelindent\endcsname
+\let\labelindent\relax
+\fi
+\usepackage[inline]{enumitem}
+
+%provides subfloats (subcaption replaces subfig and subfigure, but
+%might not be compatible with some classes)
+\usepackage{subfig}
+
+\providecommand{\ie}{i.e.}
+\providecommand{\eg}{e.g.}
+\providecommand{\etal}{et al.}
+
+%set more relaxed constraints on the floats
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\floatpagefraction}{0.7}
+
+%Make an enumeration with a letter+progressive number
+\newenvironment{lenumerate}[2][]
+{\begin{enumerate}[label=(#2\arabic*),leftmargin=0.2in,itemindent=0.15in,#1]}
+{\end{enumerate}}
+
+%Make an letter+progressive number description list
+\newenvironment{ldescription}[2][]
+{\begin{lenumerate}{#2}%
+\let\bitem\item%
+\renewcommand{\item}[1][]{\bitem\textsl{##1}:~}}
+{\end{lenumerate}}
+
+
+ %The following sets the labeling for inline enumerations
+
+\setlist*[enumerate,1]{label={\itshape\arabic*)}}
+
+%Define macro to make paragraph headings always end with a full stop
+\makeatletter
+\newcommand{\paragraphswithstop}{%
+\let\copyparagraph\paragraph%
+\renewcommand\paragraph[1]{\copyparagraph{##1.}}%
+}
+\makeatother
+
+%Package to frame text in boxes
+\usepackage[framemethod=tikz]{mdframed}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% End: 

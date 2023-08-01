@@ -1,0 +1,60 @@
+
+%macro to define other macros for block-colored labels
+\newcommand{\newcolorlabel}[2]{%
+  \expandafter\newcommand\csname #1\endcsname[1]{%
+    \colorbox{#2}{\color{white}\textsf{\textbf{##1}}}}%
+}
+
+%macro to define other macros for comments 
+%
+\newcommand{\newcommenter}[2]{%
+  \expandafter\newcommand\csname #1\endcsname[1]{%
+    \fcolorbox{#2}{#2}{\color{white}\textsf{\textbf{#1}}}
+    {\color{#2}##1}}%
+  %comment to mention commenter
+  \expandafter\newcommand\csname at#1\endcsname{%
+    \fcolorbox{#2}{#2}{\color{white}\textsf{\textbf{@#1}}}
+    {\color{#2}}}%
+  % comment to highlight
+  \expandafter\newcommand\csname #1hl\endcsname[2]{%
+    \colorbox{#2}{\color{white}\textsf{\textbf{#1}}}\sethlcolor{Azure2}\hl{##2}~%
+    \expandafter\ifx\csname commentarrow\endcsname\relax$\leftarrow$\else \commentarrow[#2]\fi~%
+    {\color{#2}##1}}%
+  % comment to strikeout
+  \expandafter\newcommand\csname #1st\endcsname[2]{%
+    \colorbox{#2}{\color{white}\textsf{\textbf{#1}}}\sout{##2}~%
+    \expandafter\ifx\csname commentarrow\endcsname\relax$\leftarrow$\else \commentarrow[#2]\fi~%
+    {\color{#2}##1}}%
+}
+% examples of the macro above
+\newcommenter{TODO}{DodgerBlue1}
+\newcommenter{rtron}{Green3}
+\newcommenter{zyang}{blue}
+%side review pointer
+\newcommand{\toreview}{\tikz[overlay, remember picture]{\coordinate (center); \node[fill=red] at (current page.center |- center){};}}
+
+%introduce the comment environment
+\usepackage{comment}
+
+%enable pdf annotation
+\usepackage{pdfcomment}
+
+%enable highlights
+\usepackage{soul}
+
+%enable strikeout text with the command \sout{}
+\usepackage[normalem]{ulem}
+
+%package for displayed text
+\usepackage{csquotes}
+
+%markup
+\newcommand{\file}[1]{\mbox{\texttt{#1}}}
+\newcommand{\var}[1]{\mbox{\texttt{#1}}}
+
+\newcommand{\function}[3][]{\displayifnotempty{[}{\var{#1}}{]=}\file{\mbox{#2}}(\var{#3})}
+
+\newcommand{\key}[1]{\mbox{\textcolor{DodgerBlue3}{\texttt{#1}}}}
+
+\newcommand{\displayfunction}[3][]{\begin{displayquote}\function[#1]{#2}{#3}\end{displayquote}}
+\newcommand{\vardim}[2]{[\texttt{#1}~$\times$~\texttt{#2}]}

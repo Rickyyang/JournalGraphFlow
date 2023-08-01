@@ -1,0 +1,138 @@
+\begin{thebibliography}{10}
+
+\bibitem{pajares2015overview}
+Gonzalo Pajares.
+\newblock Overview and current status of remote sensing applications based on
+  unmanned aerial vehicles (uavs).
+\newblock {\em Photogrammetric Engineering \& Remote Sensing}, 81(4):281--330,
+  2015.
+
+\bibitem{julian2012distributed}
+Brian~J Julian, Michael Angermann, Mac Schwager, and Daniela Rus.
+\newblock Distributed robotic sensor networks: An information-theoretic
+  approach.
+\newblock {\em The International Journal of Robotics Research},
+  31(10):1134--1154, 2012.
+
+\bibitem{wardega2019resilience}
+Kacper Wardega, Roberto Tron, and Wenchao Li.
+\newblock Resilience of multi-robot systems to physical masquerade attacks.
+\newblock In {\em 2019 IEEE Security and Privacy Workshops (SPW)}, pages
+  120--125. IEEE, 2019.
+
+\bibitem{yang2021multi}
+Ziqi Yang and Roberto Tron.
+\newblock Multi-agent trajectory optimization against plan-deviation attacks
+  using co-observations and reachability constraints.
+\newblock In {\em 2021 60th IEEE Conference on Decision and Control (CDC)},
+  pages 241--247. IEEE, 2021.
+
+\bibitem{yangmulti}
+Ziqi Yang and Roberto Tron.
+\newblock Multi-agent path planning under observation schedule constraints.
+\newblock In {\em 2020 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems (IROS)}, pages 6990--6997. IEEE, 2020.
+
+\bibitem{khamis2015multi}
+Alaa Khamis, Ahmed Hussein, and Ahmed Elmogy.
+\newblock Multi-robot task allocation: A review of the state-of-the-art.
+\newblock {\em Cooperative robots and sensor networks 2015}, pages 31--51,
+  2015.
+
+\bibitem{coltin2010mobile}
+Brian Coltin and Manuela Veloso.
+\newblock Mobile robot task allocation in hybrid wireless sensor networks.
+\newblock In {\em 2010 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems}, pages 2932--2937. IEEE, 2010.
+
+\bibitem{liu2012centralized}
+Chun Liu and Andreas Kroll.
+\newblock A centralized multi-robot task allocation for industrial plant
+  inspection by using a* and genetic algorithms.
+\newblock In {\em Artificial Intelligence and Soft Computing: 11th
+  International Conference, ICAISC 2012, Zakopane, Poland, April 29-May 3,
+  2012, Proceedings, Part II 11}, pages 466--474. Springer, 2012.
+
+\bibitem{jin2003cooperative}
+Yan Jin, Ali~A Minai, and Marios~M Polycarpou.
+\newblock Cooperative real-time search and task allocation in uav teams.
+\newblock In {\em 42nd IEEE International Conference on Decision and Control
+  (IEEE Cat. No. 03CH37475)}, volume~1, pages 7--12. IEEE, 2003.
+
+\bibitem{quinton2023market}
+F{\'e}lix Quinton, Christophe Grand, and Charles Lesire.
+\newblock Market approaches to the multi-robot task allocation problem: a
+  survey.
+\newblock {\em Journal of Intelligent \& Robotic Systems}, 107(2):29, 2023.
+
+\bibitem{cao2012overview}
+Yongcan Cao, Wenwu Yu, Wei Ren, and Guanrong Chen.
+\newblock An overview of recent progress in the study of distributed
+  multi-agent coordination.
+\newblock {\em IEEE Transactions on Industrial informatics}, 9(1):427--438,
+  2012.
+
+\bibitem{alighanbari2005decentralized}
+Mehdi Alighanbari and Jonathan~P How.
+\newblock Decentralized task assignment for unmanned aerial vehicles.
+\newblock In {\em Proceedings of the 44th IEEE Conference on Decision and
+  Control}, pages 5668--5673. IEEE, 2005.
+
+\bibitem{dionne2007multi}
+Dany Dionne and Camille~A Rabbath.
+\newblock Multi-uav decentralized task allocation with intermittent
+  communications: The dtc algorithm.
+\newblock In {\em 2007 American Control Conference}, pages 5406--5411. IEEE,
+  2007.
+
+\bibitem{sariel2005real}
+Sanem Sariel and Tucker Balch.
+\newblock Real time auction based allocation of tasks for multi-robot
+  exploration problem in dynamic environments.
+\newblock In {\em Proceedings of the AAAI-05 Workshop on Integrating Planning
+  into Scheduling}, pages 27--33. sn, 2005.
+
+\bibitem{walsh1998market}
+William~E Walsh and Michael~P Wellman.
+\newblock A market protocol for decentralized task allocation.
+\newblock In {\em Proceedings International Conference on Multi Agent Systems
+  (Cat. No. 98EX160)}, pages 325--332. IEEE, 1998.
+
+\bibitem{sujit2007distributed}
+PB~Sujit and Randy Beard.
+\newblock Distributed sequential auctions for multiple uav task allocation.
+\newblock In {\em 2007 American Control Conference}, pages 3955--3960. IEEE,
+  2007.
+
+\bibitem{choi2009consensus}
+Han-Lim Choi, Luc Brunet, and Jonathan~P How.
+\newblock Consensus-based decentralized auctions for robust task allocation.
+\newblock {\em IEEE transactions on robotics}, 25(4):912--926, 2009.
+
+\bibitem{chung1997spectral}
+Fan~RK Chung.
+\newblock {\em Spectral graph theory}, volume~92.
+\newblock American Mathematical Soc., 1997.
+
+\bibitem{Boyd2011}
+Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, and Jonathan Eckstein.
+\newblock {Distributed Optimization and Statistical Learning via the
+  Alternating Direction Method of Multipliers}.
+\newblock 3(1):1--122, 2011.
+
+\bibitem{bertsekas2000gradient}
+Dimitri~P Bertsekas and John~N Tsitsiklis.
+\newblock Gradient convergence in gradient methods with errors.
+\newblock {\em SIAM Journal on Optimization}, 10(3):627--642, 2000.
+
+\bibitem{article09}
+Xiangru Xu, Paulo Tabuada, Jessy~W Grizzle, and Aaron~D Ames.
+\newblock Robustness of control barrier functions for safety critical control.
+\newblock {\em IFAC-PapersOnLine}, 48(27):54--61, 2015.
+
+\bibitem{lindemann2018control}
+Lars Lindemann and Dimos~V Dimarogonas.
+\newblock Control barrier functions for signal temporal logic tasks.
+\newblock {\em IEEE control systems letters}, 3:96--101, 2018.
+
+\end{thebibliography}

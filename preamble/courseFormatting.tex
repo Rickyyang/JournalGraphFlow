@@ -1,0 +1,50 @@
+%make underscore work without escaping in text mode
+\usepackage{underscore}
+
+%Common style that will be used for titles
+\newcommand{\titlestyle}{\color{DodgerBlue3}\sffamily}
+
+%Perfect 1-inch margins
+\usepackage[margin=1in]{geometry}
+\usepackage[medium,compact]{titlesec}
+\usepackage{longtable}
+\titleformat*{\section}{\titlestyle \Large}
+\titleformat*{\subsection}{\titlestyle \large \itshape}
+
+%Lists (requires enumitem package):
+%Font for description
+\setlist[description]{font=\color{DodgerBlue3}}
+%Compact lists
+\setlist[1]{\labelindent=\parindent}
+\setlist[1]{topsep=3pt, itemsep=0pt}
+
+%Format main title
+\let\prevtitle\title
+\renewcommand{\title}[1]{\prevtitle{\titlestyle #1}}
+\let\prevauthor\author
+\renewcommand{\author}[1]{\prevauthor{\titlestyle #1}}
+\let\prevdate\date
+\renewcommand{\date}[1]{\prevdate{\titlestyle #1}}
+
+%Displayed quotations (used to define an environment for function specification)
+\usepackage{csquotes}
+
+
+%Include code
+\usepackage{listings}
+
+%formatting for the description of a function's input/output arguments
+\mdfdefinestyle{functionspecification}{%
+linecolor=DodgerBlue3,
+rightline=false, topline=false, bottomline=false,
+outerlinewidth=1.35,
+roundcorner=10pt,
+innerleftmargin=1.2em,
+innertopmargin=0.3em,
+innerbottommargin=0.3em,
+leftmargin=1pt,
+skipabove=0.5em,  
+skipbelow=0.5em,  
+backgroundcolor=white}
+
+\newcommand{\dstar}{$\bigstar$}

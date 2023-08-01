@@ -1,0 +1,20 @@
+% activate externalization of figures
+\usetikzlibrary{external}
+
+\tikzexternalize 
+
+%command to insert a Beamer frame from a sketch and externalize with the same name 
+\newcommand{\insertsketchframe}[1]{\section{$\mathrm{#1}$}%
+\tikzsetnextfilename{#1}%
+  \begin{tikzpicture}[scale=0.7]%
+    \input{sketch/#1}%
+  \end{tikzpicture}%
+\endpgfgraphicnamed%
+}
+
+%command to insert a Beamer frame from a tikz drawing and externalize with the same name 
+\newcommand{\inserttikzframe}[1]{\section{$\mathrm{#1}$}%
+\tikzsetnextfilename{#1}%
+\input{tikz/#1}%
+\endpgfgraphicnamed%
+}

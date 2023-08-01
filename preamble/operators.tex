@@ -1,0 +1,104 @@
+%Spaces
+\newcommand{\real}[1]{\mathbb{R}^{#1}{}}
+\newcommand{\complex}[1]{\mathbb{C}^{#1}{}}
+\newcommand{\naturals}[1]{\mathbb{N}^{#1}{}}
+\newcommand{\integers}[1]{\mathbb{Z}^{#1}{}}
+\newcommand{\sphere}[1]{{\mathbb{S}^{#1}}{}}
+\newcommand{\stiefel}{\mathrm{St}}
+\newcommand{\grassmann}{\mathrm{Grass}}
+\newcommand{\GL}{\mathbb{GL}}
+
+%short-hand for matrices
+\newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\newcommand{\Bmat}[1]{\begin{Bmatrix}#1\end{Bmatrix}}
+\newcommand{\pmat}[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+%supertscript operators
+\newcommand{\transpose}{^\mathrm{T}}
+\newcommand{\hermitian}{^\mathrm{H}}
+\newcommand{\inverse}{^{-1}}
+\newcommand{\pinverse}{^\dagger}
+\newcommand{\orth}{^{\bot}}
+\newcommand{\apstar}{^{\ast}}
+
+%parentheses-based operators
+\newcommand{\cross}[1]{[#1]_{\times}\!}
+\newcommand{\crossinv}[1]{[#1]_{\times}^{\textrm{inv}}\!}
+
+%equality
+\newcommand{\defeq}{\doteq}
+
+
+%Norms, absolute values, and inner products
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\newcommand{\frob}[1]{\norm{#1}_F}
+\newcommand{\bigfrob}[1]{\bignorm{#1}_F}
+\newcommand{\metric}[3][]{g_{#1}\left(#2, #3\right)}
+\newcommand{\metrica}[3]{\langle #2, #3\rangle_{#1}}
+
+%Derivatives
+\newcommand{\de}{\mathrm{d}}
+\newcommand{\dert}[1][]{\frac{\de #1}{\de t}}
+\newcommand{\ddert}[1][]{\frac{\de^2 #1}{\de t^2}}
+%Vector
+\newcommand{\vct}[1]{\mathbf{#1}}
+\newcommand{\pder}[2][]{\frac{\partial #1}{\partial #2}}
+%named operators
+\DeclareMathOperator*{\Land}{\bigwedge}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\blkdiag}{blkdiag}
+\DeclareMathOperator{\symm}{sym}
+\DeclareMathOperator{\asym}{skew}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator{\softmin}{softmin}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\vecspan}{span}
+\DeclareMathOperator{\vecnull}{null}
+\DeclareMathOperator{\vecnullity}{nullity}
+\DeclareMathOperator{\vecop}{vec}
+\DeclareMathOperator{\stack}{stack}
+\DeclareMathOperator{\hstack}{hstack}
+\DeclareMathOperator{\vstack}{vstack}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\expm}{expm}
+
+\DeclareMathOperator{\grad}{{grad}}
+\DeclareMathOperator{\D}{D\!}
+\DeclareMathOperator{\Dgrad}{{Dgrad}}
+\DeclareMathOperator{\hess}{{Hess}}
+
+\DeclareMathOperator*{\inj}{inj}
+\DeclareMathOperator{\hull}{hull}
+
+\DeclareMathOperator{\proj}{{proj}}
+
+\DeclareMathOperator*{\logm}{logm}
+\DeclareMathOperator{\Log}{Log}
+\DeclareMathOperator{\LogNorm}{\frac{Log}{\norm{Log}}}
+\DeclareMathOperator{\DLog}{DLog}
+\DeclareMathOperator{\DLogNorm}{D\frac{Log}{\norm{Log}}}
+
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\cvxhull}{co}
+
+\DeclareMathOperator{\dist}{dist}
+
+\DeclareMathOperator*{\bigO}{O}
+
+%\DeclareMathOperator*{\Pr}
+\newcommand{\intersect}{\cap}
+\newcommand{\union}{\cup}
+\DeclareMathOperator*{\Or}{\bigvee}
+
+%text for constrained optimization
+\newcommand{\subjectto}{\textrm{subject to }}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% End: 
+

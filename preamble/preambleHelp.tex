@@ -1,0 +1,15 @@
+\section*{Markup and commenting commands}
+Use the command \var{\textbackslash newcommenter\{cname\}\{color\}} to enable the following commands (substitute \var{cname} with your pseudonim of choice, e.g., \var{rtron}, and \var{color} with a color name supported by the \var{xcolor} package):
+\begin{itemize}
+\item \var{\textbackslash cname\{comment\}}: typeset a colored comment labeled with the pseudonim.
+\item \var{\textbackslash atcname}: use this to refer to another commenter.
+\item \var{\textbackslash cnamehl\{comment\}\{text\}}: use this to highligth a portion of the text and comment on it.
+\end{itemize}
+Examples after using \var{\textbackslash newcommenter\{rtron\}\{Green3\}}:
+\begin{itemize}
+\item \var{\textbackslash rtron\{Ignore this comment\}} produces \rtron{Ignore this comment}.
+\item \var{\textbackslash atrtron} produces \atrtron.
+\item \var{\textbackslash rtronhl\{Sentence is obvious\}\{The sky is blue\}} produces \rtronhl{Sentence is obvious}{The sky is blue}
+\end{itemize}
+
+Use the command \var{\textbackslash sout} to strike out text.

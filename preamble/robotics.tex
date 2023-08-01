@@ -1,0 +1,58 @@
+\tikzset{ax/.style={-latex,line width=2pt}}
+\newcommand{\ax}[5][]{\begin{scope}[xshift=#3,yshift=#4,rotate=#5]%
+    \node at (-0.3,-0.3) {$#1$};%
+    \coordinate (ax#2o) at (0,0);%
+    \draw[ax] (0,0) -- (1,0) node[pos=1.2] (ax#2b) {};%
+    \draw[ax] (0,0) -- (0,1) node[pos=1.2] (ax#2a) {};%
+  \end{scope}}
+
+\newcommand{\axlabels}[3]{\node at (ax#1a) {$#2$};
+  \node at (ax#1b) {$#3$};
+}
+\newcommand{\axup}[3][0]{\begin{scope}[rotate=#1]
+\fill[ax] (ax#2o) circle[radius=3pt];
+\path (ax#2o) ++(0.25,-0.25) node{$#3$};
+\end{scope}
+}
+\newcommand{\axdown}[3]{\begin{scope}[rotate=#3]
+    \draw[line width=2pt] (ax#1o) +(-3pt,-3pt) -- +(3pt,3pt) +(-3pt,3pt) -- +(3pt,-3pt);
+    \path (ax#1o) ++(0.25,-0.25) node{$#2$};
+  \end{scope}
+}
+
+\newcommand{\gpoint}[3][0]{\fill[ax] (#2) circle[radius=3pt];
+  \path (#2) ++(-45+#1:0.3536) node{$#3$};
+}
+
+\tikzset{camera/.style={fill=Sienna1,fill opacity=0.5},%
+image plane/.style={draw=RoyalBlue3,line width=2pt}}
+\newcommand{\camera}[5][]{\begin{scope}[xshift=#3,yshift=#4,rotate=#5]
+\ax[#1]{#2}{0}{0}{0}
+\draw[image plane] (-1.2,1) -- (1.2,1);
+\draw[camera] (0,0) -- (0.5,0.5) -- (-0.5,0.5) -- cycle; 
+\end{scope}}
+
+\newcommand{\gridworld}{\draw[gray] (0,0) grid[step=1cm] (5,5);}
+
+\newcommand{\wframe}{\prescript{w}{}}
+\newcommand{\Wframe}{\prescript{\cW}{}}
+\newcommand{\iframe}{\prescript{i}{}}
+\newcommand{\jframe}{\prescript{j}{}}
+\newcommand{\bframe}[1][]{\prescript{b_{#1}}{}}
+\newcommand{\Bframe}[1][]{\prescript{\cB_{#1}}{}}
+
+\newcommand{\BtoWpose}{(\Wframe R_\cB,\Wframe T_\cB)}
+\newcommand{\BtoWrot}{\Wframe R_\cB}
+\newcommand{\BtoWtransl}{\Wframe T_\cB}
+\newcommand{\BtoWposeVel}{(\Wframe{}\dot{R}_\cB,\Wframe{}\dot{T}_\cB)}
+\newcommand{\BtoWrotVel}{\Wframe{}\dot{R}_\cB}
+\newcommand{\BtoWtranslVel}{\Wframe{}\dot{T}_\cB}
+
+\newcommand{\Bframex}{\Bframe x}
+\newcommand{\Wframex}{\Wframe x}
+
+% shorthand notation for 2-D rotation written as function of theta
+\newcommand{\rottheta}{\left[ \begin{smallmatrix}
+    \cos(\theta) & -\sin(\theta)\\ \sin(\theta) & \cos(\theta)
+  \end{smallmatrix}
+\right]}

@@ -1,0 +1,176 @@
+\input{preamble/courseFormatting}
+
+%Facilities for markers file
+% open file the beginning of the document
+\AtBeginDocument{%
+  \newwrite\markerstream
+  \immediate\openout\markerstream=\jobname.mlg
+}
+% close the file at the end of the document
+\AtEndDocument{%
+  \immediate\closeout\markerstream
+}
+%definition similar to \typeout, but for markers
+\makeatletter
+\newcommand{\markerout}[1]{\begingroup \set@display@protect \immediate \write \markerstream {#1}\endgroup}
+\makeatother
+
+\usetikzlibrary{intersections}
+
+\titleformat{\section}{\titlestyle\large\bfseries}{Problem \thesection:}{0.5ex}{}
+%\titleformat{\subsection}{\normalfont\bfseries}{Problem \thesubsection:}{0.5ex}{}
+\titleformat{\paragraph}[runin]{\titlestyle\normalsize\bfseries}{}{2pt}{}
+
+%Macro for paragraph header for preparation steps to questions
+%\newcommand{\preparation}{\smallskip\par\noindent\textbf{\titlestyle Preparation.~}}
+
+\newcommand{\preparation}[1][]{%
+\smallskip\par\noindent%
+\textbf{\titlestyle Preparation \displayifnotempty{~(}{#1}{)}.~}}
+
+%New custom counter for question
+\newcounter{question}[section]
+
+%Macro for writing points for the current question to the log file.
+\newcommand{\pointmarker}{\typeout{Question points marker [\thesection.\thequestion] [\questionpoints]}}
+
+\makeatletter
+%Makes questions that:
+%- are automatically numbered using the format <sectionNumber>.<questionNumber>
+%- can be referred to using the usual \label-\ref mechanism
+%- if the optional argument is not empty, this is displayed in parenthesis (typically, this will be a \points{n} or a \optional command). If the optional argument is empty, a single point is silently added to the point counter.
+\newcommand{\question}[1][]{%
+\smallskip\par\noindent%
+\refstepcounter{question}\zerovar{\questionpoints}%
+\sbox\boxifnotempty{\textbf{\titlestyle #1}}% for some reason, if the box is saved inside the \textbf{\titlestyle ...} (to avoid repeating the style), the box counts as empty for \ifempty, so I need to repeat the style here.
+\textbf{\titlestyle Question \thesection.\thequestion\displayifnotempty{~(}{\usebox{\boxifnotempty}}{)}.~}%
+\ifempty{\usebox{\boxifnotempty}}{\increasepoints{1}}%
+\def\@currentlabel{{\thesection.\thequestion}}\pointmarker}
+\makeatother
+\newcommand{\hintquestion}[1]{\paragraph{Hint
+    for question \ref{#1}:~}}
+\newcommand{\hint}{\paragraph{Hint:~}}
+
+\newcommand{\answer}[1][]{\smallskip\leavevmode\\\noindent\textbf{Answer \thesection.\thequestion#1:~}}
+
+\newcommand{\updated}[1]{{\color{red} #1}}
+
+\newcolorlabel{labeloptional}{DodgerBlue3}
+\newcommand{\optional}{\labeloptional{optional}}
+\newcolorlabel{labelprovided}{Orange1}
+\newcommand{\provided}{\labelprovided{provided}}
+\newcolorlabel{labelvideo}{OliveDrab3}
+\newcommand{\video}{\labelvideo{video}}
+\newcolorlabel{labelimage}{DarkOrchid2}
+\newcommand{\image}{\labelimage{image}}
+\newcolorlabel{labelcode}{SlateBlue2}
+\newcommand{\code}{\labelcode{code}}
+\newcolorlabel{labelscan}{Chocolate3}
+\newcommand{\scan}{\labelcode{scan}}
+\newcolorlabel{labelnew}{OliveDrab3}
+\newcommand{\lbnew}{\labelnew{new}}
+
+%\newcommand{\optional}{{\titlestyle optional}}
+
+\tikzset{point/.style={inner sep=0pt,fill=black,circle,minimum size=4pt}}
+
+%macros for keeping track of points (total, and for current question)
+\zerovar{\totalpoints}
+\zerovar{\bonuspoints}
+\zerovar{\questionpoints}
+\newcommand{\increasepoints}[1]{\addtovar{\totalpoints}{#1}\addtovar{\questionpoints}{#1}}
+\newcommand{\points}[1]{#1 point\ifthenelse{\equal{#1}{1}}{}{s}\increasepoints{#1}}
+\makeatletter
+\newcommand{\totalpointswithbonus}[1]{\pgfmathparse{\storeddef{totalpoints}+#1}\pgfmathresult\typeout{Total points marker [\pgfmathresult]}}
+\makeatother
+
+\newstoreddef{totalpoints} %remember total number of points in aux file
+
+% answer boxes
+\newcommand{\vspaceboxdelta}{3mm}
+\newcommand{\vspacebox}[1]{\par\bigskip{\tikz{\useasboundingbox (0,-\vspaceboxdelta) rectangle (\textwidth,#1\baselineskip); \draw[gray!20!white,line width=3pt] (-\vspaceboxdelta,-\vspaceboxdelta) rectangle (\textwidth+2*\vspaceboxdelta,#1\baselineskip+\vspaceboxdelta);}}\par}
+\newcommand{\vspaceoneline}{\vspacebox{2}}
+\newcommand{\vspacetwolines}{\vspacebox{3}}
+\newcommand{\vspacethreelines}{\vspacebox{4}}
+\newcommand{\vspacefourlines}{\vspacebox{5}}
+
+% text fields
+\newcommand{\textrowfield}[1]{\par\noindent#1: \enspace\hrulefill}
+
+% formatting for the description of a function's input/output arguments
+\usepackage[framemethod=tikz]{mdframed}
+\mdfdefinestyle{functionspecification}{%
+linecolor=DodgerBlue3,
+rightline=false, topline=false, bottomline=false,
+outerlinewidth=1.35,
+roundcorner=10pt,
+innerleftmargin=1.2em,
+innertopmargin=0.3em,
+innerbottommargin=0.3em,
+leftmargin=1pt,
+skipabove=0.5em,  
+skipbelow=0.5em,  
+backgroundcolor=white}
+\mdfdefinestyle{classspecification}{%
+linecolor=DarkOliveGreen3,
+rightline=false, topline=false, bottomline=false,
+outerlinewidth=1.35,
+roundcorner=10pt,
+innerleftmargin=1.2em,
+innertopmargin=0.3em,
+innerbottommargin=0.3em,
+leftmargin=1pt,
+skipabove=0.5em,  
+skipbelow=0.5em,  
+backgroundcolor=white}
+%Note: I was not able to avoid duplication of options.
+
+\newenvironment{functionspecification}{\markerout{Marker function [start]}\begin{mdframed}[style=functionspecification]}
+{\markerout{Marker function [end]}\end{mdframed}}%
+\newenvironment{classspecification}{\markerout{Marker class [start]}\begin{mdframed}[style=classspecification]}
+{\markerout{Marker class [end]}\end{mdframed}}%
+%\NewEnviron{fdescription}{\par\noindent{\titlestyle Description}: \BODY\markerout{Marker text [description] [start]^^J\BODY^^JMarker text [description] [end]}\par}
+\NewEnviron{fdescription}{\par\noindent{\titlestyle Description}: \BODY\markerout{Marker text [description] [start]^^J\BODY^^JMarker text [description] [end]}\par}
+\newenvironment{cdescription}{\fdescription}{\endfdescription}
+\NewEnviron{frequirements}{\par\noindent{\titlestyle Requirements}: \BODY\markerout{Marker text [requirements] [start]^^J\BODY^^JMarker text [requirements] [end]}\par}
+\newcommand{\cname}[1]{\noindent{\titlestyle Class name}: \var{#1}\par}
+\newenvironment{finputs}{\markerout{Marker argument_group [start] [inputs]}\noindent{\titlestyle Input arguments}\begin{itemize}}{\end{itemize}\markerout{Marker argument_group [end]}}
+\newenvironment{foutputs}[1][Output]{\markerout{Marker argument_group [start] [outputs]}\noindent{\titlestyle #1 arguments}\begin{itemize}}{\end{itemize}\markerout{Marker argument_group [end]}}
+\newcommand{\freturns}[2][]{\noindent{\titlestyle Returns}: \var{#2}\displayifnotempty{ (type }{\var{#1}}{)}}
+\newcommand{\argument}[4][]{\markerout{Marker argument [start]}\markerout{Marker argument [name] [#2]}\var{#2} %
+  \ifnotempty{#1#3}{(\ifnotempty{#3}{\markerout{Marker argument [dimensions] [#3] [#4]}dim. \vardim{#3}{#4}\ifnotempty{#1}{, }}%
+  \displayifnotempty{\markerout{Marker argument [type] [#1]}type }{\var{#1}}{})}\markerout{Marker argument [end]}}
+\newcommand{\argumentscalar}[2][]{\argument[#1]{#2}{}{}}
+\newcommand{\fheader}[3][]{\noindent{\titlestyle Header}: \function[#1]{#2}{#3}\par}
+\newcommand{\fname}[2][Function]{\noindent{\titlestyle #1 name}: \var{#2}\par}
+\newcommand{\ffilename}[1]{\noindent{\titlestyle File name}: \file{#1}\par}
+\newcommand{\functionheader}[3][]{\markerout{Marker function_header [#1] [#2] [#3]}\function[#1]{#2}{#3}\par}
+
+%ROS node specification
+\newenvironment{nodespecification}{\begin{mdframed}[style=functionspecification]%
+\newcommand{\filename}[1]{\par{\titlestyle File name:} \file{##1}}
+\renewenvironment{description}{\par\noindent{\titlestyle Description:}}{\par}%
+\newenvironment{subscribers}{\par\noindent{\titlestyle Subscribes to topics:}}{}%
+\newenvironment{publishers}{\par\noindent{\titlestyle Publishes to topics:}}{}%
+%
+}{\end{mdframed}}
+
+\newcommand{\rostopic}[2]{\var{#1} (type \var{#2})}
+
+% Macros for questions where student need to draw on axes
+\newcommand{\drawingaxes}[1][]{\draw[gray] (-5,-5) grid (5,5);
+  \draw[very thick, -latex] (-5.7,0) -- (5.7,0);
+  \draw[very thick, -latex] (0,-5.7) -- (0,5.7); #1}
+\newcommand{\shifteddrawingaxes}[1][]{
+  \begin{scope}[xshift=15cm]
+    \drawingaxes[#1]
+  \end{scope}
+}
+
+\newcommand{\drawexercise}[2][]{\begin{center}
+\begin{tikzpicture}[scale=0.6]
+  \node[text width=5cm,anchor=west]{#2};
+  \shifteddrawingaxes[#1]
+\end{tikzpicture}
+\end{center}
+}

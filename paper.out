@@ -1,0 +1,14 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Preliminaries}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Ellipsoidal\040reachability\040constraints}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Rapidly-exploring\040Random\040Trees}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Problem\040overview}{}% 5
+\BOOKMARK [1][-]{section.4}{Checkpoint\040graph\040construction}{}% 6
+\BOOKMARK [2][-]{subsection.4.1}{Checkpoints}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.2}{Cross-trajectory\040edges}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.3}{In-trajectory\040edges}{section.4}% 9
+\BOOKMARK [1][-]{section.5}{Co-observation\040planning\040problem}{}% 10
+\BOOKMARK [1][-]{section.6}{Co-observation\040performance}{}% 11
+\BOOKMARK [1][-]{section.7}{Result\040and\040simulation}{}% 12
+\BOOKMARK [1][-]{section.8}{Summary}{}% 13
+\BOOKMARK [1][-]{section*.11}{References}{}% 14

@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2022)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: paper.aux
+The style file: unsrt.bst
+Database file #1: ADMM_planning.bib
+Database file #2: ACC.bib
+Warning--empty journal in Boyd2011
+You've used 22 entries,
+            1791 wiz_defined-function locations,
+            586 strings with 7851 characters,
+and the built_in function-call counts, 6893 in all, are:
+= -- 709
+> -- 210
+< -- 14
++ -- 78
+- -- 56
+* -- 422
+:= -- 951
+add.period$ -- 77
+call.type$ -- 22
+change.case$ -- 21
+chr.to.int$ -- 0
+cite$ -- 23
+duplicate$ -- 342
+empty$ -- 678
+format.name$ -- 56
+if$ -- 1650
+int.to.chr$ -- 0
+int.to.str$ -- 22
+missing$ -- 23
+newline$ -- 113
+num.names$ -- 22
+pop$ -- 85
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 213
+stack$ -- 0
+substring$ -- 592
+swap$ -- 144
+text.length$ -- 14
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 75
+width$ -- 24
+write$ -- 255
+(There was 1 warning)

@@ -1,0 +1,44 @@
+ \input{preamble/courseFormatting}
+
+
+\newlength{\topicwidth}
+\newlength{\topicdatewidth}
+\setlength{\topicdatewidth}{19mm}
+\newlength{\duewidth}
+\setlength{\duewidth}{23mm}
+
+%Create a topictable environment from the longtable environment
+\newenvironment{topictable}[1][2cm]%
+{\newcommand{\picswidth}{#1}\setlength{\topicwidth}{\textwidth-\picswidth-\topicdatewidth-\duewidth-12.5mm}%
+\setcounter{topic}{1}\begin{longtable}{p{\picswidth}p{\topicwidth}p{\topicdatewidth}p{\duewidth}}}%
+{\end{longtable}}
+
+%Prepare counter and relative macros for handling array of class dates
+\newcount\i
+\pgfmathsetcount{\i}{0}
+\def\classdate{\pgfprint{\classdatearray[\i]}\global\advance\i 1\relax}
+
+%Counters for topic and subtopic
+\newcounter{topic}
+\newcounter{subtopic}
+
+%Topichead
+\def\topichead#1#2#3{\rowcolor{SlateGray1}{\setcounter{subtopic}{1}\rule{0pt}{16pt}\titlestyle Topic \arabic{topic}\addtocounter{topic}{1}} & \multicolumn{3}{l}{{\titlestyle #1:} #2 \rule[-8pt]{0pt}{12pt}}\\\tikz[overlay]{\node[anchor=north west,inner sep=0pt]{\includegraphics[width=\picswidth,keepaspectratio]{figures/#3}};}}
+\def\firstsubtopic#1{ & \makecell[{{p{\topicwidth}}}]{\rule{0pt}{14pt}#1}\addtocounter{subtopic}{1}}
+\def\subtopic#1{\\ \cmidrule{2-4} & \makecell[{{p{\topicwidth}}}]{#1}\addtocounter{subtopic}{1}}
+%\def\topicdate#1{& \makecell[{{p{\topicdatewidth}}}]{#1}}
+\newcommand{\topicdate}[1][\classdate]{& \makecell[{{p{\topicdatewidth}}}]{#1}}
+\def\due#1{& \makecell[{{p{\duewidth}}}]{#1}}
+\def\endtopic{\\}
+\newcolorlabel{labelhw}{Orange1}
+\newcommand{\hwdue}[1]{\labelhw{HW #1}}
+\newcolorlabel{paperdue}{Tomato1}
+\newcolorlabel{examdue}{Tomato1}
+\newcolorlabel{labelMH}{DodgerBlue3}
+\newcommand{\mhday}{\labelMH{M-H}~}
+\newcolorlabel{labelqz}{Sienna3}
+\newcommand{\qzdue}[1]{\labelqz{QZ #1}~}
+
+%TODO: Add automatic test to check if a subtopic is the first subtopic, and adjust the formatting accordingly.
+%The subtopic counter is already there, but due to conflicts with the tabular environment, I was not able to include the test inside the \subtopic macro.
+%\def\tpctest{\noalign{\ifnum\value{subtopic}=1{}\else{\hrule}\fi}}

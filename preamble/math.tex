@@ -1,0 +1,42 @@
+%AMS typesetting
+\makeatletter
+\@ifpackageloaded{amsmath}{}{%
+\usepackage[cmex10]{amsmath}%
+}
+\makeatother
+\usepackage{mathtools}
+\usepackage{amssymb,amsfonts}
+\makeatletter
+\@ifundefined{proof}{%
+\usepackage{amsthm}%
+}{}
+\makeatother
+
+\usepackage{mathtools}
+
+%Common math statements environments
+\makeatletter
+\@ifundefined{theorem}{
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{fact}{Fact}
+}{}
+  %SIAM article classes give their own Definition and Remark environments
+\@ifundefined{definition}{
+  \newtheorem{definition}{Definition}
+}
+% \@ifundefined{remark}{
+%   \newtheorem{remark}{Remark}
+% }
+\makeatother
+\newtheorem{problem}{Problem}
+\newtheorem{assumption}{Assumption}
+\newtheorem{property}{Property}
+\newcommand{\rmss}[1]{_{\textrm{#1}}}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% End: 
