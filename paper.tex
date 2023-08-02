@@ -78,6 +78,96 @@ We propose to incorporate redundancy in the form of \emph{sub-team}s of multiple
 
 \section{Preliminaries}
 In this section, we review various mathematical concepts that will provide the foundations and context for our novel constraint.
+
+In this section, we review various mathematical concepts that will provide the foundations and context for our novel constraints.
+
+\subsection{Differentials}
+We define the differential of a map $f(x):\real{m}\to\real{n}$ at a point $x_0$ as the unique matrix $\partial_x f \in\real{n\times m}$ such that
+\begin{equation}\label{equ:dt_to_dx}
+  \left.\dert f\bigl(x(t)\bigr)\right|_{t=0}=\partial_x f\bigl(x(0)\bigr) \dot{x}(0)
+\end{equation}
+where $t\mapsto x(t)\in\real{n}$ is a smooth parametric curve such that $x(0)=x$ with any arbitrary tangent $\dot{x}(0)$. For later part of this paper, we will use $\dot f$ for $\dert f$ and $\partial_x f$ for $\frac{\partial f}{\partial x}$. The differentials $\partial_x f$ is derived through (\ref{equ:dt_to_dx}) having $\dot f$ divided by $\dot x$.
+
+With a slight abuse of notation, we use the same notation $\partial_xf$ for the differential of a matrix-valued function with scalar arguments $f:\real{R}\to\real{m\times n}$  Note that in this case \eqref{equ:dt_to_dx} is still formally correct, although semantically different.
+
+\subsection{Alternating Directions Method of Multipliers (ADMM)}\label{chapter:ADMM review}
+In this section, we briefly review the path planning algorithm based on ADMM constraints discussed in \cite{yangmulti}.
+This algorithm can deal with a variety of types of non-convex and non-smooth optimization constraints that are commonly encountered in trajectory optimization tasks once they are formulated in a certain format.
+The goal of the section is to lay the groundwork for proposing our novel constraint in the following sections.
+
+Let $x_{ij}\in\real{m}$ denote the position of agent $i\in\{1,\ldots,n\}$ at the discrete-time index $j\in[0,\ldots,T]$, with $m$ being the dimension of the workspace, $n$ the number of agents, and $T$ the planning time horizon. Let $\vx=\stack(\{x_{ij}\})$ denote the aggregated vector of all the agents' trajectories over the entire time interval. The goal of the algorithm is to optimize an objective function $\varPhi(\vx)$ on a set $\Omega$ defined by nonlinear constraints. To solve the problem using ADMM, we introduce a new set of variables $\vz=D(\vx)$ to translate the constraints $\Omega$ on $x$ to (typically lower-dimensional) sets of constraints on $\vz$, such that the projection operator on $\zeta$ can be easily implemented (e.g., a constrained distance between two agents is translated into their difference constrained to an origin-centered sphere).
+The new set of constraints $\zeta$ on $z$ is incorporated using an indicator function $\varTheta_\zeta$. The main problem is written as:
+\begin{equation}\label{eq:ADMMSetConstraint_general}
+		\begin{array}{r@{\quad}c}
+    	\min&\varPhi(\vx)+\varTheta_\zeta(\vz) \\
+        s.t.& D(\vx)-\vz=0,
+      \end{array}
+  \end{equation}
+  where $D(\vx)= [D_1(\vx)^T,\dots,D_l(\vx)^T]^T$ is a vertical concatenation of different functions for different constraints.
+
+  And having the update steps shown as:
+  \begin{subequations}\label{eq:ADMMupdate}
+    \begin{align}
+      \label{eq:admm-mod-update-q}\vx^{k+1}&:=\argmin_\vx(\varPhi(\vx^k) +\frac{\rho}{2}\norm{D(\vx)-\vz^k+\vu^k}_2^2)\\
+      \vz^{k+1}&:=\Pi_\zeta(D(\vx^{k+1})+\vu^k) \label{eq:ADMM_constraint_update}\\
+      \vu^{k+1}&:=\vu^k+D(\vx^{k+1})-\vz^{k+1},
+    \end{align}
+  \end{subequations}
+  Previous work in \cite{yangmulti} considered the following types of constraints:
+  \begin{lenumerate}{C}
+  \item \emph{Velocity constraints}: The movement of each agent is constrained by a maximum distance in any direction over a single discrete time step. This constraint could be adapted also to enforce more refined dynamical models.
+  \item \emph{Convex obstacles}: We use convex polygons to model regions defining the boundary of the workspace, as well as solid obstacles that cannot be entered by agents (note that the latter represent a non-convex constraint set from the point of view of the optimization problem). Obstacles with non-convex shapes can be modeled using unions of the convex sets.
+  \item \emph{Waypoints with flexible deadlines}: We give locations that the agents need to visit at any point in a given time window (which can potentially contain a single time). These constraints can also be interpreted as static, trusted cameras that can complement the introspection constraints.
+  \item\label{it:introspection} \emph{Introspection constraints}: In a given time window, agents are asked to remain at a certain distance from each other to detect each other's presence.
+  \end{lenumerate}
+  Constraint~\ref{it:introspection} is the main mechanism that was provided in~\cite{yangmulti} for forcing agents to stay away from the forbidden region. However, this mechanism alone cannot provide strong guarantees in this regard. This motivates the introduction of our novel \emph{ellipsoidal constraints} in Sections~\ref{sec:ellipsoid-point},~\ref{sec:ellipsoide-plane}. This novel constraint is defined with the assumption that the velocity constraints still hold under attack.
+
+  \subsection{Householder rotations}\label{sec:householder}
+
+  To formulate the operator $\Pi_\zeta$ for our novel constraint, we will define a differentiable transformation of the constraint set to a canonical form. This transformation will include a rotation that we derive from a modified version of Householder transformations \cite{householder1958unitary}. With respect to the standard definition, our modification ensures that the final operator is a proper rotation (i.e., not a reflection). We call our version of the operator a \emph{Householder rotation}. In this section we derive Householder rotations and their differentials for the 3-D case; the 2-D case can be easily obtained by embedding it in the $z=0$ plane.
+
+  \begin{definition} Let $\nu_\cF$ and $\nu_\cE$ be two unitary vectors ($\norm{\nu_\cF}=\norm{\nu_\cE}=1$). Define the normalized vector $u$ as
+    \begin{equation}
+      u'=\nu_\cF+\nu_\cE,\quad u =\frac{u'}{\norm{u'}}.
+    \end{equation}
+    The \emph{Householder rotation} $H(\nu_\cF,\nu_\cE)$ is defined as
+    \begin{equation}\label{eq:H definition}
+      H(\nu_\cF,\nu_\cE) = 2 u u\transpose-I.
+    \end{equation}
+  \end{definition}
+  The main property of interest for our application is the fact that $H$ is a rotation mapping $\hat{\nu_\cF}$ to $\hat{\nu_\cE}$, as shown by the following.
+  \begin{proposition}
+    The matrix $H$ has the following properties:
+    \begin{enumerate}
+    \item It is a rotation, i.e.
+      \begin{enumerate}
+      \item\label{it:orthonormality} $H\transpose H=I$;
+      \item\label{it:determinant} $\det(H)=1$.
+      \end{enumerate}
+    \item\label{it:transformation} $\nu_\cE=H \nu_\cF$.
+    \end{enumerate}
+  \end{proposition}
+
+  We compute the differential of $H$ implicitly using the relation \eqref{equ:dt_to_dx}. We will use the notation $\cross{v}:\real{3}\to\real{3\times 3}$ to denote the matrix representation of the cross product with the vector $v$, i.e.,
+  \begin{equation}
+    \bmat{v_1\\v_2\\v_3}\mapsto \bmat{0 & -v_3 &v_2\\v_3 & 0 & -v_1\\-v_2 & v_1 & 0},
+  \end{equation}
+  such that $[v]_\times w=v\times w$ for any $w\in\real{3}$. One can verify by direct computation the following property:
+  \begin{equation}\label{eq:asymmetric to cross}
+    wv\transpose-vw\transpose=\cross{\cross{v}w}.
+  \end{equation}
+  \begin{proposition}
+    Let $\nu_\cF(t)$ represent a parametric curve. Then we have
+    \begin{equation}
+      \dot{H}=H\cross{-2M\dot{\nu}_{\cF}}
+    \end{equation}
+    where the matrix $M\in\real{3\times3}$ is given by
+    \begin{equation}
+      M=[u]_{\times}  \frac{ \left( I - u u\transpose \right) \left( I- \nu_\cF \nu_\cF\transpose \right)} {\norm{u'} \norm{\nu_\cF}}.
+    \end{equation}
+  \end{proposition}
+
+
 \subsection{Ellipsoidal reachability constraints}\label{Chapter:ProblemFormulation}
   The reachability region is defined as the set of locations $x(t)$ that a robot can reach between two given fixed positions:
 
@@ -333,8 +423,66 @@ If we further increase $\cK>4$, we do not get a better result; instead, the plan
 \section{Summary}
 In this chapter, we provide a method to enhance the security of a multi-robot system without sacrificing the performance. This is done by introducing additional robots to perform cross-trajectory co-observations by traveling between different trajectories. We model the unsecured multi-robot trajectories as a checkpoint graph by identifying checkpoints that requires observation and cross-trajectory paths that can safely access the checkpoints from different trajectories. We have shown that the co-observation planning problem across different trajectories can be transformed into a multi flow problem on the graph, and that we can find the minimal number of robot needed to finish the co-observation task.
 
+\appendix
 
+\section{Proof of proposition 1 }
+  \begin{proof}
+    For subclaim~\ref{it:orthonormality}:
+    \begin{equation}
+      H\transpose H=H^2=4uu\transpose u u\transpose - 4uu\transpose +I^2=I,
+    \end{equation}
+    since $u\transpose u=1$.
 
+    For subclaim~\ref{it:determinant}, let $U=\bmat{u & u^\bot_{1},u^\bot_{2}}$, where $u^\bot_{1},u^\bot_{2}$ are two orthonormal vectors such that $I=UU\transpose=uu\transpose + u^\bot_{1}(u^\bot_{1})\transpose+u^\bot_{2}(u^\bot_{2})\transpose$; then, substituting $I$ in \eqref{eq:H definition}, we have that the eigenvalue decomposition of $H$ is given by
+    \begin{equation}
+      H=U\diag(1,-1,-1) U\transpose.
+    \end{equation}
+    Since the determinant of a matrix is equal to the product of the eigenvalues, $\det(H)=1$.
+
+    For subclaim~\ref{it:transformation}, first note that $Hu=2uu\transpose u - u=u$.
+    It follows that the sum of $\nu_\cF$ and $\nu_\cE$ is invariant under $H$:
+    \begin{equation}\label{equ:H(u1+u2)}
+      H(\nu_\cF+\nu_\cE)=H u \norm{\nu_\cF+\nu_\cE}
+      = u\norm{\nu_\cF+\nu_\cE} =\nu_\cF+\nu_\cE,
+    \end{equation}
+    and that their difference is flipped under $H$:
+    \begin{equation}\label{equ:H(u1-u2)}
+      H(\nu_\cF-\nu_\cE) = 2uu\transpose (\nu_\cF-\nu_\cE) - (\nu_\cF-\nu_\cE)^2 = -(\nu_\cF-\nu_\cE).
+    \end{equation}
+    Combining (\ref{equ:H(u1+u2)}) and (\ref{equ:H(u1-u2)}) we obtain
+    \begin{equation}
+      H\nu_\cF = \frac{1}{2}\bigl(H(\nu_\cF+\nu_\cE)+H(\nu_\cF-\nu_\cE)\bigr)
+      = \nu_\cE
+    \end{equation}
+  \end{proof}
+
+\section{Proof or proposition 2}
+\begin{proof}
+    From the definition of $H$ in \eqref{eq:H definition}, we have
+    \begin{equation} \label{equ:H_dot original}
+      \dot H =   2(\dot u u\transpose + u \dot u\transpose)
+    \end{equation}
+
+    Recall that $\dot{u}=\frac{1}{\norm{u'}}(I-uu\transpose)\dot{u}'$ (see, for instance, \cite{Tron:Arxiv14}), which implies $(I-uu\transpose)\dot{u}'=\dot{u}'$. It follows that $\dot{u}$ flips sign under the action of $H\transpose$:
+    \begin{multline}
+      H\transpose \dot u = (2u u\transpose-I)\frac{ \left( I - u u\transpose \right) } {\left\|u'\right\|} \dot u' \\
+      =\frac{1}{\norm{u'}} (2u u\transpose-I-2u u\transpose u u\transpose+u u\transpose)\dot{u}'\\
+      = -\frac{1}{\norm{u'}} (I-u u\transpose)\dot u'
+      = -\dot u
+    \end{multline}
+
+    Inserting $HH\transpose=I$ in (\ref{equ:H_dot original}), and using \ref{eq:asymmetric to cross}, we finally have
+    \begin{equation}
+      \begin{split}
+        \dot H =  &  2H H\transpose(\dot u u\transpose + u \dot u\transpose)
+        =  2 H (-\dot u u\transpose + u \dot u\transpose)\\
+        =  &  -2H [[u]_{\times} \dot u]_{\times} \\
+        = &  -2 H \left[ [u]_{\times}  \frac{ \left( I - u u\transpose \right) \left( I- \nu_\cF \nu_\cF\transpose \right)} {\left\|u'\right\| \left\|\nu_\cF\right\|} \dot{\nu}_\cF\right]_{\times}\\
+        = & -2 H \cross{M \dot{\nu}_\cF},
+      \end{split}
+    \end{equation}
+    which is equivalent to the claim.
+  \end{proof}
 {\small
 \bibliographystyle{unsrt}
 \bibliography{ADMM_planning,ACC}
