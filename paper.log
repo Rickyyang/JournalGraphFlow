@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  1 AUG 2023 14:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  8 AUG 2023 19:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1351,24 +1351,24 @@ Package csquotes Info: ... none found.
 )
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
 
 -- Lines per column: 58 (exact).
 Package nag Info: Attempting subfig hack.
@@ -1395,18 +1395,18 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Info: Redefining \microtypecontext on input line 31.
-Package microtype Info: Applying patch `item' on input line 31.
-Package microtype Info: Applying patch `toc' on input line 31.
-Package microtype Info: Applying patch `eqnum' on input line 31.
-Package microtype Info: Applying patch `footnote' on input line 31.
+LaTeX Info: Redefining \microtypecontext on input line 30.
+Package microtype Info: Applying patch `item' on input line 30.
+Package microtype Info: Applying patch `toc' on input line 30.
+Package microtype Info: Applying patch `eqnum' on input line 30.
+Package microtype Info: Applying patch `footnote' on input line 30.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 31.
+LaTeX Info: Redefining \showhyphens on input line 30.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1419,7 +1419,7 @@ Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 31.
+Package hyperref Info: Link coloring OFF on input line 30.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -1430,26 +1430,16 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count409
 )
-LaTeX Info: Redefining \ref on input line 31.
-LaTeX Info: Redefining \pageref on input line 31.
-LaTeX Info: Redefining \nameref on input line 31.
+LaTeX Info: Redefining \ref on input line 30.
+LaTeX Info: Redefining \pageref on input line 30.
+LaTeX Info: Redefining \nameref on input line 30.
  (./paper.out) (./paper.out)
 \@outlinefile=\write6
 \openout6 = `paper.out'.
 
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 4
+6.
 
-(/usr/local/texlive/2022/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
-File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
-)
-
-LaTeX Warning: Citation `brunner2010infiltrating' on page 1 undefined on input 
-line 50.
-
-
-LaTeX Warning: Citation `forrest_2017' on page 1 undefined on input line 50.
-
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 5
-2.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
@@ -1458,11 +1448,14 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
+(/usr/local/texlive/2022/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
+File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
+)
 (/usr/local/texlive/2022/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 52.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 56.
 
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -1471,7 +1464,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/local/texlive/2022/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 52.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 56.
 
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -1480,28 +1473,21 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 (/usr/local/texlive/2022/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-
-LaTeX Warning: Citation `gammell2014informed' on page 1 undefined on input line
- 54.
-
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-LaTeX Warning: Citation `gammell2014informed' on page 1 undefined on input line
- 56.
 
-
-LaTeX Warning: Citation `wardega2023hola' on page 1 undefined on input line 58.
+LaTeX Warning: Citation `wardega2023hola' on page 1 undefined on input line 62.
 
 
 
 LaTeX Warning: Reference `chapter:cross-trajectory' on page 1 undefined on inpu
-t line 58.
+t line 62.
 
 
-Underfull \vbox (badness 5652) has occurred while \output is active []
+Underfull \vbox (badness 2608) has occurred while \output is active []
 
  [1{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
@@ -1511,30 +1497,28 @@ Underfull \vbox (badness 5652) has occurred while \output is active []
 ]
 
 LaTeX Warning: Reference `chapter:task-assignment' on page 2 undefined on input
- line 61.
+ line 65.
 
-<Figs//co-observ.png, id=48, 398.54779pt x 342.4854pt>
+<Figs//co-observ.png, id=187, 398.54779pt x 342.4854pt>
 File: Figs//co-observ.png Graphic file (type png)
 <use Figs//co-observ.png>
-Package pdftex.def Info: Figs//co-observ.png  used on input line 65.
+Package pdftex.def Info: Figs//co-observ.png  used on input line 69.
 (pdftex.def)             Requested size: 113.39923pt x 97.44734pt.
-<Figs//cross-traj.png, id=50, 398.54779pt x 342.4854pt>
+<Figs//cross-traj.png, id=189, 398.54779pt x 342.4854pt>
 File: Figs//cross-traj.png Graphic file (type png)
 <use Figs//cross-traj.png>
-Package pdftex.def Info: Figs//cross-traj.png  used on input line 66.
+Package pdftex.def Info: Figs//cross-traj.png  used on input line 70.
 (pdftex.def)             Requested size: 113.39923pt x 97.44734pt.
+[2 <./Figs//co-observ.png> <./Figs//cross-traj.png>] [3]
 
-Underfull \hbox (badness 2846) in paragraph at lines 85--86
-[]\OT1/ptm/b/n/10 (+20) Definition 2. []\OT1/ptm/m/it/10 (+20) The \OT1/ptm/m/n
-/10 (+20) reach-a-bil-ity el-lip-soid \OT1/ptm/m/it/10 (+20) is the re-gion
- []
+LaTeX Warning: Citation `karaman2010incremental' on page 4 undefined on input l
+ine 224.
 
 
-LaTeX Warning: Citation `karaman2010incremental' on page 2 undefined on input l
-ine 93.
+LaTeX Warning: Reference `alg:rrt' on page 4 undefined on input line 224.
 
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 9
-5.
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 2
+26.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
@@ -1542,376 +1526,168 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `pcr' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<Figs//RRT_example_new.png, id=56, 1806.75pt x 1686.3pt>
-File: Figs//RRT_example_new.png Graphic file (type png)
-<use Figs//RRT_example_new.png>
-Package pdftex.def Info: Figs//RRT_example_new.png  used on input line 105.
-(pdftex.def)             Requested size: 201.60077pt x 188.14384pt.
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 112.
 
-Underfull \hbox (badness 10000) in paragraph at lines 127--128
-[] $\OML/cmm/m/it/10 c[] \OMS/cmsy/m/n/10   []\OT1/cmr/m/n/10 (\OML/cmm/m/it/10
- x[]\OT1/cmr/m/n/10 ) +
+
+LaTeX Warning: Reference `chapter:Multi-agent-ADMM' on page 4 undefined on inpu
+t line 262.
+
+[4]
+<Figs//Reachability.png, id=274, 612.45763pt x 389.93135pt>
+File: Figs//Reachability.png Graphic file (type png)
+<use Figs//Reachability.png>
+Package pdftex.def Info: Figs//Reachability.png  used on input line 277.
+(pdftex.def)             Requested size: 151.20154pt x 96.26286pt.
+
+
+LaTeX Warning: Reference `eq:ADMMSetConstraint_modified' on page 5 undefined on
+ input line 306.
+
+<Figs//Ellipse2point.png, id=278, 421.575pt x 316.18124pt>
+File: Figs//Ellipse2point.png Graphic file (type png)
+<use Figs//Ellipse2point.png>
+Package pdftex.def Info: Figs//Ellipse2point.png  used on input line 321.
+(pdftex.def)             Requested size: 151.20154pt x 113.40059pt.
+
+Overfull \hbox (0.57312pt too wide) in paragraph at lines 336--337
+ \OT1/ptm/m/it/10 (-20) 1) Projection to the standard ellipse: [][][] \OT1/ptm/
+m/n/10 (-20) The ellipse $\OMS/cmsy/m/n/10 E$ \OT1/ptm/m/n/10 (-20) expressed
  []
 
+[5 <./Figs//Reachability.png>]
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--136
-[] \OT1/ptm/b/n/10 (+20) if $[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]; x[]\OT1/c
-mr/m/n/10 )$ \OT1/ptm/m/n/10 (+20) and
- []
+LaTeX Warning: Citation `eberly' on page 6 undefined on input line 360.
 
 
-LaTeX Warning: Reference `chapter:Multi-agent-ADMM' on page 2 undefined on inpu
-t line 149.
+LaTeX Warning: Citation `eberly' on page 6 undefined on input line 383.
 
-[2 <./Figs//co-observ.png> <./Figs//cross-traj.png>]
+<Figs//Ellipse2line_V2.png, id=296, 416.00333pt x 268.68904pt>
+File: Figs//Ellipse2line_V2.png Graphic file (type png)
+<use Figs//Ellipse2line_V2.png>
+Package pdftex.def Info: Figs//Ellipse2line_V2.png  used on input line 421.
+(pdftex.def)             Requested size: 151.20154pt x 97.65865pt.
+[6 <./Figs//Ellipse2point.png> <./Figs//Ellipse2line_V2.png>]
+<Figs//Ellipse2safezone_V2.png, id=322, 457.2526pt x 280.08437pt>
+File: Figs//Ellipse2safezone_V2.png Graphic file (type png)
+<use Figs//Ellipse2safezone_V2.png>
+Package pdftex.def Info: Figs//Ellipse2safezone_V2.png  used on input line 507.
 
-LaTeX Warning: Citation `yu2013multi' on page 3 undefined on input line 151.
+(pdftex.def)             Requested size: 151.20154pt x 92.61617pt.
 
 
-LaTeX Warning: Reference `chapter:Multi-agent-ADMM' on page 3 undefined on inpu
-t line 159.
+LaTeX Warning: Reference `sec:obstacle' on page 7 undefined on input line 534.
 
 
-LaTeX Warning: Reference `chapter:Reachability_Constraints' on page 3 undefined
- on input line 161.
+LaTeX Warning: Reference `chapter:Multi-agent-ADMM' on page 7 undefined on inpu
+t line 549.
 
-[3 <./Figs//RRT_example_new.png (PNG copy)>]
+[7 <./Figs//Ellipse2safezone_V2.png>]
 
-LaTeX Warning: Reference `fig:checkpoint-generate' on page 4 undefined on input
- line 163.
+LaTeX Warning: Citation `yu2013multi' on page 8 undefined on input line 551.
 
-<Figs//SC_gen_1.png, id=116, 512.55319pt x 410.04256pt>
+
+LaTeX Warning: Reference `chapter:Multi-agent-ADMM' on page 8 undefined on inpu
+t line 559.
+
+
+LaTeX Warning: Reference `chapter:Reachability_Constraints' on page 8 undefined
+ on input line 561.
+
+<Figs//SC_gen_1.png, id=356, 512.55319pt x 410.04256pt>
 File: Figs//SC_gen_1.png Graphic file (type png)
 <use Figs//SC_gen_1.png>
-Package pdftex.def Info: Figs//SC_gen_1.png  used on input line 167.
+Package pdftex.def Info: Figs//SC_gen_1.png  used on input line 567.
 (pdftex.def)             Requested size: 113.39923pt x 90.71643pt.
-<Figs//SC_gen_2.png, id=117, 512.55319pt x 410.04256pt>
+<Figs//SC_gen_2.png, id=357, 512.55319pt x 410.04256pt>
 File: Figs//SC_gen_2.png Graphic file (type png)
 <use Figs//SC_gen_2.png>
-Package pdftex.def Info: Figs//SC_gen_2.png  used on input line 168.
+Package pdftex.def Info: Figs//SC_gen_2.png  used on input line 568.
 (pdftex.def)             Requested size: 113.39923pt x 90.71643pt.
 
-LaTeX Warning: Reference `chapter:Reachability_Constraints' on page 4 undefined
- on input line 173.
+LaTeX Warning: Reference `chapter:Reachability_Constraints' on page 8 undefined
+ on input line 573.
 
-<Figs//two_edges.png, id=118, 540.67331pt x 283.85349pt>
+<Figs//two_edges.png, id=358, 540.67331pt x 283.85349pt>
 File: Figs//two_edges.png Graphic file (type png)
 <use Figs//two_edges.png>
-Package pdftex.def Info: Figs//two_edges.png  used on input line 177.
+Package pdftex.def Info: Figs//two_edges.png  used on input line 577.
 (pdftex.def)             Requested size: 151.20154pt x 79.3788pt.
 
-LaTeX Warning: Reference `fig:two-edges' on page 4 undefined on input line 192.
+LaTeX Warning: Reference `fig:RRT*' on page 8 undefined on input line 583.
 
+[8 <./Figs//SC_gen_1.png> <./Figs//SC_gen_2.png>]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 595.
 
-
-LaTeX Warning: Reference `alg:cross-trajectory-edges' on page 4 undefined on in
-put line 192.
-
-
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.1}) 
-has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.197 \Procedure
-                {CrossTrajectoryEdges}{$V$}
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.2}) 
-has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.198 \State
-             $V_{q} \gets V$; $E_{q}\gets 0$;
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.3}) 
-has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.199 \ForAll
-              {$v\in V$}
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.4}) 
-has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.200 	\ForAll
-              {$\vq_{r}$ that $\cI_{r} \neq \cI_{v}$}
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.5}) 
-has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.201 		\State
-               $V_{q},E_{q} \gets \textsc{AddEdges} (q_{v}, \vq_{r}, V_{q}, ...
-
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.6}) 
-has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.202 	\EndFor
-              
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.7}) 
-has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.203 \EndFor
-             
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.8}) 
-has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.204 \State
-             \Return $V_{q}, E_{q}$
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.9}) 
-has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.205 \EndProcedure
-                   
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.10})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.206 \Procedure
-                {AddEdges}{$q_{v}, \vq_{r}, V_{q},E_{q}$}
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.11})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.207 \State
-             $t^{d}_r \gets -\infty $; $t^{a}_r \gets \infty$;
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.12})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.208 \State
-             $\cV_{goal}=RRT^*(q_{v}, \vq_{r})$;
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.13})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.209     \ForAll
-                 {$ q \in \cV_{goal} $ that $\texttt{Parent}(q)\neq \emptyse...
-
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.14})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.210         \If
-                 {$\texttt{Cost}(q)/ v_{max} < t_{q}-t_{v}$ and $\cE(q, v_{p...
-
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.15})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.211         		\If
-                   {$t_{q}<t^{a}_r$}
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.16})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.212 			\State
-                $t^{a}_r \gets t_{q}$;
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.17})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.213 		\EndIf
-              
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.18})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.214         \ElsIf
-                    {$\texttt{Cost}(q)/ v_{max} < t_{v} - t_{q}$ and $\cE(q,...
-
-Underfull \hbox (badness 10000) in paragraph at lines 214--215
+Underfull \hbox (badness 10000) in paragraph at lines 614--615
 [] \OT1/ptm/b/n/10 (+20) else if $[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 q\OT1/cmr
 /m/n/10 )\OML/cmm/m/it/10 =v[] < t[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 t[]$
  \OT1/ptm/m/n/10 (+20) and
  []
 
-
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.19})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.215         		\If
-                   {$t_{q}>t^{d}_r$}
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.20})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.216 			\State
-                $t^{d}_r \gets t_{q}$;
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.21})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.217 		\EndIf
-              
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.22})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.218         \EndIf
-                    
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.23})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.219     \EndFor
-                 
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.24})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.220     \If
-             {$t^{d}_r \neq -\infty $ and $t^{a}_r \neq \infty$}
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.25})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.221     \State
-                 $v_{a} \gets (q(t^{a}_r),t^{a}_r)$; $v_{d} \gets(q(t^{d}_r)...
-
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.26})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.222     \State
-                 $V_{q}\gets V_{q} \union v_{a}$; $V_{q}\gets V_{q} \union v...
-
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.27})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.223     \State
-                 $E_{q}\gets E_{q} \union (v_{p} \rightarrow v_{a})$; $E_{q}...
-
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.28})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.224     \EndIf
-                
-pdfTeX warning (ext4): destination with the same identifier (name{ALG@line.29})
- has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.225     \State
-                 \Return $V_{q},E_{q}$
-
-LaTeX Warning: Reference `sec:security-checkpoint' on page 4 undefined on input
- line 233.
-
-
-LaTeX Warning: Reference `sec:cross-traj-edges' on page 4 undefined on input li
-ne 233.
-
-
-LaTeX Warning: Reference `fig:security-graph-generate' on page 4 undefined on i
-nput line 233.
-
-<Figs//security_graph.png, id=120, 540.67331pt x 404.06319pt>
+<Figs//security_graph.png, id=373, 540.67331pt x 404.06319pt>
 File: Figs//security_graph.png Graphic file (type png)
 <use Figs//security_graph.png>
-Package pdftex.def Info: Figs//security_graph.png  used on input line 236.
+Package pdftex.def Info: Figs//security_graph.png  used on input line 636.
 (pdftex.def)             Requested size: 151.20154pt x 112.9951pt.
-[4 <./Figs//SC_gen_1.png> <./Figs//SC_gen_2.png> <./Figs//two_edges.png> <./Fig
-s//security_graph.png>]
-Overfull \hbox (51.19498pt too wide) detected at line 267
+[9 <./Figs//two_edges.png> <./Figs//security_graph.png>]
+Overfull \hbox (51.19498pt too wide) detected at line 667
 []
  []
 
 
-LaTeX Warning: Reference `eq:flow-cost' on page 5 undefined on input line 270.
+LaTeX Warning: Citation `ntafos1979path' on page 10 undefined on input line 670
+.
 
 
-LaTeX Warning: Reference `eq:FlowBalanceConstraint' on page 5 undefined on inpu
-t line 270.
+LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 10 undefine
+d on input line 679.
 
 
-LaTeX Warning: Reference `eq:FlowCoverage' on page 5 undefined on input line 27
-0.
+LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 10 undefine
+d on input line 679.
 
-
-LaTeX Warning: Citation `ntafos1979path' on page 5 undefined on input line 270.
-
-
-
-LaTeX Warning: Reference `eq:flow-coverage-problem' on page 5 undefined on inpu
-t line 273.
-
-
-LaTeX Warning: Reference `eq:flow-cost' on page 5 undefined on input line 274.
-
-[5]
-
-LaTeX Warning: Reference `eq:flow-cost' on page 6 undefined on input line 276.
-
-
-LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 6 undefined
- on input line 279.
-
-
-LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 6 undefined
- on input line 279.
-
-<Figs//graph_flow_result_3.png, id=152, 1204.5pt x 1686.3pt>
+<Figs//graph_flow_result_3.png, id=420, 1204.5pt x 1686.3pt>
 File: Figs//graph_flow_result_3.png Graphic file (type png)
 <use Figs//graph_flow_result_3.png>
-Package pdftex.def Info: Figs//graph_flow_result_3.png  used on input line 283.
+Package pdftex.def Info: Figs//graph_flow_result_3.png  used on input line 683.
 
 (pdftex.def)             Requested size: 100.79846pt x 141.10788pt.
-<Figs//3_flow_result.png, id=153, 1606.0pt x 1405.25pt>
+<Figs//3_flow_result.png, id=421, 1606.0pt x 1405.25pt>
 File: Figs//3_flow_result.png Graphic file (type png)
 <use Figs//3_flow_result.png>
-Package pdftex.def Info: Figs//3_flow_result.png  used on input line 291.
+Package pdftex.def Info: Figs//3_flow_result.png  used on input line 691.
 (pdftex.def)             Requested size: 151.20154pt x 132.29936pt.
-
-LaTeX Warning: Reference `fig:security-graph-3-flow' on page 6 undefined on inp
-ut line 297.
-
-
-LaTeX Warning: Reference `eq:flow-coverage-problem' on page 6 undefined on inpu
-t line 299.
-
-
-LaTeX Warning: Reference `fig:workspace-3-flow' on page 6 undefined on input li
-ne 299.
-
-
-LaTeX Warning: Reference `fig:security-graph-3-flow' on page 6 undefined on inp
-ut line 299.
-
-<Figs//graph_flow_result_4.png, id=154, 1204.5pt x 1686.3pt>
+[10 <./Figs//graph_flow_result_3.png (PNG copy)>]
+<Figs//graph_flow_result_4.png, id=442, 1204.5pt x 1686.3pt>
 File: Figs//graph_flow_result_4.png Graphic file (type png)
 <use Figs//graph_flow_result_4.png>
-Package pdftex.def Info: Figs//graph_flow_result_4.png  used on input line 303.
+Package pdftex.def Info: Figs//graph_flow_result_4.png  used on input line 703.
 
 (pdftex.def)             Requested size: 100.79846pt x 141.10788pt.
-<Figs//4_flow_result.png, id=155, 1606.0pt x 1405.25pt>
+<Figs//4_flow_result.png, id=443, 1606.0pt x 1405.25pt>
 File: Figs//4_flow_result.png Graphic file (type png)
 <use Figs//4_flow_result.png>
-Package pdftex.def Info: Figs//4_flow_result.png  used on input line 311.
+Package pdftex.def Info: Figs//4_flow_result.png  used on input line 711.
 (pdftex.def)             Requested size: 151.20154pt x 132.29936pt.
-
-LaTeX Warning: Reference `fig:security-graph-4-flow' on page 6 undefined on inp
-ut line 317.
-
-
-LaTeX Warning: Reference `fig:workspace-4-flow' on page 6 undefined on input li
-ne 317.
-
-[6 <./Figs//graph_flow_result_3.png (PNG copy)> <./Figs//3_flow_result.png (PNG
- copy)> <./Figs//graph_flow_result_4.png (PNG copy)> <./Figs//4_flow_result.png
- (PNG copy)>]
-<Figs//nflow_vs_cost.png, id=166, 1232.605pt x 375.4025pt>
+<Figs//nflow_vs_cost.png, id=446, 1232.605pt x 375.4025pt>
 File: Figs//nflow_vs_cost.png Graphic file (type png)
 <use Figs//nflow_vs_cost.png>
-Package pdftex.def Info: Figs//nflow_vs_cost.png  used on input line 323.
+Package pdftex.def Info: Figs//nflow_vs_cost.png  used on input line 723.
 (pdftex.def)             Requested size: 151.20154pt x 46.04878pt.
- (./paper.bbl) 
+
+Underfull \vbox (badness 4454) has occurred while \output is active []
+
+ [11 <./Figs//3_flow_result.png (PNG copy)> <./Figs//graph_flow_result_4.png (P
+NG copy)> <./Figs//4_flow_result.png (PNG copy)> <./Figs//nflow_vs_cost.png (PN
+G copy)>]
+
+LaTeX Warning: Citation `Tron:Arxiv14' on page 12 undefined on input line 773.
+
+[12] (./paper.bbl) 
 AED: pageslts setting LastPage 
-[7 <./Figs//nflow_vs_cost.png (PNG copy)>]
+[13
+
+]
 No complaints by nag.
 \c@pagesLTS.arabic.1.local.count=\count410
 
@@ -1936,44 +1712,58 @@ Package rerunfilecheck Warning: File `paper.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `paper.out':
-(rerunfilecheck)             Before: F5C2194057324CF7E890F11050D96D37;317
-(rerunfilecheck)             After:  EB4E16409B70CAB3379334EF46F36EFA;892.
+(rerunfilecheck)             Before: 4257A1D117309C76DB4E3813C589199D;3077
+(rerunfilecheck)             After:  FBA295AEF181A58D2AB2FD39A0C0104D;3169.
  ) 
 Here is how much of TeX's memory you used:
- 39050 strings out of 478268
- 768728 string characters out of 5846348
- 1164760 words of memory out of 5000000
- 56059 multiletter control sequences out of 15000+600000
- 525988 words of font info for 348 fonts, out of 8000000 for 9000
+ 39356 strings out of 478268
+ 774666 string characters out of 5846348
+ 1171760 words of memory out of 5000000
+ 56245 multiletter control sequences out of 15000+600000
+ 532140 words of font info for 357 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 119i,10n,111p,1668b,553s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 119i,20n,111p,1457b,658s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-pdfTeX warning (dest): name{section*.3} has been referenced but does not exist,
- replaced by a fixed one
+pdfTeX warning (dest): name{equation.6.67} has been referenced but does not exi
+st, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{equation.6.67c} has been referenced but does not ex
+ist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{equation.6.67b} has been referenced but does not ex
+ist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{equation.6.67a} has been referenced but does not ex
+ist, replaced by a fixed one
 
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
 live/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texl
-ive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texli
-ve/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texliv
-e/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/
-2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/20
-22/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2022/texmf-dis
-t/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/texmf
--dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2022/texmf-dist/fo
-nts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type
-1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/t
-imes/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi
-8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></u
-sr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (7 pages, 1361946 bytes).
+ive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texliv
+e/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive
+/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/
+2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/20
+22/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2022/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2022/texmf-dist/fo
+nts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/texmf-dis
+t/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/
+type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/ur
+w/helvetic/uhvb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times
+/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.p
+fb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/l
+ocal/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on paper.pdf (13 pages, 1810936 bytes).
 PDF statistics:
- 298 PDF objects out of 1000 (max. 8388607)
- 228 compressed objects within 3 object streams
- 100 named destinations out of 1000 (max. 500000)
- 71281 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 651 PDF objects out of 1000 (max. 8388607)
+ 561 compressed objects within 6 object streams
+ 221 named destinations out of 1000 (max. 500000)
+ 80776 words of extra memory for PDF output out of 89155 (max. 10000000)
 

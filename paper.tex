@@ -59,10 +59,10 @@ When transforming the solution to continuous configuration spaces, additional an
 
 We formulate a way to enforce an empty intersection between forbidden regions and ellipsoidal reachability region while optimizing the trajectory, such that if an attacker takes control of the robots, they cannot perform an undetected attack without breaking the co-observation schedule.  The idea is inspired by the \emph{heuristic sampling domain} introduced by \cite{gammell2014informed} in the context of the $\mathtt{RRT^*}$ path planning algorithm; in that case, an ellipsoidal bound is used to limit the search space with the initial and goal states fixed. In our case, we use a similar bound to optimize the location of the two states to exclude the forbidden region from the ellipsoidal region. We propose a mathematical formulation of reachability regions that is compatible with the solver from \zyang{cite ADMM} as a spatio-temporal constraint. 
 
-However, two main challenges have been identified in \cite{wardega2023hola} \zyang{previous works}. Firstly, finding a co-observation and reachability secured plan may not always be feasible when robots are separated from others by obstacles or forbidden regions, or are located far away from each other. In such case, it is impossible for other robots to get close enough to establish co-observation schedules or find a reachability-secured path. Agent 3 in the Figure \zyang{ref fig:ReachabilitySimulation} is a good example, as it required additional security checkpoint to create secured reachability areas. Secondly, security requirements may come at the cost of overall system performance, as illustrated by the comparison of Figure \zyang{ref fig:trajectories-more-constraint} and \zyang{ref fig:ReachabilitySimulation} where, after the introduction of security constraints, the top left corner is never explored by any robots. This is particularly concerning given that system performance is a key factor in the decision to use multi-agent systems. These challenges are addressed in Chapter \ref{chapter:cross-trajectory}, in order to ensure the effectiveness of planning with reachability and co-observation in securing multi-agent systems.
+A preliminary version of the paper was presented at conferences \zyang{cite CDC IROS}. This paper extend the previous works by fixing two main challenges identified in \cite{wardega2023hola} \zyang{previous works}. Firstly, finding a co-observation and reachability secured plan may not always be feasible when robots are separated from others by obstacles or forbidden regions, or are located far away from each other. In such case, it is impossible for other robots to get close enough to establish co-observation schedules or find a reachability-secured path. Agent 3 in the Figure \zyang{ref fig:ReachabilitySimulation} is a good example, as it required additional security checkpoint to create secured reachability areas. Secondly, security requirements may come at the cost of overall system performance, as illustrated by the comparison of Figure \zyang{ref fig:trajectories-more-constraint} and \zyang{ref fig:ReachabilitySimulation} where, after the introduction of security constraints, the top left corner is never explored by any robots. This is particularly concerning given that system performance is a key factor in the decision to use multi-agent systems. These challenges are addressed in Chapter \ref{chapter:cross-trajectory}, in order to ensure the effectiveness of planning with reachability and co-observation in securing multi-agent systems.
 
 We propose to form \emph{sub-teams} on each route, and setup additional co-observations both within the sub-team and across different sub-teams. Notice that co-observations across sub-teams (named \emph{cross-trajectory co-observation}) are always preferred when feasible, since they provide better security in potential situations where the entire sub-team is compromised.
-In this chapter, we consider only the high-level path planning, while the assignment of the duties in the team will be performed dynamically as introduced later in Chapter \ref{chapter:task-assignment}), making it more difficult for attackers to successfully plan and execute attacks. Cross-trajectory co-observations allows sub-teams to preserve the optimal unsecured trajectories (as shown in Figure \ref{fig:cross-traj-comparison-set}), as it does not require the entire \emph{sub-team} to maintain a close distance with other teams when co-observation occurs. 
+In this paper, we consider only the high-level path planning, while the assignment of the duties in the team will be performed dynamically as introduced later in Chapter \ref{chapter:task-assignment}), making it more difficult for attackers to successfully plan and execute attacks. Cross-trajectory co-observations allows sub-teams to preserve the optimal unsecured trajectories (as shown in Figure \ref{fig:cross-traj-comparison-set}), as it does not require the entire \emph{sub-team} to maintain a close distance with other teams when co-observation occurs. 
 
 \begin{figure}
 	\centering
@@ -76,9 +76,8 @@ In this chapter, we consider only the high-level path planning, while the assign
 
 We propose to incorporate redundancy in the form of \emph{sub-team}s of multiple robots in place of individual robots along each route. This allows robots to deviate from their assigned sub-team, and join others to perform cross-trajectory co-observations, thereby securing multiple trajectories. We propose a formulation of the multi-flow problem on unsecured MRS trajectories to plan the cross-trajectory co-observations that can preserve the security against plan-deviation attacks.
 
-\section{Preliminaries}
-In this section, we review various mathematical concepts that will provide the foundations and context for our novel constraint.
 
+\section{Preliminaries}
 In this section, we review various mathematical concepts that will provide the foundations and context for our novel constraints.
 
 \subsection{Differentials}
@@ -113,14 +112,68 @@ The new set of constraints $\zeta$ on $z$ is incorporated using an indicator fun
       \vu^{k+1}&:=\vu^k+D(\vx^{k+1})-\vz^{k+1},
     \end{align}
   \end{subequations}
-  Previous work in \cite{yangmulti} considered the following types of constraints:
-  \begin{lenumerate}{C}
-  \item \emph{Velocity constraints}: The movement of each agent is constrained by a maximum distance in any direction over a single discrete time step. This constraint could be adapted also to enforce more refined dynamical models.
-  \item \emph{Convex obstacles}: We use convex polygons to model regions defining the boundary of the workspace, as well as solid obstacles that cannot be entered by agents (note that the latter represent a non-convex constraint set from the point of view of the optimization problem). Obstacles with non-convex shapes can be modeled using unions of the convex sets.
-  \item \emph{Waypoints with flexible deadlines}: We give locations that the agents need to visit at any point in a given time window (which can potentially contain a single time). These constraints can also be interpreted as static, trusted cameras that can complement the introspection constraints.
-  \item\label{it:introspection} \emph{Introspection constraints}: In a given time window, agents are asked to remain at a certain distance from each other to detect each other's presence.
-  \end{lenumerate}
-  Constraint~\ref{it:introspection} is the main mechanism that was provided in~\cite{yangmulti} for forcing agents to stay away from the forbidden region. However, this mechanism alone cannot provide strong guarantees in this regard. This motivates the introduction of our novel \emph{ellipsoidal constraints} in Sections~\ref{sec:ellipsoid-point},~\ref{sec:ellipsoide-plane}. This novel constraint is defined with the assumption that the velocity constraints still hold under attack.
+  
+  Since $D(\vx)$ is the vertical concatenation of $D_l(\vx)$, the projection of each set $\zeta_l$ is independent for each constraint and can be computed separately. The advantage of this formulation is that we can choose $D(\vx)$ such that the new constraint set~$\zeta$ becomes simple to compute; however, the drawback is that we move the non-convexity to the primal cost function, i.e., in the update for $\vx$ in \eqref{eq:admm-mod-update-q}.
+Additionally, the function~$D(\vx)$ can be used to select only the subset of the variables on which a constraint depends. 
+
+We consider the following types of traditional path planning constraints:
+  \subsubsection{Velocity constraints}
+  The movement of each agent is constrained by a maximum distance in any direction over a single discrete time step. We then define the function $D(\vx)$ to return the velocity vectors for the $i$-th agent at time step $j$:
+\begin{equation}
+     D_{ij}(\vx) = x_{ij}-x_{i(j-1)}, \quad j\in\{1,\ldots, T\}
+\end{equation}
+and the constraint set is:
+\begin{equation}\label{eq:velocity_constraint}
+   \zeta_{ij} =\bigl\{z \mid \norm{z} \leq v_{max}\bigr\}.
+\end{equation}
+The projection operator $\Pi_\zeta(z)$ for this constraint implies that the projection of the vector $z$ is inside a sphere with a radius of $v_{max}$ which can then be written as:
+\begin{equation}\label{eq:velocity_constraint_update}
+    \Pi_{\zeta}(z) = \begin{cases}
+ v_{max}\frac{z}{\norm{z}} &\text{if } \norm{z} > v_{max},\\
+z	& otherwise.
+\end{cases}
+\end{equation}
+
+This constraint could be adapted also to enforce more refined dynamical models.
+
+  \subsubsection{Convex obstacles}: We use convex polygons to model regions defining the boundary of the workspace, as well as solid obstacles that cannot be entered by agents (note that the latter represent a non-convex constraint set from the point of view of the optimization problem). Obstacles with non-convex shapes can be modeled using unions of the convex sets.
+  
+  We enforce the constraints at each discrete time step $x_{ij}$ (enforcement of the constraints between these points can be achieved by making the obstacles sightly bigger than its actual size). For a convex area, waypoints stays unchanged it they are outside the zone, and if the waypoints are inside the zone, the constraint function $D(\vx)$ returns the least negative distance from the waypoints to the zone defined by hyperplanes which is represented as:
+\begin{equation}\label{eq:zoneConstraintMap}
+D_i(\vx) = \bmat{d_{11} \\\vdots\\ d_{nm}}
+\end{equation}
+where 
+\begin{align}
+    d_{ij}&= \max(\min(d_{ijk},0)),\\
+   d_{ijk} &= p_{ij}\transpose n_k - m_k,
+\end{align}
+and $n_k$ is the normal vector and $m_k$ is the scalar offset defining the $k$-th hyperplane.
+The corresponding constraint set is simply
+\begin{equation}
+    \zeta= \{z \mid z = 0 \},
+\end{equation}
+with a projection function:
+\begin{equation}\label{eq:zoneConstraintProjection}
+    \Pi_\zeta(z) = 0.
+\end{equation}
+The motivating idea for \eqref{eq:zoneConstraintMap} and \eqref{eq:zoneConstraintProjection} is to find waypoints inside the zone and project them to the closest boundary. As mentioned before, non-convex obstacles can be handled by the union of (possibly overlapping) convex obstacles.
+\subsubsection{Waypoints with flexible deadlines}
+In this type of constraint, we assume that an agent needs to go through a spherical ball around a given point $p$ with a radius of $d_{max}$ at some time instant $j$ belonging to a given time window $[t_1,t_2]$. In this case, we define the function $D(\vq)$ to return the smallest distance from the point $p$ to any point on the trajectory restricted to the relevant time window. This can be expressed precisely in the following form:
+\begin{equation}\label{eq:waypoint_constraint_D}
+D_i(\vq) = \min_{i\in\{1\dots,n\}, j\in\{t_1,\dots,t_2-1\}}\bigl(\dist(p,\overrightarrow{q_{ij}q_{i(j+1)}})\bigr),
+\end{equation}
+with the constraint set:
+\begin{equation}\label{eq:waypoint_constraint}
+\zeta= \{z \mid z < z_{max} \},
+\end{equation}
+where $\dist(p,\overrightarrow{q_{ij}q_{i(j+1)}})$ returns the distance between the fixed point $p$ and the segment $\overrightarrow{q_{ij}q_{i(j+1)}}$. Note that this function returns the smallest distance between $(p,q_{ij})$ and $(p,q_{i(j+1)})$ if the projection of the point $p$ does not lie on the line segment~$\overrightarrow{q_{ij}q_{i(j+1)}}$; as a consequence, this constraint does not need to be satisfied exactly at one of the points on the discretized trajectory, but it can also be satisfied ``en route'' on the segment between them.
+The projection $\Pi_\zeta(z)$ for this constraint can be written as:
+\begin{equation}\label{eq:waypoint_constraint_update}
+\Pi_\zeta(z) = \min(z,z_{max}).
+\end{equation}
+Note that \eqref{eq:waypoint_constraint} and \eqref{eq:waypoint_constraint_update} are equivalent to \eqref{eq:velocity_constraint} and \eqref{eq:velocity_constraint_update}, except for the fact that the quantity in \eqref{eq:waypoint_constraint_D} is always a positive scalar.
+
+
 
   \subsection{Householder rotations}\label{sec:householder}
 
@@ -136,7 +189,7 @@ The new set of constraints $\zeta$ on $z$ is incorporated using an indicator fun
     \end{equation}
   \end{definition}
   The main property of interest for our application is the fact that $H$ is a rotation mapping $\hat{\nu_\cF}$ to $\hat{\nu_\cE}$, as shown by the following.
-  \begin{proposition}
+  \begin{proposition}\label{prop:HProperidy}
     The matrix $H$ has the following properties:
     \begin{enumerate}
     \item It is a rotation, i.e.
@@ -156,7 +209,7 @@ The new set of constraints $\zeta$ on $z$ is incorporated using an indicator fun
   \begin{equation}\label{eq:asymmetric to cross}
     wv\transpose-vw\transpose=\cross{\cross{v}w}.
   \end{equation}
-  \begin{proposition}
+  \begin{proposition}\label{prop:Hderivitive}
     Let $\nu_\cF(t)$ represent a parametric curve. Then we have
     \begin{equation}
       \dot{H}=H\cross{-2M\dot{\nu}_{\cF}}
@@ -166,22 +219,6 @@ The new set of constraints $\zeta$ on $z$ is incorporated using an indicator fun
       M=[u]_{\times}  \frac{ \left( I - u u\transpose \right) \left( I- \nu_\cF \nu_\cF\transpose \right)} {\norm{u'} \norm{\nu_\cF}}.
     \end{equation}
   \end{proposition}
-
-
-\subsection{Ellipsoidal reachability constraints}\label{Chapter:ProblemFormulation}
-  The reachability region is defined as the set of locations $x(t)$ that a robot can reach between two given fixed positions:
-
-  \begin{definition}
-    The \emph{reachability region} for two waypoints $x(t_1)=x_1$, $x(t_2)=x_2$ is defined as the sets of points $x'$ in the workspace such that there exist a trajectory $x(t)$ where $x(t')=x'$, $t_1\leq t' \leq t_2$ and $x(t)$ satisfies the velocity constraint $d(x(t),x(t+1))\leq v_{max}$.
-  \end{definition}
-  This region can be analytically bound via an ellipsoid:
-  \begin{definition}\label{Def_Reachability}
-    The \emph{reachability ellipsoid} is the region  $\mathcal{E}(x_1,x_2)=\{\tilde{x}\in\mathbb{R}^n: d(x_1,\tilde{x})+d(\tilde{x}+x_2)<2a\}$, where $a=\frac{v_{max}}{2}(t_2-t_1)$.
-  \end{definition}
-  % The reachability ellipsoid for a robot during time $[t_1,t_2]$ is the locations it could visit if only the planning at time $t_1$ and $t_2$ is obeyed.
-  The region $\cE(x_1,x_2)$ is an ellipsoid with foci at $x_1,x_2$, center $o_{\cE} = \frac{1}{2}(x_1+x_2)$, and the major radius equal to $a$. Let $c_\cE=\frac{1}{2}\norm{x_1-x_2}=\norm{o_\cE-x_1}$ be the distance from the center to a foci.
-
-  The reachability ellipsoid is an over-approximation of the exact reachability region; the difference between the two is due to the discretization of the trajectory, and the fact that $\cE$ does not consider the presence of obstacles.
 
 \subsection{Rapidly-exploring Random Trees}
 We use RRT* as a component of the solution \cite{karaman2010incremental}, which is an optimized variant of the rapidly-exploring Random Trees (RRT). As a optimal path planning algorithm, RRT* returns the shortest paths between an initial location and multiple potential goals. We assume that the generated paths can be travelled in both directions (this is used later in our analysis). The basic RRT* algorithm is shown in Algorithm \ref{alg:rrt}. For a given tree $G=(V,E)$, key functions called by the algorithm are
@@ -194,51 +231,325 @@ We use RRT* as a component of the solution \cite{karaman2010incremental}, which 
 \item[$\texttt{Parent}(v)$] This is a function that maps the vertex $v$ to $v'\in V$ such that $(v',v)\in E$
 \end{description}
 
+\section{Secure Multi-robot path planning using co-observation and reachability constraints}
+
+Besides traditional path planning constraints, additional security constraints need to be incorporated into the path planning problem to prevent cases where an attacker changes a robot's path between two observations to reach a forbidden region without being detected. The work of \cite{wardega2019resilience} provide exact solution for grid-world configuration. Using the onboard sensing capabilities, robots can perform inter-robot observations as an additional security measure. Each robot' self-report includes not only its own status, but also additional observations of other robots' status. For example, robot $i$'s self-report may include its observation of robot $j$, ``$i$ report its arrival at $v$ and $i$ observes $j$ at location $w$''. Similarly, robot $j$ also reports its observations of robot $i$ to the CE. This solution provides paths with an observation schedule such that any attempts by a compromised robot to violate the safety constraints would necessarily break the observation plan and be detected.
+
+When transforming the solution to continuous configuration spaces, additional analysis is needed on the reachability of robots in order for the security of co-observation schedule to hold. More broadly, the problem of solving a path optimization problem with constraints based on the sets of locations that the agents could \emph{potentially} reach, which we call \emph{reachability regions}, has not received attention in the literature.  This constraint is formulated using an ellipsoidal bound of the reachability region, and the idea of using an ellipsoidal bound to limit the search space is inspired by the \emph{heuristic sampling domain} introduced by \cite{gammell2014informed} in the context of the $\mathtt{RRT^*}$ path planning algorithm.
+
+We formulate a way to enforce an empty intersection between forbidden regions and ellipsoidal reachability region while optimizing the trajectory, such that if an attacker takes control of the robots, they cannot perform an undetected attack without breaking the co-observation schedule. To the best of our knowledge, our path planning algorithm is the only one flexible enough to handle the safety related spatio-temporal constraints introduced by co-observations and reachability. 
+
+\subsection{Co-observation schedule}
+The co-observation constraints is used to guarantee that, at time required by the schedule, two robots should get close enough with each other to observe each other's behavior. The co-observation constraint is modeled as a relative distance constraint between two robots at some time instant $j$ (i.e., to require two agents see each other within a certain radius to inspect each other, or to exchange data). The location of the co-observation location should make sure that the ellipsoidal reachability region between each co-observation, considered in later sections \ref{sec:reachability}, has an empty intersection with all forbidden regions.
+ We write the function for the constraint as:
+\begin{align}
+D(\vq) = \overrightarrow{q_{aj}q_{bj}},
+\end{align}
+where $a,b$ are the indices of the pair of agents required for a mutual inspection. The corresponding constraint set is simply
+\begin{equation}
+\zeta= \{z \mid z \leq d_{max} \},
+\end{equation}
+with a projection function:
+\begin{equation}\label{eq:co-observation_constraint_update}
+\Pi_{\zeta}(z) = \begin{cases}
+d_{max}\frac{z}{\norm{z}} &\text{if } \norm{z} > d_{max},\\
+z	& otherwise.
+\end{cases}
+\end{equation}
+The locations $q_{aj}$ and $q_{bj}$ where the co-observation performed are computed as part of the optimization.
+
+\subsection{Reachability constraints}\label{sec:reachability}
+  In this section, we first provide the definition of an \emph{ellipsoidal reachability region}. We then provide a differentiable map to transform such region in a canonical axis-aligned form where the operator $\Pi_\zeta$ and its differential can be obtained; these operators are then extended to the general case via the aforementioned transform. The overall goal is to define the functions $D(q)$, its differential, and the operator $\Pi_\zeta$ for \emph{ellipsoidal reachability regions} with respect to the forbidden regions that can then be used in the ADMM formulation in Chapter \ref{chapter:Multi-agent-ADMM}.
+
+\subsection{Definition of reachability constraint}\label{sec:ellipsoidal definition}
+The reachability region is defined as the set of locations $q(t)$ that a robot can reach between two given fixed positions:
+
+\begin{definition}
+	The \emph{reachability region} for two waypoints $q(t_1)=q_1$, $q(t_2)=q_2$ is defined as the sets of points $q'$ in the workspace such that there exist a trajectory $q(t)$ where $q(t')=q'$, $t_1\leq t' \leq t_2$ and $q(t)$ satisfies the velocity constraint $d(q(t),q(t+1))\leq v_{max}$.
+\end{definition}
+This region can be analytically bounded via an ellipsoid:
+\begin{definition}\label{def:Reachability}
+	The \emph{reachability ellipsoid} is defined as the region  $\mathcal{E}(q_1,q_2,t_{1},t_{2})=\{\tilde{q}\in\mathbb{R}^n: d(q_1,\tilde{q})+d(\tilde{q}+q_2)<2a\}$, where $a=\frac{v_{maq}}{2}(t_2-t_1)$.
+\end{definition}
+
+ \begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{Reachability}
+    \caption{The ellipse showcases the reachability region. The black line is the planned trajectory of a robot, $q_1$ and $q_2$ are two locations this robot are expected at given time $t_1$ and $t_2$, blue and red line are possible trajectories if the robot is compromised in after reaching $q_1$. Robot that goes outside the reachability region to forbidden region can only reach $q_{2}'$ instead of $q_{2}$ at time $t_{2}$, even if it drives directly toward $q_{2}$ at full speed $v_{max}$ after the intrusion into forbidden region.}
+    \label{fig:EllipseConstraintExample}
+  \end{figure}
+ 
+
+The region $\cE(q_1,q_2)$ is an ellipsoid with foci at $q_1,q_2$, center $o_{\cE} = \frac{1}{2}(q_1+q_2)$, and the major radius equal to $a$. Let $c_\cE=\frac{1}{2}\norm{q_1-q_2}=\norm{o_\cE-q_1}$ be the distance from the center to a foci.
+
+The reachability ellipsoid is an over-approximation of the exact reachability region; the difference between the two is due to the discretization of the trajectory, and the fact that $\cE$ does not consider the presence of obstacles.
+\subsection{Transformation to canonical coordinates}\label{sec:rotation2Standard}
+  To simplify the problem, a canonical rigid body transformation is used to transform the ellipse $\cE$ from a global frame $\cF$ to a canonical frame $\cF_\cE$. The latter is defined such that the center of the ellipsoid is located at the origin and the foci are aligned with the first axis of $\cF_\cE$. Since the transformation depends on the two foci, i.e., two waypoints of an agent, the challenge here is to construct the transformation in a differentiable way.
+  For the convenience of derivation, we define the coordinate transformation from $\cF$ to $\cF_\cE$ using a rotation $R^\cF_\cE$ and a translation $o^\cF_\cE$, which, to simplify the notation, from now on we simply refer to as $R$ and $o$, respectively. The transformation of a point from the frame $\cF_\cE$ to the frame $\cF$ and its inverse are given by the formulation:
+  \begin{equation}
+    \Fframe{q}=R\Eframe{q}+o,\label{eq:E to F transform}\quad
+    \Eframe{q}=R\transpose(\Fframe{q}-o).
+  \end{equation}
+  The reverse transformation is $\Eframe{q}=R\transpose( \Fframe{q}-o)$.
+
+  We define $\nu_\cF$ and $\nu_\cE$ to represent the $x$-axis unitary vector of $\cF_\cE$ in the frames $\cF$ and $\cF_\cE$, respectively. Formally:
+  \begin{align}
+    \nu'_\cF&=q_2-q_1, & \nu_\cF &= \frac{\nu'_\cF}{\norm{\nu_\cF}}, & \nu_\cE&=[1,0,0]^T;
+  \end{align}
+  see Fig.\ref{fig:EllipseConstraintExample} for an illustration. Note that $\nu_\cE$ is constant while, for the sake of clarity, $\nu_{\cF}$ depends on $q_1,q_2$. We then define the rotation $R$ using a Householder rotation, while from \eqref{eq:E to F transform} we see that $o$ represents the center of $\cE(q_1,q_2)$ expressed in $\cF$, i.e.:
+  \begin{align}
+    R&=H(\nu_\cF(q_1,q_2),\nu_\cE(q_1,q_2)), &o&=\frac{1}{2}(q_1+q_2).
+  \end{align}
+  To simplify the notation, in the following we will consider $H$ to be a function of $q_1,q_2$ directly, i.e. $H(q_1,q_2)$.
+
+\subsection{Reachability constraints via ellipsoids}\label{sec:ellipoid constraints}
+In later sections, we define constraint formulation of the ellipsoid regions against different types of forbidden regions: a point, a plane, a segment, and a convex polygon. For each one, our goal is to define the function $D(q)$, the set $\zeta$ and the projection $\Pi_\zeta$ that can be incorporated in the ADMM optimization (\ref{eq:ADMMSetConstraint_modified}); we also include derivations for the differential $\partial_qD(q)$, which can be used to significantly speed up the optimization. 
+
+\subsection{Point-ellipsoid constraint}\label{sec:ellipsoid-point}
+As shown in Fig.\ref{fig:Ellipse-to-point}, we consider a forbidden region in the shape of a single point $q_{avoid}$. The goal is to design the trajectory $q(t)$ such that $q_{avoid}\notin\mathcal{E}(q_1,q_2)$. We first define a projection function $\pi_{p\cE}(q_{avoid};q_1,q_2,a) = q_p$, which returns a projected point $q_p$ of $q_{avoid}$ outside the ellipse, i.e., as the solution to
+
+\begin{equation}\label{eq:ellipse-point-projection}
+\begin{split}
+\argmin_{q_p} &\quad \norm{q_{avoid}-q_p}^2 \\
+s.t. &\quad q_p\in \cE^{c}.
+\end{split}
+\end{equation}
+where $\cE^{c}$ is the set complement of the region $\cE$.
+  
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.8\linewidth]{RRT_example_new}
-\caption{RRT* used to find trajectory from a point to different trajectories}
-\label{fig:RRT*}
+\includegraphics[width=0.6\linewidth]{Ellipse2point}
+\caption{Point-ellipsoid constraint, a point $f$ inside ellipsoid is projected to the areas outside the ellipsoid $f_{p}$.}
+\label{fig:Ellipse-to-point}
 \end{center}
 \end{figure}
 
-	\begin{algorithm} 
-		\caption{RRT*($x_{init}, \{x_{goal}\}$)} \label{alg:rrt}
-		\begin{algorithmic}[1]
-			\State $V_{goal}\gets\{x_{goal}\}$
-			\State $V\gets x_{init} \union V_{goal} $, $E\gets 0$
-			\State $i\leftarrow 0$
-			\While{$i<N$}
-			\State $G\leftarrow (V,E)$
-			\State $x_{rand}\leftarrow \texttt{Sample}(i)$; $i=i+1$;
-			\State $x_{nearest}\leftarrow \texttt{Nearest}(G=(V,E),x_{rand})$;
-			\State $x_{new}\leftarrow\texttt{Steer}(x_{nearest},x_{rand})$;
-			\If{$\texttt{ObstacleFree}(x_{nearest},x_{new})$}
-			\State $V\leftarrow V\cup \{x_{new}\}$;
-			\State $x_{min}\leftarrow x_{nearest}$;
-			\ForAll{ $x_{near}\in X_{near}$}
-				\If{$\texttt{ObstacleFree}(x_{near},x_{new})$}
-					\State $c'\leftarrow \texttt{Cost}(x_{near})+c(\texttt{Line}(x_{near}, x_{new}))$;
-					\If{$c'<\texttt{Cost}(x_{new})$}
-						\State $x_{min}\leftarrow x_{near}$;
-					\EndIf			
-				\EndIf
-			\EndFor
-			
-			\ForAll{$ x_{near}\in X_{near}\backslash {x_{min}} $}
-				\If{$\texttt{ObstacleFree}(x_{new},x_{near})$ and $\texttt{Cost}(x_{near})>\texttt{Cost}(x_{new}+c(\texttt{Line}({x_{new},x_{near}})))$}
-					\State $x_{parent}\leftarrow \texttt{Parent}(x_{near})$;
-					\State $E' \leftarrow E' \backslash \{ (x_{parent}, x_{near})\}$;
-					\State $E' \leftarrow E' \union  \{ (x_{new}, x_{near})\} $
-				\EndIf
-			\EndFor
-			\EndIf
-			\EndWhile
-			\State \Return $V_{goal}$;
-		\end{algorithmic}
-	\end{algorithm}
+  Then, the constraint $q_{avoid}\notin\mathcal{E}(q(t_1),q(t_2))$ can be written as:
+  \begin{equation}
+    D(q) = \pi_{p\cE}(q_{avoid};q(t_1),q(t_2),r)-q_{avoid} = 0
+  \end{equation}
 
-\section{Problem overview}
+  For cases where $q_{avoid} \notin \cE(q(t_2),q(t_1),r)$, $\pi_{p\cE}(q_{avoid}) = q_{avoid}$. And for cases where $q_{avoid} \in \cE(q_1,q_2,r)$, $D(q)$ needs to be projected to the boundary of the ellipse, which is discussed below.
+
+
+  \subsubsection{Projection to the standard ellipse}
+  The ellipse $\cE$ expressed in $\cF_\cE$ is given by $\Eframe{\cE}=\{\Eframe{q}\in\real{m}:d(q^\cE_1,\Eframe{q})+d(\Eframe{q},q^\cE_2)<2a\}$, where the coordinates of the two foci $q^\cE_1,q^\cE_2$ in $\cF_\cE$ are
+  \begin{align}
+    q^\cE_1=\bmat{c & 0 & 0}\transpose, && q^\cE_2=\bmat{-c & 0 & 0}\transpose,
+  \end{align}
+  with $c=\frac{\norm{q_2-q_1}}{2}$.
+
+  The ellipsoid $\cE$ in the canonical frame can be described as the zero level set of the quadratic function
+  \begin{equation}\label{equ:standard-ellipse}
+    \Eframe{E}(\Eframe{q}) = \Eframe{q}\transpose Q \Eframe{q} - 1
+  \end{equation}
+  where
+  \begin{equation}
+    Q = \diag(a^{-2},b^{-2},b^{-2}),
+  \end{equation}
+  and $b = \sqrt{a^2-c^2}$.
+  The ellipse parameters $a$,$b$ represent the lengths of the major axes.
+
+  % Using the transformation defined in Section~\ref{sec:rotation2Standard}, the original ellipse $\cE$ in $\cF$ can be expressed as the zero level set of the quadratic function
+  % \begin{equation}
+  %   \Fframe{E}(\Fframe{x}) = (\Fframe{x}-o_\cE)\transpose H\transpose Q H (\Fframe{x}-o_\cE) - 1
+  % \end{equation}
+
+  The point to project, $q_{avoid}$, can be likewise expressed in $\cF_\cE$ as $\Eframe{q}_{avoid} =  H (\Fframe q_{avoid}-o)$.
+
+  We now turn our attention to the problem of projecting $\Eframe{q}_{avoid}$ on the zero level set of $E^\cE$ (i.e., the reachability ellipsoid in the canonical frame). The derivations below are loosely inspired by \cite{eberly}.
+
+  Let $q^\cE_p$ be the point on the surface of the ellipsoid, i.e., $\Eframe E(q^\cE_p) = 0$, corresponding to the projection of the point $q^\cE_{avoid}$. Using Lagrange multipliers applied to the constrained optimization problem \eqref{eq:ellipse-point-projection} (after transforming it in the canonical frame), one can show that the vector from a point to its projection, $q^\cE_{avoid}- q^\cE_p$, must be collinear with the gradient of $\Eframe \cE$, i.e.
+  \begin{equation}
+    q^\cE_p- q^\cE_{avoid} = s \partial_q \Eframe E(q^\cE_p)\transpose = s Q q^\cE_p
+  \end{equation}
+  for some scale $s\in\real{}$;
+  thus $q^\cE_p$ can be written as:
+  \begin{equation}\label{eq:qp from S}
+    q^\cE_{p} = {(I+sQ)}\inverse q^\cE_{avoid} = S q^\cE_{avoid}
+    % \bmat{\frac{a^{2}}{s+a^{2}}& 0 & 0 \\
+    % 0 & \frac{b^{2}}{s+b^{2}}&0 \\
+    % 0&0&\frac{b^{2}}{s+b^{2}}} q^\cE_{avoid} =
+  \end{equation}
+  where $S=(I+sQ)\inverse$.
+  Using the fact that since $q^\cE_p$ is a point on the ellipse, $s$ can be solved as the root of the equation obtained by substituting \eqref{eq:qp from S} in $\Eframe E(\Eframe q)$:
+  \begin{equation}
+    0=F(s)={q^\cE_p}\transpose Q q^\cE_p-1={q^\cE_{avoid}}\transpose Q'(s) q^\cE_{avoid} -1,
+  \end{equation}
+  where
+  \begin{equation}
+    Q'(s) =S\transpose Q S = \diag\left(\frac{a^{2}}{(s+a^{2})^2}, \frac{b^{2}}{(s+b^{2})^2},\frac{b^{2}}{(s+b^{2})^2}\right)
+  \end{equation}
+ Detailed methods for computing $s$ can be found in \cite{eberly}. 
+ 
+  Then the point-to-ellipse projection function can be represented as:
+  \begin{multline}\label{equ:Point2EllipseProjection}
+    \pi_{p\cE}(q)= R^{-1}(q(t_1),q(t_2))q^\cE_p+o \\
+    = R^{-1}(q(t_1),q(t_2))Sq^\cE_{avoid}+o\\
+    = R^{-1}S R ( q_{avoid}- o)+o
+  \end{multline}
+  In our derivations, we consider only the 3-D case ($m=3$); for the 2-D case, let $P=\bmat{I & 0}\in\real{2\times 3}$: then $\pi_{p\cE}^{\textrm{2D}}=P\pi_{p\cE}^{\textrm{3D}}(P\transpose q_{avoid}; P\transpose q_1, P\transpose q_2,a)$.
+
+  \subsubsection{ADMM constraints}
+  The corresponding constraint is written as
+  \begin{equation}
+    D_{p}(q) = \begin{cases}
+      \pi_{p\cE}(q) - q_{avoid} & q_{avoid} \in \cE, \\
+      {0} & \textrm{otherwise}.
+    \end{cases}
+  \end{equation}
+  and feasible set and projection function as:
+  \begin{equation}
+    \zeta = \{q\in\mathbb{R}^{nm}:\norm{D_p(q)} = 0 \},\quad \Pi(D_p(q)) = {0}
+  \end{equation}
+
+  \begin{proposition}\label{prop:Ellipse2PointDiff}
+    The differential of the projection operator $\pi_{p\cE}(q_{avoid}; q_1,q_2,a)$ with respect to the foci $q_1,q_2$ is given by the following (where we use $q$ as a shorthand notation for $q^\cE_{avoid}$)
+    \begin{multline}
+      \partial_{\left[\begin{smallmatrix}q_1\\q_2\end{smallmatrix}\right]} \pi_{p\cE}=-2 H [ SH(q-o)]_{\times}U   \\
+      + \left( (q\transpose \partial_sQ' q)^{-1} H^{-1} Q' q q\transpose  (4Q' H[q - o]_\times U \right. \\
+      \left.+ 2Q' H\partial_q o - \partial_b Q' q q \partial_q b) -  s H^{-1} S^2 \partial_b Q q \partial_q b\right) \\
+      -2H^{-1} S H[q-o]_{\times} U  + (H^{-1}SH -I)\partial_q o
+    \end{multline}
+  \end{proposition}
+  The differential of $D_p$ is the same as the one for $\pi_{p\cE}$.
+
+\subsection{Plane-ellipsoid constraint}\label{sec:ellipsoide-plane}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.6\linewidth]{Ellipse2line_V2}
+\caption{Plane-ellipse constraint. Projected a ellipsoid to one side of a plane. The projection is simplified to the point-ellipse constraint as projecting a point inside ellipse $p_{L}$ to $p_{t}$ on outside the ellipse.}
+\label{fig:Ellipse-to-plane}
+\end{center}
+\end{figure}
+
+For a intermediate step to get the relationship between a polygon shaped forbidden region, we first consider a forbidden region in the shape of a hyperplane $\mathcal{L}(\tilde{q}) = \{\tilde{q}\in\mathbb{R}^n: \vn\transpose \tilde{q} = d\}$ (as shown in Figure \ref{fig:Ellipse-to-plane}). The reachability constraint now can then be defined as $\mathcal{L} \cap \mathcal{E}(q_1,q_2,a) = \emptyset$.
+  Using the transformation introduced in (\ref{sec:rotation2Standard}), the ellipse can be transferred into a standard one with the new hyperplane in the form of $\Eframe \cL(\tilde{q}) = \{  \tilde{q}\in\mathbb{R}^m:  \vn_\cE\transpose \tilde{q} = d_{\cE}\}$, where,
+  \begin{equation}
+    n_\cE = H(q_1,q_2)n
+\end{equation}
+\begin{equation} 
+	d_\cE =-\vn\transpose o + d
+  \end{equation}
+\subsubsection{Projection via the tangent interpolation point}
+  For each $\cL_\cE$, there exist two planes $\Eframe \cL_{1} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} =  d_{\cE t} \}$ and $\Eframe \cL_{2} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} = - d_{\cE t} \}$ that are parallel to $\cL$ and tangent to the ellipse, where
+  \begin{equation}
+    d_{\cE t} = \sqrt{ n_\cE\transpose Q^{-1} n_\cE}.
+  \end{equation}
+  The corresponding tangent points are given as 
+  \begin{equation}
+    p^\cE_{1} = \frac{  d_{\cE t} Q^{-1}   n_\cE}{ n_\cE \transpose Q^{-1}  n_\cE} = \frac{Q^{-1} n_\cE}{ d_{\cE t}},
+  \end{equation}
+  \begin{equation}
+   p^\cE_{2} = -  p^\cE_{1}.
+  \end{equation}
+  We use these two tangent points to define a novel measure of displacement between a plane and an ellipse.
+  \begin{definition}
+    The \emph{tangent interpolation point} is defined as 
+    \begin{equation}\label{equ:ProjectPoint}
+      p^\cE_{\cL} = \frac{ d_\cE Q^{-1} n_\cE}{ n_\cE\transpose Q^{-1} n_\cE}
+    \end{equation}
+  \end{definition}
+  Note that $p^\cE_{\cL} \in \mathcal{L}$ and when  $d_\cE=d_{\cE t}$ or $d_\cE=-d_{\cE t}$, $p^\cE_{\cL}=p^\cE_{1}$ or $p^\cE_{\cL}=p^\cE_{2}$, respectively. 
+  % it is easy to see that $\Eframe p_{\cL} \in \mathcal{L}$, and $p_{\mathcal{L}}$ can be used to indicate the relationship between the $\mathcal{L}$ and $\mathcal{E}$, which is shown below. \zyang{how to emphaise this? maybe a graph here?}
+  %The reason such that a specific point is used is for the convenience of evaluating ellipse-plane-segment relationship in Section~\ref{chapter:ellipse to segment}.
+  It is clear that when $ d_\cE \in [- d_{\cE t},  d_{\cE t}]$, the plane $\cL$ and the ellipsoid $\cE$ have at least one intersection, thus violating our desired reachability constraint. Using this fact, we define the following projection operator:
+  \begin{equation}\label{equ:plane2ellipse}
+    \pi^\cE_{\vn \cE}(q) =\begin{cases}
+      p^\cE_{t1}-p^\cE_{\cL} &  d_\cE \in [0, d_{\cE t}], \\
+      p^\cE_{t2}-p^\cE_{\cL} &  d_\cE \in [- d_{\cE t},0), \\
+      {0} & \textrm{otherwise}.
+    \end{cases}
+  \end{equation}
+  \subsubsection{ADMM constraints}
+  Transforming the projection $\pi^\cE$ back to $\cF$ we have:
+  \begin{equation}\label{equ:constraint plane to ellipse}
+    D_{\vn}(q)= H^{-1}(q(t_1),q(t_2))\pi^\cE_{\vn \cE}(q)+o,
+  \end{equation}
+  with the corresponding constraint written as
+  \begin{equation}
+    \zeta_\vn = \{q\in\mathbb{R}^{nm}:\norm{D_{\vn}(q)} = 0 \}
+  \end{equation}
+  \begin{equation}
+   \quad\Pi_\vn(D_{\vn}(q)) = {0}
+  \end{equation}
+
+  \subsubsection{Gradients for the projection function}
+  \begin{proposition}\label{prop:dpi_ne dt}
+    The differential of the projection function $\Eframe \Pi_{\vn \cE}(q)$ with respect to the foci $q_1$ and $q_2$ is given by:
+    \begin{equation}
+      \partial_q \pi^\cE_{\vn \cE}(q) = \begin{cases}
+        \partial_q p^\cE_{t1}-\partial_q p^\cE_{\cL} &  d_\cE \in [0, d_{\cE t}], \\
+        \partial_q p^\cE_{t2}-\partial_q p^\cE_{\cL} &  d \in [- d_{\cE t},0), \\
+        {0} & otherwise.
+      \end{cases}
+    \end{equation}
+    where
+    \begin{multline}
+      \partial_q p_\cL =   (-\frac{d_{\cE t} n\transpose \partial_q o -2d_\cE \partial_q d_{\cE t}}{d_{\cE t}^3} )Q^{-1}n_\cE \\
+      + \frac{d_\cE\partial_b Q^{-1} n_\cE \partial_q b -  2d_\cE Q^{-1}H[n]_\times U}{d_{\cE t}^2},
+    \end{multline}
+    \begin{equation}
+      \partial_q p_{1} =  -\frac{Q^{-1}n_\cE \partial_q d_{\cE t} }{d_{\cE t}^2} 
+      + \frac{\partial_b Q^{-1}n_\cE \partial_q b -  2Q^{-1}H[n]_\times U }{d_{\cE t}}.
+    \end{equation}
+  \end{proposition}
+  Based on the previous proposition, the differential of (\ref{equ:constraint plane to ellipse}) can be written as:
+  \begin{equation}
+    \partial_q {D_{\vn\cE}} = -2 H \cross{\Eframe \Pi_{\vn \cE}}  M + H^{-1}\partial_q \Eframe \Pi_{\vn \cE}
+  \end{equation}
+
+\subsection{Line-segment-ellipse constraint}\label{chapter:ellipse to segment}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.6\linewidth]{Ellipse2safezone_V2}
+\caption{Polygen-ellipse constraint. This constraint is simplified to either a plane-ellipse constraint or a point-ellipse constraint.}
+\label{fig:Ellipse-to-safezone}
+\end{center}
+\end{figure}
+
+To avoid (or stay in) a region defined by several hyperplanes, the relative position between the ellipse and segment of the hyperplane needs to be studied instead of the whole plane. Assume the segment has endpoints $p_1$ and $p_2$, the segment can be defined as:
+\begin{equation}
+\bmat{(p_1-p_2)\transpose\\(p_2-p_1)\transpose} p \leq \bmat{p_2\transpose\\-p_1\transpose}(p_1-p_2)
+\end{equation}
+And using the $p_{\cL}$ defined in (\ref{equ:ProjectPoint}), we define
+\begin{equation}
+D_{seg}(q) = \begin{cases}
+D_1(p_1) & (p_1-p_2)\transpose (p_{\cL}-p_2)<0\\
+D_1(p_2) & (p_2-p_1)\transpose (p_{\cL}-p_1)<0\\
+D_2(p_{\cL}) & otherwise
+\end{cases}
+\end{equation}
+where $D_{p\cE}$ and $D_{\vn\cE}$ are corresponding constraint function introduced in section \ref{sec:ellipsoid-point} and \ref{sec:ellipsoide-plane}
+with the constraint set and projection written as:
+\begin{equation}
+\zeta_{seg} = \{q\in\mathbb{R}^{nm}:\norm{D_{seg}(q)} = 0 \}
+\end{equation}
+\begin{equation}
+\Pi_{seg}(D_{seg}(q)) = {0}
+\end{equation}
+\subsection{Convex-polygon-ellipse constraint}\label{sec:ellipse-region-constraint} 
+To keep an ellipse away from a convex polygon, first, we need to keep all segments of the hyperplanes outside the ellipse. And a convex obstacle constraint for the polygon (as introduced in section \ref{sec:obstacle}) is also added to prevent cases where the ellipse is a subset of the region. Similar to \eqref{equ:ProjectPoint}, we define
+\begin{equation}
+D_{cp}(q) = \bmat{D_{seg1}\\D_{seg2}\\ \vdots}
+\end{equation}
+with the constraint set and projection written as:
+\begin{equation}
+\zeta_{cp} = \{q\in\mathbb{R}^{nm}:\norm{D_{cp}(q)} = 0 \}
+\end{equation}
+\begin{equation}
+\Pi_{cp}(D_{cp}(q)) = {0}
+\end{equation}
+
+
+\section{Cross-trajectory co-observation planning}
+
+We propose to form \emph{sub-teams} on each route, and setup additional co-observations both within the sub-team and across different sub-teams. Notice that co-observations across sub-teams (named \emph{cross-trajectory co-observation}) are always preferred when feasible, since they provide better security in potential situations where the entire sub-team is compromised.
+In this section, we consider only the high-level path planning, while the assignment of the duties in the team will be performed dynamically, making it more difficult for attackers to successfully plan and execute attacks. Cross-trajectory co-observations allows sub-teams to preserve the optimal unsecured trajectories (as shown in Figure \ref{fig:cross-traj-comparison-set}), as it does not require the entire \emph{sub-team} to maintain a close distance with other teams when co-observation occurs. 
+
+\subsection{Problem overview}
 
 Assume we have a total of $N$ robots in the system. We define a partition $\cI=\union_p \cI_p$ of the robots such that robots in \emph{sub-team} $\cI_p$ have the same nominal trajectory. We use the planner introduced in Chapter \ref{chapter:Multi-agent-ADMM} to generate multi-robot trajectories with $N_{p}<N$ routes $\{q_p\}_{p=1}^{N_p}$ without reachability and co-observation constraints, where the state $q_p(t), p \in\{0,\ldots,N_{p}\}$ represents the reference position of the $i$-th sub-team at time $t\in\{0, \dots, t_{e}\}$. Within each sub-team, at least one robot is required to follow the reference trajectory to fulfill the required tasks. Meanwhile, the additional robots can switch from one reference trajectory to another in order to perform co-observation with different sub-teams. We refer to the new type of co-observations as \emph{cross-trajectory co-observation}s. The goal is to find the cross trajectory co-observation plan to secure an unsecured MRS trajectory as with a minimal number of additional robots.
 
@@ -425,8 +736,9 @@ In this chapter, we provide a method to enhance the security of a multi-robot sy
 
 \appendix
 
-\section{Proof of proposition 1 }
-  \begin{proof}
+
+\subsection{Proof of proposition \ref{prop:HProperidy}}
+\begin{proof}
     For subclaim~\ref{it:orthonormality}:
     \begin{equation}
       H\transpose H=H^2=4uu\transpose u u\transpose - 4uu\transpose +I^2=I,
@@ -454,9 +766,9 @@ In this chapter, we provide a method to enhance the security of a multi-robot sy
       H\nu_\cF = \frac{1}{2}\bigl(H(\nu_\cF+\nu_\cE)+H(\nu_\cF-\nu_\cE)\bigr)
       = \nu_\cE
     \end{equation}
-  \end{proof}
+\end{proof}
 
-\section{Proof or proposition 2}
+\subsection{Proof or proposition \ref{prop:Hderivitive}}
 \begin{proof}
     From the definition of $H$ in \eqref{eq:H definition}, we have
     \begin{equation} \label{equ:H_dot original}
@@ -483,6 +795,103 @@ In this chapter, we provide a method to enhance the security of a multi-robot sy
     \end{equation}
     which is equivalent to the claim.
   \end{proof}
+  
+  \subsection{Proof of proposition \ref{prop:Ellipse2PointDiff}}
+  \begin{proof}
+    To make the notation more compact, we will use $\partial_q f$ instead of $\partial_{\left[\begin{smallmatrix}q_1\\q_2\end{smallmatrix}\right]} f$ for the remainder of the proof.
+    The differential of \eqref{equ:Point2EllipseProjection} can be represented as:
+    \begin{equation}\label{equ:dPi_dt}
+      \begin{split}
+        \dot \pi_{p\cE} = &  \dot H^{-1}SH (q_{avoid} - o)  + H^{-1}\dot S H (q_{avoid} - o) \\
+        &+ H^{-1}S \dot H (q_{avoid} - o) + (H^{-1}SH -I)\dot o\\
+      \end{split}
+    \end{equation}
+
+    where
+    \begin{equation}\label{equ:S_dot}
+      \begin{split}
+        \dot S  =& - S^2 (Q \dot s + s \dot Q)\\
+        =& - S^2 (Q \partial_q s \dot q - \partial_b Q \partial_q b \dot q)
+      \end{split}
+    \end{equation}
+    where
+    \begin{equation}
+      \partial_b Q = 2\frac{s}{b^3} \diag\{0,1,1\}
+    \end{equation}
+    To compute the derivative $\partial_q \pi$, we need the expression of $\partial_q b$, $\partial_q o$ and $\partial_q s$; the first two can be easily derived using the equations above:
+    \begin{align}
+      \partial_q b &= \frac{1}{4b}\bmat{q_1-q_2,q_2-q_1}\transpose\\
+      \partial_q o &= \bmat{I/2,I/2}\transpose
+    \end{align}
+
+    In order to get $\partial_q s$, we use the fact that $F\bigl(s(q)\bigr)=0$ for all $q$; hence $F\bigl(\tilde{q}(t)\bigr)\equiv 0$, and $\partial_q F = 0$. We then have:
+
+    \begin{equation}
+      0=\dot F =  2q\transpose Q' \dot q + q\transpose \partial_s Q' q \dot s + q\transpose \partial_bQ' q \dot b
+    \end{equation}
+    where
+    \begin{equation}
+      \partial_s Q'= -\diag\left(\frac{2a^2}{(s+a^2)^3},\frac{2b^2}{(s+b^2)^3},\frac{2b^2}{(s+b^2)^3}\right).
+    \end{equation}
+    By moving term $\dot s$ to the left-hand side we can obtain:
+    \begin{multline}\label{equ:s_dot}
+      \dot s =  (q\transpose \partial_s Q' q)^{-1} (2q\transpose Q' \dot q + q\transpose \partial_b Q' q \dot b)\\
+      =  (q\transpose \partial_s Q' q)^{-1} (-4q\transpose Q' H[U\dot q]_\times (q_{avoid} - o) \\
+      -2q\transpose Q'H\dot o + q\transpose \partial_b Q' q \dot b)\\
+      =  (q\transpose \partial_s Q' q)^{-1} (-4q\transpose Q' H[q_{avoid} - o]_\times U\dot q \\
+      -2q\transpose Q'H\dot o + q\transpose \partial_b Q' q \dot b)
+    \end{multline}
+
+    The second term of equation (\ref{equ:dPi_dt}) turns into:
+    \begin{multline}
+      H^{-1}\dot S H (q_{avoid} - o)
+      = - H^{-1} Q' q \dot s - s H^{-1} S^2 \partial_b Q q \dot b\\
+      =   \big( (q\transpose \partial_s Q' q)^{-1} H^{-1} Q' q q\transpose  (4Q' H[q_{avoid} - o]_\times U  \\
+      + 2Q' H\partial_q o - \partial_b Q' q q \partial_q b) -  s H^{-1} S^2 \partial_b Q q \partial_q b\big) \dot q\\
+    \end{multline}
+
+    Thus equation \eqref{equ:dPi_dt} could be written as:
+    \begin{multline}
+      \dot \pi_{p\cE} = \big(-2 H [ SH(q_{avoid}-o)]_{\times}U   \\
+      + \left( (q\transpose \partial_s Q' q)^{-1} H^{-1} Q' q q\transpose  (4Q' H[q_{avoid} - o]_\times U \right. \\
+      \left.+ 2Q' H\partial_q o - \partial_b Q' q q \partial_q b) -  s H^{-1} S^2 \partial_b Q q \partial_q b\right) \\
+      -2H^{-1} S H[q_{avoid}-o]_{\times} U  \\
+      + (H^{-1}SH -I)\partial_q o \big) \dot q,
+    \end{multline}
+    from which the claim follows.
+  \end{proof}
+  
+  \subsection{Proof of proposition \ref{prop:dpi_ne dt}}
+  \begin{proof}
+    We first need to derive $\dot{d}_\cE$ and $\dot{d}_{\cE t}$
+
+    \begin{equation}
+      \dot d_\cE = -n\transpose \partial_q o \dot q
+    \end{equation}
+    \begin{equation}\label{equ:dot det}
+      \begin{split}
+        \dot d_{\cE t} =&  (\dot n_\cE\transpose Q^{-1} n_\cE + n_\cE\transpose \dot Q^{-1} n_\cE + n_\cE\transpose Q^{-1} \dot n_\cE) /\sqrt{n_\cE\transpose Q^{-1} n_\cE}\\
+        = & (\sqrt{n_\cE\transpose Q^{-1} n_\cE})^{-1}\left(-2n\transpose H[Q^{-1}n_\cE]_\times U \right.\\
+        &\left. + n_\cE \transpose \partial_b Q^{-1} n_\cE \partial_q b  -2 n_\cE Q^{-1}H[n]_\times U \right) \dot q
+      \end{split}
+    \end{equation}
+    Next, we need to derive  $\dot p_{t1}$, $\dot p_{t2} $ and $\dot p_\cL$. Since $p_\cL$ could be written as
+    \begin{equation}
+      p_\cL = \frac{d_\cE Q^{-1} n_\cE}{ d_{\cE t} ^2},
+    \end{equation}
+    we have
+    \begin{multline}\label{equ:dpl_dt}
+        \dot p_\cL =  \left( (-\frac{d_{\cE t} n\transpose \partial_q o -2d_\cE \partial_q d_{\cE t}}{d_{\cE t}^3} )Q^{-1}n_\cE \right.\\
+        \left .+ \frac{d_\cE\partial_b Q^{-1} n_\cE \partial_q b -  2d_\cE Q^{-1}H[n]_\times U}{d_{\cE t}^2}\right) \dot q
+    \end{multline}
+    \begin{multline}\label{equ:dplt_dt}
+        \dot p_{1} =  \left(-\frac{Q^{-1}n_\cE \partial_q d_{\cE t} }{d_{\cE t}^2} \right.\\
+         \left. + \frac{\partial_b Q^{-1}n_\cE \partial_q b -  2Q^{-1}H[n]_\times U }{d_{\cE t}} \right) \dot q
+    \end{multline}
+    subtracting $\dot q$ from (\ref{equ:dpl_dt}) and (\ref{equ:dplt_dt}), we can derive the result shown in (\ref{equ:ProjectPoint})
+  \end{proof}
+
+
 {\small
 \bibliographystyle{unsrt}
 \bibliography{ADMM_planning,ACC}
