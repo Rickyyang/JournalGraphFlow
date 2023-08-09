@@ -14,6 +14,8 @@
 % The following packages can be found on http:\\www.ctan.org
 
 \input{preamble/common}
+\newcommand{\rrtstar}{$\texttt{RRT}^\texttt{*}$}
+
 \usepackage{cleveref}
 \graphicspath{{Figs/}}
 
@@ -93,8 +95,11 @@ With a slight abuse of notation, we use the same notation $\partial_xf$ for the 
 In this section, we briefly review the path planning algorithm based on ADMM constraints discussed in \cite{yangmulti}.
 This algorithm can deal with a variety of types of non-convex and non-smooth optimization constraints that are commonly encountered in trajectory optimization tasks once they are formulated in a certain format.
 The goal of the section is to lay the groundwork for proposing our novel constraint in the following sections.
+\rtron{Do a literature review of other trajectory optimization algorithms, and state if they could be applicable}
 
-Let $x_{ij}\in\real{m}$ denote the position of agent $i\in\{1,\ldots,n\}$ at the discrete-time index $j\in[0,\ldots,T]$, with $m$ being the dimension of the workspace, $n$ the number of agents, and $T$ the planning time horizon. Let $\vx=\stack(\{x_{ij}\})$ denote the aggregated vector of all the agents' trajectories over the entire time interval. The goal of the algorithm is to optimize an objective function $\varPhi(\vx)$ on a set $\Omega$ defined by nonlinear constraints. To solve the problem using ADMM, we introduce a new set of variables $\vz=D(\vx)$ to translate the constraints $\Omega$ on $x$ to (typically lower-dimensional) sets of constraints on $\vz$, such that the projection operator on $\zeta$ can be easily implemented (e.g., a constrained distance between two agents is translated into their difference constrained to an origin-centered sphere).
+Let $x_{ij}\in\real{m}$ denote the position of agent $i\in\{1,\ldots,n\}$ at the discrete-time index $j\in[0,\ldots,T]$, with $m$ being the dimension of the workspace, $n$ the number of agents, and $T$ the planning time horizon. 
+Let $\vx=\stack(\{x_{ij}\})$ denote the aggregated vector of all the agents' trajectories over the entire time interval. The goal of the algorithm is to optimize an objective function $\varPhi(\vx)$ on a set $\Omega$ defined by nonlinear constraints. 
+To solve the problem using ADMM, we introduce a new set of variables \rtronhl{$D$ is not well defined}{$\vz=D(\vx)$} to translate the constraints $\Omega$ on $x$ to (typically lower-dimensional) sets of constraints on $\vz$ \rtron{(leaving $x$ unconstrained, except for the equality constraints with $z$)}, such that the projection operator on $\zeta$ can be easily implemented (e.g., a constrained distance between two agents is translated into their difference constrained to an origin-centered sphere).\zyang{Clearify the notations and use capital zeta}
 The new set of constraints $\zeta$ on $z$ is incorporated using an indicator function $\varTheta_\zeta$. The main problem is written as:
 \begin{equation}\label{eq:ADMMSetConstraint_general}
 		\begin{array}{r@{\quad}c}
@@ -104,7 +109,7 @@ The new set of constraints $\zeta$ on $z$ is incorporated using an indicator fun
   \end{equation}
   where $D(\vx)= [D_1(\vx)^T,\dots,D_l(\vx)^T]^T$ is a vertical concatenation of different functions for different constraints.
 
-  And having the update steps shown as:
+  Applying the ADMM iterations \rtron{ref ADMM paper}, the update steps can be derived as:
   \begin{subequations}\label{eq:ADMMupdate}
     \begin{align}
       \label{eq:admm-mod-update-q}\vx^{k+1}&:=\argmin_\vx(\varPhi(\vx^k) +\frac{\rho}{2}\norm{D(\vx)-\vz^k+\vu^k}_2^2)\\
@@ -112,11 +117,11 @@ The new set of constraints $\zeta$ on $z$ is incorporated using an indicator fun
       \vu^{k+1}&:=\vu^k+D(\vx^{k+1})-\vz^{k+1},
     \end{align}
   \end{subequations}
-  
+  \rtron{where $u$ is...}
   Since $D(\vx)$ is the vertical concatenation of $D_l(\vx)$, the projection of each set $\zeta_l$ is independent for each constraint and can be computed separately. The advantage of this formulation is that we can choose $D(\vx)$ such that the new constraint set~$\zeta$ becomes simple to compute; however, the drawback is that we move the non-convexity to the primal cost function, i.e., in the update for $\vx$ in \eqref{eq:admm-mod-update-q}.
 Additionally, the function~$D(\vx)$ can be used to select only the subset of the variables on which a constraint depends. 
 
-We consider the following types of traditional path planning constraints:
+We consider the following types of traditional path planning constraints:\zyang{notation using x or q}
   \subsubsection{Velocity constraints}
   The movement of each agent is constrained by a maximum distance in any direction over a single discrete time step. We then define the function $D(\vx)$ to return the velocity vectors for the $i$-th agent at time step $j$:
 \begin{equation}
@@ -126,19 +131,20 @@ and the constraint set is:
 \begin{equation}\label{eq:velocity_constraint}
    \zeta_{ij} =\bigl\{z \mid \norm{z} \leq v_{max}\bigr\}.
 \end{equation}
-The projection operator $\Pi_\zeta(z)$ for this constraint implies that the projection of the vector $z$ is inside a sphere with a radius of $v_{max}$ which can then be written as:
-\begin{equation}\label{eq:velocity_constraint_update}
-    \Pi_{\zeta}(z) = \begin{cases}
- v_{max}\frac{z}{\norm{z}} &\text{if } \norm{z} > v_{max},\\
-z	& otherwise.
-\end{cases}
-\end{equation}
+The projection operator $\Pi_\zeta(z)$ for this constraint  is simply a projection of $z$ to the interior of a sphere centered at the origin and having radius $v_{max}$
+%implies that the projection of the vector $z$ is inside a sphere with a radius of $v_{max}$ which can then be written as:
+%\begin{equation}\label{eq:velocity_constraint_update}
+%    \Pi_{\zeta}(z) = \begin{cases}
+% v_{max}\frac{z}{\norm{z}} &\text{if } \norm{z} > v_{max},\\
+%z	& otherwise.
+%\end{cases}
+\%end{equation}
 
-This constraint could be adapted also to enforce more refined dynamical models.
+This constraint could be adapted to enforce more refined dynamical models.
 
-  \subsubsection{Convex obstacles}: We use convex polygons to model regions defining the boundary of the workspace, as well as solid obstacles that cannot be entered by agents (note that the latter represent a non-convex constraint set from the point of view of the optimization problem). Obstacles with non-convex shapes can be modeled using unions of the convex sets.
+\subsubsection{Convex obstacles} We use convex polygons to model regions defining the boundary of the workspace, as well as solid obstacles that cannot be entered by agents (note that the latter represent a non-convex constraint set from the point of view of the optimization problem). Obstacles with non-convex shapes can be modeled using unions of the convex sets.
   
-  We enforce the constraints at each discrete time step $x_{ij}$ (enforcement of the constraints between these points can be achieved by making the obstacles sightly bigger than its actual size). For a convex area, waypoints stays unchanged it they are outside the zone, and if the waypoints are inside the zone, the constraint function $D(\vx)$ returns the least negative distance from the waypoints to the zone defined by hyperplanes which is represented as:
+\rtron{Define for a single $x_{ij}$, then just say that we add constraints for all $ij$. Instead of using $min(d_{ijk})$, use $dist(x_{ij},\cP)$, where $\cP$ is the cvx polygon} We enforce the constraints at each discrete time step $x_{ij}$ (enforcement of the constraints between these points can be achieved by making the obstacles sightly bigger than its actual size). For a convex area, waypoints stays unchanged it they are outside the zone, and if the waypoints are inside the zone, the constraint function $D(\vx)$ returns the least negative distance from the waypoints to the zone defined by hyperplanes which is represented as:
 \begin{equation}\label{eq:zoneConstraintMap}
 D_i(\vx) = \bmat{d_{11} \\\vdots\\ d_{nm}}
 \end{equation}
@@ -173,7 +179,7 @@ The projection $\Pi_\zeta(z)$ for this constraint can be written as:
 \end{equation}
 Note that \eqref{eq:waypoint_constraint} and \eqref{eq:waypoint_constraint_update} are equivalent to \eqref{eq:velocity_constraint} and \eqref{eq:velocity_constraint_update}, except for the fact that the quantity in \eqref{eq:waypoint_constraint_D} is always a positive scalar.
 
-
+\rtron{Give example application here, and include application of ADMM without the security constraints, but highlighting a path that would break the security}
 
   \subsection{Householder rotations}\label{sec:householder}
 
@@ -205,10 +211,10 @@ Note that \eqref{eq:waypoint_constraint} and \eqref{eq:waypoint_constraint_updat
   \begin{equation}
     \bmat{v_1\\v_2\\v_3}\mapsto \bmat{0 & -v_3 &v_2\\v_3 & 0 & -v_1\\-v_2 & v_1 & 0},
   \end{equation}
-  such that $[v]_\times w=v\times w$ for any $w\in\real{3}$. One can verify by direct computation the following property:
-  \begin{equation}\label{eq:asymmetric to cross}
-    wv\transpose-vw\transpose=\cross{\cross{v}w}.
-  \end{equation}
+  such that $[v]_\times w=v\times w$ for any $w\in\real{3}$. %One can verify by direct computation the following property:
+  %\begin{equation}\label{eq:asymmetric to cross}
+  %  wv\transpose-vw\transpose=\cross{\cross{v}w}.
+  %\end{equation}
   \begin{proposition}\label{prop:Hderivitive}
     Let $\nu_\cF(t)$ represent a parametric curve. Then we have
     \begin{equation}
@@ -221,7 +227,12 @@ Note that \eqref{eq:waypoint_constraint} and \eqref{eq:waypoint_constraint_updat
   \end{proposition}
 
 \subsection{Rapidly-exploring Random Trees}
-We use RRT* as a component of the solution \cite{karaman2010incremental}, which is an optimized variant of the rapidly-exploring Random Trees (RRT). As a optimal path planning algorithm, RRT* returns the shortest paths between an initial location and multiple potential goals. We assume that the generated paths can be travelled in both directions (this is used later in our analysis). The basic RRT* algorithm is shown in Algorithm \ref{alg:rrt}. For a given tree $G=(V,E)$, key functions called by the algorithm are
+\rtron{consider moving this section to part II}
+\rtron{Mention that one could theoretically use the ADMM solver, but RRT* is more appropriate to find one start-many destination paths, and is more efficient, although it can only minimize path length (or simial additive cost) with obstacle constraints (not the other spatio-temporal constraints).}
+We use \rrtstar{} \cite{karaman2010incremental} as a component of \rtronhl{mention that is used only in part II}{the solution}, which is an optimized variant of the rapidly-exploring Random Trees (RRT). 
+As a optimal path planning algorithm, RRT* returns the shortest paths between an initial location and multiple potential goals. We assume that the generated paths can be travelled in both directions (this is used later in our analysis). 
+%The basic RRT* algorithm is shown in Algorithm \ref{alg:rrt}.
+For a given tree $G=(V,E)$, key functions called by the algorithm are \zyang{Check with cross-trajectory algorithm, leave the functions used in later algorithm}
 \begin{description}
 \item[$\texttt{Sample}(i)$] This function returns independent identically distributed samples from the free configuration space.
 \item[$\texttt{Nearest}(x)$] This function returns the vertex $v\in V$ that is closest in Euclidean distance to the input point $x$.
@@ -230,16 +241,24 @@ We use RRT* as a component of the solution \cite{karaman2010incremental}, which 
 \item[$\texttt{Cost}(v)$] This function assigns a non-negative cost (total travel distance in our application) to the unique path from the initial position to $v$ . 
 \item[$\texttt{Parent}(v)$] This is a function that maps the vertex $v$ to $v'\in V$ such that $(v',v)\in E$
 \end{description}
+\rtron{You do not need to put the full pseudocode, but either mention how the functions above are used, or do not mention them}
+\rtron{More importantly, emphasize that we use it to solve the single-to-many path planning problem.}
+
 
 \section{Secure Multi-robot path planning using co-observation and reachability constraints}
 
-Besides traditional path planning constraints, additional security constraints need to be incorporated into the path planning problem to prevent cases where an attacker changes a robot's path between two observations to reach a forbidden region without being detected. The work of \cite{wardega2019resilience} provide exact solution for grid-world configuration. Using the onboard sensing capabilities, robots can perform inter-robot observations as an additional security measure. Each robot' self-report includes not only its own status, but also additional observations of other robots' status. For example, robot $i$'s self-report may include its observation of robot $j$, ``$i$ report its arrival at $v$ and $i$ observes $j$ at location $w$''. Similarly, robot $j$ also reports its observations of robot $i$ to the CE. This solution provides paths with an observation schedule such that any attempts by a compromised robot to violate the safety constraints would necessarily break the observation plan and be detected.
+\rtron{Streamline this introductory paragraphs. The point is to point out again the problem (use the figure from the example application), give an overview of the solution (co-observations, ellipsoidal constraints, then ADMM), and say that [5] solved this for grid worlds, but not optimizing $\Phi(x)$.}
+Beside traditional path planning constraints, additional security constraints need to be incorporated into the path planning problem to prevent cases where an attacker changes a robot's path between two observations to reach a forbidden region without being detected. 
+The work of \cite{wardega2019resilience} provide exact solution for grid-world configuration. Using the onboard sensing capabilities, robots can perform inter-robot observations as an additional security measure. Each robot' self-report includes not only its own status, but also additional observations of other robots' status. 
+For example, robot $i$'s self-report may include its observation of robot $j$, ``$i$ report its arrival at $v$ and $i$ observes $j$ at location $w$''. Similarly, robot $j$ also reports its observations of robot $i$ to the \rtronhl{defined?}{CE}. This solution provides paths with an observation schedule such that any attempts by a compromised robot to violate the safety constraints would necessarily break the observation plan and be detected.
 
 When transforming the solution to continuous configuration spaces, additional analysis is needed on the reachability of robots in order for the security of co-observation schedule to hold. More broadly, the problem of solving a path optimization problem with constraints based on the sets of locations that the agents could \emph{potentially} reach, which we call \emph{reachability regions}, has not received attention in the literature.  This constraint is formulated using an ellipsoidal bound of the reachability region, and the idea of using an ellipsoidal bound to limit the search space is inspired by the \emph{heuristic sampling domain} introduced by \cite{gammell2014informed} in the context of the $\mathtt{RRT^*}$ path planning algorithm.
 
 We formulate a way to enforce an empty intersection between forbidden regions and ellipsoidal reachability region while optimizing the trajectory, such that if an attacker takes control of the robots, they cannot perform an undetected attack without breaking the co-observation schedule. To the best of our knowledge, our path planning algorithm is the only one flexible enough to handle the safety related spatio-temporal constraints introduced by co-observations and reachability. 
 
-\subsection{Co-observation schedule}
+\rtron{Include overview of how the rest of the section is organized}
+
+\subsection{Co-observation schedule constraint}
 The co-observation constraints is used to guarantee that, at time required by the schedule, two robots should get close enough with each other to observe each other's behavior. The co-observation constraint is modeled as a relative distance constraint between two robots at some time instant $j$ (i.e., to require two agents see each other within a certain radius to inspect each other, or to exchange data). The location of the co-observation location should make sure that the ellipsoidal reachability region between each co-observation, considered in later sections \ref{sec:reachability}, has an empty intersection with all forbidden regions.
  We write the function for the constraint as:
 \begin{align}
@@ -258,7 +277,8 @@ z	& otherwise.
 \end{equation}
 The locations $q_{aj}$ and $q_{bj}$ where the co-observation performed are computed as part of the optimization.
 
-\subsection{Reachability constraints}\label{sec:reachability}
+\rtron{First a subsection "Definition of ellipsoidal constraints and their differential", and then another one "Reachability constraints using ellipsoidal constraints" with the three cases}
+\subsection{Reachability constraint}\label{sec:reachability}
   In this section, we first provide the definition of an \emph{ellipsoidal reachability region}. We then provide a differentiable map to transform such region in a canonical axis-aligned form where the operator $\Pi_\zeta$ and its differential can be obtained; these operators are then extended to the general case via the aforementioned transform. The overall goal is to define the functions $D(q)$, its differential, and the operator $\Pi_\zeta$ for \emph{ellipsoidal reachability regions} with respect to the forbidden regions that can then be used in the ADMM formulation in Chapter \ref{chapter:Multi-agent-ADMM}.
 
 \subsection{Definition of reachability constraint}\label{sec:ellipsoidal definition}
