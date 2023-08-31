@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  31 AUG 2023 22:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  31 AUG 2023 22:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1605,10 +1605,6 @@ LaTeX Warning: Reference `chapter:cross-trajectory' on page 8 undefined on inpu
 t line 587.
 
 
-LaTeX Warning: Reference `sec:reachability-discussion' on page 8 undefined on i
-nput line 591.
-
-
 LaTeX Warning: Reference `chapter:Multi-agent-ADMM' on page 8 undefined on inpu
 t line 597.
 
@@ -1639,12 +1635,12 @@ t line 618.
 LaTeX Warning: Reference `chapter:Reachability_Constraints' on page 9 undefined
  on input line 620.
 
-<Figs//SC_gen_1.png, id=398, 512.55319pt x 410.04256pt>
+<Figs//SC_gen_1.png, id=399, 512.55319pt x 410.04256pt>
 File: Figs//SC_gen_1.png Graphic file (type png)
 <use Figs//SC_gen_1.png>
 Package pdftex.def Info: Figs//SC_gen_1.png  used on input line 626.
 (pdftex.def)             Requested size: 113.39923pt x 90.71643pt.
-<Figs//SC_gen_2.png, id=399, 512.55319pt x 410.04256pt>
+<Figs//SC_gen_2.png, id=400, 512.55319pt x 410.04256pt>
 File: Figs//SC_gen_2.png Graphic file (type png)
 <use Figs//SC_gen_2.png>
 Package pdftex.def Info: Figs//SC_gen_2.png  used on input line 627.
@@ -1653,15 +1649,15 @@ Package pdftex.def Info: Figs//SC_gen_2.png  used on input line 627.
 LaTeX Warning: Reference `chapter:Reachability_Constraints' on page 9 undefined
  on input line 632.
 
-<Figs//two_edges.png, id=400, 540.67331pt x 283.85349pt>
+<Figs//two_edges.png, id=401, 540.67331pt x 283.85349pt>
 File: Figs//two_edges.png Graphic file (type png)
 <use Figs//two_edges.png>
 Package pdftex.def Info: Figs//two_edges.png  used on input line 636.
 (pdftex.def)             Requested size: 151.20154pt x 79.3788pt.
+
+LaTeX Warning: Reference `fig:RRT*' on page 9 undefined on input line 642.
+
 [9 <./Figs//SC_gen_1.png> <./Figs//SC_gen_2.png>]
-
-LaTeX Warning: Reference `fig:RRT*' on page 10 undefined on input line 642.
-
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 654.
 
@@ -1671,16 +1667,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 673--674
  \OT1/ptm/m/n/10 (+20) and
  []
 
-<Figs//security_graph.png, id=417, 540.67331pt x 404.06319pt>
+<Figs//security_graph.png, id=418, 540.67331pt x 404.06319pt>
 File: Figs//security_graph.png Graphic file (type png)
 <use Figs//security_graph.png>
 Package pdftex.def Info: Figs//security_graph.png  used on input line 695.
 (pdftex.def)             Requested size: 151.20154pt x 112.9951pt.
 [10 <./Figs//two_edges.png> <./Figs//security_graph.png>]
-Overfull \hbox (51.19498pt too wide) detected at line 726
-[]
- []
-
 
 LaTeX Warning: Citation `ntafos1979path' on page 11 undefined on input line 729
 .
@@ -1693,37 +1685,37 @@ d on input line 738.
 LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 11 undefine
 d on input line 738.
 
-<Figs//graph_flow_result_3.png, id=464, 1204.5pt x 1686.3pt>
+<Figs//graph_flow_result_3.png, id=465, 1204.5pt x 1686.3pt>
 File: Figs//graph_flow_result_3.png Graphic file (type png)
 <use Figs//graph_flow_result_3.png>
 Package pdftex.def Info: Figs//graph_flow_result_3.png  used on input line 742.
 
 (pdftex.def)             Requested size: 100.79846pt x 141.10788pt.
-<Figs//3_flow_result.png, id=465, 1606.0pt x 1405.25pt>
+<Figs//3_flow_result.png, id=466, 1606.0pt x 1405.25pt>
 File: Figs//3_flow_result.png Graphic file (type png)
 <use Figs//3_flow_result.png>
 Package pdftex.def Info: Figs//3_flow_result.png  used on input line 750.
 (pdftex.def)             Requested size: 151.20154pt x 132.29936pt.
-[11]
-<Figs//graph_flow_result_4.png, id=481, 1204.5pt x 1686.3pt>
+[11 <./Figs//graph_flow_result_3.png (PNG copy)>]
+<Figs//graph_flow_result_4.png, id=482, 1204.5pt x 1686.3pt>
 File: Figs//graph_flow_result_4.png Graphic file (type png)
 <use Figs//graph_flow_result_4.png>
 Package pdftex.def Info: Figs//graph_flow_result_4.png  used on input line 762.
 
 (pdftex.def)             Requested size: 100.79846pt x 141.10788pt.
-<Figs//4_flow_result.png, id=482, 1606.0pt x 1405.25pt>
+<Figs//4_flow_result.png, id=483, 1606.0pt x 1405.25pt>
 File: Figs//4_flow_result.png Graphic file (type png)
 <use Figs//4_flow_result.png>
 Package pdftex.def Info: Figs//4_flow_result.png  used on input line 770.
 (pdftex.def)             Requested size: 151.20154pt x 132.29936pt.
-<Figs//nflow_vs_cost.png, id=485, 1232.605pt x 375.4025pt>
+<Figs//nflow_vs_cost.png, id=486, 1232.605pt x 375.4025pt>
 File: Figs//nflow_vs_cost.png Graphic file (type png)
 <use Figs//nflow_vs_cost.png>
 Package pdftex.def Info: Figs//nflow_vs_cost.png  used on input line 782.
 (pdftex.def)             Requested size: 151.20154pt x 46.04878pt.
- [12 <./Figs//graph_flow_result_3.png (PNG copy)> <./Figs//3_flow_result.png (P
-NG copy)> <./Figs//graph_flow_result_4.png (PNG copy)> <./Figs//4_flow_result.p
-ng (PNG copy)> <./Figs//nflow_vs_cost.png (PNG copy)>]
+ [12 <./Figs//3_flow_result.png (PNG copy)> <./Figs//graph_flow_result_4.png (P
+NG copy)> <./Figs//4_flow_result.png (PNG copy)> <./Figs//nflow_vs_cost.png (PN
+G copy)>]
 
 LaTeX Warning: Citation `Tron:Arxiv14' on page 13 undefined on input line 832.
 
@@ -1751,24 +1743,15 @@ Package pageslts Info: Total number of pages is even.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `paper.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `paper.out':
-(rerunfilecheck)             Before: C74CE4E8A327A772C96DD11FAAF5CD9C;3143
-(rerunfilecheck)             After:  FDD571C8850813787D7F7E5A65C185B7;3142.
+Package rerunfilecheck Info: File `paper.out' has not changed.
+(rerunfilecheck)             Checksum: B166FC6FB07D709F130EB84ACBD1ACCC;3228.
  ) 
 Here is how much of TeX's memory you used:
- 39450 strings out of 478268
- 776705 string characters out of 5846348
+ 39448 strings out of 478268
+ 776759 string characters out of 5846348
  1171775 words of memory out of 5000000
  56314 multiletter control sequences out of 15000+600000
- 532957 words of font info for 364 fonts, out of 8000000 for 9000
+ 532904 words of font info for 363 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  119i,20n,111p,1457b,550s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
@@ -1792,10 +1775,10 @@ urw/helvetic/uhvb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/tim
 es/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a
 .pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr
 /local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (14 pages, 2582624 bytes).
+Output written on paper.pdf (14 pages, 2582308 bytes).
 PDF statistics:
- 689 PDF objects out of 1000 (max. 8388607)
- 581 compressed objects within 6 object streams
+ 690 PDF objects out of 1000 (max. 8388607)
+ 582 compressed objects within 6 object streams
  224 named destinations out of 1000 (max. 500000)
  80791 words of extra memory for PDF output out of 89155 (max. 10000000)
 
