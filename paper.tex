@@ -15,6 +15,8 @@
 
 \input{preamble/common}
 \newcommand{\rrtstar}{$\texttt{RRT}^\texttt{*}$}
+\newtheorem{constraint}{ADMM constraint}
+\newtheoreom{example}{Example}
 
 \usepackage{cleveref}
 \graphicspath{{Figs/}}
@@ -83,7 +85,7 @@ We propose to incorporate redundancy in the form of \emph{sub-team}s of multiple
 
 In this section, we aims to enhance the security of MRSs against malicious takeovers and deviations by attackers. Specifically, we design an inter-robot observation plan (co-observation schedule) to ensures that, during the task period, robots are constantly in proximity to one another according to a schedule, in order to observe and detect potential hazardous behaviors. This achieved by keeping the potential region that the robots can possibly reach between each consecutive co-observations away from the forbidden regions. In this way, the plan ensure that any potential deviations to these forbidden regions will cause the corresponding robot to miss their next co-observation with other robots. \cite{wardega2019resilience} solved this problem in grid world for robots with fixed start and goal locations (Figure~\ref{fig:Grid-example-application}) but was unable to optimizing over arbitrary smooth cost functions. 
 
-We formulate the planning problem into an optimal trajectory optimization problem to minimize arbitrary smooth objective functions. The security constraints including co-observation schedule and reachability analysis, alongside with traditional path planning constraints, are transformed into different types of spatio-temporal constraints in the optimization problem. We denote as $q_{ij}\in\real{m}$ the position of agent $i$ at the discrete-time index $j$, with $m$ representing the dimension of the state space. For a team of $n$ agents, and a task time horizon of $T$, the overall trajectory of the multi-agent system can be represented as an aggregated vector $\vq\in \real{n m T}$. 
+We formulate the planning problem into an optimal trajectory optimization problem to minimize arbitrary smooth objective functions. The security constraints, including those from the co-observation schedule, reachability analysis, and the traditional path planning constraints, are transformed into different types of spatio-temporal sets in the optimization problem. We denote as $q_{ij}\in\real{m}$ the position of agent $i$ at the discrete-time index $j$, with $m$ representing the dimension of the state space. For a team of $n$ agents, and a task time horizon of $T$, the overall trajectory of the multi-agent system can be represented as an aggregated vector $\vq\in \real{n m T}$. 
 The goal of our path planning problem is to minimize or maximize an objective function $\varPhi(\vq)$ under a set of nonlinear constraints described by a set $\Omega$, formally:
 \begin{equation}\label{eq:general-problem}
 	\begin{split}
@@ -92,7 +94,11 @@ The goal of our path planning problem is to minimize or maximize an objective fu
 	\end{split}
 \end{equation}
 
-As an example application, we assume that there exists an underlying slowly-time-varying scalar or vector field $\vx$ whose value needs to be estimated at a given number of discrete locations. To explore unknown spatially-distributed fields, autonomous agents are usually required to traverse the entire unknown environment while collecting sensory data to estimate a corresponding map (Figure~\ref{fig:ADMM-example-application}). We model the map as a set of locations of interests arranged on a regular grid, where at each location, we assume that there is a corresponding slowly-time-varying quantity. For our purposes, we are interested in finding paths that best reconstruct the field, i.e., that achieve the minimum uncertainty. We define the cost function $\varPhi(\vq)$ to be an approximation of the uncertainty at any of the given points, and we aim to minimize such maximum uncertainty. We focus on a particular choice of objective function $\varPhi(\vq)$, in the context of a mapping and estimation applications, for the optimization problem \eqref{eq:general-problem}. \zyang{Do we need detail of the problem formulations?}
+To give a concrete example of the cost $\varPhi$ and the set $\Omega$, we introduce a representative application that will be used for all the simulations throughout the paper.
+\begin{example} Assume that there exists an underlying slowly-time-varying scalar or vector field $\vx$ whose value needs to be estimated at a given number of discrete locations. To explore unknown spatially-distributed fields, autonomous agents are usually required to traverse the entire unknown environment while collecting sensory data to estimate a corresponding map (Figure~\ref{fig:ADMM-example-application}). We model the map as a set of locations of interests arranged on a regular grid, where at each location, we assume that there is a corresponding slowly-time-varying quantity. For our purposes, we are interested in finding paths that best reconstruct the field, i.e., that achieve the minimum uncertainty. 
+\rtron{Define $\varPhi$ and $\Omega$ in words but briefly}
+%We define the cost function $\varPhi(\vq)$ to be an approximation of the uncertainty at any of the given points, and we aim to minimize such maximum uncertainty. We focus on a particular choice of objective function $\varPhi(\vq)$, in the context of a mapping and estimation applications, for the optimization problem \eqref{eq:general-problem}. \zyang{Do we need detail of the problem formulations?}
+\end{example}
 
 \begin{figure}
      \centering
@@ -104,7 +110,7 @@ As an example application, we assume that there exists an underlying slowly-time
  
  This section is organized as follows. We begin by presenting the foundational mathematical concepts, notably the basic ADMM optimal trajectory solver. Subsequently, we seamlessly integrate security constraints, encompassing co-observation schedule and reachability constraints, into our proposed solver. Concluding this section, we present the obtained results alongside identifying limitations that will be addressed in the upcoming section.
 
-\subsection{Preliminary}
+\subsection{Preliminaries}
 In this section, we review various mathematical concepts that will provide the foundations and context for the solver.
 
 \subsubsection{Differentials}
@@ -152,15 +158,22 @@ Additionally, the function~$D(\vq)$ can be used to select only the subset of the
 
 We consider the following types of traditional path planning constraints in the ADMM constraints:
 \subsubsection*{Velocity constraints}
-  The movement of each agent is constrained by a maximum distance in any direction over a single discrete time step. We then define the function $D(\vq)$ to return the velocity vectors for the $i$-th agent at time step $j$:
-\begin{equation}
-     D_{ij}(\vq) = q_{ij}-q_{i(j-1)}, \quad j\in\{1,\ldots, T\}
-\end{equation}
-and the constraint set is:
-\begin{equation}\label{eq:velocity_constraint}
-   \sZ_{ij} =\bigl\{z \mid \norm{z} \leq v_{max}\bigr\}.
-\end{equation}
-The projection operator $\Pi_\zeta(z)$ for this constraint  is simply a projection of $z$ to the interior of a sphere centered at the origin and having radius $v_{max}$. This constraint could be adapted to enforce more refined dynamical models.
+  The movement of each agent is constrained by a maximum distance in any direction over a single discrete time step. We then define the function $D(\vq)$ to return the velocity vectors for the $i$-th agent at time step $j$; its result then needs to be constrained to a sphere.
+
+  \begin{constraint}[Velocity constraint]
+\begin{align}
+     D_{ij}(\vq) &= q_{ij}-q_{i(j-1)}, \quad j\in\{1,\ldots, T\}\\
+\label{eq:velocity_constraint}
+   \sZ_{ij} &=\bigl\{z \mid \norm{z} \leq v_{max}\bigr\}\\
+   \Pi_{\sZ_{ij}}(z)&=\begin{cases}
+   v_{\max}\frac{z}{\norm{z}} \textrm{ if } \norm{z}>v_{\max}\\
+   z\textrm{ otherwise}
+   \end{cases}
+\end{align}
+\end{constraint}
+\rtron{Put all the constraints using this $\LaTeX$ environment.}
+\rtron{Make sure notation for $\sZ$ is consistent}
+%The projection operator $\Pi_\zeta(z)$ for this constraint  is simply a projection of $z$ to the interior of a sphere centered at the origin and having radius $v_{max}$. This constraint could be adapted to enforce more refined dynamical models.
 
 %implies that the projection of the vector $z$ is inside a sphere with a radius of $v_{max}$ which can then be written as:
 %\begin{equation}\label{eq:velocity_constraint_update}
@@ -216,7 +229,7 @@ The projection $\Pi_\sZ(z)$ for this constraint can be written as:
 \zyang{plot new simpler example, add collision avoidance}
 
  \subsubsection{Householder rotations}\label{sec:householder}
-
+ \rtron{Move to right after the definition of differential}
   To formulate the operator $\Pi_\sZ$ for our novel constraint, we will define a differentiable transformation of the constraint set to a canonical form. This transformation will include a rotation that we derive from a modified version of Householder transformations \cite{householder1958unitary}. With respect to the standard definition, our modification ensures that the final operator is a proper rotation (i.e., not a reflection). We call our version of the operator a \emph{Householder rotation}. In this section we derive Householder rotations and their differentials for the 3-D case; the 2-D case can be easily obtained by embedding it in the $z=0$ plane.
 
   \begin{definition} Let $\nu_\cF$ and $\nu_\cE$ be two unitary vectors ($\norm{\nu_\cF}=\norm{\nu_\cE}=1$). Define the normalized vector $u$ as
@@ -280,10 +293,12 @@ z	& otherwise.
 \end{equation}
 The locations $q_{aj}$ and $q_{bj}$ where the co-observation performed are computed as part of the optimization.
 
-\subsection{Definition of reachability constraint}\label{sec:reachability}
-  In this section, we first provide the definition of an \emph{ellipsoidal reachability region}. We then provide a differentiable map to transform such region in a canonical axis-aligned form where the operator $\Pi_\zeta$ and its differential can be obtained; these operators are then extended to the general case via the aforementioned transform. The overall goal is to define the functions $D(q)$, its differential, and the operator $\Pi_\zeta$ for \emph{ellipsoidal reachability regions} with respect to the forbidden regions that can then be used in the ADMM formulation in section \ref{chapter:ADMM review}.
+\subsection{Definition of ellipsoidal reachability regions}\label{sec:reachability}
+  In this section, we define  \emph{ellipsoidal reachability regions} based on pairs of locations on a trajectory, and a transformation of such region in axis-aligned form. These definitions will be used to define different types of reachability constraints (between an ellipsoid and different geometric entities such as a point, line, line segment, and polygon), their projections, and differentials in subsequent sections. 
+  %differentiable map to transform such region in a canonical axis-aligned form where the operator $\Pi_\zeta$ and its differential can be obtained; these operators are then extended to the general case via the aforementioned transform. The overall goal is to define the functions $D(q)$, its differential, and the operator $\Pi_\zeta$ for \emph{ellipsoidal reachability regions} with respect to the forbidden regions that can then be 
+  These will be used in the ADMM formulation in section \ref{chapter:ADMM review}.
 
-The reachability region is defined as the set of locations $q(t)$ that a robot can reach between two given fixed positions:
+%The reachability region is defined as the set of locations $q(t)$ that a robot can reach between two given fixed positions:
 
 \begin{definition}\label{sec:ellipsoidal definition}
 	The \emph{reachability region} for two waypoints $q(t_1)=q_1$, $q(t_2)=q_2$ is defined as the sets of points $q'$ in the workspace such that there exist a trajectory $q(t)$ where $q(t')=q'$, $t_1\leq t' \leq t_2$ and $q(t)$ satisfies the velocity constraint $d(q(t),q(t+1))\leq v_{max}$.
@@ -296,6 +311,7 @@ This region can be analytically bounded via an ellipsoid:
  \begin{figure}
     \centering
     \includegraphics[width=0.6\linewidth]{Reachability}
+\rtron{Extend the figure to give a graphical representation of the canonical transformation}
     \caption{The ellipse showcases the reachability region. The black line is the planned trajectory of a robot, $q_1$ and $q_2$ are two locations this robot are expected at given time $t_1$ and $t_2$, blue and red line are possible trajectories if the robot is compromised in after reaching $q_1$. Robot that goes outside the reachability region to forbidden region can only reach $q_{2}'$ instead of $q_{2}$ at time $t_{2}$, even if it drives directly toward $q_{2}$ at full speed $v_{max}$ after the intrusion into forbidden region.}
     \label{fig:EllipseConstraintExample}
   \end{figure}
@@ -323,17 +339,17 @@ The reachability ellipsoid is an over-approximation of the exact reachability re
   \end{align}
   To simplify the notation, in the following we will consider $H$ to be a function of $q_1,q_2$ directly, i.e. $H(q_1,q_2)$.
 
-\subsection{Reachability constraints using ellipsoidal constraints and their differential}\label{sec:ellipoid constraints}
-In later sections, we define constraint formulation of the ellipsoid regions against different types of forbidden regions: a point, a plane, a segment, and a convex polygon. For each one, our goal is to define the function $D(q)$, the set $\zeta$ and the projection $\Pi_\zeta$ that can be incorporated in the ADMM optimization (\ref{eq:ADMMSetConstraint_modified}); we also include derivations for the differential $\partial_qD(q)$, which can be used to significantly speed up the optimization. 
+%\subsection{Reachability constraints using ellipsoidal constraints and their differential}\label{sec:ellipoid constraints}
+\rtron{Make sure that, throughout the paper, we use reachability ellipsoid instead of ellipsoidal regions}
+We are now ready to formulate constraints based on reachability ellipsoids against different types of forbidden regions: a point, a plane, a segment, and a convex polygon. For each one, our goal is to define the function $D(q)$, its differential $\partial_qD(q)$, the set $\zeta$ and the projection $\Pi_\zeta$ that can be incorporated in the ADMM optimization (\ref{eq:ADMMSetConstraint_modified}).
 
 \subsection{Point-ellipsoid constraint}\label{sec:ellipsoid-point}
 As shown in Fig.\ref{fig:Ellipse-to-point}, we consider a forbidden region in the shape of a single point $q_{avoid}$. The goal is to design the trajectory $q(t)$ such that $q_{avoid}\notin\mathcal{E}(q_1,q_2)$. We first define a projection function $\pi_{p\cE}(q_{avoid};q_1,q_2,a) = q_p$, which returns a projected point $q_p$ of $q_{avoid}$ outside the ellipse, i.e., as the solution to
 
+\rtron{For these constraints, add $\pi$ inside the constraint environment, then follow that environment with the proposition with the differential of $\pi$.}
+
 \begin{equation}\label{eq:ellipse-point-projection}
-\begin{split}
-\argmin_{q_p} &\quad \norm{q_{avoid}-q_p}^2 \\
-s.t. &\quad q_p\in \cE^{c}.
-\end{split}
+\pi_{p\cE}=\argmin_{q_p\in\cE^c} &\quad \norm{q_{avoid}-q_p}^2 
 \end{equation}
 where $\cE^{c}$ is the set complement of the region $\cE$.
   
@@ -353,7 +369,7 @@ where $\cE^{c}$ is the set complement of the region $\cE$.
   For cases where $q_{avoid} \notin \cE(q(t_2),q(t_1),r)$, $\pi_{p\cE}(q_{avoid}) = q_{avoid}$. And for cases where $q_{avoid} \in \cE(q_1,q_2,r)$, $D(q)$ needs to be projected to the boundary of the ellipse, which is discussed below.
 
 
-  \subsubsection{Projection to the standard ellipse}
+  \subsubsection{Projection to the standard ellipse}\rtron{Move to the appendix or refer to the conference paper}
   The ellipse $\cE$ expressed in $\cF_\cE$ is given by $\Eframe{\cE}=\{\Eframe{q}\in\real{m}:d(q^\cE_1,\Eframe{q})+d(\Eframe{q},q^\cE_2)<2a\}$, where the coordinates of the two foci $q^\cE_1,q^\cE_2$ in $\cF_\cE$ are
   \begin{align}
     q^\cE_1=\bmat{c & 0 & 0}\transpose, && q^\cE_2=\bmat{-c & 0 & 0}\transpose,
@@ -465,6 +481,7 @@ For a intermediate step to get the relationship between a polygon shaped forbidd
   \begin{equation}
    p^\cE_{2} = -  p^\cE_{1}.
   \end{equation}
+  \rtron{Refer to figure}
   We use these two tangent points to define a novel measure of displacement between a plane and an ellipse.
   \begin{definition}
     The \emph{tangent interpolation point} is defined as 
@@ -526,7 +543,7 @@ For a intermediate step to get the relationship between a polygon shaped forbidd
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=0.6\linewidth]{Ellipse2safezone_V2}
-\caption{Polygen-ellipse constraint. This constraint is simplified to either a plane-ellipse constraint or a point-ellipse constraint.}
+\caption{Polygon-ellipse constraint. This constraint is simplified to either a plane-ellipse constraint or a point-ellipse constraint.}
 \label{fig:Ellipse-to-safezone}
 \end{center}
 \end{figure}
