@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  31 AUG 2023 22:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  6 SEP 2023 17:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1322,6 +1322,9 @@ File: tikzlibraryshapes.arrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 shapes.arrows.code.tex
 File: pgflibraryshapes.arrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ))) (./preamble/robotics.tex))
+\c@constraint=\count399
+\c@example=\count400
+
 (/usr/local/texlive/2022/texmf-dist/tex/latex/cleveref/cleveref.sty
 Package: cleveref 2018/03/27 v0.21.4 Intelligent cross-referencing
 Package cleveref Info: `hyperref' support loaded on input line 2370.
@@ -1339,52 +1342,58 @@ Package cleveref Info: `amsthm' support loaded on input line 3026.
 Package cleveref Info: `algorithmicx' support loaded on input line 3120.
 Package cleveref Info: `subfig' support loaded on input line 3164.
 )
-\c@pagesLTS.pnc.arabic=\count399
-\c@pagesLTS.double.arabic=\count400
-\c@pagesLTS.current.local.arabic=\count401
-LaTeX Font Info:    Redeclaring math alphabet \mathcal on input line 24.
+\c@pagesLTS.pnc.arabic=\count401
+\c@pagesLTS.double.arabic=\count402
+\c@pagesLTS.current.local.arabic=\count403
+LaTeX Font Info:    Redeclaring math alphabet \mathcal on input line 26.
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
 
 (./paper.aux
-\c@pagesLTS.arabic.1.local.cnt=\count402
+
+LaTeX Warning: Label `eq:obstacle_constraint' multiply defined.
+
+
+LaTeX Warning: Label `eq:obstacle_constraint@cref' multiply defined.
+
+\c@pagesLTS.arabic.1.local.cnt=\count404
 )
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
 
 -- Lines per column: 58 (exact).
 Package nag Info: Attempting subfig hack.
 Package nag Info: OK, equivalent to subfig 1.3, redefining \sf@@@subfloat.
 (/usr/local/texlive/2022/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count403
+\scratchcounter=\count405
 \scratchdimen=\dimen341
 \scratchbox=\box88
-\nofMPsegments=\count404
-\nofMParguments=\count405
+\nofMPsegments=\count406
+\nofMParguments=\count407
 \everyMPshowfont=\toks60
-\MPscratchCnt=\count406
+\MPscratchCnt=\count408
 \MPscratchDim=\dimen342
-\MPnumerator=\count407
-\makeMPintoPDFobject=\count408
+\MPnumerator=\count409
+\makeMPintoPDFobject=\count410
 \everyMPtoPDFconversion=\toks61
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1395,18 +1404,18 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Info: Redefining \microtypecontext on input line 32.
-Package microtype Info: Applying patch `item' on input line 32.
-Package microtype Info: Applying patch `toc' on input line 32.
-Package microtype Info: Applying patch `eqnum' on input line 32.
-Package microtype Info: Applying patch `footnote' on input line 32.
+LaTeX Info: Redefining \microtypecontext on input line 34.
+Package microtype Info: Applying patch `item' on input line 34.
+Package microtype Info: Applying patch `toc' on input line 34.
+Package microtype Info: Applying patch `eqnum' on input line 34.
+Package microtype Info: Applying patch `footnote' on input line 34.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 32.
+LaTeX Info: Redefining \showhyphens on input line 34.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1419,7 +1428,7 @@ Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 32.
+Package hyperref Info: Link coloring OFF on input line 34.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -1428,17 +1437,17 @@ Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 ty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count409
+\c@section@level=\count411
 )
-LaTeX Info: Redefining \ref on input line 32.
-LaTeX Info: Redefining \pageref on input line 32.
-LaTeX Info: Redefining \nameref on input line 32.
+LaTeX Info: Redefining \ref on input line 34.
+LaTeX Info: Redefining \pageref on input line 34.
+LaTeX Info: Redefining \nameref on input line 34.
  (./paper.out) (./paper.out)
 \@outlinefile=\write6
 \openout6 = `paper.out'.
 
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 4
-8.
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 5
+0.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
@@ -1455,7 +1464,7 @@ File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 58.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 60.
 
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -1464,7 +1473,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/local/texlive/2022/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 58.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 60.
 
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -1479,12 +1488,12 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 
 
-LaTeX Warning: Citation `wardega2023hola' on page 1 undefined on input line 64.
+LaTeX Warning: Citation `wardega2023hola' on page 1 undefined on input line 66.
 
 
 
 LaTeX Warning: Reference `chapter:cross-trajectory' on page 1 undefined on inpu
-t line 64.
+t line 66.
 
 
 Underfull \vbox (badness 2608) has occurred while \output is active []
@@ -1497,84 +1506,93 @@ Underfull \vbox (badness 2608) has occurred while \output is active []
 ]
 
 LaTeX Warning: Reference `chapter:task-assignment' on page 2 undefined on input
- line 67.
+ line 69.
 
-<Figs//co-observ.png, id=187, 398.54779pt x 342.4854pt>
+<Figs//co-observ.png, id=183, 398.54779pt x 342.4854pt>
 File: Figs//co-observ.png Graphic file (type png)
 <use Figs//co-observ.png>
-Package pdftex.def Info: Figs//co-observ.png  used on input line 71.
+Package pdftex.def Info: Figs//co-observ.png  used on input line 73.
 (pdftex.def)             Requested size: 113.39923pt x 97.44734pt.
-<Figs//cross-traj.png, id=189, 398.54779pt x 342.4854pt>
+<Figs//cross-traj.png, id=185, 398.54779pt x 342.4854pt>
 File: Figs//cross-traj.png Graphic file (type png)
 <use Figs//cross-traj.png>
-Package pdftex.def Info: Figs//cross-traj.png  used on input line 72.
+Package pdftex.def Info: Figs//cross-traj.png  used on input line 74.
 (pdftex.def)             Requested size: 113.39923pt x 97.44734pt.
-<Figs//Example_application.pdf, id=198, 903.375pt x 843.15pt>
+
+LaTeX Warning: Citation `anderson2012optimal' on page 2 undefined on input line
+ 100.
+
+[2 <./Figs//co-observ.png> <./Figs//cross-traj.png>]
+<Figs//Example_application.pdf, id=213, 903.375pt x 843.15pt>
 File: Figs//Example_application.pdf Graphic file (type pdf)
 <use Figs//Example_application.pdf>
-Package pdftex.def Info: Figs//Example_application.pdf  used on input line 99.
+Package pdftex.def Info: Figs//Example_application.pdf  used on input line 105.
+
 (pdftex.def)             Requested size: 113.39923pt x 104.7443pt.
-<Figs//Kacper_result.pdf, id=199, 677.53125pt x 602.25pt>
+<Figs//Kacper_result.pdf, id=214, 677.53125pt x 602.25pt>
 File: Figs//Kacper_result.pdf Graphic file (type pdf)
 <use Figs//Kacper_result.pdf>
-Package pdftex.def Info: Figs//Kacper_result.pdf  used on input line 100.
+Package pdftex.def Info: Figs//Kacper_result.pdf  used on input line 106.
 (pdftex.def)             Requested size: 113.39923pt x 97.03969pt.
-[2 <./Figs//co-observ.png> <./Figs//cross-traj.png>]
 
-LaTeX Warning: Citation `zyang' on page 3 undefined on input line 120.
+
+LaTeX Warning: Citation `zyang' on page 3 undefined on input line 170.
 
 
 LaTeX Warning: Reference `equ:ADMMSetConstraint' on page 3 undefined on input l
-ine 122.
+ine 172.
 
-[3 <./Figs//Example_application.pdf> <./Figs//Kacper_result.pdf>] [4]
-<Figs//Reachability.png, id=294, 612.45763pt x 389.93135pt>
+[3 <./Figs//Example_application.pdf> <./Figs//Kacper_result.pdf>]
+
+LaTeX Warning: Reference `eq:zoneConstraintMap' on page 4 undefined on input li
+ne 250.
+
+
+LaTeX Warning: Reference `eq:zoneConstraintProjection' on page 4 undefined on i
+nput line 250.
+
+[4]
+<Figs//Reachability.png, id=291, 555.92308pt x 467.71661pt>
 File: Figs//Reachability.png Graphic file (type png)
 <use Figs//Reachability.png>
-Package pdftex.def Info: Figs//Reachability.png  used on input line 298.
-(pdftex.def)             Requested size: 151.20154pt x 96.26286pt.
-<Figs//Ellipse2point.png, id=299, 421.575pt x 316.18124pt>
+Package pdftex.def Info: Figs//Reachability.png  used on input line 307.
+(pdftex.def)             Requested size: 201.60077pt x 115.96846pt.
+<Figs//Ellipse2point.png, id=296, 421.575pt x 316.18124pt>
 File: Figs//Ellipse2point.png Graphic file (type png)
 <use Figs//Ellipse2point.png>
-Package pdftex.def Info: Figs//Ellipse2point.png  used on input line 342.
+Package pdftex.def Info: Figs//Ellipse2point.png  used on input line 351.
 (pdftex.def)             Requested size: 151.20154pt x 113.40059pt.
+ [5 <./Figs//Reachability.png>]
 
-Overfull \hbox (0.57312pt too wide) in paragraph at lines 357--358
- \OT1/ptm/m/it/10 (-20) 1) Projection to the standard ellipse: [][][] \OT1/ptm/
-m/n/10 (-20) The ellipse $\OMS/cmsy/m/n/10 E$ \OT1/ptm/m/n/10 (-20) expressed
- []
-
-[5 <./Figs//Reachability.png>]
-
-LaTeX Warning: Citation `eberly' on page 6 undefined on input line 381.
+LaTeX Warning: Citation `eberly' on page 6 undefined on input line 390.
 
 
-LaTeX Warning: Citation `eberly' on page 6 undefined on input line 404.
+LaTeX Warning: Citation `eberly' on page 6 undefined on input line 413.
 
-<Figs//Ellipse2line_V2.png, id=317, 416.00333pt x 268.68904pt>
+<Figs//Ellipse2line_V2.png, id=315, 416.00333pt x 268.68904pt>
 File: Figs//Ellipse2line_V2.png Graphic file (type png)
 <use Figs//Ellipse2line_V2.png>
-Package pdftex.def Info: Figs//Ellipse2line_V2.png  used on input line 442.
+Package pdftex.def Info: Figs//Ellipse2line_V2.png  used on input line 451.
 (pdftex.def)             Requested size: 151.20154pt x 97.65865pt.
 [6 <./Figs//Ellipse2point.png> <./Figs//Ellipse2line_V2.png>]
-<Figs//Ellipse2safezone_V2.png, id=343, 457.2526pt x 280.08437pt>
+<Figs//Ellipse2safezone_V2.png, id=339, 457.2526pt x 280.08437pt>
 File: Figs//Ellipse2safezone_V2.png Graphic file (type png)
 <use Figs//Ellipse2safezone_V2.png>
-Package pdftex.def Info: Figs//Ellipse2safezone_V2.png  used on input line 528.
+Package pdftex.def Info: Figs//Ellipse2safezone_V2.png  used on input line 538.
 
 (pdftex.def)             Requested size: 151.20154pt x 92.61617pt.
 
 
-LaTeX Warning: Reference `sec:obstacle' on page 7 undefined on input line 555.
-
-
-LaTeX Warning: Reference `fig:trajectories-base' on page 7 undefined on input l
-ine 570.
+LaTeX Warning: Reference `sec:obstacle' on page 7 undefined on input line 565.
 
 [7 <./Figs//Ellipse2safezone_V2.png>]
 
+LaTeX Warning: Reference `fig:trajectories-base' on page 8 undefined on input l
+ine 580.
+
+
 LaTeX Warning: Reference `chapter:cross-trajectory' on page 8 undefined on inpu
-t line 574.
+t line 584.
 
 Package epstopdf Info: Source file: <Figs//FinalResult.eps>
 (epstopdf)                    date: 2023-04-04 03:59:30
@@ -1584,37 +1602,36 @@ Package epstopdf Info: Source file: <Figs//FinalResult.eps>
 (epstopdf)                    size: 105831 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figs//FinalResult-eps-conv
 erted-to.pdf Figs//FinalResult.eps>
-(epstopdf)             \includegraphics on input line 580.
+(epstopdf)             \includegraphics on input line 590.
 Package epstopdf Info: Output file is already uptodate.
-<Figs//FinalResult-eps-converted-to.pdf, id=382, 677.53125pt x 602.25pt>
+<Figs//FinalResult-eps-converted-to.pdf, id=380, 677.53125pt x 602.25pt>
 File: Figs//FinalResult-eps-converted-to.pdf Graphic file (type pdf)
 <use Figs//FinalResult-eps-converted-to.pdf>
 Package pdftex.def Info: Figs//FinalResult-eps-converted-to.pdf  used on input 
-line 580.
+line 590.
 (pdftex.def)             Requested size: 151.20154pt x 134.39764pt.
 
-LaTeX Warning: Citation `wardega2023hola' on page 8 undefined on input line 587
+LaTeX Warning: Citation `wardega2023hola' on page 8 undefined on input line 597
 .
 
 
 LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 8 undefined
- on input line 587.
+ on input line 597.
 
 
 LaTeX Warning: Reference `chapter:cross-trajectory' on page 8 undefined on inpu
-t line 587.
-
-
-LaTeX Warning: Reference `chapter:Multi-agent-ADMM' on page 8 undefined on inpu
 t line 597.
 
 
-LaTeX Warning: Citation `yu2013multi' on page 8 undefined on input line 599.
+LaTeX Warning: Reference `chapter:Multi-agent-ADMM' on page 8 undefined on inpu
+t line 607.
 
 [8 <./Figs//FinalResult-eps-converted-to.pdf>]
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 6
-04.
 
+LaTeX Warning: Citation `yu2013multi' on page 9 undefined on input line 609.
+
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 6
+14.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
@@ -1625,103 +1642,104 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 
 LaTeX Warning: Citation `karaman2010incremental' on page 9 undefined on input l
-ine 604.
+ine 614.
 
 
 LaTeX Warning: Reference `chapter:Multi-agent-ADMM' on page 9 undefined on inpu
-t line 618.
+t line 628.
 
 
 LaTeX Warning: Reference `chapter:Reachability_Constraints' on page 9 undefined
- on input line 620.
+ on input line 630.
 
-<Figs//SC_gen_1.png, id=399, 512.55319pt x 410.04256pt>
+<Figs//SC_gen_1.png, id=397, 512.55319pt x 410.04256pt>
 File: Figs//SC_gen_1.png Graphic file (type png)
 <use Figs//SC_gen_1.png>
-Package pdftex.def Info: Figs//SC_gen_1.png  used on input line 626.
+Package pdftex.def Info: Figs//SC_gen_1.png  used on input line 636.
 (pdftex.def)             Requested size: 113.39923pt x 90.71643pt.
-<Figs//SC_gen_2.png, id=400, 512.55319pt x 410.04256pt>
+<Figs//SC_gen_2.png, id=398, 512.55319pt x 410.04256pt>
 File: Figs//SC_gen_2.png Graphic file (type png)
 <use Figs//SC_gen_2.png>
-Package pdftex.def Info: Figs//SC_gen_2.png  used on input line 627.
+Package pdftex.def Info: Figs//SC_gen_2.png  used on input line 637.
 (pdftex.def)             Requested size: 113.39923pt x 90.71643pt.
 
 LaTeX Warning: Reference `chapter:Reachability_Constraints' on page 9 undefined
- on input line 632.
-
-<Figs//two_edges.png, id=401, 540.67331pt x 283.85349pt>
-File: Figs//two_edges.png Graphic file (type png)
-<use Figs//two_edges.png>
-Package pdftex.def Info: Figs//two_edges.png  used on input line 636.
-(pdftex.def)             Requested size: 151.20154pt x 79.3788pt.
-
-LaTeX Warning: Reference `fig:RRT*' on page 9 undefined on input line 642.
+ on input line 642.
 
 [9 <./Figs//SC_gen_1.png> <./Figs//SC_gen_2.png>]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 654.
+<Figs//two_edges.png, id=410, 540.67331pt x 283.85349pt>
+File: Figs//two_edges.png Graphic file (type png)
+<use Figs//two_edges.png>
+Package pdftex.def Info: Figs//two_edges.png  used on input line 646.
+(pdftex.def)             Requested size: 151.20154pt x 79.3788pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 673--674
+
+LaTeX Warning: Reference `fig:RRT*' on page 10 undefined on input line 652.
+
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 664.
+
+Underfull \hbox (badness 10000) in paragraph at lines 683--684
 [] \OT1/ptm/b/n/10 (+20) else if $[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 q\OT1/cmr
 /m/n/10 )\OML/cmm/m/it/10 =v[] < t[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 t[]$
  \OT1/ptm/m/n/10 (+20) and
  []
 
-<Figs//security_graph.png, id=418, 540.67331pt x 404.06319pt>
+<Figs//security_graph.png, id=416, 540.67331pt x 404.06319pt>
 File: Figs//security_graph.png Graphic file (type png)
 <use Figs//security_graph.png>
-Package pdftex.def Info: Figs//security_graph.png  used on input line 695.
+Package pdftex.def Info: Figs//security_graph.png  used on input line 705.
 (pdftex.def)             Requested size: 151.20154pt x 112.9951pt.
 [10 <./Figs//two_edges.png> <./Figs//security_graph.png>]
 
-LaTeX Warning: Citation `ntafos1979path' on page 11 undefined on input line 729
+LaTeX Warning: Citation `ntafos1979path' on page 11 undefined on input line 739
 .
 
 
 LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 11 undefine
-d on input line 738.
+d on input line 748.
 
 
 LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 11 undefine
-d on input line 738.
+d on input line 748.
 
-<Figs//graph_flow_result_3.png, id=465, 1204.5pt x 1686.3pt>
+<Figs//graph_flow_result_3.png, id=463, 1204.5pt x 1686.3pt>
 File: Figs//graph_flow_result_3.png Graphic file (type png)
 <use Figs//graph_flow_result_3.png>
-Package pdftex.def Info: Figs//graph_flow_result_3.png  used on input line 742.
+Package pdftex.def Info: Figs//graph_flow_result_3.png  used on input line 752.
 
 (pdftex.def)             Requested size: 100.79846pt x 141.10788pt.
-<Figs//3_flow_result.png, id=466, 1606.0pt x 1405.25pt>
+<Figs//3_flow_result.png, id=464, 1606.0pt x 1405.25pt>
 File: Figs//3_flow_result.png Graphic file (type png)
 <use Figs//3_flow_result.png>
-Package pdftex.def Info: Figs//3_flow_result.png  used on input line 750.
+Package pdftex.def Info: Figs//3_flow_result.png  used on input line 760.
 (pdftex.def)             Requested size: 151.20154pt x 132.29936pt.
-[11 <./Figs//graph_flow_result_3.png (PNG copy)>]
-<Figs//graph_flow_result_4.png, id=482, 1204.5pt x 1686.3pt>
+[11]
+<Figs//graph_flow_result_4.png, id=481, 1204.5pt x 1686.3pt>
 File: Figs//graph_flow_result_4.png Graphic file (type png)
 <use Figs//graph_flow_result_4.png>
-Package pdftex.def Info: Figs//graph_flow_result_4.png  used on input line 762.
+Package pdftex.def Info: Figs//graph_flow_result_4.png  used on input line 772.
 
 (pdftex.def)             Requested size: 100.79846pt x 141.10788pt.
-<Figs//4_flow_result.png, id=483, 1606.0pt x 1405.25pt>
+<Figs//4_flow_result.png, id=482, 1606.0pt x 1405.25pt>
 File: Figs//4_flow_result.png Graphic file (type png)
 <use Figs//4_flow_result.png>
-Package pdftex.def Info: Figs//4_flow_result.png  used on input line 770.
+Package pdftex.def Info: Figs//4_flow_result.png  used on input line 780.
 (pdftex.def)             Requested size: 151.20154pt x 132.29936pt.
-<Figs//nflow_vs_cost.png, id=486, 1232.605pt x 375.4025pt>
+<Figs//nflow_vs_cost.png, id=485, 1232.605pt x 375.4025pt>
 File: Figs//nflow_vs_cost.png Graphic file (type png)
 <use Figs//nflow_vs_cost.png>
-Package pdftex.def Info: Figs//nflow_vs_cost.png  used on input line 782.
+Package pdftex.def Info: Figs//nflow_vs_cost.png  used on input line 792.
 (pdftex.def)             Requested size: 151.20154pt x 46.04878pt.
- [12 <./Figs//3_flow_result.png (PNG copy)> <./Figs//graph_flow_result_4.png (P
-NG copy)> <./Figs//4_flow_result.png (PNG copy)> <./Figs//nflow_vs_cost.png (PN
-G copy)>]
+ [12 <./Figs//graph_flow_result_3.png (PNG copy)> <./Figs//3_flow_result.png (P
+NG copy)> <./Figs//graph_flow_result_4.png (PNG copy)> <./Figs//4_flow_result.p
+ng (PNG copy)> <./Figs//nflow_vs_cost.png (PNG copy)>]
 
-LaTeX Warning: Citation `Tron:Arxiv14' on page 13 undefined on input line 832.
+LaTeX Warning: Citation `Tron:Arxiv14' on page 13 undefined on input line 842.
 
 
 LaTeX Warning: Reference `eq:asymmetric to cross' on page 13 undefined on input
- line 840.
+ line 850.
 
 [13] (./paper.bbl) 
 AED: pageslts setting LastPage 
@@ -1729,7 +1747,7 @@ AED: pageslts setting LastPage
 
 ]
 No complaints by nag.
-\c@pagesLTS.arabic.1.local.count=\count410
+\c@pagesLTS.arabic.1.local.count=\count412
 
 AED: pageslts setting VeryLastPage via AfterLastShipout 
 
@@ -1743,15 +1761,18 @@ Package pageslts Info: Total number of pages is even.
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: B166FC6FB07D709F130EB84ACBD1ACCC;3228.
+(rerunfilecheck)             Checksum: AD2C3344BC4A6D835ED6A12F974370AF;3094.
  ) 
 Here is how much of TeX's memory you used:
- 39448 strings out of 478268
- 776759 string characters out of 5846348
- 1171775 words of memory out of 5000000
- 56314 multiletter control sequences out of 15000+600000
- 532904 words of font info for 363 fonts, out of 8000000 for 9000
+ 39498 strings out of 478268
+ 777141 string characters out of 5846348
+ 1171917 words of memory out of 5000000
+ 56324 multiletter control sequences out of 15000+600000
+ 535996 words of font info for 385 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  119i,20n,111p,1457b,550s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
@@ -1775,10 +1796,10 @@ urw/helvetic/uhvb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/tim
 es/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a
 .pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr
 /local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (14 pages, 2582308 bytes).
+Output written on paper.pdf (14 pages, 2605651 bytes).
 PDF statistics:
- 690 PDF objects out of 1000 (max. 8388607)
- 582 compressed objects within 6 object streams
- 224 named destinations out of 1000 (max. 500000)
- 80791 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 688 PDF objects out of 1000 (max. 8388607)
+ 580 compressed objects within 6 object streams
+ 228 named destinations out of 1000 (max. 500000)
+ 88975 words of extra memory for PDF output out of 89155 (max. 10000000)
 

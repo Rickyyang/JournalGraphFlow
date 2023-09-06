@@ -16,7 +16,7 @@
 \input{preamble/common}
 \newcommand{\rrtstar}{$\texttt{RRT}^\texttt{*}$}
 \newtheorem{constraint}{ADMM constraint}
-\newtheoreom{example}{Example}
+\newtheorem{example}{Example}
 
 \usepackage{cleveref}
 \graphicspath{{Figs/}}
@@ -96,8 +96,8 @@ The goal of our path planning problem is to minimize or maximize an objective fu
 
 To give a concrete example of the cost $\varPhi$ and the set $\Omega$, we introduce a representative application that will be used for all the simulations throughout the paper.
 \begin{example} Assume that there exists an underlying slowly-time-varying scalar or vector field $\vx$ whose value needs to be estimated at a given number of discrete locations. To explore unknown spatially-distributed fields, autonomous agents are usually required to traverse the entire unknown environment while collecting sensory data to estimate a corresponding map (Figure~\ref{fig:ADMM-example-application}). We model the map as a set of locations of interests arranged on a regular grid, where at each location, we assume that there is a corresponding slowly-time-varying quantity. For our purposes, we are interested in finding paths that best reconstruct the field, i.e., that achieve the minimum uncertainty. 
-\rtron{Define $\varPhi$ and $\Omega$ in words but briefly}
-%We define the cost function $\varPhi(\vq)$ to be an approximation of the uncertainty at any of the given points, and we aim to minimize such maximum uncertainty. We focus on a particular choice of objective function $\varPhi(\vq)$, in the context of a mapping and estimation applications, for the optimization problem \eqref{eq:general-problem}. \zyang{Do we need detail of the problem formulations?}
+
+We address the estimation problem using Kalman Filters (KFs)(cf. \cite{anderson2012optimal}), with a focus on the estimated covariance $P_j$, to calculate the map model uncertainty. We assume the robot provides field measurements at waypoints~$q$, with Gaussian radial basis function modeling radius and quality. Our cost function $\varPhi(\vq)$ measures the maximum uncertainty $P_{j}$ among map locations of interest along the entire trajectory $\vq$, and our objective is to minimize this maximum uncertainty. Constraints $\Omega$ includes traditional constraints like velocity constraints, convex obstacles, waypoints to reach with deadlines, and security constraints including co-observation constraints and reachability constraints.
 \end{example}
 
 \begin{figure}
@@ -121,6 +121,50 @@ We define the differential of a map $f(x):\real{m}\to\real{n}$ at a point $x_0$ 
 where $t\mapsto x(t)\in\real{n}$ is a smooth parametric curve such that $x(0)=x$ with any arbitrary tangent $\dot{x}(0)$. For later part of this paper, we will use $\dot f$ for $\dert f$ and $\partial_x f$ for $\frac{\partial f}{\partial x}$. The differentials $\partial_x f$ is derived through (\ref{equ:dt_to_dx}) having $\dot f$ divided by $\dot x$.
 
 With a slight abuse of notation, we use the same notation $\partial_xf$ for the differential of a matrix-valued function with scalar arguments $f:\real{R}\to\real{m\times n}$  Note that in this case \eqref{equ:dt_to_dx} is still formally correct, although semantically different.
+
+ \subsubsection{Householder rotations}\label{sec:householder}
+  To formulate the operator $\Pi_\sZ$ for our novel constraint, we will define a differentiable transformation of the constraint set to a canonical form. This transformation will include a rotation that we derive from a modified version of Householder transformations \cite{householder1958unitary}. With respect to the standard definition, our modification ensures that the final operator is a proper rotation (i.e., not a reflection). We call our version of the operator a \emph{Householder rotation}. In this section we derive Householder rotations and their differentials for the 3-D case; the 2-D case can be easily obtained by embedding it in the $z=0$ plane.
+
+  \begin{definition} Let $\nu_\cF$ and $\nu_\cE$ be two unitary vectors ($\norm{\nu_\cF}=\norm{\nu_\cE}=1$). Define the normalized vector $u$ as
+    \begin{equation}
+      u'=\nu_\cF+\nu_\cE,\quad u =\frac{u'}{\norm{u'}}.
+    \end{equation}
+    The \emph{Householder rotation} $H(\nu_\cF,\nu_\cE)$ is defined as
+    \begin{equation}\label{eq:H definition}
+      H(\nu_\cF,\nu_\cE) = 2 u u\transpose-I.
+    \end{equation}
+  \end{definition}
+  The main property of interest for our application is the fact that $H$ is a rotation mapping $\hat{\nu_\cF}$ to $\hat{\nu_\cE}$, as shown by the following.
+  \begin{proposition}\label{prop:HProperidy}
+    The matrix $H$ has the following properties:
+    \begin{enumerate}
+    \item It is a rotation, i.e.
+      \begin{enumerate}
+      \item\label{it:orthonormality} $H\transpose H=I$;
+      \item\label{it:determinant} $\det(H)=1$.
+      \end{enumerate}
+    \item\label{it:transformation} $\nu_\cE=H \nu_\cF$.
+    \end{enumerate}
+  \end{proposition}
+
+  We compute the differential of $H$ implicitly using the relation \eqref{equ:dt_to_dx}. We will use the notation $\cross{v}:\real{3}\to\real{3\times 3}$ to denote the matrix representation of the cross product with the vector $v$, i.e.,
+  \begin{equation}
+    \bmat{v_1\\v_2\\v_3}\mapsto \bmat{0 & -v_3 &v_2\\v_3 & 0 & -v_1\\-v_2 & v_1 & 0},
+  \end{equation}
+  such that $[v]_\times w=v\times w$ for any $w\in\real{3}$. %One can verify by direct computation the following property:
+  %\begin{equation}\label{eq:asymmetric to cross}
+  %  wv\transpose-vw\transpose=\cross{\cross{v}w}.
+  %\end{equation}
+  \begin{proposition}\label{prop:Hderivitive}
+    Let $\nu_\cF(t)$ represent a parametric curve. Then we have
+    \begin{equation}
+      \dot{H}=H\cross{-2M\dot{\nu}_{\cF}}
+    \end{equation}
+    where the matrix $M\in\real{3\times3}$ is given by
+    \begin{equation}
+      M=[u]_{\times}  \frac{ \left( I - u u\transpose \right) \left( I- \nu_\cF \nu_\cF\transpose \right)} {\norm{u'} \norm{\nu_\cF}}.
+    \end{equation}
+  \end{proposition}
 
 \subsubsection{Alternating Directions Method of Multipliers (ADMM)}\label{chapter:ADMM review}
 The basic idea behind ADMM based solver \cite{zyang} is to split the constraints from the objective function using a different set of variables $\vz$, and then solve an Augmented Lagrangian formulation of the optimization problem in \eqref{eq:general-problem}.
@@ -171,7 +215,7 @@ We consider the following types of traditional path planning constraints in the 
    \end{cases}
 \end{align}
 \end{constraint}
-\rtron{Put all the constraints using this $\LaTeX$ environment.}
+\rtron{Put all the constraints using this \LaTeX environment.}
 \rtron{Make sure notation for $\sZ$ is consistent}
 %The projection operator $\Pi_\zeta(z)$ for this constraint  is simply a projection of $z$ to the interior of a sphere centered at the origin and having radius $v_{max}$. This constraint could be adapted to enforce more refined dynamical models.
 
@@ -185,93 +229,43 @@ We consider the following types of traditional path planning constraints in the 
 
 \subsubsection*{Convex obstacles}
 
-We use convex polygons to model regions defining the boundary of the workspace, as well as solid obstacles that cannot be entered by agents (note that the latter represent a non-convex constraint set from the point of view of the optimization problem). Obstacles with non-convex shapes can be modeled using unions of the convex sets. 
-
-The convex region $\cP$ is defined using a collection of $l$ hyperplanes $n_{k} q = m_{k}$, where $n_k$ is the normal vector (outward pointing for obstacle boundaries and inward pointing for workspace boundaries) and $m_k$ is the scalar offset defining the $k$-th hyperplane. The distance between a single waypoint $q_{ij}$ and the $k$th hyperplane $d_{k}(q_{ij},\cP)$ is defined as:
+We use convex polygons to model regions defining solid obstacles and forbidden regions that cannot be entered by agents. The convex region $\cP$ is defined using a collection of $l$ hyperplanes $n_{k} q = m_{k}$, where $n_k$ is the normal vector pointing toward the outside of the obstacle and $m_k$ is the scalar offset defining the $k$-th hyperplane. The distance between a single waypoint $q_{ij}$ and the $k$th hyperplane $d_{k}(q_{ij},\cP)$ is defined as:
 \begin{equation}
     d_{k}(q_{ij},\cP)= p_{ij}\transpose n_k - m_k.
 \end{equation}
+We then defined function $D(\vq)$ to return the maximum distance from $q_{ij}$ to all hyperplane boundaries of region $\cP$, and set constraint on $z$ that it is a non-negative scalar. This constraint is applied to all $q_{ij} \in \vq$. 
 
-The constraint function $D(q_{ij})$ returns the least negative distance from $q_{ij}$ to all hyperplane boundaries of region $\cP$, defined as:
-\begin{equation}\label{eq:zoneConstraintMap}
-	D(q_{ij}) = \max_{k=1,\dots,l} (\min(d_{k}(q_{ij},\cP),0))
-\end{equation}
-  
-%\rtron{Define for a single $x_{ij}$, then just say that we add constraints for all $ij$. Instead of using $min(d_{ijk})$, use $dist(x_{ij},\cP)$, where $\cP$ is the cvx polygon} We enforce the constraints for all $ij$ (enforcement of the constraints between these points can be achieved by making the obstacles sightly bigger than its actual size). 
+\begin{constraint}[Obstacle constraint]
+\begin{align}
+     	D(q_{ij}) &= \max_{k=1,\dots,l} (d_{k}(q_{ij},\cP))\\
+\label{eq:obstacle_constraint}
+  \sZ &= \{z \mid z \geq 0 \},\\
+   \Pi_\sZ(z) & = \begin{cases}
+   0 & \textrm{if} \quad z < 0\\
+   z  & \textrm{otherwise}
+   \end{cases}
+\end{align}
+\end{constraint}
 
-The corresponding constraint set is simply
-\begin{equation}
-    \sZ= \{z \mid z = 0 \},
-\end{equation}
-with a projection function:
-\begin{equation}\label{eq:zoneConstraintProjection}
-    \Pi_\sZ(z) = 0.
-\end{equation}
-The motivating idea for \eqref{eq:zoneConstraintMap} and \eqref{eq:zoneConstraintProjection} is to find waypoints inside the zone and project them to the closest boundary. As mentioned before, non-convex obstacles can be handled by the union of (possibly overlapping) convex obstacles.
+The motivating idea for \eqref{eq:zoneConstraintMap} and \eqref{eq:zoneConstraintProjection} is to identify waypoints within a specific region and project them to the closest boundary. Non-convex obstacles can be handled by the union of (possibly overlapping) convex obstacles. By setting the normal vector pointing toward the inside of the region, this method can also serve to constrain the robots within the designated workspace region.
 
 \subsubsection*{Waypoints with flexible deadlines}
-We assume that an robot $i$ needs to reach a given point $p$ within a radius of $d_{max}$ at some time instant $j$ belonging to a given time window $[t_1,t_2]$. The constraint function $D(\vq)$ to return the smallest distance from the point $p$ to waypoint on the trajectory restricted to the relevant time window. This can be expressed precisely in the following form:
-\begin{equation}\label{eq:waypoint_constraint_D}
-D(\vq) = \min_{j\in\{t_1,\dots,t_2-1\}}\bigl(\dist(p,\overrightarrow{q_{ij}q_{i(j+1)}})\bigr),
-\end{equation}
-with the constraint set:
-\begin{equation}\label{eq:waypoint_constraint}
-\sZ= \{z \mid z < z_{max} \},
-\end{equation}
+It is common for security related constraints to require robot reach a specific location at specific time. We assume robot $i$ is required to reach a given point $p$ within a radius of $d_{max}$ at some time instant $j$ belonging to a given time window $[t_1,t_2]$. The constraint function $D(\vq)$ to return the smallest distance from the point $p$ to waypoint on the trajectory restricted to the relevant time window. 
+\begin{constraint}[Waypoint constraint]
+\begin{align}
+     	D(\vq) &= \min_{j\in\{t_1,\dots,t_2-1\}}\bigl(\dist(p,\overrightarrow{q_{ij}q_{i(j+1)}})\bigr)\\
+\label{eq:obstacle_constraint}
+  \sZ &= \{z \mid z < z_{max} \},\\
+   \Pi_\sZ(z) & = \min(z, d_{max}).
+\end{align}
+\end{constraint}
+
 where $\dist(p,\overrightarrow{q_{ij}q_{i(j+1)}})$ returns the distance between the fixed point $p$ and the segment $\overrightarrow{q_{ij}q_{i(j+1)}}$. Note that this function returns the smallest distance between $(p,q_{ij})$ and $(p,q_{i(j+1)})$ if the projection of the point $p$ does not lie on the line segment~$\overrightarrow{q_{ij}q_{i(j+1)}}$; as a consequence, this constraint does not need to be satisfied exactly at one of the points on the discretized trajectory, but it can also be satisfied ``en route'' on the segment between them.
-The projection $\Pi_\sZ(z)$ for this constraint can be written as:
-\begin{equation}\label{eq:waypoint_constraint_update}
-\Pi_\sZ(z) = \min(z,z_{max}).
-\end{equation}
+
 %Note that \eqref{eq:waypoint_constraint} and \eqref{eq:waypoint_constraint_update} are equivalent to \eqref{eq:velocity_constraint} and \eqref{eq:velocity_constraint_update}, except for the fact that the quantity in \eqref{eq:waypoint_constraint_D} is always a positive scalar.
 
 \rtron{Give example application here, and include application of ADMM without the security constraints, but highlighting a path that would break the security}
 \zyang{plot new simpler example, add collision avoidance}
-
- \subsubsection{Householder rotations}\label{sec:householder}
- \rtron{Move to right after the definition of differential}
-  To formulate the operator $\Pi_\sZ$ for our novel constraint, we will define a differentiable transformation of the constraint set to a canonical form. This transformation will include a rotation that we derive from a modified version of Householder transformations \cite{householder1958unitary}. With respect to the standard definition, our modification ensures that the final operator is a proper rotation (i.e., not a reflection). We call our version of the operator a \emph{Householder rotation}. In this section we derive Householder rotations and their differentials for the 3-D case; the 2-D case can be easily obtained by embedding it in the $z=0$ plane.
-
-  \begin{definition} Let $\nu_\cF$ and $\nu_\cE$ be two unitary vectors ($\norm{\nu_\cF}=\norm{\nu_\cE}=1$). Define the normalized vector $u$ as
-    \begin{equation}
-      u'=\nu_\cF+\nu_\cE,\quad u =\frac{u'}{\norm{u'}}.
-    \end{equation}
-    The \emph{Householder rotation} $H(\nu_\cF,\nu_\cE)$ is defined as
-    \begin{equation}\label{eq:H definition}
-      H(\nu_\cF,\nu_\cE) = 2 u u\transpose-I.
-    \end{equation}
-  \end{definition}
-  The main property of interest for our application is the fact that $H$ is a rotation mapping $\hat{\nu_\cF}$ to $\hat{\nu_\cE}$, as shown by the following.
-  \begin{proposition}\label{prop:HProperidy}
-    The matrix $H$ has the following properties:
-    \begin{enumerate}
-    \item It is a rotation, i.e.
-      \begin{enumerate}
-      \item\label{it:orthonormality} $H\transpose H=I$;
-      \item\label{it:determinant} $\det(H)=1$.
-      \end{enumerate}
-    \item\label{it:transformation} $\nu_\cE=H \nu_\cF$.
-    \end{enumerate}
-  \end{proposition}
-
-  We compute the differential of $H$ implicitly using the relation \eqref{equ:dt_to_dx}. We will use the notation $\cross{v}:\real{3}\to\real{3\times 3}$ to denote the matrix representation of the cross product with the vector $v$, i.e.,
-  \begin{equation}
-    \bmat{v_1\\v_2\\v_3}\mapsto \bmat{0 & -v_3 &v_2\\v_3 & 0 & -v_1\\-v_2 & v_1 & 0},
-  \end{equation}
-  such that $[v]_\times w=v\times w$ for any $w\in\real{3}$. %One can verify by direct computation the following property:
-  %\begin{equation}\label{eq:asymmetric to cross}
-  %  wv\transpose-vw\transpose=\cross{\cross{v}w}.
-  %\end{equation}
-  \begin{proposition}\label{prop:Hderivitive}
-    Let $\nu_\cF(t)$ represent a parametric curve. Then we have
-    \begin{equation}
-      \dot{H}=H\cross{-2M\dot{\nu}_{\cF}}
-    \end{equation}
-    where the matrix $M\in\real{3\times3}$ is given by
-    \begin{equation}
-      M=[u]_{\times}  \frac{ \left( I - u u\transpose \right) \left( I- \nu_\cF \nu_\cF\transpose \right)} {\norm{u'} \norm{\nu_\cF}}.
-    \end{equation}
-  \end{proposition}
 
 %\subsection{Secure Multi-robot path planning using co-observation and reachability constraints}
 \subsection{Co-observation schedule constraint}
@@ -310,9 +304,8 @@ This region can be analytically bounded via an ellipsoid:
 
  \begin{figure}
     \centering
-    \includegraphics[width=0.6\linewidth]{Reachability}
-\rtron{Extend the figure to give a graphical representation of the canonical transformation}
-    \caption{The ellipse showcases the reachability region. The black line is the planned trajectory of a robot, $q_1$ and $q_2$ are two locations this robot are expected at given time $t_1$ and $t_2$, blue and red line are possible trajectories if the robot is compromised in after reaching $q_1$. Robot that goes outside the reachability region to forbidden region can only reach $q_{2}'$ instead of $q_{2}$ at time $t_{2}$, even if it drives directly toward $q_{2}$ at full speed $v_{max}$ after the intrusion into forbidden region.}
+    \includegraphics[width=0.8\linewidth, trim = 2cm 2.5cm 2cm 5cm]{Reachability}
+    \caption{The ellipse showcases the reachability region. The black line is the planned trajectory of a robot, $q_1$ and $q_2$ are two locations this robot are expected at given time $t_1$ and $t_2$, dashed line is a possible trajectory if the robot is compromised after reaching $q_1$. Axis of global frame $\cF$ and canonical frame $\cF_{\cE}$ are shown as $x_{\cF}, y_{\cF}$ and $x_{\cE}, y_{\cE}$ respectively. }
     \label{fig:EllipseConstraintExample}
   \end{figure}
  
@@ -334,7 +327,7 @@ The reachability ellipsoid is an over-approximation of the exact reachability re
     \nu'_\cF&=q_2-q_1, & \nu_\cF &= \frac{\nu'_\cF}{\norm{\nu_\cF}}, & \nu_\cE&=[1,0,0]^T;
   \end{align}
   see Fig.\ref{fig:EllipseConstraintExample} for an illustration. Note that $\nu_\cE$ is constant while, for the sake of clarity, $\nu_{\cF}$ depends on $q_1,q_2$. We then define the rotation $R$ using a Householder rotation, while from \eqref{eq:E to F transform} we see that $o$ represents the center of $\cE(q_1,q_2)$ expressed in $\cF$, i.e.:
-  \begin{align}
+  \begin{align} 
     R&=H(\nu_\cF(q_1,q_2),\nu_\cE(q_1,q_2)), &o&=\frac{1}{2}(q_1+q_2).
   \end{align}
   To simplify the notation, in the following we will consider $H$ to be a function of $q_1,q_2$ directly, i.e. $H(q_1,q_2)$.
@@ -349,7 +342,7 @@ As shown in Fig.\ref{fig:Ellipse-to-point}, we consider a forbidden region in th
 \rtron{For these constraints, add $\pi$ inside the constraint environment, then follow that environment with the proposition with the differential of $\pi$.}
 
 \begin{equation}\label{eq:ellipse-point-projection}
-\pi_{p\cE}=\argmin_{q_p\in\cE^c} &\quad \norm{q_{avoid}-q_p}^2 
+\pi_{p\cE}=\argmin_{q_p\in\cE^c} \quad \norm{q_{avoid}-q_p}^2 
 \end{equation}
 where $\cE^{c}$ is the set complement of the region $\cE$.
   
@@ -368,31 +361,7 @@ where $\cE^{c}$ is the set complement of the region $\cE$.
 
   For cases where $q_{avoid} \notin \cE(q(t_2),q(t_1),r)$, $\pi_{p\cE}(q_{avoid}) = q_{avoid}$. And for cases where $q_{avoid} \in \cE(q_1,q_2,r)$, $D(q)$ needs to be projected to the boundary of the ellipse, which is discussed below.
 
-
-  \subsubsection{Projection to the standard ellipse}\rtron{Move to the appendix or refer to the conference paper}
-  The ellipse $\cE$ expressed in $\cF_\cE$ is given by $\Eframe{\cE}=\{\Eframe{q}\in\real{m}:d(q^\cE_1,\Eframe{q})+d(\Eframe{q},q^\cE_2)<2a\}$, where the coordinates of the two foci $q^\cE_1,q^\cE_2$ in $\cF_\cE$ are
-  \begin{align}
-    q^\cE_1=\bmat{c & 0 & 0}\transpose, && q^\cE_2=\bmat{-c & 0 & 0}\transpose,
-  \end{align}
-  with $c=\frac{\norm{q_2-q_1}}{2}$.
-
-  The ellipsoid $\cE$ in the canonical frame can be described as the zero level set of the quadratic function
-  \begin{equation}\label{equ:standard-ellipse}
-    \Eframe{E}(\Eframe{q}) = \Eframe{q}\transpose Q \Eframe{q} - 1
-  \end{equation}
-  where
-  \begin{equation}
-    Q = \diag(a^{-2},b^{-2},b^{-2}),
-  \end{equation}
-  and $b = \sqrt{a^2-c^2}$.
-  The ellipse parameters $a$,$b$ represent the lengths of the major axes.
-
-  % Using the transformation defined in Section~\ref{sec:rotation2Standard}, the original ellipse $\cE$ in $\cF$ can be expressed as the zero level set of the quadratic function
-  % \begin{equation}
-  %   \Fframe{E}(\Fframe{x}) = (\Fframe{x}-o_\cE)\transpose H\transpose Q H (\Fframe{x}-o_\cE) - 1
-  % \end{equation}
-
-  The point to project, $q_{avoid}$, can be likewise expressed in $\cF_\cE$ as $\Eframe{q}_{avoid} =  H (\Fframe q_{avoid}-o)$.
+The point to project, $q_{avoid}$, can be likewise expressed in $\cF_\cE$ as $\Eframe{q}_{avoid} =  H (\Fframe q_{avoid}-o)$.
 
   We now turn our attention to the problem of projecting $\Eframe{q}_{avoid}$ on the zero level set of $E^\cE$ (i.e., the reachability ellipsoid in the canonical frame). The derivations below are loosely inspired by \cite{eberly}.
 
