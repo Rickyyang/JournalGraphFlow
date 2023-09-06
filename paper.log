@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  6 SEP 2023 17:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  6 SEP 2023 20:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1557,42 +1557,43 @@ File: Figs//Reachability.png Graphic file (type png)
 <use Figs//Reachability.png>
 Package pdftex.def Info: Figs//Reachability.png  used on input line 307.
 (pdftex.def)             Requested size: 201.60077pt x 115.96846pt.
-<Figs//Ellipse2point.png, id=296, 421.575pt x 316.18124pt>
+ [5 <./Figs//Reachability.png>]
+<Figs//Ellipse2point.png, id=312, 421.575pt x 316.18124pt>
 File: Figs//Ellipse2point.png Graphic file (type png)
 <use Figs//Ellipse2point.png>
-Package pdftex.def Info: Figs//Ellipse2point.png  used on input line 351.
+Package pdftex.def Info: Figs//Ellipse2point.png  used on input line 367.
 (pdftex.def)             Requested size: 151.20154pt x 113.40059pt.
- [5 <./Figs//Reachability.png>]
-
-LaTeX Warning: Citation `eberly' on page 6 undefined on input line 390.
 
 
-LaTeX Warning: Citation `eberly' on page 6 undefined on input line 413.
+LaTeX Warning: Citation `eberly' on page 6 undefined on input line 389.
+
+
+LaTeX Warning: Citation `eberly' on page 6 undefined on input line 412.
 
 <Figs//Ellipse2line_V2.png, id=315, 416.00333pt x 268.68904pt>
 File: Figs//Ellipse2line_V2.png Graphic file (type png)
 <use Figs//Ellipse2line_V2.png>
-Package pdftex.def Info: Figs//Ellipse2line_V2.png  used on input line 451.
+Package pdftex.def Info: Figs//Ellipse2line_V2.png  used on input line 450.
 (pdftex.def)             Requested size: 151.20154pt x 97.65865pt.
 [6 <./Figs//Ellipse2point.png> <./Figs//Ellipse2line_V2.png>]
 <Figs//Ellipse2safezone_V2.png, id=339, 457.2526pt x 280.08437pt>
 File: Figs//Ellipse2safezone_V2.png Graphic file (type png)
 <use Figs//Ellipse2safezone_V2.png>
-Package pdftex.def Info: Figs//Ellipse2safezone_V2.png  used on input line 538.
+Package pdftex.def Info: Figs//Ellipse2safezone_V2.png  used on input line 537.
 
 (pdftex.def)             Requested size: 151.20154pt x 92.61617pt.
 
 
-LaTeX Warning: Reference `sec:obstacle' on page 7 undefined on input line 565.
+LaTeX Warning: Reference `sec:obstacle' on page 7 undefined on input line 564.
 
 [7 <./Figs//Ellipse2safezone_V2.png>]
 
 LaTeX Warning: Reference `fig:trajectories-base' on page 8 undefined on input l
-ine 580.
+ine 579.
 
 
 LaTeX Warning: Reference `chapter:cross-trajectory' on page 8 undefined on inpu
-t line 584.
+t line 583.
 
 Package epstopdf Info: Source file: <Figs//FinalResult.eps>
 (epstopdf)                    date: 2023-04-04 03:59:30
@@ -1602,36 +1603,36 @@ Package epstopdf Info: Source file: <Figs//FinalResult.eps>
 (epstopdf)                    size: 105831 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figs//FinalResult-eps-conv
 erted-to.pdf Figs//FinalResult.eps>
-(epstopdf)             \includegraphics on input line 590.
+(epstopdf)             \includegraphics on input line 589.
 Package epstopdf Info: Output file is already uptodate.
-<Figs//FinalResult-eps-converted-to.pdf, id=380, 677.53125pt x 602.25pt>
+<Figs//FinalResult-eps-converted-to.pdf, id=377, 677.53125pt x 602.25pt>
 File: Figs//FinalResult-eps-converted-to.pdf Graphic file (type pdf)
 <use Figs//FinalResult-eps-converted-to.pdf>
 Package pdftex.def Info: Figs//FinalResult-eps-converted-to.pdf  used on input 
-line 590.
+line 589.
 (pdftex.def)             Requested size: 151.20154pt x 134.39764pt.
 
-LaTeX Warning: Citation `wardega2023hola' on page 8 undefined on input line 597
+LaTeX Warning: Citation `wardega2023hola' on page 8 undefined on input line 596
 .
 
 
 LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 8 undefined
- on input line 597.
+ on input line 596.
 
 
 LaTeX Warning: Reference `chapter:cross-trajectory' on page 8 undefined on inpu
-t line 597.
-
-
-LaTeX Warning: Reference `chapter:Multi-agent-ADMM' on page 8 undefined on inpu
-t line 607.
+t line 596.
 
 [8 <./Figs//FinalResult-eps-converted-to.pdf>]
 
-LaTeX Warning: Citation `yu2013multi' on page 9 undefined on input line 609.
+LaTeX Warning: Reference `chapter:Multi-agent-ADMM' on page 9 undefined on inpu
+t line 606.
+
+
+LaTeX Warning: Citation `yu2013multi' on page 9 undefined on input line 608.
 
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 6
-14.
+13.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
@@ -1642,104 +1643,104 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 
 LaTeX Warning: Citation `karaman2010incremental' on page 9 undefined on input l
-ine 614.
+ine 613.
 
 
 LaTeX Warning: Reference `chapter:Multi-agent-ADMM' on page 9 undefined on inpu
-t line 628.
+t line 627.
 
 
 LaTeX Warning: Reference `chapter:Reachability_Constraints' on page 9 undefined
- on input line 630.
+ on input line 629.
 
 <Figs//SC_gen_1.png, id=397, 512.55319pt x 410.04256pt>
 File: Figs//SC_gen_1.png Graphic file (type png)
 <use Figs//SC_gen_1.png>
-Package pdftex.def Info: Figs//SC_gen_1.png  used on input line 636.
+Package pdftex.def Info: Figs//SC_gen_1.png  used on input line 635.
 (pdftex.def)             Requested size: 113.39923pt x 90.71643pt.
 <Figs//SC_gen_2.png, id=398, 512.55319pt x 410.04256pt>
 File: Figs//SC_gen_2.png Graphic file (type png)
 <use Figs//SC_gen_2.png>
-Package pdftex.def Info: Figs//SC_gen_2.png  used on input line 637.
+Package pdftex.def Info: Figs//SC_gen_2.png  used on input line 636.
 (pdftex.def)             Requested size: 113.39923pt x 90.71643pt.
 
 LaTeX Warning: Reference `chapter:Reachability_Constraints' on page 9 undefined
- on input line 642.
+ on input line 641.
 
-[9 <./Figs//SC_gen_1.png> <./Figs//SC_gen_2.png>]
-<Figs//two_edges.png, id=410, 540.67331pt x 283.85349pt>
+[9]
+<Figs//two_edges.png, id=406, 540.67331pt x 283.85349pt>
 File: Figs//two_edges.png Graphic file (type png)
 <use Figs//two_edges.png>
-Package pdftex.def Info: Figs//two_edges.png  used on input line 646.
+Package pdftex.def Info: Figs//two_edges.png  used on input line 645.
 (pdftex.def)             Requested size: 151.20154pt x 79.3788pt.
 
 
-LaTeX Warning: Reference `fig:RRT*' on page 10 undefined on input line 652.
+LaTeX Warning: Reference `fig:RRT*' on page 10 undefined on input line 651.
 
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 664.
+put line 663.
 
-Underfull \hbox (badness 10000) in paragraph at lines 683--684
+Underfull \hbox (badness 10000) in paragraph at lines 682--683
 [] \OT1/ptm/b/n/10 (+20) else if $[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 q\OT1/cmr
 /m/n/10 )\OML/cmm/m/it/10 =v[] < t[] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 t[]$
  \OT1/ptm/m/n/10 (+20) and
  []
 
-<Figs//security_graph.png, id=416, 540.67331pt x 404.06319pt>
+<Figs//security_graph.png, id=412, 540.67331pt x 404.06319pt>
 File: Figs//security_graph.png Graphic file (type png)
 <use Figs//security_graph.png>
-Package pdftex.def Info: Figs//security_graph.png  used on input line 705.
+Package pdftex.def Info: Figs//security_graph.png  used on input line 704.
 (pdftex.def)             Requested size: 151.20154pt x 112.9951pt.
-[10 <./Figs//two_edges.png> <./Figs//security_graph.png>]
+[10 <./Figs//SC_gen_1.png> <./Figs//SC_gen_2.png> <./Figs//two_edges.png>]
 
-LaTeX Warning: Citation `ntafos1979path' on page 11 undefined on input line 739
+LaTeX Warning: Citation `ntafos1979path' on page 11 undefined on input line 738
 .
 
 
 LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 11 undefine
-d on input line 748.
+d on input line 747.
 
 
 LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 11 undefine
-d on input line 748.
+d on input line 747.
 
-<Figs//graph_flow_result_3.png, id=463, 1204.5pt x 1686.3pt>
+[11 <./Figs//security_graph.png>]
+<Figs//graph_flow_result_3.png, id=473, 1204.5pt x 1686.3pt>
 File: Figs//graph_flow_result_3.png Graphic file (type png)
 <use Figs//graph_flow_result_3.png>
-Package pdftex.def Info: Figs//graph_flow_result_3.png  used on input line 752.
+Package pdftex.def Info: Figs//graph_flow_result_3.png  used on input line 751.
 
 (pdftex.def)             Requested size: 100.79846pt x 141.10788pt.
-<Figs//3_flow_result.png, id=464, 1606.0pt x 1405.25pt>
+<Figs//3_flow_result.png, id=474, 1606.0pt x 1405.25pt>
 File: Figs//3_flow_result.png Graphic file (type png)
 <use Figs//3_flow_result.png>
-Package pdftex.def Info: Figs//3_flow_result.png  used on input line 760.
+Package pdftex.def Info: Figs//3_flow_result.png  used on input line 759.
 (pdftex.def)             Requested size: 151.20154pt x 132.29936pt.
-[11]
-<Figs//graph_flow_result_4.png, id=481, 1204.5pt x 1686.3pt>
+<Figs//graph_flow_result_4.png, id=479, 1204.5pt x 1686.3pt>
 File: Figs//graph_flow_result_4.png Graphic file (type png)
 <use Figs//graph_flow_result_4.png>
-Package pdftex.def Info: Figs//graph_flow_result_4.png  used on input line 772.
+Package pdftex.def Info: Figs//graph_flow_result_4.png  used on input line 771.
 
 (pdftex.def)             Requested size: 100.79846pt x 141.10788pt.
-<Figs//4_flow_result.png, id=482, 1606.0pt x 1405.25pt>
+<Figs//4_flow_result.png, id=480, 1606.0pt x 1405.25pt>
 File: Figs//4_flow_result.png Graphic file (type png)
 <use Figs//4_flow_result.png>
-Package pdftex.def Info: Figs//4_flow_result.png  used on input line 780.
+Package pdftex.def Info: Figs//4_flow_result.png  used on input line 779.
 (pdftex.def)             Requested size: 151.20154pt x 132.29936pt.
-<Figs//nflow_vs_cost.png, id=485, 1232.605pt x 375.4025pt>
+<Figs//nflow_vs_cost.png, id=483, 1232.605pt x 375.4025pt>
 File: Figs//nflow_vs_cost.png Graphic file (type png)
 <use Figs//nflow_vs_cost.png>
-Package pdftex.def Info: Figs//nflow_vs_cost.png  used on input line 792.
+Package pdftex.def Info: Figs//nflow_vs_cost.png  used on input line 791.
 (pdftex.def)             Requested size: 151.20154pt x 46.04878pt.
  [12 <./Figs//graph_flow_result_3.png (PNG copy)> <./Figs//3_flow_result.png (P
 NG copy)> <./Figs//graph_flow_result_4.png (PNG copy)> <./Figs//4_flow_result.p
 ng (PNG copy)> <./Figs//nflow_vs_cost.png (PNG copy)>]
 
-LaTeX Warning: Citation `Tron:Arxiv14' on page 13 undefined on input line 842.
+LaTeX Warning: Citation `Tron:Arxiv14' on page 13 undefined on input line 841.
 
 
 LaTeX Warning: Reference `eq:asymmetric to cross' on page 13 undefined on input
- line 850.
+ line 849.
 
 [13] (./paper.bbl) 
 AED: pageslts setting LastPage 
@@ -1768,11 +1769,11 @@ Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: AD2C3344BC4A6D835ED6A12F974370AF;3094.
  ) 
 Here is how much of TeX's memory you used:
- 39498 strings out of 478268
- 777141 string characters out of 5846348
- 1171917 words of memory out of 5000000
+ 39501 strings out of 478268
+ 777168 string characters out of 5846348
+ 1170917 words of memory out of 5000000
  56324 multiletter control sequences out of 15000+600000
- 535996 words of font info for 385 fonts, out of 8000000 for 9000
+ 536197 words of font info for 387 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  119i,20n,111p,1457b,550s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
@@ -1796,7 +1797,7 @@ urw/helvetic/uhvb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/tim
 es/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a
 .pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr
 /local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (14 pages, 2605651 bytes).
+Output written on paper.pdf (14 pages, 2605716 bytes).
 PDF statistics:
  688 PDF objects out of 1000 (max. 8388607)
  580 compressed objects within 6 object streams

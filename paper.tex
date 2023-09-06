@@ -330,10 +330,26 @@ The reachability ellipsoid is an over-approximation of the exact reachability re
   \begin{align} 
     R&=H(\nu_\cF(q_1,q_2),\nu_\cE(q_1,q_2)), &o&=\frac{1}{2}(q_1+q_2).
   \end{align}
-  To simplify the notation, in the following we will consider $H$ to be a function of $q_1,q_2$ directly, i.e. $H(q_1,q_2)$.
+  To simplify the notation, in the following we will consider $H$ to be a function of $q_1,q_2$ directly, i.e. $H(q_1,q_2)$. 
+  The ellipse $\cE$ expressed in $\cF_\cE$ is given by $\Eframe{\cE}=\{\Eframe{q}\in\real{m}:d(q^\cE_1,\Eframe{q})+d(\Eframe{q},q^\cE_2)<2a\}$, where the coordinates of the two foci $q^\cE_1,q^\cE_2$ in $\cF_\cE$ are
+  \begin{align}
+    q^\cE_1=\bmat{c & 0 & 0}\transpose, && q^\cE_2=\bmat{-c & 0 & 0}\transpose,
+  \end{align}
+  with $c=\frac{\norm{q_2-q_1}}{2}$.
 
-%\subsection{Reachability constraints using ellipsoidal constraints and their differential}\label{sec:ellipoid constraints}
-\rtron{Make sure that, throughout the paper, we use reachability ellipsoid instead of ellipsoidal regions}
+  The ellipsoid $\cE$ in the canonical frame can be described as the zero level set of the quadratic function
+  \begin{equation}\label{equ:standard-ellipse}
+    \Eframe{E}(\Eframe{q}) = \Eframe{q}\transpose Q \Eframe{q} - 1
+  \end{equation}
+  where
+  \begin{equation}
+    Q = \diag(a^{-2},b^{-2},b^{-2}),
+  \end{equation}
+  and $b = \sqrt{a^2-c^2}$.
+  The ellipse parameters $a$,$b$ represent the lengths of the major axes.
+
+For all reachability ellipsoid constraints, we first solve the problem in the canonical frame $\cF_{\cE}$, and transform the solutions to the global frame $\cF$ using the defined transformation function.
+
 We are now ready to formulate constraints based on reachability ellipsoids against different types of forbidden regions: a point, a plane, a segment, and a convex polygon. For each one, our goal is to define the function $D(q)$, its differential $\partial_qD(q)$, the set $\zeta$ and the projection $\Pi_\zeta$ that can be incorporated in the ADMM optimization (\ref{eq:ADMMSetConstraint_modified}).
 
 \subsection{Point-ellipsoid constraint}\label{sec:ellipsoid-point}
@@ -361,7 +377,14 @@ where $\cE^{c}$ is the set complement of the region $\cE$.
 
   For cases where $q_{avoid} \notin \cE(q(t_2),q(t_1),r)$, $\pi_{p\cE}(q_{avoid}) = q_{avoid}$. And for cases where $q_{avoid} \in \cE(q_1,q_2,r)$, $D(q)$ needs to be projected to the boundary of the ellipse, which is discussed below.
 
-The point to project, $q_{avoid}$, can be likewise expressed in $\cF_\cE$ as $\Eframe{q}_{avoid} =  H (\Fframe q_{avoid}-o)$.
+
+  \subsubsection{Projection to the standard ellipse}\rtron{Move to the appendix or refer to the conference paper}
+  % Using the transformation defined in Section~\ref{sec:rotation2Standard}, the original ellipse $\cE$ in $\cF$ can be expressed as the zero level set of the quadratic function
+  % \begin{equation}
+  %   \Fframe{E}(\Fframe{x}) = (\Fframe{x}-o_\cE)\transpose H\transpose Q H (\Fframe{x}-o_\cE) - 1
+  % \end{equation}
+
+  The point to project, $q_{avoid}$, can be likewise expressed in $\cF_\cE$ as $\Eframe{q}_{avoid} =  H (\Fframe q_{avoid}-o)$.
 
   We now turn our attention to the problem of projecting $\Eframe{q}_{avoid}$ on the zero level set of $E^\cE$ (i.e., the reachability ellipsoid in the canonical frame). The derivations below are loosely inspired by \cite{eberly}.
 
