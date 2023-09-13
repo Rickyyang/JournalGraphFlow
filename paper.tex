@@ -349,6 +349,10 @@ For the convenience of derivation, we define the coordinate transformation from 
   \end{equation}
   and $b = \sqrt{a^2-c^2}$.
   The ellipse parameters $a$,$b$ represent the lengths of the major axes.
+  And the original ellipse $\cE$ in $\cF$ can be expressed as the zero level set of the quadratic function
+   \begin{equation}
+     \Fframe{E}(\Fframe{q}) = (\Fframe{q}-o_\cE)\transpose H\transpose Q H (\Fframe{q}-o_\cE) - 1
+     \end{equation}
 \end{definition}
 
 For all reachability ellipsoid constraints, we first solve the problem in the canonical frame $\cF_{\cE}$, and transform the solutions to the global frame $\cF$ using the defined transformation function.
@@ -356,6 +360,7 @@ For all reachability ellipsoid constraints, we first solve the problem in the ca
 We are now ready to formulate constraints based on reachability ellipsoids against different types of forbidden regions: a point, a plane, a segment, and a convex polygon. For each one, our goal is to define the function $D(q)$, its differential $\partial_qD(q)$, the set $\zeta$ and the projection $\Pi_\zeta$ that can be incorporated in the ADMM optimization (\ref{eq:ADMMSetConstraint_modified}).
 
 \subsection{Point-ellipsoid reachability constraint}\label{sec:ellipsoid-point}
+\zyang{change this to a circle by adding radius to projection?}
 As shown in Fig.\ref{fig:Ellipse-to-point}, we consider a forbidden region in the shape of a single point $q_{avoid}$. The goal is to design the trajectory $q(t)$ such that $q_{avoid}\notin\mathcal{E}(q_1,q_2)$. This constraint can be written as, 
 
 \begin{constraint}[Point-ellipsoid reachability constraint]
@@ -383,35 +388,21 @@ where $\cE^{c}$ is the set complement of the region $\cE$.
 \end{center}
 \end{figure}
 
-  For cases where $q_{avoid} \notin \cE(q(t_2),q(t_1),r)$, $\pi_{p\cE}(q_{avoid}) = q_{avoid}$. And for cases where $q_{avoid} \in \cE(q_1,q_2,r)$, $D(q)$ needs to be projected to the boundary of the ellipse.
-  
-  \zyang{can this be treated as proposition}
-  \begin{proposition} \label{prop:ellipse-project-canonical}
-  In canonical frame $\cF_{\cE}$, the projection from a point $q^{\cE}_{avoid}\in \cE$ inside the ellipse to the boundary of $\cE$:
+  For cases where $q_{avoid} \notin \cE(q(t_2),q(t_1),r)$, $\pi_{p\cE}(q_{avoid}) = q_{avoid}$. And for cases where $q_{avoid} \in \cE(q_1,q_2,r)$, $D(q)$ needs to be projected to the boundary of the ellipse. In canonical frame $\cF_{\cE}$, the projected point $q^{\cE}_{p}$ can be written as:
   \begin{equation}
   	q^\cE_{p} = {(I+sQ)}\inverse q^\cE_{avoid} = S q^\cE_{avoid}
   \end{equation}
   %where $S=(I+sQ)\inverse$.Using the fact that since $q^\cE_p$ is a point on the ellipse, 
-  where $s$ can be solved as the root of the equation obtained by substituting \eqref{eq:qp from S} in $\Eframe E(\Eframe q)$:
+  where $s$ can be solved as the root of the \eqref{equ:standard-ellipse}:
   \begin{equation}
-    0=F(s)={q^\cE_p}\transpose Q q^\cE_p-1={q^\cE_{avoid}}\transpose Q'(s) q^\cE_{avoid} -1,
+    {q^\cE_p}\transpose Q q^\cE_p-1={q^\cE_{avoid}}\transpose Q'(s) q^\cE_{avoid} -1=0
   \end{equation}
   where
   \begin{equation}
     Q'(s) =S\transpose Q S = \diag\left(\frac{a^{2}}{(s+a^{2})^2}, \frac{b^{2}}{(s+b^{2})^2},\frac{b^{2}}{(s+b^{2})^2}\right)
   \end{equation}
- Detailed methods for computing $s$ can be found in \cite{eberly}. 
-  \end{proposition}
-  \begin{proof}
-  Proof can be found in Appendix~\Cref{proof:ellipse-project-canonical}
-  \end{proof}
+ Detailed methods for computing $s$ can be found in \cite{yang2021multi} \cite{yang2020multi} \cite{eberly}. 
 
-
-  \subsubsection{Projection to the standard ellipse}\rtron{Move to the appendix or refer to the conference paper}
-  % Using the transformation defined in Section~\ref{sec:rotation2Standard}, the original ellipse $\cE$ in $\cF$ can be expressed as the zero level set of the quadratic function
-  % \begin{equation}
-  %   \Fframe{E}(\Fframe{x}) = (\Fframe{x}-o_\cE)\transpose H\transpose Q H (\Fframe{x}-o_\cE) - 1
-  % \end{equation}
 
   %The point to project, $q_{avoid}$, can be likewise expressed in $\cF_\cE$ as $\Eframe{q}_{avoid} =  H (\Fframe q_{avoid}-o)$. We now turn our attention to the problem of projecting $\Eframe{q}_{avoid}$ on the zero level set of $E^\cE$ (i.e., the reachability ellipsoid in the canonical frame). The derivations below are loosely inspired by \cite{eberly}.
 
@@ -440,50 +431,35 @@ where $\cE^{c}$ is the set complement of the region $\cE$.
       -2H^{-1} S H[q-o]_{\times} U  + (H^{-1}SH -I)\partial_q o
     \end{multline}
   \end{proposition}
+  \begin{proof}
+  See \Cref{proof:Ellipse2PointDiff}.
+  \end{proof}
   The differential of $D_p$ is the same as the one for $\pi_{p\cE}$.
 
 \subsection{Plane-ellipsoid reachability constraint}\label{sec:ellipsoide-plane}
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.6\linewidth]{Ellipse2line_V2}
+\includegraphics[width=0.6\linewidth, trim = 0cm 1.5cm 0cm 1cm, clip]{Ellipse2line_V2}
 \caption{Plane-ellipse constraint. Projected a ellipsoid to one side of a plane. The projection is simplified to the point-ellipse constraint as projecting a point inside ellipse $p_{L}$ to $p_{t}$ on outside the ellipse.}
 \label{fig:Ellipse-to-plane}
 \end{center}
 \end{figure}
 
-For a intermediate step to get the relationship between a polygon shaped forbidden region, we first consider a forbidden region in the shape of a hyperplane $\mathcal{L}(\tilde{q}) = \{\tilde{q}\in\mathbb{R}^n: \vn\transpose \tilde{q} = d\}$ (as shown in Figure \ref{fig:Ellipse-to-plane}). The reachability constraint now can then be defined as $\mathcal{L} \cap \mathcal{E}(q_1,q_2,a) = \emptyset$.
-  Using the transformation introduced in (\ref{sec:rotation2Standard}), the ellipse can be transferred into a standard one with the new hyperplane in the form of $\Eframe \cL(\tilde{q}) = \{  \tilde{q}\in\mathbb{R}^m:  \vn_\cE\transpose \tilde{q} = d_{\cE}\}$, where,
+For forbidden region in the shape of a hyperplane $\mathcal{L}(\tilde{q}) = \{\tilde{q}\in\mathbb{R}^n: \vn\transpose \tilde{q} = d\}$ (as shown in Figure \ref{fig:Ellipse-to-plane}). The reachability constraint now can then be defined as $\mathcal{L} \cap \mathcal{E}(q_1,q_2,a) = \emptyset$. When transformed into canonical frame, the hyperplane can be written as $\Eframe \cL(\tilde{q}) = \{  \tilde{q}\in\mathbb{R}^m:  \vn_\cE\transpose \tilde{q} = d_{\cE}\}$, where,
   \begin{equation}
-    n_\cE = H(q_1,q_2)n
+    n_\cE = H(q_1,q_2)n, \quad d_\cE =-\vn\transpose o + d
 \end{equation}
-\begin{equation} 
-	d_\cE =-\vn\transpose o + d
-  \end{equation}
-\subsubsection{Projection via the tangent interpolation point}
-  For each $\cL_\cE$, there exist two planes $\Eframe \cL_{1} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} =  d_{\cE t} \}$ and $\Eframe \cL_{2} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} = - d_{\cE t} \}$ that are parallel to $\cL$ and tangent to the ellipse, where
-  \begin{equation}
-    d_{\cE t} = \sqrt{ n_\cE\transpose Q^{-1} n_\cE}.
-  \end{equation}
-  The corresponding tangent points are given as 
-  \begin{equation}
-    p^\cE_{1} = \frac{  d_{\cE t} Q^{-1}   n_\cE}{ n_\cE \transpose Q^{-1}  n_\cE} = \frac{Q^{-1} n_\cE}{ d_{\cE t}},
-  \end{equation}
-  \begin{equation}
-   p^\cE_{2} = -  p^\cE_{1}.
-  \end{equation}
-  \rtron{Refer to figure}
-  We use these two tangent points to define a novel measure of displacement between a plane and an ellipse.
-  \begin{definition}
-    The \emph{tangent interpolation point} is defined as 
-    \begin{equation}\label{equ:ProjectPoint}
-      p^\cE_{\cL} = \frac{ d_\cE Q^{-1} n_\cE}{ n_\cE\transpose Q^{-1} n_\cE}
-    \end{equation}
-  \end{definition}
-  Note that $p^\cE_{\cL} \in \mathcal{L}$ and when  $d_\cE=d_{\cE t}$ or $d_\cE=-d_{\cE t}$, $p^\cE_{\cL}=p^\cE_{1}$ or $p^\cE_{\cL}=p^\cE_{2}$, respectively. 
-  % it is easy to see that $\Eframe p_{\cL} \in \mathcal{L}$, and $p_{\mathcal{L}}$ can be used to indicate the relationship between the $\mathcal{L}$ and $\mathcal{E}$, which is shown below. \zyang{how to emphaise this? maybe a graph here?}
-  %The reason such that a specific point is used is for the convenience of evaluating ellipse-plane-segment relationship in Section~\ref{chapter:ellipse to segment}.
-  It is clear that when $ d_\cE \in [- d_{\cE t},  d_{\cE t}]$, the plane $\cL$ and the ellipsoid $\cE$ have at least one intersection, thus violating our desired reachability constraint. Using this fact, we define the following projection operator:
+The corresponding constraint can be written as:
+
+\begin{constraint}[Plane-ellipsoid reachability constraint]
+\begin{align}
+D(\vq) &= H^{-1}(q(t_1),q(t_2))\pi^\cE_{\vn \cE}(q)+o, \label{eq:plane_ellipsoid_constraint}\\
+  \sZ &= \{q\in\mathbb{R}^{nm}:\norm{D_{\vn}(q)} = 0 \},\\
+   \Pi_\sZ(z) & = \overrightarrow{0}, 
+\end{align}
+\end{constraint}
+where $\pi^\cE_{\vn \cE}(q)$ is the projection operator defined as:
   \begin{equation}\label{equ:plane2ellipse}
     \pi^\cE_{\vn \cE}(q) =\begin{cases}
       p^\cE_{t1}-p^\cE_{\cL} &  d_\cE \in [0, d_{\cE t}], \\
@@ -491,22 +467,20 @@ For a intermediate step to get the relationship between a polygon shaped forbidd
       {0} & \textrm{otherwise}.
     \end{cases}
   \end{equation}
-  \subsubsection{ADMM constraints}
-  Transforming the projection $\pi^\cE$ back to $\cF$ we have:
-  \begin{equation}\label{equ:constraint plane to ellipse}
-    D_{\vn}(q)= H^{-1}(q(t_1),q(t_2))\pi^\cE_{\vn \cE}(q)+o,
+$p^{\cE}_{1}$ and $p^{\cE}_{2}$ are tangent points on two planes $\Eframe \cL_{1} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} =  d_{\cE t} \}$ and $\Eframe \cL_{2} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} = - d_{\cE t} \}$ that are parallel to $\cL$ and tangent to the ellipse (\Cref{fig:Ellipse-to-plane}), defined as 
+ \begin{equation}
+    p^\cE_{1} = \frac{ d_{\cE t} Q^{-1}   n_\cE}{ n_\cE \transpose Q^{-1}  n_\cE} = \frac{Q^{-1} n_\cE}{ d_{\cE t}},\quad  p^\cE_{2} = -  p^\cE_{1},
   \end{equation}
-  with the corresponding constraint written as
-  \begin{equation}
-    \zeta_\vn = \{q\in\mathbb{R}^{nm}:\norm{D_{\vn}(q)} = 0 \}
-  \end{equation}
-  \begin{equation}
-   \quad\Pi_\vn(D_{\vn}(q)) = {0}
-  \end{equation}
+where $d_{\cE t} = \sqrt{ n_\cE\transpose Q^{-1} n_\cE}$. And the \emph{tangent interpolation point} is defined as 
+    \begin{equation}\label{equ:ProjectPoint}
+      p^\cE_{\cL} = \frac{ d_\cE Q^{-1} n_\cE}{ n_\cE\transpose Q^{-1} n_\cE}.
+    \end{equation}
+  Note that $p^\cE_{\cL} \in \mathcal{L}$ and when  $d_\cE=d_{\cE t}$ or $d_\cE=-d_{\cE t}$, $p^\cE_{\cL}=p^\cE_{1}$ or $p^\cE_{\cL}=p^\cE_{2}$, respectively. 
+  
+  It is clear that when $ d_\cE \in [- d_{\cE t},  d_{\cE t}]$, the plane $\cL$ and the ellipsoid $\cE$ have at least one intersection, thus violating our desired reachability constraint. 
 
-  \subsubsection{Gradients for the projection function}
-  \begin{proposition}\label{prop:dpi_ne dt}
-    The differential of the projection function $\Eframe \Pi_{\vn \cE}(q)$ with respect to the foci $q_1$ and $q_2$ is given by:
+  \begin{proposition}\label{prop:dpi_ne_dt}
+    The differential of the projection function $\Eframe \pi_{\vn \cE}(q)$ with respect to the foci $q_1$ and $q_2$ is given by:
     \begin{equation}
       \partial_q \pi^\cE_{\vn \cE}(q) = \begin{cases}
         \partial_q p^\cE_{t1}-\partial_q p^\cE_{\cL} &  d_\cE \in [0, d_{\cE t}], \\
@@ -524,7 +498,10 @@ For a intermediate step to get the relationship between a polygon shaped forbidd
       + \frac{\partial_b Q^{-1}n_\cE \partial_q b -  2Q^{-1}H[n]_\times U }{d_{\cE t}}.
     \end{equation}
   \end{proposition}
-  Based on the previous proposition, the differential of (\ref{equ:constraint plane to ellipse}) can be written as:
+  \begin{proof}
+  See \Cref{proof:dpi_ne_dt}.
+  \end{proof}
+  Based on the previous proposition, the differential of (\ref{eq:plane_ellipsoid_constraint}) can be written as:
   \begin{equation}
     \partial_q {D_{\vn\cE}} = -2 H \cross{\Eframe \Pi_{\vn \cE}}  M + H^{-1}\partial_q \Eframe \Pi_{\vn \cE}
   \end{equation}
@@ -539,7 +516,7 @@ For a intermediate step to get the relationship between a polygon shaped forbidd
 \end{center}
 \end{figure}
 
-To avoid (or stay in) a region defined by several hyperplanes, the relative position between the ellipse and segment of the hyperplane needs to be studied instead of the whole plane. Assume the segment has endpoints $p_1$ and $p_2$, the segment can be defined as:
+For a intermediate step to get the relationship between a polygon shaped forbidden region, the relative position between the ellipse and segment of the hyperplane that defines the region is studied. Assume the segment has endpoints $p_1$ and $p_2$, the segment can be defined as:
 \begin{equation}
 \bmat{(p_1-p_2)\transpose\\(p_2-p_1)\transpose} p \leq \bmat{p_2\transpose\\-p_1\transpose}(p_1-p_2)
 \end{equation}
@@ -596,9 +573,9 @@ Our solution shows that planning with reachability and co-observation is a promi
 
 \section{Cross-trajectory co-observation planning}
 
-To address the feasibility challenge and performance trade-off of the ADMM problem discussed in \Cref{sec:reachability-discussion}, we propose to form \emph{sub-teams} on each route, and setup additional co-observations both within the sub-team and across different sub-teams \rtronref{refer to introductory figure}. 
+To address the feasibility challenge and performance trade-off of the ADMM problem discussed in \Cref{sec:reachability-discussion}, we propose to form \emph{sub-teams} on each route, and setup additional co-observations both within the sub-team and across different sub-teams \rtron{refer to introductory figure}. 
 These \emph{cross-trajectory co-observations} allow sub-teams to preserve the optimal unsecured trajectories (as shown in Figure \ref{fig:cross-traj-comparison-set}), as it does not require the entire \emph{sub-team} to maintain a close distance with other teams when co-observation occurs. 
-Note that \emph{cross-trajectory co-observation}, are always preferred when feasible, since they provide better security in potential situations where the entire sub-team is compromised. \rtronref{(More discussion in Sec. ??)}.
+Note that \emph{cross-trajectory co-observation}, are always preferred when feasible, since they provide better security in potential situations where the entire sub-team is compromised. \rtron{(More discussion in Sec. ??)}.
 
 \rtronhl{Move to discussion}{In this section, we consider only the high-level path planning, while the assignment of the duties in the team will be performed dynamically, making it more difficult for attackers to successfully plan and execute attacks.}
 
@@ -620,7 +597,7 @@ The set $E_{q} = E_{t} \union E_{c}$ consists of directed edges of two types, tr
 This section presents the two components of our approach: constructing the checkpoint graph based on unsecured multi-robot trajectories, and the formulation and solution of the network flow problem.
 
 \subsection{Rapidly-exploring Random Trees}
-In this section, we use the \rrtstar{} \cite{karaman2010incremental} algorithm to find paths from a single starting location to multiple destination points (i.e., the reference trajectories of other robots, in our method). \rtronhl{Move to the end of this RRT* section}{Our objective is not to optimize specific constraints but to ascertain the existence of feasible paths. While the ADMM based solver \Cref{chapter:ADMM review} presented earlier offers a broader range of constraint handling, the RRT* algorithm is better suited to the problem in this section. RRT*'s efficient exploration of the solution space, coupled with its ability to incorporate obstacle constraints, makes it a fitting choice for building the checkpoint graph.}
+In this section, we use the \rrtstar{} \cite{karaman2010incremental} algorithm to find paths from a single starting location to multiple destination points (i.e., the reference trajectories of other robots, in our method). \rtronhl{Move to the end of this RRT* section} Our objective is not to optimize specific constraints but to ascertain the existence of feasible paths. While the ADMM based solver \Cref{chapter:ADMM review} presented earlier offers a broader range of constraint handling, the RRT* algorithm is better suited to the problem in this section. RRT*'s efficient exploration of the solution space, coupled with its ability to incorporate obstacle constraints, makes it a fitting choice for building the checkpoint graph.
 
 As a optimal path planning algorithm, \rrtstar{} returns the shortest paths between an initial location and points in the free configuration space, organized as a tree. We assume that the generated paths can be travelled in both directions (this is used later in our analysis). 
 Key functions from \rrtstar{} that are also used during constructions of the checkpoint graph are
@@ -933,7 +910,7 @@ In this paper, we provide a method to enhance the security of a multi-robot syst
     \end{multline}
     from which the claim follows.
   
-  \subsection{Proof of proposition \ref{prop:dpi_ne dt}}\label{proof:dpi_ne dt}
+  \subsection{Proof of proposition \ref{prop:dpi_ne_dt}}\label{proof:dpi_ne_dt}
     We first need to derive $\dot{d}_\cE$ and $\dot{d}_{\cE t}$
 
     \begin{equation}
@@ -964,7 +941,7 @@ In this paper, we provide a method to enhance the security of a multi-robot syst
 
 {\small
 \bibliographystyle{unsrt}
-\bibliography{ADMM_planning,ACC}
+\bibliography{ADMM_planning,ACC,tron,ziqi}
 }
 
 \end{document}

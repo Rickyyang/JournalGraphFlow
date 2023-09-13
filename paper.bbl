@@ -40,11 +40,10 @@ Jonathan~D Gammell, Siddhartha~S Srinivasa, and Timothy~D Barfoot.
 \newblock In {\em 2014 IEEE/RSJ International Conference on Intelligent Robots
   and Systems}, pages 2997--3004. IEEE, 2014.
 
-\bibitem{yangmulti}
-Ziqi Yang and Roberto Tron.
-\newblock Multi-agent path planning under observation schedule constraints.
-\newblock In {\em 2020 IEEE/RSJ International Conference on Intelligent Robots
-  and Systems (IROS)}, pages 6990--6997. IEEE, 2020.
+\bibitem{anderson2012optimal}
+Brian~DO Anderson and John~B Moore.
+\newblock {\em Optimal filtering}.
+\newblock Courier Corporation, 2012.
 
 \bibitem{householder1958unitary}
 Alston~S Householder.
@@ -57,9 +56,28 @@ Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, and Jonathan Eckstein.
   Alternating Direction Method of Multipliers}.
 \newblock 3(1):1--122, 2011.
 
-\bibitem{wang2019global}
-Yu~Wang, Wotao Yin, and Jinshan Zeng.
-\newblock Global convergence of admm in nonconvex nonsmooth optimization.
-\newblock {\em Journal of Scientific Computing}, 78(1):29--63, 2019.
+\bibitem{yang2021multi}
+Ziqi Yang and Roberto Tron.
+\newblock Multi-agent trajectory optimization against plan-deviation attacks
+  using co-observations and reachability constraints.
+\newblock In {\em 2021 60th IEEE Conference on Decision and Control (CDC)},
+  pages 241--247. IEEE, 2021.
+
+\bibitem{yang2020multi}
+Ziqi Yang and Roberto Tron.
+\newblock Multi-agent path planning under observation schedule constraints.
+\newblock In {\em 2020 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems (IROS)}, pages 6990--6997. IEEE, 2020.
+
+\bibitem{eberly}
+David Eberly.
+\newblock Distance from a point to an ellipse, an ellipsoid, or a
+  hyperellipsoid, 2013.
+
+\bibitem{Tron:Arxiv14}
+Roberto Tron and K.~Daniilidis.
+\newblock Technical report on optimization-based bearing-only visual homing
+  with applications to a 2-d unicycle model.
+\newblock 2014.
 
 \end{thebibliography}
