@@ -300,7 +300,7 @@ where $a,b$ are the indices of the pair of agents required for a mutual inspecti
 \end{definition}
 This region can be analytically bounded via an ellipsoid:
 \begin{definition}\label{def:Reachability}
-	The \emph{reachability ellipsoid} is defined as the region  $\mathcal{E}(q_1,q_2,t_{1},t_{2})=\{\tilde{q}\in\mathbb{R}^n: d(q_1,\tilde{q})+d(\tilde{q}+q_2)<2a\}$, where $a=\frac{v_{maq}}{2}(t_2-t_1)$.
+	The \emph{reachability ellipsoid $\cE$} is defined as the region  $\mathcal{E}(q_1,q_2,t_{1},t_{2})=\{\tilde{q}\in\mathbb{R}^n: d(q_1,\tilde{q})+d(\tilde{q}+q_2)<2a\}$, where $a=\frac{v_{maq}}{2}(t_2-t_1)$.
 \end{definition}
 
  \begin{figure}
@@ -316,10 +316,11 @@ The region $\cE(q_1,q_2)$ is an ellipsoid with foci at $q_1,q_2$, center $o_{\cE
 The reachability ellipsoid is an over-approximation of the exact reachability region; the difference between the two is due to the discretization of the trajectory, and the fact that $\cE$ does not consider the presence of obstacles.
 
 \subsubsection{Transformation to canonical coordinates}\label{sec:rotation2Standard}
-To simplify the problem, we employ a canonical rigid body transformation that repositions the ellipse $\cE$ from the global frame $\cF$ to a canonical frame $\cF_\cE$. In this new frame, the ellipsoid's center aligns with the origin, and its foci align with the first axis of $\cF_\cE$. We perform this transformation in a differentiable manner, with respect to the two foci serving as waypoints for a robot.
-
-For the convenience of derivation, we define the coordinate transformation from $\cF$ to $\cF_\cE$ using a rotation $R^\cF_\cE$ and a translation $o^\cF_\cE$, which, to simplify the notation, we simply refer to as $R$ and $o$, respectively. The transformation of a point from the frame $\cF_\cE$ to the frame $\cF$ and its inverse are given by the formulation:
-  \begin{equation}
+To simplify the problem, we employ a canonical rigid body transformation that repositions the ellipse $\cE$ from the global frame $\cF$ to a canonical frame $\cF_\cE$. 
+\rtronhl{Make this sentence as "The canonical frame $\cF_\cE$ is defined as..."}{In this new frame, the ellipsoid's center aligns with the origin, and its foci align with the first axis of $\cF_\cE$.} We perform this transformation in a differentiable manner, with respect to the two foci serving as waypoints for a robot.
+We parametrize the transformation from $\cF$ to $\cF_\cE$ using a rotation $R^\cF_\cE$ and a translation $o^\cF_\cE$, which, to simplify the notation, we refer to as $R$ and $o$, respectively. 
+The transformation of a point from the frame $\cF_\cE$ to the frame $\cF$ and its inverse are given by the rigid body transformations:
+  \begin{equation}\label{eq:transformations}
     \Fframe{q}=R\Eframe{q}+o,\label{eq:E to F transform}\quad
     \Eframe{q}=R\transpose(\Fframe{q}-o).
   \end{equation}
@@ -328,18 +329,18 @@ For the convenience of derivation, we define the coordinate transformation from 
   \begin{align}
     \nu'_\cF&=q_2-q_1, & \nu_\cF &= \frac{\nu'_\cF}{\norm{\nu_\cF}}, & \nu_\cE&=[1,0,0]^T;
   \end{align}
-  see Fig.\ref{fig:EllipseConstraintExample} for an illustration. Note that $\nu_\cE$ is constant while, for the sake of clarity, $\nu_{\cF}$ depends on $q_1,q_2$. We then define the rotation $R$ using a \emph{Householder rotation}, while from \eqref{eq:E to F transform} we see that $o$ represents the center of $\cE(q_1,q_2)$ expressed in $\cF$, i.e.:
+  see Fig.\ref{fig:EllipseConstraintExample} for an illustration. Note that $\nu_\cE$ is constant while, for the sake of clarity, $\nu_{\cF}$ depends on $q_1,q_2$. From the definition of $\cF_\cE$, the rotation $R$ can be found using a \emph{Householder rotation}, while from \eqref{eq:E to F transform} the translation $o$ must be equal to the center of $\cE(q_1,q_2)$ expressed in $\cF$, i.e.:
   \begin{align} 
     R&=H(\nu_\cF(q_1,q_2),\nu_\cE(q_1,q_2)), &o&=\frac{1}{2}(q_1+q_2).
   \end{align}
-  In the following, we will consider $H$ to be a function of $q_1,q_2$ directly, i.e. $H(q_1,q_2)$. 
+  To simplify notation, in the following, we will consider $H$ to be a function of $q_1,q_2$ directly, i.e. $H(q_1,q_2)$. 
   The ellipse $\cE$ expressed in $\cF_\cE$ is given by $\Eframe{\cE}=\{\Eframe{q}\in\real{m}:d(q^\cE_1,\Eframe{q})+d(\Eframe{q},q^\cE_2)<2a\}$, where the coordinates of the two foci $q^\cE_1,q^\cE_2$ in $\cF_\cE$ are
   \begin{align}
     q^\cE_1=\bmat{c & 0 & 0}\transpose, && q^\cE_2=\bmat{-c & 0 & 0}\transpose,
   \end{align}
   with $c=\frac{\norm{q_2-q_1}}{2}$.
 \begin{definition}
-  The ellipsoid $\cE$ in the canonical frame can be described as the zero level set of the quadratic function
+  The \emph{reachability ellipsoid $\cE$ in the canonical frame} is defined as as the zero level set of the quadratic function
   \begin{equation}\label{equ:standard-ellipse}
     \Eframe{E}(\Eframe{q}) = \Eframe{q}\transpose Q \Eframe{q} - 1
   \end{equation}
@@ -348,14 +349,18 @@ For the convenience of derivation, we define the coordinate transformation from 
     Q = \diag(a^{-2},b^{-2},b^{-2}),
   \end{equation}
   and $b = \sqrt{a^2-c^2}$.
-  The ellipse parameters $a$,$b$ represent the lengths of the major axes.
-  And the original ellipse $\cE$ in $\cF$ can be expressed as the zero level set of the quadratic function
-   \begin{equation}
+  The ellipse parameters $a$, $b$ represent the lengths of the major axes.
+\end{definition}
+\begin{lemma}
+The original ellipse $\cE$ in $\cF$ can be expressed as the zero level set of the quadratic function
+   \begin{equation}\label{eq:ellpsoid from canonical}
      \Fframe{E}(\Fframe{q}) = (\Fframe{q}-o_\cE)\transpose H\transpose Q H (\Fframe{q}-o_\cE) - 1
      \end{equation}
-\end{definition}
-
-For all reachability ellipsoid constraints, we first solve the problem in the canonical frame $\cF_{\cE}$, and transform the solutions to the global frame $\cF$ using the defined transformation function.
+\end{lemma}
+\begin{proof}
+    The claim follows by substituting  \eqref{eq:transformations} into \eqref{equ:standard-ellipse}, and from the definition of $R$ and $o$.
+\end{proof}
+For all reachability ellipsoid constraints, we first solve the problem in the canonical frame $\cF_{\cE}$, and transform the solutions to the global frame $\cF$ using the transformation \eqref{eq:transformations}.
 
 We are now ready to formulate constraints based on reachability ellipsoids against different types of forbidden regions: a point, a plane, a segment, and a convex polygon. For each one, our goal is to define the function $D(q)$, its differential $\partial_qD(q)$, the set $\zeta$ and the projection $\Pi_\zeta$ that can be incorporated in the ADMM optimization (\ref{eq:ADMMSetConstraint_modified}).
 
@@ -441,6 +446,7 @@ where $\cE^{c}$ is the set complement of the region $\cE$.
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=0.6\linewidth, trim = 0cm 1.5cm 0cm 1cm, clip]{Ellipse2line_V2}
+\rtron{Add $d_{\cE t}$}
 \caption{Plane-ellipse constraint. Projected a ellipsoid to one side of a plane. The projection is simplified to the point-ellipse constraint as projecting a point inside ellipse $p_{L}$ to $p_{t}$ on outside the ellipse.}
 \label{fig:Ellipse-to-plane}
 \end{center}
@@ -448,39 +454,44 @@ where $\cE^{c}$ is the set complement of the region $\cE$.
 
 For forbidden region in the shape of a hyperplane $\mathcal{L}(\tilde{q}) = \{\tilde{q}\in\mathbb{R}^n: \vn\transpose \tilde{q} = d\}$ (as shown in Figure \ref{fig:Ellipse-to-plane}). The reachability constraint now can then be defined as $\mathcal{L} \cap \mathcal{E}(q_1,q_2,a) = \emptyset$. When transformed into canonical frame, the hyperplane can be written as $\Eframe \cL(\tilde{q}) = \{  \tilde{q}\in\mathbb{R}^m:  \vn_\cE\transpose \tilde{q} = d_{\cE}\}$, where,
   \begin{equation}
-    n_\cE = H(q_1,q_2)n, \quad d_\cE =-\vn\transpose o + d
+    n_\cE = H(q_1,q_2)n, \quad d_\cE =-\vn\transpose o + d.
 \end{equation}
-The corresponding constraint can be written as:
+Intuitively, $d_\cE$ can be thought as a distance between the the plane $\cL$ and the origin (i.e., the center of $\cE$.
+
+\rtron{Move the definition of tangents, tangent points, and tangent interpolation point here}
+
+With these definitions, the constraint can be written as:
 
 \begin{constraint}[Plane-ellipsoid reachability constraint]
 \begin{align}
-D(\vq) &= H^{-1}(q(t_1),q(t_2))\pi^\cE_{\vn \cE}(q)+o, \label{eq:plane_ellipsoid_constraint}\\
+D(\vq) &= H^{-1}(q(t_1),q(t_2))\pi^\cE_{\vn_\cE}(q)+o, \label{eq:plane_ellipsoid_constraint}\\
   \sZ &= \{q\in\mathbb{R}^{nm}:\norm{D_{\vn}(q)} = 0 \},\\
    \Pi_\sZ(z) & = \overrightarrow{0}, 
 \end{align}
 \end{constraint}
-where $\pi^\cE_{\vn \cE}(q)$ is the projection operator defined as:
+\rtron{Check that $q$ is $\vq$ where necessary. Also sometimes you use $q(t_1),q(t_2)$ and sometimes $q_1,q_2$, check for consistency.}
+where $\pi^\cE_{\vn_\cE}(q)$ is the projection operator defined as:
   \begin{equation}\label{equ:plane2ellipse}
-    \pi^\cE_{\vn \cE}(q) =\begin{cases}
-      p^\cE_{t1}-p^\cE_{\cL} &  d_\cE \in [0, d_{\cE t}], \\
-      p^\cE_{t2}-p^\cE_{\cL} &  d_\cE \in [- d_{\cE t},0), \\
+    \pi^\cE_{\vn_\cE}(q) =\begin{cases}
+      p^\cE_{1}-p^\cE_{\cL} & \textrm{ if } d_\cE \in [0, d_{\cE t}], \\
+      p^\cE_{2}-p^\cE_{\cL} &  \textrm{ if } d_\cE \in [- d_{\cE t},0), \\
       {0} & \textrm{otherwise}.
     \end{cases}
   \end{equation}
-$p^{\cE}_{1}$ and $p^{\cE}_{2}$ are tangent points on two planes $\Eframe \cL_{1} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} =  d_{\cE t} \}$ and $\Eframe \cL_{2} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} = - d_{\cE t} \}$ that are parallel to $\cL$ and tangent to the ellipse (\Cref{fig:Ellipse-to-plane}), defined as 
+$p^\cE_1$ and $p^\cE_2$ are tangent points on two planes that are parallel to $\cL$ and tangent to the ellipse, $\cL_1^{\cE} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} =  d_{\cE t} \}$ and $\cL_2^{\cE} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} = - d_{\cE t} \}$  (\Cref{fig:Ellipse-to-plane}). Analytically, these points can be found as 
  \begin{equation}
     p^\cE_{1} = \frac{ d_{\cE t} Q^{-1}   n_\cE}{ n_\cE \transpose Q^{-1}  n_\cE} = \frac{Q^{-1} n_\cE}{ d_{\cE t}},\quad  p^\cE_{2} = -  p^\cE_{1},
   \end{equation}
-where $d_{\cE t} = \sqrt{ n_\cE\transpose Q^{-1} n_\cE}$. And the \emph{tangent interpolation point} is defined as 
+where $d_{\cE t} = \sqrt{ n_\cE\transpose Q^{-1} n_\cE}$; intuitively, $d_{\cE t}$ can be thought as a distance between the tangent planes $\cL_1^\cE$, $\cL_2^\cE$ and the origin (i.e., the center of the ellipse $\cE$).
+The \emph{tangent interpolation point} $p^\cE_{\cL} \in \mathcal{L}$ is defined on the plane by 
     \begin{equation}\label{equ:ProjectPoint}
       p^\cE_{\cL} = \frac{ d_\cE Q^{-1} n_\cE}{ n_\cE\transpose Q^{-1} n_\cE}.
     \end{equation}
-  Note that $p^\cE_{\cL} \in \mathcal{L}$ and when  $d_\cE=d_{\cE t}$ or $d_\cE=-d_{\cE t}$, $p^\cE_{\cL}=p^\cE_{1}$ or $p^\cE_{\cL}=p^\cE_{2}$, respectively. 
-  
-  It is clear that when $ d_\cE \in [- d_{\cE t},  d_{\cE t}]$, the plane $\cL$ and the ellipsoid $\cE$ have at least one intersection, thus violating our desired reachability constraint. 
+  Intuitively, the point $p^\cE_\cL$ is the point on $\cL$ which is closest to either $p^\cE_1$ or $p^\cE_2$.
+  Note that when  $d_\cE=d_{\cE t}$ or $d_\cE=-d_{\cE t}$, $p^\cE_{\cL}=p^\cE_{1}$ or $p^\cE_{\cL}=p^\cE_{2}$, respectively. When $ d_\cE \in [- d_{\cE t},  d_{\cE t}]$, the plane $\cL$ and the ellipsoid $\cE$ have at least one intersection, thus violating our desired reachability constraint. 
 
   \begin{proposition}\label{prop:dpi_ne_dt}
-    The differential of the projection function $\Eframe \pi_{\vn \cE}(q)$ with respect to the foci $q_1$ and $q_2$ is given by:
+    The differential of the projection function $\pi^\cE_{\vn \cE}(q)$ with respect to the foci $q_1$ and $q_2$ is given by:
     \begin{equation}
       \partial_q \pi^\cE_{\vn \cE}(q) = \begin{cases}
         \partial_q p^\cE_{t1}-\partial_q p^\cE_{\cL} &  d_\cE \in [0, d_{\cE t}], \\
@@ -516,38 +527,36 @@ where $d_{\cE t} = \sqrt{ n_\cE\transpose Q^{-1} n_\cE}$. And the \emph{tangent 
 \end{center}
 \end{figure}
 
-For a intermediate step to get the relationship between a polygon shaped forbidden region, the relative position between the ellipse and segment of the hyperplane that defines the region is studied. Assume the segment has endpoints $p_1$ and $p_2$, the segment can be defined as:
+For a intermediate step to get the relationship between a polygon shaped forbidden region, the relative position between the ellipse and segment of the hyperplane that defines the region is studied. 
+Assume the segment has endpoints $p_1$ and $p_2$; then the segment can be defined as:
 \begin{equation}
 \bmat{(p_1-p_2)\transpose\\(p_2-p_1)\transpose} p \leq \bmat{p_2\transpose\\-p_1\transpose}(p_1-p_2)
 \end{equation}
-And using the $p_{\cL}$ defined in (\ref{equ:ProjectPoint}), we define
-\begin{equation}
-D_{seg}(q) = \begin{cases}
+\rtron{Needs an additiona constraint that $p$ needs to be on the line $p_1p_2$.}
+\begin{constraint}[Line-segment-ellipsoid reachability constraint]
+\begin{align}
+D(\vq) &=  \begin{cases}
 D_1(p_1) & (p_1-p_2)\transpose (p_{\cL}-p_2)<0\\
 D_1(p_2) & (p_2-p_1)\transpose (p_{\cL}-p_1)<0\\
-D_2(p_{\cL}) & otherwise
-\end{cases}
-\end{equation}
-where $D_{p\cE}$ and $D_{\vn\cE}$ are corresponding constraint function introduced in section \ref{sec:ellipsoid-point} and \ref{sec:ellipsoide-plane}
-with the constraint set and projection written as:
-\begin{equation}
-\zeta_{seg} = \{q\in\mathbb{R}^{nm}:\norm{D_{seg}(q)} = 0 \}
-\end{equation}
-\begin{equation}
-\Pi_{seg}(D_{seg}(q)) = {0}
-\end{equation}
+D_2(p_{\cL}) & \textrm{otherwise}
+\end{cases} \label{eq:segment_ellipsoid_constraint}\\
+  \sZ &= \{q\in\mathbb{R}^{nm}:\norm{D_p(q)} = 0 \},\\
+   \Pi_\sZ(z) & = 0, 
+\end{align}
+\end{constraint}
+
+\rtron{Define $D_1$, $D_2$. Give intuition about what they represent.}
 \subsection{Convex-polygon-ellipse reachability constraint}\label{sec:ellipse-region-constraint} 
-To keep an ellipse away from a convex polygon, first, we need to keep all segments of the hyperplanes outside the ellipse. And a convex obstacle constraint for the polygon (as introduced in section \ref{sec:obstacle}) is also added to prevent cases where the ellipse is a subset of the region. Similar to \eqref{equ:ProjectPoint}, we define
-\begin{equation}
-D_{cp}(q) = \bmat{D_{seg1}\\D_{seg2}\\ \vdots}
-\end{equation}
-with the constraint set and projection written as:
-\begin{equation}
-\zeta_{cp} = \{q\in\mathbb{R}^{nm}:\norm{D_{cp}(q)} = 0 \}
-\end{equation}
-\begin{equation}
-\Pi_{cp}(D_{cp}(q)) = {0}
-\end{equation}
+To keep an ellipse away from a convex polygon, first, we need to keep all segments of the hyperplanes outside the ellipse. Similar to \eqref{equ:ProjectPoint}, we define
+\begin{constraint}[Convex-polygon-ellipsoid reachability constraint]\label{constraint:polygon-ellipsoid}
+\begin{align}
+D(\vq) &= \bmat{D_{seg1}\\D_{seg2}\\ \vdots} \label{eq:region_ellipsoid_constraint}\\
+  \sZ &= \{q\in\mathbb{R}^{nm}:\norm{D_p(q)} = 0 \},\\
+   \Pi_\sZ(z) & = 0, 
+\end{align}
+\end{constraint}
+\rtron{$D_{seg1}, D_{seg2}$ need to be defined.}
+ADMM constraint~\ref{constraint:polygon-ellipsoid} needs to be supplemented with a convex obstacle constraint for the polygon (as introduced in section \ref{sec:obstacle}) to prevent cases where the ellipse is a subset of the region.
 
 \subsection{Secured planning results and limitation}
 In this section, we apply our ADMM path planning algorithm to an instance of a map exploration problem (Figure~\ref{fig:ADMM-example-application}), and test the algorithm in both simulations and an experimental testbed. The environment to be explored, with three agents, is a $10m\times10m$ region and two forbidden regions \emph{Zone 2, 3} which is shown in Fig.\ref{fig:Grid-example-application}.We assume that the robots can meaningfully collect information on the underlying vector field for data locations no further than $3m$. The maximum velocity constraint $v_{max}$ is set to~$0.5m/dt$ a time limit of 20. 
@@ -556,7 +565,7 @@ We utilize the APMAPF solver introduced in \cite{wardega2019resilience} to gener
 
 As shown in Fig.\ref{fig:Grid-example-application}, no task has been assigned to the agent besides the start and goal location. Agent 1 and 2 need to meet at time 8 and 14, whereas agent 2 and 3 need to meet at time 18. This result is also used as the initial trajectory input for the ADMM solver. 
 
-Based on the schedule, reachability for agent 1 in-between the scheduled co-observations are constrained. Notice that additional checkpoint (i.e. stationary security camera) need to be incorporated in order to generated an attack-proof solution. Additional solutions to avoid these checkpoints will be discussed in Chapter \ref{chapter:cross-trajectory}.  
+Based on the schedule, reachability for agent 1 in-between the scheduled co-observations are constrained. Notice that additional checkpoint (i.e. stationary security camera) need to be incorporated in order to generated an attack-proof solution. Additional solutions to avoid these checkpoints will be discussed in \Cref{chapter:cross-trajectory}.  
 
 The result of the simulation is shown in Fig.~\ref{fig:ReachabilitySimulation}. The reachability regions are shown as black ellipsoids, and we can show that all of them have empty intersections with Zone 2 and 3. Notice that no explicit constraints have been enabled between reachability regions and obstacles, because we assume that robots have the basic obstacle avoidance capability and can not go through any hard obstacles. Therefore, the intersections between obstacles and ellipsoids, i.e. the case here between agent 3 and zone 1, are tolerable. All constraints have been satisfied and, to the best of their capability, agents have spread out across the map to perform the best possible exploration task. 
 
