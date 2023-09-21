@@ -187,7 +187,7 @@ With a slight abuse of notation, we use the same notation $\partial_xf$ for the 
 \subsubsection{Alternating Directions Method of Multipliers (ADMM)}\label{chapter:ADMM review}
 The basic idea behind our ADMM-based solver \cite{zyang} is to split the constraints from the objective function using a different set of variables $\vz$, and then solve an Augmented Lagrangian formulation of the optimization problem in \eqref{eq:general-problem}.
 More specifically, we can rewrite the constraint $\vq\in\varOmega$ using an indicator function $\varTheta$, and include it in the objective function. In the traditional application of ADMM, the variables $\vz$ are duplicates of $\vx$ projected to the constraint set $\Omega$. However, in path planning problems, some constraints are non-convex, rendering the projection step more difficult (due to the presence of multiple local minima).
-To deal with this problem, we propose a minor generalization of the ADMM formulation where we allow $\vz$ to replicate an arbitrary function of the main variables $\vq$ (instead of being an exact copy): 
+To allow for a easier projection step, we propose a minor generalization of the ADMM formulation where we allow $\vz$ to replicate an arbitrary function of the main variables $\vq$ (instead of being an exact copy), to transform constraint $\vq\in\Omega$ to $D(\vq) \in \sZ$ : 
 \begin{equation}\label{eq:ADMMSetConstraint_modified}
 	\begin{aligned}
 		&\max\quad \varPhi(\vq)+\varTheta(\vz) \\
@@ -206,19 +206,20 @@ The update steps of the ADMM algorithm can be then denoted as \cite{Boyd2011}:
 		\vu^{k+1}&:=\vu^k+D(\vq^{k+1})-\vz^{k+1},
 	\end{align}
 \end{subequations}
-where $\Pi_\mathcal{Z}$ is the new projection to the modified constraint set $\mathcal{Z}$ \rtron{It is not clear where $\cZ$ comes from}, $\vu$ represents a scaled dual variable that, intuitively, accumulates the sum of primal residuals
+where $\Pi_\mathcal{Z}$ is the new projection to the modified constraint set $\mathcal{Z}$, $\vu$ represents a scaled dual variable that, intuitively, accumulates the sum of primal residuals
 \begin{equation}\label{eq:primal-residual}
 	\vr^{k}=D(\vq^{k+1})-\vz^{k+1}.
 \end{equation}
 Checking the primal residuals alongside with the dual residuals 
 \begin{equation}\label{eq:dual-residual}
-	\vs^{k}=-\rho(z^{k}-z^{k-1}),
+	\vs^{k}=-\rho(\vz^{k}-\vz^{k-1}),
 \end{equation}
 after each iteration, the steps are reiterated until convergence when the primal and dual residuals are small, or divergence when primal and dual residual remains large after a fixed large number of iterations.
 Since $D(\vq)$ is the vertical concatenation of $D_i(\vq)$, the projection of each set $\mathcal{Z}_i$ is independent for each constraint and can be computed separately. The advantage of this formulation is that we can choose $D(\vq)$ such that the new constraint set~$\cZ$ becomes simple to compute; however, the drawback is that we move the non-convexity to the primal cost function, i.e., in the update for $\vq$ in \eqref{eq:admm-mod-update-q}.
 Additionally, the function~$D(\vq)$ can be used to select only the subset of the variables on which a constraint depends, speeding up computations.
 
-We now provide the functions $D(\vq)$, the sets $\cZ$, and the corresponding projection operators $\Pi_\cZ$ for traditional path planning constraints (\Cref{sec:velocity-constraint}-\Cref{sec:waypoint-constraint}), co-observation security constraints (\Cref{sec:co-observation-constraint}), and reachability constraints (\Cref{sec:??}). The latter are based on the definition of \emph{ellipsoidal reacability regions} (\Cref{sec:reachability}).
+We now provide the functions $D(\vq)$, the sets $\cZ$, and the corresponding projection operators $\Pi_\cZ$ for traditional path planning constraints (\Cref{sec:velocity-constraint}-\Cref{sec:waypoint-constraint}), co-observation security constraints (\Cref{sec:co-observation-constraint}), and reachability constraints (\Cref{sec:ellipsoid-point}-\Cref{eq:region_ellipsoid_constraint}). The latter are based on the definition of \emph{ellipse-region-constraint} (\Cref{sec:reachability}).
+
 \subsection{Velocity constraints}\label{sec:velocity-constraint}
   The movement of each agent is constrained by a maximum distance in any direction over a single discrete time step. We then define the function $D(\vq)$ to return the velocity vectors for the $i$-th agent at time step $j$; its result then needs to be constrained to a sphere.
 
@@ -226,10 +227,10 @@ We now provide the functions $D(\vq)$, the sets $\cZ$, and the corresponding pro
 \begin{align}
      D_{ij}(\vq) &= q_{ij}-q_{i(j-1)}, \quad j\in\{1,\ldots, T\}\\
 \label{eq:velocity_constraint}
-   \sZ_{ij} &=\bigl\{z \mid \norm{z} \leq v_{max}\bigr\}\\
-   \Pi_{\sZ_{ij}}(z)&=\begin{cases}
-   v_{\max}\frac{z}{\norm{z}} \textrm{ if } \norm{z}>v_{\max}\\
-   z\textrm{ otherwise}
+   \sZ_{ij} &=\bigl\{\vz \mid \norm{\vz} \leq v_{max}\bigr\}\\
+   \Pi_{\sZ_{ij}}(\vz)&=\begin{cases}
+   v_{\max}\frac{\vz}{\norm{\vz}} \textrm{ if } \norm{\vz}>v_{\max}\\
+   \vz\textrm{ otherwise}
    \end{cases}
 \end{align}
 \end{constraint}
@@ -257,7 +258,8 @@ We then defined function $D(\vq)$ to return the maximum distance from $q_{ij}$ t
 The motivating idea for \eqref{eq:obstacle_constraint} and \eqref{eq:zoneConstraintProjection} is to identify waypoints within a specific region and project them to the closest boundary. Non-convex obstacles can be handled by the union of (possibly overlapping) convex obstacles. By setting the normal vector pointing toward the inside of the region, this method can also serve to constrain the robots within the designated workspace region.
 
 \subsection{Waypoints with flexible deadlines}\label{sec:waypoint-constraint}
-It is common for security related constraints to require robot reach a specific location at specific time. We assume robot $i$ is required to reach a given point $p$ within a radius of $d_{max}$ at some time instant $j$ belonging to a given time window $[t_1,t_2]$. The constraint function $D(\vq)$ to return the smallest distance from the point $p$ to waypoint on the trajectory restricted to the relevant time window. 
+Security-related constraints often necessitate that a robot reaches a specified location at a particular time. We assume robot $i$ is tasked with reaching a given point $p$ within a radius of $d_{max}$ at some time instant $j$ within a predefined time window $[t_1,t_2]$. We defined a constraint this constraint as follow.
+
 \begin{constraint}[Waypoint constraint]
 \begin{align}
      	D(\vq) &= \min_{j\in\{t_1,\dots,t_2-1\}}\bigl(\dist(p,\overrightarrow{q_{ij}q_{i(j+1)}})\bigr)\\
@@ -273,15 +275,18 @@ where $\dist(p,\overrightarrow{q_{ij}q_{i(j+1)}})$ returns the distance between 
 
 %\subsection{Secure Multi-robot path planning using co-observation and reachability constraints}
 \subsection{Co-observation schedule constraint}\label{sec:co-observation-constraint}
-The co-observation constraints is used to guarantee that, at time required by the schedule, two robots should get close enough with each other to observe each other's behavior. This constraint is modeled as a relative distance constraint between two robots at some time instant $j$ (i.e., to require two agents see each other within a certain radius to inspect each other, or to exchange data). The location of the co-observation location should make sure that the ellipsoidal reachability region between each co-observation, considered in later sections \ref{sec:reachability}, has an empty intersection with all forbidden regions.
+The co-observation constraint ensures that two robots come into close proximity at scheduled times to observe each other's behavior. This constraint is represented as a relative distance requirement between the two robots at a specific time instant, ensuring they are within a defined radius to inspect each other or exchange data. Importantly, the co-observation locations must be chosen to guarantee that the ellipsoidal reachability regions, as discussed in \Cref{sec:reachability}, do not intersect with any forbidden regions.
+
+%The co-observation constraints is used to guarantee that, at time required by the schedule, two robots should get close enough with each other to observe each other's behavior. This constraint is modeled as a relative distance constraint between two robots at some time instant $j$ (i.e., to require two agents see each other within a certain radius to inspect each other, or to exchange data). The location of the co-observation should make sure that the ellipsoidal reachability region between each co-observation, considered in later sections \ref{sec:reachability}, has an empty intersection with all forbidden regions.
+
  We write the function for the constraint as:
 \begin{constraint}[Co-observation constraint]
 \begin{align}
 D(\vq) &= \overrightarrow{q_{aj}q_{bj}}, \label{eq:waypoint_constraint}\\
-  \sZ &= \{z \mid z \leq d_{max} \},\\
+  \sZ &= \{\vz \mid \norm{\vz} \leq d_{max} \},\\
    \Pi_\sZ(z) & = \begin{cases}
-d_{max}\frac{z}{\norm{z}} &\text{if } \norm{z} > d_{max},\\
-z	& otherwise.
+d_{max}\frac{\vz}{\norm{\vz}} &\text{if } \norm{\vz} > d_{max},\\
+\vz	& otherwise.
 \end{cases}
 \end{align}
 \end{constraint}
@@ -317,11 +322,11 @@ The reachability ellipsoid is an over-approximation of the exact reachability re
 
 \subsubsection{Transformation to canonical coordinates}\label{sec:rotation2Standard}
 To simplify the problem, we employ a canonical rigid body transformation that repositions the ellipse $\cE$ from the global frame $\cF$ to a canonical frame $\cF_\cE$. 
-\rtronhl{Make this sentence as "The canonical frame $\cF_\cE$ is defined as..."}{In this new frame, the ellipsoid's center aligns with the origin, and its foci align with the first axis of $\cF_\cE$.} We perform this transformation in a differentiable manner, with respect to the two foci serving as waypoints for a robot.
+The canonical frame $\cF_\cE$ is defined as the origin aligns with the ellipsoid's center, and the first axis aligns with the foci. We perform this transformation in a differentiable manner, with respect to the two foci serving as waypoints for a robot.
 We parametrize the transformation from $\cF$ to $\cF_\cE$ using a rotation $R^\cF_\cE$ and a translation $o^\cF_\cE$, which, to simplify the notation, we refer to as $R$ and $o$, respectively. 
 The transformation of a point from the frame $\cF_\cE$ to the frame $\cF$ and its inverse are given by the rigid body transformations:
   \begin{equation}\label{eq:transformations}
-    \Fframe{q}=R\Eframe{q}+o,\label{eq:E to F transform}\quad
+    \Fframe{q}=R\Eframe{q}+o,\quad
     \Eframe{q}=R\transpose(\Fframe{q}-o).
   \end{equation}
  
@@ -329,7 +334,7 @@ The transformation of a point from the frame $\cF_\cE$ to the frame $\cF$ and it
   \begin{align}
     \nu'_\cF&=q_2-q_1, & \nu_\cF &= \frac{\nu'_\cF}{\norm{\nu_\cF}}, & \nu_\cE&=[1,0,0]^T;
   \end{align}
-  see Fig.\ref{fig:EllipseConstraintExample} for an illustration. Note that $\nu_\cE$ is constant while, for the sake of clarity, $\nu_{\cF}$ depends on $q_1,q_2$. From the definition of $\cF_\cE$, the rotation $R$ can be found using a \emph{Householder rotation}, while from \eqref{eq:E to F transform} the translation $o$ must be equal to the center of $\cE(q_1,q_2)$ expressed in $\cF$, i.e.:
+  see Fig.\ref{fig:EllipseConstraintExample} for an illustration. Note that $\nu_\cE$ is constant while, for the sake of clarity, $\nu_{\cF}$ depends on $q_1,q_2$. From the definition of $\cF_\cE$, the rotation $R$ can be found using a \emph{Householder rotation}, while from \eqref{eq:transformations} the translation $o$ must be equal to the center of $\cE(q_1,q_2)$ expressed in $\cF$, i.e.:
   \begin{align} 
     R&=H(\nu_\cF(q_1,q_2),\nu_\cE(q_1,q_2)), &o&=\frac{1}{2}(q_1+q_2).
   \end{align}
@@ -456,8 +461,8 @@ For forbidden region in the shape of a hyperplane $\mathcal{L}(\tilde{q}) = \{\t
   \begin{equation}
     n_\cE = H(q_1,q_2)n, \quad d_\cE =-\vn\transpose o + d.
 \end{equation}
-Intuitively, $d_\cE$ can be thought as a distance between the the plane $\cL$ and the origin (i.e., the center of $\cE$.
-
+Intuitively, $d_\cE$ can be thought as a distance between the the plane $\cL$ and the origin (i.e., the center of $\cE$).
+For every $\Eframe \cL(\tilde{q})$, there always exist two planes that are parallel to $\cL$ and tangent to the ellipse, $\cL_1^{\cE} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} =  d_{\cE t} \}$ and $\cL_2^{\cE} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} = - d_{\cE t} \}$  (\Cref{fig:Ellipse-to-plane}).
 \rtron{Move the definition of tangents, tangent points, and tangent interpolation point here}
 
 With these definitions, the constraint can be written as:
