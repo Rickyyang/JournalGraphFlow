@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  25 SEP 2023 21:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  25 SEP 2023 21:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1563,7 +1563,7 @@ File: Figs//Ellipse2line_V2.png Graphic file (type png)
 Package pdftex.def Info: Figs//Ellipse2line_V2.png  used on input line 453.
 (pdftex.def)             Requested size: 151.20154pt x 126.33931pt.
  [6 <./Figs//Ellipse2point.png> <./Figs//Ellipse2line_V2.png>]
-<Figs//Ellipse2safezone_V2.png, id=363, 457.2526pt x 280.08437pt>
+<Figs//Ellipse2safezone_V2.png, id=364, 457.2526pt x 280.08437pt>
 File: Figs//Ellipse2safezone_V2.png Graphic file (type png)
 <use Figs//Ellipse2safezone_V2.png>
 Package pdftex.def Info: Figs//Ellipse2safezone_V2.png  used on input line 531.
@@ -1592,7 +1592,7 @@ Package epstopdf Info: Source file: <Figs//FinalResult.eps>
 erted-to.pdf Figs//FinalResult.eps>
 (epstopdf)             \includegraphics on input line 581.
 Package epstopdf Info: Output file is already uptodate.
-<Figs//FinalResult-eps-converted-to.pdf, id=401, 677.53125pt x 602.25pt>
+<Figs//FinalResult-eps-converted-to.pdf, id=402, 677.53125pt x 602.25pt>
 File: Figs//FinalResult-eps-converted-to.pdf Graphic file (type pdf)
 <use Figs//FinalResult-eps-converted-to.pdf>
 Package pdftex.def Info: Figs//FinalResult-eps-converted-to.pdf  used on input 
@@ -1643,12 +1643,12 @@ t line 630.
 LaTeX Warning: Reference `chapter:Reachability_Constraints' on page 1 undefined
  on input line 632.
 
-<Figs//SC_gen_1.png, id=418, 512.55319pt x 410.04256pt>
+<Figs//SC_gen_1.png, id=419, 512.55319pt x 410.04256pt>
 File: Figs//SC_gen_1.png Graphic file (type png)
 <use Figs//SC_gen_1.png>
 Package pdftex.def Info: Figs//SC_gen_1.png  used on input line 639.
 (pdftex.def)             Requested size: 113.39923pt x 90.71643pt.
-<Figs//SC_gen_2.png, id=419, 512.55319pt x 410.04256pt>
+<Figs//SC_gen_2.png, id=420, 512.55319pt x 410.04256pt>
 File: Figs//SC_gen_2.png Graphic file (type png)
 <use Figs//SC_gen_2.png>
 Package pdftex.def Info: Figs//SC_gen_2.png  used on input line 640.
@@ -1657,7 +1657,7 @@ Package pdftex.def Info: Figs//SC_gen_2.png  used on input line 640.
 LaTeX Warning: Reference `chapter:Reachability_Constraints' on page 1 undefined
  on input line 646.
 
-<Figs//two_edges.png, id=420, 540.67331pt x 283.85349pt>
+<Figs//two_edges.png, id=421, 540.67331pt x 283.85349pt>
 File: Figs//two_edges.png Graphic file (type png)
 <use Figs//two_edges.png>
 Package pdftex.def Info: Figs//two_edges.png  used on input line 650.
@@ -1675,7 +1675,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 690--691
  \OT1/ptm/m/n/10 (+20) and
  []
 
-<Figs//security_graph.png, id=433, 540.67331pt x 404.06319pt>
+<Figs//security_graph.png, id=434, 540.67331pt x 404.06319pt>
 File: Figs//security_graph.png Graphic file (type png)
 <use Figs//security_graph.png>
 Package pdftex.def Info: Figs//security_graph.png  used on input line 712.
@@ -1693,30 +1693,30 @@ d on input line 755.
 LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 11 undefine
 d on input line 755.
 
-<Figs//graph_flow_result_3.png, id=483, 1204.5pt x 1686.3pt>
+<Figs//graph_flow_result_3.png, id=484, 1204.5pt x 1686.3pt>
 File: Figs//graph_flow_result_3.png Graphic file (type png)
 <use Figs//graph_flow_result_3.png>
 Package pdftex.def Info: Figs//graph_flow_result_3.png  used on input line 759.
 
 (pdftex.def)             Requested size: 100.79846pt x 141.10788pt.
-<Figs//3_flow_result.png, id=484, 1606.0pt x 1405.25pt>
+<Figs//3_flow_result.png, id=485, 1606.0pt x 1405.25pt>
 File: Figs//3_flow_result.png Graphic file (type png)
 <use Figs//3_flow_result.png>
 Package pdftex.def Info: Figs//3_flow_result.png  used on input line 767.
 (pdftex.def)             Requested size: 151.20154pt x 132.29936pt.
 [11 <./Figs//security_graph.png>]
-<Figs//graph_flow_result_4.png, id=501, 1204.5pt x 1686.3pt>
+<Figs//graph_flow_result_4.png, id=502, 1204.5pt x 1686.3pt>
 File: Figs//graph_flow_result_4.png Graphic file (type png)
 <use Figs//graph_flow_result_4.png>
 Package pdftex.def Info: Figs//graph_flow_result_4.png  used on input line 779.
 
 (pdftex.def)             Requested size: 100.79846pt x 141.10788pt.
-<Figs//4_flow_result.png, id=502, 1606.0pt x 1405.25pt>
+<Figs//4_flow_result.png, id=503, 1606.0pt x 1405.25pt>
 File: Figs//4_flow_result.png Graphic file (type png)
 <use Figs//4_flow_result.png>
 Package pdftex.def Info: Figs//4_flow_result.png  used on input line 787.
 (pdftex.def)             Requested size: 151.20154pt x 132.29936pt.
-<Figs//nflow_vs_cost.png, id=505, 1232.605pt x 375.4025pt>
+<Figs//nflow_vs_cost.png, id=506, 1232.605pt x 375.4025pt>
 File: Figs//nflow_vs_cost.png Graphic file (type png)
 <use Figs//nflow_vs_cost.png>
 Package pdftex.def Info: Figs//nflow_vs_cost.png  used on input line 799.
@@ -1783,10 +1783,10 @@ urw/helvetic/uhvb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/tim
 es/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a
 .pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr
 /local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (14 pages, 2683073 bytes).
+Output written on paper.pdf (14 pages, 2683259 bytes).
 PDF statistics:
- 709 PDF objects out of 1000 (max. 8388607)
- 597 compressed objects within 6 object streams
+ 710 PDF objects out of 1000 (max. 8388607)
+ 598 compressed objects within 6 object streams
  231 named destinations out of 1000 (max. 500000)
  84880 words of extra memory for PDF output out of 89155 (max. 10000000)
 

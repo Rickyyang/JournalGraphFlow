@@ -456,7 +456,7 @@ where $\cE^{c}$ is the set complement of the region $\cE$.
 \end{center}
 \end{figure}
 
-For forbidden region in the shape of a hyperplane $\mathcal{L}(\tilde{q}) = \{\tilde{q}\in\mathbb{R}^n: \vn\transpose \tilde{q} = d\}$ (as shown in Figure \ref{fig:Ellipse-to-plane}). The reachability constraint now can then be defined as $\mathcal{L} \cap \mathcal{E}(q_1,q_2,a) = \emptyset$. When transformed into canonical frame, the hyperplane can be written as $\Eframe \cL(\tilde{q}) = \{  \tilde{q}\in\mathbb{R}^m:  \vn_\cE\transpose \tilde{q} = d_{\cE}\}$, where,
+For forbidden region in the shape of a hyperplane $\mathcal{L}(\Eframe{q}) = \{\tilde{q}\in\mathbb{R}^n: \vn\transpose \tilde{q} = d\}$ (as shown in Figure \ref{fig:Ellipse-to-plane}). The reachability constraint now can then be defined as $\mathcal{L} \cap \mathcal{E}(q_1,q_2,a) = \emptyset$. When transformed into canonical frame, the hyperplane can be written as $\Eframe \cL(\tilde{q}) = \{  \tilde{q}\in\mathbb{R}^m:  \vn_\cE\transpose \tilde{q} = d_{\cE}\}$, where,
   \begin{equation}
     n_\cE = H(q_1,q_2)n, \quad d_\cE =-\vn\transpose o + d.
 \end{equation}
@@ -519,7 +519,7 @@ where $\pi^\cE_{\vn_\cE}(q)$ is the projection operator defined as:
   \begin{proof}
   See \Cref{proof:dpi_ne_dt}.
   \end{proof}
-  Based on the previous proposition, the differential of (\ref{eq:plane_ellipsoid_constraint}) can be written as:
+  Based on the \Cref{prop:dpi_ne_dt}, the differential of (\ref{eq:plane_ellipsoid_constraint}) can be written as:
   \begin{equation}
     \partial_q {D_{\vn\cE}} = -2 H \cross{\Eframe \Pi_{\vn \cE}}  M + H^{-1}\partial_q \Eframe \Pi_{\vn \cE}
   \end{equation}
@@ -535,9 +535,9 @@ where $\pi^\cE_{\vn_\cE}(q)$ is the projection operator defined as:
 \end{figure}
 
 For a intermediate step to get the relationship between a polygon shaped forbidden region, the relative position between the ellipse and segment of the hyperplane that defines the region is studied. 
-Assume the segment has endpoints $p_1$ and $p_2$; then the segment can be defined as:
+Assume the segment on hyperplane $\Eframe \cL(\tilde{q}) = \{  \tilde{q}\in\mathbb{R}^m:  \vn_\cE\transpose \tilde{q} = d_{\cE}\}$ has endpoints $p_1$ and $p_2$; then the segment can be defined as:
 \begin{equation}
-\bmat{(p_1-p_2)\transpose\\(p_2-p_1)\transpose} p \leq \bmat{p_2\transpose\\-p_1\transpose}(p_1-p_2)
+\bmat{(\Eframe {p_1}- \Eframe{p_2})\transpose\\( \Eframe{p_2} - \Eframe{p_1})\transpose}  \Eframe p \leq \bmat{ \Eframe{p_2}\transpose\\- \Eframe{p_1}\transpose}( \Eframe{p_1}- \Eframe{p_2}), 
 \end{equation}
 \rtron{Needs an additiona constraint that $p$ needs to be on the line $p_1p_2$.}
 \begin{constraint}[Line-segment-ellipsoid reachability constraint]
