@@ -392,7 +392,7 @@ where $\cE^{c}$ is the set complement of the region $\cE$.
   
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.6\linewidth, trim = 1.5cm 2.5cm 1.5cm 3cm, clip]{Ellipse2point}
+\includegraphics[width=0.6\linewidth, trim = 0.3cm 1.3cm 0.3cm 1.3cm, clip]{Ellipse2point}
 \caption{Point-ellipsoid constraint, a point $q_{avoid}$ inside ellipsoid is projected to the areas outside the ellipsoid $f_{p}$.}
 \label{fig:Ellipse-to-point}
 \end{center}
@@ -450,8 +450,7 @@ where $\cE^{c}$ is the set complement of the region $\cE$.
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=0.6\linewidth, trim = 0cm 1.5cm 0cm 1cm, clip]{Ellipse2line_V2}
-\rtron{Add $d_{\cE t}$}
+\includegraphics[width=0.6\linewidth, trim = 0.3cm 1cm 0.3cm 1cm, clip]{Ellipse2line_V2}
 \caption{Plane-ellipse constraint. Projected a ellipsoid to one side of a plane. The projection is simplified to the point-ellipse constraint as projecting a point inside ellipse $p_{L}$ to $p_{t}$ on outside the ellipse.}
 \label{fig:Ellipse-to-plane}
 \end{center}
@@ -462,19 +461,33 @@ For forbidden region in the shape of a hyperplane $\mathcal{L}(\tilde{q}) = \{\t
     n_\cE = H(q_1,q_2)n, \quad d_\cE =-\vn\transpose o + d.
 \end{equation}
 Intuitively, $d_\cE$ can be thought as a distance between the the plane $\cL$ and the origin (i.e., the center of $\cE$).
-For every $\Eframe \cL(\tilde{q})$, there always exist two planes that are parallel to $\cL$ and tangent to the ellipse, $\cL_1^{\cE} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} =  d_{\cE t} \}$ and $\cL_2^{\cE} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} = - d_{\cE t} \}$  (\Cref{fig:Ellipse-to-plane}).
-\rtron{Move the definition of tangents, tangent points, and tangent interpolation point here}
+
+For every $\Eframe \cL(\tilde{q})$, there always exist two planes that are both parallel to $\cL$ and tangential to the ellipse (i.e. resulting in a unique intersection point), $\cL_1^{\cE} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} =  d_{\cE t} \}$ and $\cL_2^{\cE} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} = - d_{\cE t} \}$  (\Cref{fig:Ellipse-to-plane}). And the intersection point can be written as:
+\begin{equation}
+    p^\cE_{1} = \frac{ d_{\cE t} Q^{-1}   n_\cE}{ n_\cE \transpose Q^{-1}  n_\cE} = \frac{Q^{-1} n_\cE}{ d_{\cE t}},\quad  p^\cE_{2} = -  p^\cE_{1},
+\end{equation}
+where $d_{\cE t} = \sqrt{ n_\cE\transpose Q^{-1} n_\cE}$; intuitively, $d_{\cE t}$ can be thought as a distance between the tangent planes $\cL_1^\cE$, $\cL_2^\cE$ and the origin (i.e., the center of the ellipse $\cE$).
+
+We introduce the concept of a tangent interpolation point on the hyperplane to characterize the relationship between the plane and the ellipse.
+
+\begin{definition}
+The \emph{tangent interpolation point} $p^\cE_{\cL} \in \mathcal{L}$ is defined on the plane by 
+    \begin{equation}\label{equ:ProjectPoint}
+      p^\cE_{\cL} = \frac{ d_\cE Q^{-1} n_\cE}{ n_\cE\transpose Q^{-1} n_\cE}.
+    \end{equation}
+  Intuitively, the point $p^\cE_\cL$ is the point on $\cL$ which is closest to either $p^\cE_1$ or $p^\cE_2$.
+  Note that when  $d_\cE=d_{\cE t}$ or $d_\cE=-d_{\cE t}$, $p^\cE_{\cL}=p^\cE_{1}$ or $p^\cE_{\cL}=p^\cE_{2}$, respectively. When $ d_\cE \in [- d_{\cE t},  d_{\cE t}]$, the plane $\cL$ and the ellipsoid $\cE$ have at least one intersection, thus violating our desired reachability constraint. 
+\end{definition}
 
 With these definitions, the constraint can be written as:
 
 \begin{constraint}[Plane-ellipsoid reachability constraint]
 \begin{align}
-D(\vq) &= H^{-1}(q(t_1),q(t_2))\pi^\cE_{\vn_\cE}(q)+o, \label{eq:plane_ellipsoid_constraint}\\
-  \sZ &= \{q\in\mathbb{R}^{nm}:\norm{D_{\vn}(q)} = 0 \},\\
+D(\vq) &= H^{-1}(q_{1},q_2)\pi^\cE_{\vn_\cE}(q)+o, \label{eq:plane_ellipsoid_constraint}\\
+  \sZ &= \{\vq\in\mathbb{R}^{nm}:\norm{D_{\vn}(\vq)} = 0 \},\\
    \Pi_\sZ(z) & = \overrightarrow{0}, 
 \end{align}
 \end{constraint}
-\rtron{Check that $q$ is $\vq$ where necessary. Also sometimes you use $q(t_1),q(t_2)$ and sometimes $q_1,q_2$, check for consistency.}
 where $\pi^\cE_{\vn_\cE}(q)$ is the projection operator defined as:
   \begin{equation}\label{equ:plane2ellipse}
     \pi^\cE_{\vn_\cE}(q) =\begin{cases}
@@ -483,17 +496,6 @@ where $\pi^\cE_{\vn_\cE}(q)$ is the projection operator defined as:
       {0} & \textrm{otherwise}.
     \end{cases}
   \end{equation}
-$p^\cE_1$ and $p^\cE_2$ are tangent points on two planes that are parallel to $\cL$ and tangent to the ellipse, $\cL_1^{\cE} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} =  d_{\cE t} \}$ and $\cL_2^{\cE} = \{\tilde{q}\in\mathbb{R}^m: \vn_\cE \transpose \tilde{q} = - d_{\cE t} \}$  (\Cref{fig:Ellipse-to-plane}). Analytically, these points can be found as 
- \begin{equation}
-    p^\cE_{1} = \frac{ d_{\cE t} Q^{-1}   n_\cE}{ n_\cE \transpose Q^{-1}  n_\cE} = \frac{Q^{-1} n_\cE}{ d_{\cE t}},\quad  p^\cE_{2} = -  p^\cE_{1},
-  \end{equation}
-where $d_{\cE t} = \sqrt{ n_\cE\transpose Q^{-1} n_\cE}$; intuitively, $d_{\cE t}$ can be thought as a distance between the tangent planes $\cL_1^\cE$, $\cL_2^\cE$ and the origin (i.e., the center of the ellipse $\cE$).
-The \emph{tangent interpolation point} $p^\cE_{\cL} \in \mathcal{L}$ is defined on the plane by 
-    \begin{equation}\label{equ:ProjectPoint}
-      p^\cE_{\cL} = \frac{ d_\cE Q^{-1} n_\cE}{ n_\cE\transpose Q^{-1} n_\cE}.
-    \end{equation}
-  Intuitively, the point $p^\cE_\cL$ is the point on $\cL$ which is closest to either $p^\cE_1$ or $p^\cE_2$.
-  Note that when  $d_\cE=d_{\cE t}$ or $d_\cE=-d_{\cE t}$, $p^\cE_{\cL}=p^\cE_{1}$ or $p^\cE_{\cL}=p^\cE_{2}$, respectively. When $ d_\cE \in [- d_{\cE t},  d_{\cE t}]$, the plane $\cL$ and the ellipsoid $\cE$ have at least one intersection, thus violating our desired reachability constraint. 
 
   \begin{proposition}\label{prop:dpi_ne_dt}
     The differential of the projection function $\pi^\cE_{\vn \cE}(q)$ with respect to the foci $q_1$ and $q_2$ is given by:
