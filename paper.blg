@@ -8,56 +8,47 @@ Database file #3: tron.bib
 Warning--string name "arxiv" is undefined
 --line 207 of file tron.bib
 Database file #4: ziqi.bib
-Repeated entry---line 11 of file ziqi.bib
- : @inproceedings{yang2021multi
- :                             ,
-I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "wardega2023hola"
-Warning--I didn't find a database entry for "zyang"
-Warning--I didn't find a database entry for "yu2013multi"
-Warning--I didn't find a database entry for "karaman2010incremental"
 Warning--I didn't find a database entry for "ntafos1979path"
-Warning--empty journal in Boyd2011
 Warning--empty note in Tron:Arxiv14
-You've used 13 entries,
+You've used 17 entries,
             1791 wiz_defined-function locations,
-            533 strings with 6159 characters,
-and the built_in function-call counts, 3330 in all, are:
-= -- 321
-> -- 121
-< -- 4
-+ -- 46
-- -- 33
-* -- 196
-:= -- 489
-add.period$ -- 42
-call.type$ -- 13
-change.case$ -- 12
+            553 strings with 7077 characters,
+and the built_in function-call counts, 4576 in all, are:
+= -- 440
+> -- 174
+< -- 6
++ -- 65
+- -- 48
+* -- 272
+:= -- 667
+add.period$ -- 55
+call.type$ -- 17
+change.case$ -- 16
 chr.to.int$ -- 0
-cite$ -- 15
-duplicate$ -- 156
-empty$ -- 332
-format.name$ -- 33
-if$ -- 775
+cite$ -- 18
+duplicate$ -- 217
+empty$ -- 449
+format.name$ -- 48
+if$ -- 1069
 int.to.chr$ -- 0
-int.to.str$ -- 13
-missing$ -- 11
-newline$ -- 67
-num.names$ -- 13
-pop$ -- 54
+int.to.str$ -- 17
+missing$ -- 15
+newline$ -- 87
+num.names$ -- 17
+pop$ -- 68
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 90
+skip$ -- 131
 stack$ -- 0
-substring$ -- 244
-swap$ -- 55
-text.length$ -- 4
+substring$ -- 341
+swap$ -- 82
+text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 2
-while$ -- 33
-width$ -- 15
-write$ -- 140
-(There was 1 error message)
+warning$ -- 1
+while$ -- 45
+width$ -- 19
+write$ -- 185
+(There were 3 warnings)

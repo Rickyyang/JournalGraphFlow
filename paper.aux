@@ -52,10 +52,12 @@
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Cross-trajectory co-observation }}}{2}{subfigure.1.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{\numberline {\mbox  {I-}0a}Paper contributions}{2}{paragraph.1.0.0.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {II}Multi-robot trajectory planning with co-observation}{2}{section.2}\protected@file@percent }
+\newlabel{sec:ADMM-planning}{{II}{2}{Multi-robot trajectory planning with co-observation}{section.2}{}}
+\newlabel{sec:ADMM-planning@cref}{{[section][2][]II}{[1][2][]2}}
 \newlabel{eq:general-problem}{{1}{2}{Multi-robot trajectory planning with co-observation}{equation.2.1}{}}
 \newlabel{eq:general-problem@cref}{{[equation][1][]1}{[1][2][]2}}
 \citation{householder1958unitary}
-\citation{zyang}
+\citation{yang2020multi}
 \citation{Boyd2011}
 \newlabel{fig:ADMM-example-application}{{2a}{3}{Subfigure 2a}{subfigure.2.1}{}}
 \newlabel{sub@fig:ADMM-example-application}{{(a)}{a}{Subfigure 2a\relax }{subfigure.2.1}{}}
@@ -123,8 +125,8 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The ellipse showcases the reachability region. The black line is the planned trajectory of a robot, $q_1$ and $q_2$ are two locations this robot are expected at given time $t_1$ and $t_2$, dashed line is a possible trajectory if the robot is compromised after reaching $q_1$. Axis of global frame $\mathcal  {F}$ and canonical frame $\mathcal  {F}_{\mathcal  {E}}$ are shown as $x_{\mathcal  {F}}, y_{\mathcal  {F}}$ and $x_{\mathcal  {E}}, y_{\mathcal  {E}}$ respectively. \relax }}{5}{figure.caption.3}\protected@file@percent }
 \newlabel{fig:EllipseConstraintExample}{{3}{5}{The ellipse showcases the reachability region. The black line is the planned trajectory of a robot, $q_1$ and $q_2$ are two locations this robot are expected at given time $t_1$ and $t_2$, dashed line is a possible trajectory if the robot is compromised after reaching $q_1$. Axis of global frame $\cF $ and canonical frame $\cF _{\cE }$ are shown as $x_{\cF }, y_{\cF }$ and $x_{\cE }, y_{\cE }$ respectively. \relax }{figure.caption.3}{}}
 \newlabel{fig:EllipseConstraintExample@cref}{{[figure][3][]3}{[1][5][]5}}
-\newlabel{eq:waypoint_constraint}{{22}{5}{Co-observation constraint}{equation.2.22}{}}
-\newlabel{eq:waypoint_constraint@cref}{{[equation][22][]22}{[1][5][]5}}
+\newlabel{eq:coobservation_constraint}{{22}{5}{Co-observation constraint}{equation.2.22}{}}
+\newlabel{eq:coobservation_constraint@cref}{{[equation][22][]22}{[1][5][]5}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-F}}Definition of ellipsoidal reachability regions}{5}{subsection.2.6}\protected@file@percent }
 \newlabel{sec:reachability}{{\mbox  {II-F}}{5}{Definition of ellipsoidal reachability regions}{subsection.2.6}{}}
 \newlabel{sec:reachability@cref}{{[subsection][6][2]\mbox  {II-F}}{[1][5][]5}}
@@ -172,8 +174,8 @@
 \newlabel{equ:plane2ellipse@cref}{{[equation][47][]47}{[1][7][]7}}
 \newlabel{prop:dpi_ne_dt}{{4}{7}{}{proposition.4}{}}
 \newlabel{prop:dpi_ne_dt@cref}{{[proposition][4][]4}{[1][7][]7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Polygon-ellipse constraint. This constraint is simplified to either a plane-ellipse constraint or a point-ellipse constraint.\relax }}{7}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:Ellipse-to-safezone}{{6}{7}{Polygon-ellipse constraint. This constraint is simplified to either a plane-ellipse constraint or a point-ellipse constraint.\relax }{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Polygon-ellipse constraint. This constraint is simplified to either a plane-ellipse constraint $D_{1}$ or a point-ellipse constraint $D_{2}$.\relax }}{7}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:Ellipse-to-safezone}{{6}{7}{Polygon-ellipse constraint. This constraint is simplified to either a plane-ellipse constraint $D_{1}$ or a point-ellipse constraint $D_{2}$.\relax }{figure.caption.6}{}}
 \newlabel{fig:Ellipse-to-safezone@cref}{{[figure][6][]6}{[1][7][]7}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-I}}Line-segment-ellipse reachability constraint}{7}{subsection.2.9}\protected@file@percent }
 \newlabel{chapter:ellipse to segment}{{\mbox  {II-I}}{7}{Line-segment-ellipse reachability constraint}{subsection.2.9}{}}
@@ -185,22 +187,30 @@
 \newlabel{sec:ellipse-region-constraint@cref}{{[subsection][10][2]\mbox  {II-J}}{[1][7][]7}}
 \newlabel{constraint:polygon-ellipsoid}{{8}{7}{Convex-polygon-ellipsoid reachability constraint}{constraint.8}{}}
 \newlabel{constraint:polygon-ellipsoid@cref}{{[constraint][8][]8}{[1][7][]7}}
-\newlabel{eq:region_ellipsoid_constraint}{{56}{7}{Convex-polygon-ellipsoid reachability constraint}{equation.2.56}{}}
-\newlabel{eq:region_ellipsoid_constraint@cref}{{[equation][56][]56}{[1][7][]7}}
 \citation{wardega2019resilience}
 \citation{wardega2023hola}
+\citation{wardega2023byzantine}
+\newlabel{eq:region_ellipsoid_constraint}{{56}{8}{Convex-polygon-ellipsoid reachability constraint}{equation.2.56}{}}
+\newlabel{eq:region_ellipsoid_constraint@cref}{{[equation][56][]56}{[1][7][]8}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-K}}Secured planning results and limitation}{8}{subsection.2.11}\protected@file@percent }
-\newlabel{sec:reachability-discussion}{{\mbox  {II-K}1}{8}{Limitations}{subsubsection.2.11.1}{}}
-\newlabel{sec:reachability-discussion@cref}{{[subsubsection][1][2,11]\mbox  {II-K}1}{[1][8][]8}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {II-K}1}Limitations}{8}{subsubsection.2.11.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Simulation result for map exploration task. Reachability regions are shown as black ellipses in the result. Zone 1 is obstacle, Zone 2 and Zone 3 are safe zones\relax }}{8}{figure.caption.7}\protected@file@percent }
 \newlabel{fig:ReachabilitySimulation}{{7}{8}{Simulation result for map exploration task. Reachability regions are shown as black ellipses in the result. Zone 1 is obstacle, Zone 2 and Zone 3 are safe zones\relax }{figure.caption.7}{}}
 \newlabel{fig:ReachabilitySimulation@cref}{{[figure][7][]7}{[1][8][]8}}
+\newlabel{sec:reachability-discussion}{{\mbox  {II-K}1}{8}{Limitations}{subsubsection.2.11.1}{}}
+\newlabel{sec:reachability-discussion@cref}{{[subsubsection][1][2,11]\mbox  {II-K}1}{[1][8][]8}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {II-K}1}Limitations}{8}{subsubsection.2.11.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {III}Cross-trajectory co-observation planning}{8}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Problem overview}{8}{subsection.3.1}\protected@file@percent }
+\newlabel{sec:cross-trajectory}{{III}{8}{Cross-trajectory co-observation planning}{section.3}{}}
+\newlabel{sec:cross-trajectory@cref}{{[section][3][]III}{[1][8][]8}}
 \citation{yu2013multi}
 \citation{karaman2010incremental}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Problem overview}{9}{subsection.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Rapidly-exploring Random Trees}{9}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Checkpoint generation example\relax }}{9}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:checkpoint-generate}{{8}{9}{Checkpoint generation example\relax }{figure.caption.8}{}}
+\newlabel{fig:checkpoint-generate@cref}{{[figure][8][]8}{[1][9][]9}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{9}{subfigure.8.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{9}{subfigure.8.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Checkpoint graph construction}{9}{subsection.3.3}\protected@file@percent }
 \newlabel{sec:security-checkpoint}{{\mbox  {III-C}1}{9}{Checkpoints}{subsubsection.3.3.1}{}}
 \newlabel{sec:security-checkpoint@cref}{{[subsubsection][1][3,3]\mbox  {III-C}1}{[1][9][]9}}
@@ -208,25 +218,26 @@
 \newlabel{sec:cross-traj-edges}{{\mbox  {III-C}2}{9}{Cross-trajectory edges}{subsubsection.3.3.2}{}}
 \newlabel{sec:cross-traj-edges@cref}{{[subsubsection][2][3,3]\mbox  {III-C}2}{[1][9][]9}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}2}Cross-trajectory edges}{9}{subsubsection.3.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Checkpoint generation example\relax }}{10}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:checkpoint-generate}{{8}{10}{Checkpoint generation example\relax }{figure.caption.8}{}}
-\newlabel{fig:checkpoint-generate@cref}{{[figure][8][]8}{[1][9][]10}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{10}{subfigure.8.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{10}{subfigure.8.2}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Secure Checkpoint Generate for sub-team $p$\relax }}{10}{algorithm.1}\protected@file@percent }
+\newlabel{alg:checkpoint-gen}{{1}{10}{Secure Checkpoint Generate for sub-team $p$\relax }{algorithm.1}{}}
+\newlabel{alg:checkpoint-gen@cref}{{[algorithm][1][]1}{[1][9][]10}}
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces For checkpoints of the red trajectory, latest departure node $q^{d}_{b}$ found for $v_{r1}$ and earliest arrival node $q^{a}_{b}$ found for $v_{r3}$.\relax }}{10}{figure.caption.9}\protected@file@percent }
 \newlabel{fig:two-edges}{{9}{10}{For checkpoints of the red trajectory, latest departure node $q^{d}_{b}$ found for $v_{r1}$ and earliest arrival node $q^{a}_{b}$ found for $v_{r3}$.\relax }{figure.caption.9}{}}
-\newlabel{fig:two-edges@cref}{{[figure][9][]9}{[1][9][]10}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Cross-trajectory edges generation\relax }}{10}{algorithm.1}\protected@file@percent }
-\newlabel{alg:cross-trajectory-edges}{{1}{10}{Cross-trajectory edges generation\relax }{algorithm.1}{}}
-\newlabel{alg:cross-trajectory-edges@cref}{{[algorithm][1][]1}{[1][10][]10}}
+\newlabel{fig:two-edges@cref}{{[figure][9][]9}{[1][10][]10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces ALL viable path found from a waypoint to all reference trajectories of other sub-teams.\relax }}{10}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:RRT*}{{10}{10}{ALL viable path found from a waypoint to all reference trajectories of other sub-teams.\relax }{figure.caption.10}{}}
+\newlabel{fig:RRT*@cref}{{[figure][10][]10}{[1][10][]10}}
 \newlabel{sec:Graph-intro}{{\mbox  {III-C}3}{10}{In-trajectory edges}{subsubsection.3.3.3}{}}
 \newlabel{sec:Graph-intro@cref}{{[subsubsection][3][3,3]\mbox  {III-C}3}{[1][10][]10}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}3}In-trajectory edges}{10}{subsubsection.3.3.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Co-observation planning problem}{10}{subsection.3.4}\protected@file@percent }
 \citation{ntafos1979path}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Example of a two trajectory security graph. Round vertices are checkpoint generated through the heuristic search and triangle vertices are added with the cross-trajectory edges. Additional virtual source $v^{+}$ and sink $v^{-}$ is used later in planning problem.\relax }}{11}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:security-graph-generate}{{10}{11}{Example of a two trajectory security graph. Round vertices are checkpoint generated through the heuristic search and triangle vertices are added with the cross-trajectory edges. Additional virtual source $v^{+}$ and sink $v^{-}$ is used later in planning problem.\relax }{figure.caption.10}{}}
-\newlabel{fig:security-graph-generate@cref}{{[figure][10][]10}{[1][10][]11}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Cross-trajectory edges generation\relax }}{11}{algorithm.2}\protected@file@percent }
+\newlabel{alg:cross-trajectory-edges}{{2}{11}{Cross-trajectory edges generation\relax }{algorithm.2}{}}
+\newlabel{alg:cross-trajectory-edges@cref}{{[algorithm][2][]2}{[1][10][]11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Example of a two trajectory security graph. Round vertices are checkpoint generated through the heuristic search and triangle vertices are added with the cross-trajectory edges. Additional virtual source $v^{+}$ and sink $v^{-}$ is used later in planning problem.\relax }}{11}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:security-graph-generate}{{11}{11}{Example of a two trajectory security graph. Round vertices are checkpoint generated through the heuristic search and triangle vertices are added with the cross-trajectory edges. Additional virtual source $v^{+}$ and sink $v^{-}$ is used later in planning problem.\relax }{figure.caption.11}{}}
+\newlabel{fig:security-graph-generate@cref}{{[figure][11][]11}{[1][10][]11}}
 \newlabel{eq:flow-coverage-problem}{{60}{11}{Co-observation planning problem}{equation.3.60}{}}
 \newlabel{eq:flow-coverage-problem@cref}{{[subequation][60][]60}{[1][11][]11}}
 \newlabel{eq:flow-cost}{{60a}{11}{Co-observation planning problem}{equation.3.60a}{}}
@@ -237,29 +248,29 @@
 \newlabel{eq:FlowCoverage@cref}{{[subequation][3][60]60c}{[1][11][]11}}
 \newlabel{eq:SingleFLowCapacity}{{60d}{11}{Co-observation planning problem}{equation.3.60d}{}}
 \newlabel{eq:SingleFLowCapacity@cref}{{[subequation][4][60]60d}{[1][11][]11}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-E}}Co-observation performance}{11}{subsection.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-F}}Result and simulation}{11}{subsection.3.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Security Graph and result for 3 flows\relax }}{12}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:security-graph-3-flow}{{11}{12}{Security Graph and result for 3 flows\relax }{figure.caption.11}{}}
-\newlabel{fig:security-graph-3-flow@cref}{{[figure][11][]11}{[1][11][]12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Result of 3 surveillance agents' plan in workspace\relax }}{12}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:workspace-3-flow}{{12}{12}{Result of 3 surveillance agents' plan in workspace\relax }{figure.caption.12}{}}
-\newlabel{fig:workspace-3-flow@cref}{{[figure][12][]12}{[1][11][]12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-E}}Co-observation performance}{12}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-F}}Result and simulation}{12}{subsection.3.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Security Graph and result for 3 flows\relax }}{12}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:security-graph-3-flow}{{12}{12}{Security Graph and result for 3 flows\relax }{figure.caption.12}{}}
+\newlabel{fig:security-graph-3-flow@cref}{{[figure][12][]12}{[1][12][]12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Result of 3 surveillance agents' plan in workspace\relax }}{12}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:workspace-3-flow}{{13}{12}{Result of 3 surveillance agents' plan in workspace\relax }{figure.caption.13}{}}
+\newlabel{fig:workspace-3-flow@cref}{{[figure][13][]13}{[1][12][]12}}
 \@writefile{toc}{\contentsline {section}{\numberline {IV}Summary}{12}{section.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Security Graph and result for 4 flows.\relax }}{12}{figure.caption.13}\protected@file@percent }
-\newlabel{fig:security-graph-4-flow}{{13}{12}{Security Graph and result for 4 flows.\relax }{figure.caption.13}{}}
-\newlabel{fig:security-graph-4-flow@cref}{{[figure][13][]13}{[1][12][]12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Result of 3 surveillance agents' plan in work space.\relax }}{12}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:workspace-4-flow}{{14}{12}{Result of 3 surveillance agents' plan in work space.\relax }{figure.caption.14}{}}
-\newlabel{fig:workspace-4-flow@cref}{{[figure][14][]14}{[1][12][]12}}
-\@writefile{toc}{\contentsline {section}{Appendix}{12}{section*.16}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Proof of proposition \ref  {prop:HProperty}}{12}{subsection.Appendix.A.1}\protected@file@percent }
-\newlabel{proof:HProperty}{{A}{12}{Proof of proposition \ref {prop:HProperty}}{subsection.Appendix.A.1}{}}
-\newlabel{proof:HProperty@cref}{{[subappendix][1][2147483647,1]A}{[1][12][]12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Plan reach optimality when $\mathcal  {K}=4$, further increase of $\mathcal  {K}$ does not increase the cost of objectives.\relax }}{12}{figure.caption.15}\protected@file@percent }
-\newlabel{fig:flow-n-vs-cost}{{15}{12}{Plan reach optimality when $\cK =4$, further increase of $\cK $ does not increase the cost of objectives.\relax }{figure.caption.15}{}}
-\newlabel{fig:flow-n-vs-cost@cref}{{[figure][15][]15}{[1][12][]12}}
 \citation{Tron:Arxiv14}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Security Graph and result for 4 flows.\relax }}{13}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:security-graph-4-flow}{{14}{13}{Security Graph and result for 4 flows.\relax }{figure.caption.14}{}}
+\newlabel{fig:security-graph-4-flow@cref}{{[figure][14][]14}{[1][12][]13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Result of 3 surveillance agents' plan in work space.\relax }}{13}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:workspace-4-flow}{{15}{13}{Result of 3 surveillance agents' plan in work space.\relax }{figure.caption.15}{}}
+\newlabel{fig:workspace-4-flow@cref}{{[figure][15][]15}{[1][12][]13}}
+\@writefile{toc}{\contentsline {section}{Appendix}{13}{section*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Proof of proposition \ref  {prop:HProperty}}{13}{subsection.Appendix.A.1}\protected@file@percent }
+\newlabel{proof:HProperty}{{A}{13}{Proof of proposition \ref {prop:HProperty}}{subsection.Appendix.A.1}{}}
+\newlabel{proof:HProperty@cref}{{[subappendix][1][2147483647,1]A}{[1][13][]13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Plan reach optimality when $\mathcal  {K}=4$, further increase of $\mathcal  {K}$ does not increase the cost of objectives.\relax }}{13}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:flow-n-vs-cost}{{16}{13}{Plan reach optimality when $\cK =4$, further increase of $\cK $ does not increase the cost of objectives.\relax }{figure.caption.16}{}}
+\newlabel{fig:flow-n-vs-cost@cref}{{[figure][16][]16}{[1][12][]13}}
 \newlabel{equ:H(u1+u2)}{{63}{13}{Proof of proposition \ref {prop:HProperty}}{equation.Appendix.A.63}{}}
 \newlabel{equ:H(u1+u2)@cref}{{[equation][63][2147483647]63}{[1][13][]13}}
 \newlabel{equ:H(u1-u2)}{{64}{13}{Proof of proposition \ref {prop:HProperty}}{equation.Appendix.A.64}{}}
@@ -276,13 +287,6 @@
 \newlabel{equ:dPi_dt@cref}{{[equation][69][2147483647]69}{[1][13][]13}}
 \newlabel{equ:S_dot}{{70}{13}{Proof of proposition \ref {prop:Ellipse2PointDiff}}{equation.Appendix.A.70}{}}
 \newlabel{equ:S_dot@cref}{{[equation][70][2147483647]70}{[1][13][]13}}
-\newlabel{equ:s_dot}{{76}{13}{Proof of proposition \ref {prop:Ellipse2PointDiff}}{equation.Appendix.A.76}{}}
-\newlabel{equ:s_dot@cref}{{[equation][76][2147483647]76}{[1][13][]13}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {D}Proof of proposition \ref  {prop:dpi_ne_dt}}{13}{subsection.Appendix.A.4}\protected@file@percent }
-\newlabel{proof:dpi_ne_dt}{{D}{13}{Proof of proposition \ref {prop:dpi_ne_dt}}{subsection.Appendix.A.4}{}}
-\newlabel{proof:dpi_ne_dt@cref}{{[subappendix][4][2147483647,1]D}{[1][13][]13}}
-\newlabel{equ:dot det}{{80}{13}{Proof of proposition \ref {prop:dpi_ne_dt}}{equation.Appendix.A.80}{}}
-\newlabel{equ:dot det@cref}{{[equation][80][2147483647]80}{[1][13][]13}}
 \bibstyle{unsrt}
 \bibdata{ADMM_planning,ACC,tron,ziqi}
 \bibcite{pajares2015overview}{1}
@@ -291,27 +295,38 @@
 \bibcite{forrest_2017}{4}
 \bibcite{wardega2019resilience}{5}
 \bibcite{gammell2014informed}{6}
-\bibcite{anderson2012optimal}{7}
-\bibcite{householder1958unitary}{8}
-\bibcite{Boyd2011}{9}
-\bibcite{yang2021multi}{10}
-\bibcite{yang2020multi}{11}
-\bibcite{eberly}{12}
-\bibcite{Tron:Arxiv14}{13}
+\bibcite{wardega2023hola}{7}
+\bibcite{anderson2012optimal}{8}
+\bibcite{householder1958unitary}{9}
+\bibcite{yang2020multi}{10}
+\bibcite{Boyd2011}{11}
+\bibcite{yang2021multi}{12}
+\bibcite{eberly}{13}
+\bibcite{wardega2023byzantine}{14}
+\bibcite{yu2013multi}{15}
+\bibcite{karaman2010incremental}{16}
+\bibcite{Tron:Arxiv14}{17}
+\newlabel{equ:s_dot}{{76}{14}{Proof of proposition \ref {prop:Ellipse2PointDiff}}{equation.Appendix.A.76}{}}
+\newlabel{equ:s_dot@cref}{{[equation][76][2147483647]76}{[1][14][]14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D}Proof of proposition \ref  {prop:dpi_ne_dt}}{14}{subsection.Appendix.A.4}\protected@file@percent }
+\newlabel{proof:dpi_ne_dt}{{D}{14}{Proof of proposition \ref {prop:dpi_ne_dt}}{subsection.Appendix.A.4}{}}
+\newlabel{proof:dpi_ne_dt@cref}{{[subappendix][4][2147483647,1]D}{[1][14][]14}}
+\newlabel{equ:dot det}{{80}{14}{Proof of proposition \ref {prop:dpi_ne_dt}}{equation.Appendix.A.80}{}}
+\newlabel{equ:dot det@cref}{{[equation][80][2147483647]80}{[1][14][]14}}
 \newlabel{equ:dpl_dt}{{82}{14}{Proof of proposition \ref {prop:dpi_ne_dt}}{equation.Appendix.A.82}{}}
-\newlabel{equ:dpl_dt@cref}{{[equation][82][2147483647]82}{[1][13][]14}}
+\newlabel{equ:dpl_dt@cref}{{[equation][82][2147483647]82}{[1][14][]14}}
 \newlabel{equ:dplt_dt}{{83}{14}{Proof of proposition \ref {prop:dpi_ne_dt}}{equation.Appendix.A.83}{}}
 \newlabel{equ:dplt_dt@cref}{{[equation][83][2147483647]83}{[1][14][]14}}
-\@writefile{toc}{\contentsline {section}{References}{14}{section*.17}\protected@file@percent }
-\newlabel{LastPage}{{}{14}{}{page.14}{}}
+\@writefile{toc}{\contentsline {section}{References}{14}{section*.18}\protected@file@percent }
+\newlabel{LastPage}{{}{15}{}{page.15}{}}
 \pagesLTS@ifcounter{pagesLTS.arabic.1.local.cnt}
-\setcounter{pagesLTS.arabic.1.local.cnt}{14}
-\gdef\pagesLTS.lastpage{14}
-\setcounter{pagesLTS.pagenr}{14}
-\newlabel{VeryLastPage}{{}{14}{}{page.14}{}}
-\newlabel{pagesLTS.arabic.1}{{}{14}{}{page.14}{}}
-\newlabel{pagesLTS.arabic.1.local}{{}{14}{}{page.14}{}}
-\newlabel{pagesLTS.arabic}{{}{14}{}{page.14}{}}
-\newlabel{pagesLTS.arabic.local}{{}{14}{}{page.14}{}}
-\newlabel{LastPages}{{}{14}{}{page.14}{}}
-\gdef \@abspage@last{14}
+\setcounter{pagesLTS.arabic.1.local.cnt}{15}
+\gdef\pagesLTS.lastpage{15}
+\setcounter{pagesLTS.pagenr}{15}
+\newlabel{VeryLastPage}{{}{15}{}{page.15}{}}
+\newlabel{pagesLTS.arabic.1}{{}{15}{}{page.15}{}}
+\newlabel{pagesLTS.arabic.1.local}{{}{15}{}{page.15}{}}
+\newlabel{pagesLTS.arabic}{{}{15}{}{page.15}{}}
+\newlabel{pagesLTS.arabic.local}{{}{15}{}{page.15}{}}
+\newlabel{LastPages}{{}{15}{}{page.15}{}}
+\gdef \@abspage@last{15}

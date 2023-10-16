@@ -40,6 +40,13 @@ Jonathan~D Gammell, Siddhartha~S Srinivasa, and Timothy~D Barfoot.
 \newblock In {\em 2014 IEEE/RSJ International Conference on Intelligent Robots
   and Systems}, pages 2997--3004. IEEE, 2014.
 
+\bibitem{wardega2023hola}
+Kacper Wardega, Max von Hippel, Roberto Tron, Cristina Nita-Rotaru, and Wenchao
+  Li.
+\newblock Hola robots: Mitigating plan-deviation attacks in multi-robot systems
+  with co-observations and horizon-limiting announcements.
+\newblock {\em arXiv preprint arXiv:2301.10704}, 2023.
+
 \bibitem{anderson2012optimal}
 Brian~DO Anderson and John~B Moore.
 \newblock {\em Optimal filtering}.
@@ -50,11 +57,18 @@ Alston~S Householder.
 \newblock Unitary triangularization of a nonsymmetric matrix.
 \newblock {\em Journal of the ACM (JACM)}, 5(4):339--342, 1958.
 
+\bibitem{yang2020multi}
+Ziqi Yang and Roberto Tron.
+\newblock Multi-agent path planning under observation schedule constraints.
+\newblock In {\em 2020 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems (IROS)}, pages 6990--6997. IEEE, 2020.
+
 \bibitem{Boyd2011}
-Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, and Jonathan Eckstein.
-\newblock {Distributed Optimization and Statistical Learning via the
-  Alternating Direction Method of Multipliers}.
-\newblock 3(1):1--122, 2011.
+Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, Jonathan Eckstein, et~al.
+\newblock Distributed optimization and statistical learning via the alternating
+  direction method of multipliers.
+\newblock {\em Foundations and Trends{\textregistered} in Machine learning},
+  3(1):1--122, 2011.
 
 \bibitem{yang2021multi}
 Ziqi Yang and Roberto Tron.
@@ -63,16 +77,30 @@ Ziqi Yang and Roberto Tron.
 \newblock In {\em 2021 60th IEEE Conference on Decision and Control (CDC)},
   pages 241--247. IEEE, 2021.
 
-\bibitem{yang2020multi}
-Ziqi Yang and Roberto Tron.
-\newblock Multi-agent path planning under observation schedule constraints.
-\newblock In {\em 2020 IEEE/RSJ International Conference on Intelligent Robots
-  and Systems (IROS)}, pages 6990--6997. IEEE, 2020.
-
 \bibitem{eberly}
 David Eberly.
 \newblock Distance from a point to an ellipse, an ellipsoid, or a
   hyperellipsoid, 2013.
+
+\bibitem{wardega2023byzantine}
+Kacper Wardega, Max von Hippel, Roberto Tron, Cristina Nita-Rotaru, and Wenchao
+  Li.
+\newblock Byzantine resilience at swarm scale: A decentralized blocklist
+  protocol from inter-robot accusations.
+\newblock In {\em Proceedings of the 2023 International Conference on
+  Autonomous Agents and Multiagent Systems}, pages 1430--1438, 2023.
+
+\bibitem{yu2013multi}
+Jingjin Yu and Steven~M LaValle.
+\newblock Multi-agent path planning and network flow.
+\newblock In {\em Algorithmic Foundations of Robotics X: Proceedings of the
+  Tenth Workshop on the Algorithmic Foundations of Robotics}, pages 157--173.
+  Springer, 2013.
+
+\bibitem{karaman2010incremental}
+Sertac Karaman and Emilio Frazzoli.
+\newblock Incremental sampling-based algorithms for optimal motion planning.
+\newblock {\em Robotics Science and Systems VI}, 104(2):267--274, 2010.
 
 \bibitem{Tron:Arxiv14}
 Roberto Tron and K.~Daniilidis.
