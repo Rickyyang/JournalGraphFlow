@@ -102,6 +102,13 @@ Sertac Karaman and Emilio Frazzoli.
 \newblock Incremental sampling-based algorithms for optimal motion planning.
 \newblock {\em Robotics Science and Systems VI}, 104(2):267--274, 2010.
 
+\bibitem{1702662}
+S.C. Ntafos and S.L. Hakimi.
+\newblock On path cover problems in digraphs and applications to program
+  testing.
+\newblock {\em IEEE Transactions on Software Engineering}, SE-5(5):520--529,
+  1979.
+
 \bibitem{Tron:Arxiv14}
 Roberto Tron and K.~Daniilidis.
 \newblock Technical report on optimization-based bearing-only visual homing

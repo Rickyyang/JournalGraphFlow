@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  23 OCT 2023 20:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  23 OCT 2023 21:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1301,47 +1301,44 @@ Package pdftex.def Info: Figs//RRT_example_new.png  used on input line 716.
 Underfull \vbox (badness 1859) has occurred while \output is active []
 
  [10 <./Figs//SC_gen_1.png> <./Figs//SC_gen_2.png> <./Figs//two_edges.png> <./Figs//security_graph.png> <./Figs//RRT_example_new.png (PNG copy)>]
-Underfull \vbox (badness 3919) has occurred while \output is active []
+Underfull \vbox (badness 1484) has occurred while \output is active []
 
 
 
-LaTeX Warning: Citation `ntafos1979path' on page 11 undefined on input line 777.
+LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 11 undefined on input line 788.
 
 
-LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 11 undefined on input line 786.
-
-
-LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 11 undefined on input line 786.
+LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 11 undefined on input line 788.
 
 [11]
-<Figs//graph_flow_result_3.png, id=533, 1204.5pt x 1686.3pt>
+<Figs//graph_flow_result_3.png, id=535, 1204.5pt x 1686.3pt>
 File: Figs//graph_flow_result_3.png Graphic file (type png)
 <use Figs//graph_flow_result_3.png>
-Package pdftex.def Info: Figs//graph_flow_result_3.png  used on input line 790.
+Package pdftex.def Info: Figs//graph_flow_result_3.png  used on input line 792.
 (pdftex.def)             Requested size: 100.79846pt x 141.10788pt.
-<Figs//3_flow_result.png, id=534, 1606.0pt x 1405.25pt>
+<Figs//3_flow_result.png, id=536, 1606.0pt x 1405.25pt>
 File: Figs//3_flow_result.png Graphic file (type png)
 <use Figs//3_flow_result.png>
-Package pdftex.def Info: Figs//3_flow_result.png  used on input line 798.
+Package pdftex.def Info: Figs//3_flow_result.png  used on input line 800.
 (pdftex.def)             Requested size: 151.20154pt x 132.29936pt.
-<Figs//graph_flow_result_4.png, id=539, 1204.5pt x 1686.3pt>
+<Figs//graph_flow_result_4.png, id=541, 1204.5pt x 1686.3pt>
 File: Figs//graph_flow_result_4.png Graphic file (type png)
 <use Figs//graph_flow_result_4.png>
-Package pdftex.def Info: Figs//graph_flow_result_4.png  used on input line 810.
+Package pdftex.def Info: Figs//graph_flow_result_4.png  used on input line 812.
 (pdftex.def)             Requested size: 100.79846pt x 141.10788pt.
-<Figs//4_flow_result.png, id=540, 1606.0pt x 1405.25pt>
+<Figs//4_flow_result.png, id=542, 1606.0pt x 1405.25pt>
 File: Figs//4_flow_result.png Graphic file (type png)
 <use Figs//4_flow_result.png>
-Package pdftex.def Info: Figs//4_flow_result.png  used on input line 818.
+Package pdftex.def Info: Figs//4_flow_result.png  used on input line 820.
 (pdftex.def)             Requested size: 151.20154pt x 132.29936pt.
-<Figs//nflow_vs_cost.png, id=543, 1232.605pt x 375.4025pt>
+<Figs//nflow_vs_cost.png, id=545, 1232.605pt x 375.4025pt>
 File: Figs//nflow_vs_cost.png Graphic file (type png)
 <use Figs//nflow_vs_cost.png>
-Package pdftex.def Info: Figs//nflow_vs_cost.png  used on input line 830.
+Package pdftex.def Info: Figs//nflow_vs_cost.png  used on input line 832.
 (pdftex.def)             Requested size: 151.20154pt x 46.04878pt.
  [12 <./Figs//graph_flow_result_3.png (PNG copy)> <./Figs//3_flow_result.png (PNG copy)> <./Figs//graph_flow_result_4.png (PNG copy)> <./Figs//4_flow_result.png (PNG copy)> <./Figs//nflow_vs_cost.png (PNG copy)>]
 
-LaTeX Warning: Reference `eq:asymmetric to cross' on page 13 undefined on input line 885.
+LaTeX Warning: Reference `eq:asymmetric to cross' on page 13 undefined on input line 887.
 
 [13] (./paper.bbl
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 70.
@@ -1369,18 +1366,18 @@ Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 14D5AA4570DA9E41D26B4A22EC3ECEF0;2943.
  ) 
 Here is how much of TeX's memory you used:
- 39664 strings out of 478268
- 780555 string characters out of 5846348
+ 39665 strings out of 478268
+ 780560 string characters out of 5846348
  1169939 words of memory out of 5000000
  56447 multiletter control sequences out of 15000+600000
  538189 words of font info for 409 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  119i,20n,111p,1396b,642s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (14 pages, 2705973 bytes).
+Output written on paper.pdf (14 pages, 2706200 bytes).
 PDF statistics:
- 753 PDF objects out of 1000 (max. 8388607)
- 634 compressed objects within 7 object streams
- 230 named destinations out of 1000 (max. 500000)
+ 755 PDF objects out of 1000 (max. 8388607)
+ 636 compressed objects within 7 object streams
+ 231 named destinations out of 1000 (max. 500000)
  88987 words of extra memory for PDF output out of 89155 (max. 10000000)
 
