@@ -15,6 +15,10 @@
 
 \input{preamble/common}
 \newcommand{\rrtstar}{$\texttt{RRT}^\texttt{*}$}
+\newcommand{\SubItem}[1]{
+    {\setlength\itemindent{15pt} \item[-] #1}
+}
+
 \newtheorem{constraint}{ADMM constraint}
 \newtheorem{example}{Example}
 
@@ -86,7 +90,11 @@ We propose to incorporate redundancy in the form of \emph{sub-team}s of multiple
 
 In this section, we aim to enhance the security of MRSs against malicious takeovers and deviations by attackers. Specifically, we design an inter-robot observation plan (co-observation schedule) to ensures that, during the task period, robots are constantly in proximity to one another according to a schedule, in order to observe and detect potential hazardous behaviors. 
 This is achieved by keeping the potential region that the robots can possibly reach between each consecutive co-observations away from the forbidden regions. 
-In this way, the plan ensure that any potential deviations to these forbidden regions will cause the corresponding robot to miss their next co-observation with other robots. \zyang{avoid start with reference} \cite{wardega2019resilience} solved this problem in grid world for robots with fixed start and goal locations (Figure~\ref{fig:Grid-example-application}) but does not offer the ability to optimize arbitrary smooth cost functions of the trajectories. 
+\begin{definition}\label{def:secured-plan}
+  A multi-robot trajectory plan is secure again plan-deviation attacks if it ensure that any potential deviations to these forbidden regions will cause the corresponding robot to miss their next co-observation with other robots. 
+\end{definition}
+
+This problem is first solved by \cite{wardega2019resilience} in grid world for robots with fixed start and goal locations (Figure~\ref{fig:Grid-example-application}) but does not offer the ability to optimize arbitrary smooth cost functions of the trajectories. 
 
 We formulate the planning problem as an optimal trajectory optimization problem to minimize arbitrary smooth objective functions. 
 We denote as $q_{ij}\in\real{m}$ the position of agent $i$ at the discrete-time index $j$, with $m$ representing the dimension of the state space. For a total of $n_p$ robots, and a task time horizon of $T$, a total of $n_p$ trajectories can be represented as an aggregated vector $\vq\in \real{n m T}$. 
@@ -191,7 +199,7 @@ With a slight abuse of notation, we use the same notation $\partial_xf$ for the 
 The basic idea behind our ADMM-based solver \cite{yang2020multi} is to split the constraints from the objective function using a different set of variables $\vz$, and then solve an Augmented Lagrangian formulation of the optimization problem in \eqref{eq:general-problem}.
 More specifically, we can rewrite the constraint $\vq\in\varOmega$ using an indicator function $\varTheta$, and include it in the objective function. 
 In the traditional application of ADMM, the variables $\vz$ are simple duplicates of $\vx$ projected to the constraint set $\Omega$. However, in path planning problems, some constraints are non-convex, rendering the projection step more difficult (due to the presence of multiple local minima).
-To allow for an easier projection step, we propose a minor generalization of the ADMM formulation where we allow $\vz$ to replicate an arbitrary function of the main variables $\vq$ (instead of being an exact copy), to transform constraint $\vq\in\Omega$ to $D(\vq) \in \sZ$. In summary, we transform \rtronref{(1)} into
+To allow for an easier projection step, we propose a minor generalization of the ADMM formulation where we allow $\vz$ to replicate an arbitrary function of the main variables $\vq$ (instead of being an exact copy), to transform constraint $\vq\in\Omega$ to $D(\vq) \in \sZ$. In summary, we transform \Cref{eq:general-problem} into
 \begin{equation}\label{eq:ADMMSetConstraint_modified}
 	\begin{aligned}
 		&\max\quad \varPhi(\vq)+\varTheta(\vz) \\
@@ -327,7 +335,7 @@ The reachability ellipsoid is an over-approximation of the exact reachability re
 \subsubsection{Transformation to canonical coordinates}\label{sec:rotation2Standard}
 To simplify the problem, we employ a canonical rigid body transformation that repositions the ellipse $\cE$ from the global frame $\cF$ to a canonical frame $\cF_\cE$. 
 
-The canonical frame $\cF_\cE$ is defined with the origin at the ellipsoid's center, and the first axis aligned with the foci \rtronref{Figure 3}. We perform this transformation in a differentiable manner, with the two foci serving as waypoints for a robot.
+The canonical frame $\cF_\cE$ is defined with the origin at the ellipsoid's center, and the first axis aligned with the foci \Cref{fig:EllipseConstraintExample} . We perform this transformation in a differentiable manner, with the two foci serving as waypoints for a robot.
 We parametrize the transformation from $\cF$ to $\cF_\cE$ using a rotation $R^\cF_\cE$ and a translation $o^\cF_\cE$, which, to simplify the notation, we refer to as $R$ and $o$, respectively. 
 The transformation of a point from the frame $\cF_\cE$ to the frame $\cF$ and its inverse are given by the rigid body transformations:
   \begin{equation}\label{eq:transformations}
@@ -608,9 +616,14 @@ These \emph{cross-trajectory co-observations} allow sub-teams to preserve the op
 \zyang{security or safety?}
 
 In \Cref{sec:ADMM-planning} we assumed that the number of robot is equal to the number of routes $n_p$.
-In this section, we assume that we have a total of $n>n_p$ robots available. During initialization, $n$ robots are formed into \emph{sub-teams} by a time-varying partition $\cI(t)=\union_p \cI_p(t)$ of the robots where robots in \emph{sub-team} $\cI_p$ have the same nominal trajectory. The planner introduced in \Cref{sec:ADMM-planning} is used to generate $n_p$ routes $\{q_p\}_{p=1}^{N_p}$ without reachability and co-observation constraints, where the state $q_p(t), p \in\{\cI_0,\ldots,\cI_{p}\}$ represents the reference position of the $i$-th sub-team at time $t\in\{0, \dots, T\}$.
+In this section, we assume that we have a total of $n>n_p$ robots available. During initialization, $n$ robots are formed into \emph{sub-teams} by a time-varying partition $\cI(t)=\union_p \cI_p(t)$ of the robots where robots in each \emph{sub-team} $\cI_p$ share the same nominal trajectory. The planner introduced in \Cref{sec:ADMM-planning} is used to generate $n_p$ routes $\{q_p\}_{p=1}^{N_p}$ without reachability and co-observation constraints, where the state $q_p(t), p \in\{\cI_0,\ldots,\cI_{p}\}$ represents the reference position of the $i$-th sub-team at time $t\in\{0, \dots, T\}$. \zyang{should we mention admm is used here but other planners can be used as well?}
 
-Expanding upon the concept introduced in \Cref{sec:co-observation-constraint}, where robots can collaborate through co-observation to enhance security while traveling in close proximity to one another, we capitalize on the presence of additional $n_p-n$ robots to enhance security.
+Expanding upon the concept of \emph{co-observation} and \emph{reachability}, \Cref{def:secured-plan} can be written as,
+\begin{remark}\label{rmk:revised-security}
+  a multi-robot trajectory is secured against plan-deviation attacks if there exist a co-observation plan such that the reachability region between each consecutive co-observation does not intersect with any forbidden regions.
+\end{remark}
+
+We capitalize on the presence of additional $n_p-n$ robots to enhance security.
 In scenarios where at least one robot is mandated to adhere to the reference trajectory to fulfill essential tasks, these additional robots' initial focus are on performing co-observations within their respective sub-teams. Whenever necessary, they are designed to seamlessly transition between sub-teams. By deviating from their original sub-team's route and joining teams requiring heightened attention, they become instrumental in providing co-observations at critical junctures. 
 
 We refer to the new type of co-observations as \emph{cross-trajectory co-observations}. Our objective is to formulate a cross-trajectory co-observation strategy that fortifies an unsecured Multi-Robot System (MRS) trajectory, while minimizing the number of additional robots required.
@@ -688,11 +701,9 @@ We provide a heuristic approach to locate the checkpoints on given trajectories 
 After identifying checkpoints $\union_p V_p$ for all sub-teams, the next step is to search for cross-trajectory edges connecting all checkpoints to the respective trajectories. These cross-trajectory edges define viable paths between two reference trajectories, allowing robots to closely approach and collaborate with robots on a different reference trajectory for co-observations with the relevant sub-teams. Consequently, at least one endpoint of each edge must correspond to a security checkpoint $v_{p} \in \union_p V_p$. Assuming a single robot is transferred at a time between trajectories, the cross-trajectory edges must adhere to the reachability constraints detailed in ~\Cref{sec:reachability} to ensure that no deviations into forbidden areas can occur during trajectory switches.  
 
 \begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.6\linewidth]{two_edges}
-\caption{For checkpoints of the red trajectory, latest departure node $q^{d}_{b}$ found for $v_{r1}$ and earliest arrival node $q^{a}_{b}$ found for $v_{r3}$.}
-\label{fig:two-edges}
-\end{center}
+  \subfloat[Cross-trajectory edge generation\label{fig:two-edges}]{\includegraphics[width=0.45\linewidth]{two_edges}}
+  \subfloat[Full checkpoint graph\label{fig:security-graph-generate}]{\includegraphics[width=0.45\linewidth]{security_graph}}
+  \caption{\Cref{fig:two-edges}, Latest departure node $q^{d}_{b}$ found for $v_{r1}$ and earliest arrival node $q^{a}_{b}$ found for $v_{r3}$. \Cref{fig:security-graph-generate}, example of a full checkpoint graph where round vertices are checkpoint generated through the heuristic search and triangle vertices are added with the cross-trajectory edges. Virtual source $v^{+}$ and sink $v^{-}$ are added to be used later in planning problem.}  
 \end{figure}
 
 To find cross-trajectory edges, we first find trees of feasible paths using \rrtstar{} and position information alone; we then prune these trees by considering time constraints (that consider the time needed to physically travel from one trajectory to the other while meeting other robots at the two endpoints) and ellipsoidal reachability constraints.
@@ -709,66 +720,23 @@ We then calculate the minimal travel time $t_{\textrm{path}}=\texttt{Cost}(q)/v_
 \end{figure}
 
 \begin{description}
-\item[Arrival node] the waypoints that a robot from sub-team $\cI_p$, deviating from $(q_r(t_{r_i}),t_{r_i})$, can meet with sub-team $\cI_r$. We call a node $(q_r(t_{r_i}),t_{r_i})$ an \emph{arrival node} if \rrtstar{} found a path from $v_p$ to $v_{{r}_{i}}$ with $t_{p}+t_{\textrm{path}}<t_{{r}_{i}}$, and $\mathcal{E}(q_{r}(t_{{r}_{i}}),q_{p},t_{{r}_{i}},t_{p}) \intersect F = \emptyset$. 
-The smallest $t_{r_i}$ that can be found $t^{a}_r$ is named as \emph{earliest arrival time}, together with the \emph{earliest arrival node} $(q_{r}(t^{a}_r),t^{a}_r)$.
-\item[Departure node] are the waypoint with the latest time $t^{d}_r$ such that a robot from sub-team $\cI_r$ can meet with robots in sub-team $\cI_p$ at $v_{p}$ Similarly, a node $v_{r_i}\in\cV_r$ is a \emph{departure node} for $v_p$ if  $t_{p}>t_{{r}_{i}}+t_{\textrm{path}}$ and $\mathcal{E}(q_{p}, q_{r}(t_{{r}_{i}}),t_{p}, t_{{r}_{i}}) \intersect F = \emptyset$. 
+\item[Arrival node] are waypoints on $\{q_r\}$ where robots from sub-team $\cI_p$, deviating at $v_p$, can meet with sub-team $\cI_r$ at $(q_r(t_{r_i}),t_{r_i})$. \emph{Arrival node}s need to satisfy that \rrtstar{} can find a path from $v_p$ to $q_{r}(t^{a}_r)$ with $t_{p}+t_{\textrm{path}}<t_{{r}_{i}}$, and $\mathcal{E}(q_{r}(t_{{r}_{i}}),q_{p},t_{{r}_{i}},t_{p}) \intersect F = \emptyset$.
 
-Given a point $v_{p} \in V_{p}$, we define the \emph{latest departure node} $q_{r}(t^{d}_r)$, and the \emph{earliest arrival node} $q_{r}(t^{a}_r)$ as follows:
-[Earliest arrival node $q_{r}(t^{a}_r)$] is waypoint with the earliest time $t^{a}_r$ such that a robot from sub-team $\cI_p$ deviating from $v_{p}$ can meet with sub-team $\cI_r$.
-Arrival nodes are the waypoint with the latest time $t^{d}_r$ such that a robot from sub-team $\cI_r$  can meet with robots in sub-team $\cI_p$ at $v_{p}$. [Latest departure node $q_{r}(t^{d}_r)$]latest time
+\emph{Earliest arrival node} $(q_{r}(t^{a}_r),t^{a}_r)$ is defined as the arrival node characterized by the minimum $t^{a}_r$ discovered. 
+%$t^{a}_r$ is designated as the \emph{earliest arrival time}.
+
+\item[Departure node] are the waypoints on $\{q_r\}$ such that a robot from sub-team $\cI_r$, deviating from $(q_{r}(t_{{r}_{i}}),t_{{r}_{i}})$, can meet with robots in sub-team $\cI_p$ at $v_{p}$. \emph{Departure node}s need to satisfy that \rrtstar{} can find a path from $v_p$ to $q_{r}(t_{{r}_{i}})$ for $v_p$ if  $t_{p}>t_{{r}_{i}}+t_{\textrm{path}}$ and $\mathcal{E}(q_{p}, q_{r}(t_{{r}_{i}}),t_{p}, t_{{r}_{i}}) \intersect F = \emptyset$. 
+
+\emph{Latest departure node} $(q_{r}(t^{d}_r),t^{d}_r)$ is defined as the departure node characterized by the maximum $t^{d}_r$ discovered.
+% $t^{d}_r$ is designated as the \emph{latest departure time}.
 \end{description}
 
-For each $v_{p} \in V_{p}$, we add all the latest departure and earliest arrival nodes to $V_{q}$, and their corresponding paths as cross-trajectory edges $E_{q}$. Examples are shown in Figure \ref{fig:two-edges}, while the full algorithm is shown in Algorithm \ref{alg:cross-trajectory-edges}.
-
-\begin{algorithm}
-\caption{Cross-trajectory edges generation}\label{alg:cross-trajectory-edges}
-\begin{algorithmic}
-\Procedure{CrossTrajectoryEdges}{$V$}
-\State $V_{q} \gets V$; $E_{q}\gets 0$;
-\ForAll {$v\in V$}
-	\ForAll{$\vq_{r}$ that $\cI_{r} \neq \cI_{v}$}
-		\State $V_{q},E_{q} \gets \textsc{AddEdges} (q_{v}, \vq_{r}, V_{q}, E_{q}) $;
-	\EndFor
-\EndFor
-\State \Return $V_{q}, E_{q}$
-\EndProcedure
-\Procedure{AddEdges}{$q_{v}, \vq_{r}, V_{q},E_{q}$}
-\State $t^{d}_r \gets -\infty $; $t^{a}_r \gets \infty$;
-\State $\cV_{goal}=RRT^*(q_{v}, \vq_{r})$;
-    \ForAll{$ q \in \cV_{goal} $ that $\texttt{Parent}(q)\neq \emptyset $}
-        \If{$\texttt{Cost}(q)/ v_{max} < t_{q}-t_{v}$ and $\cE(q, v_{p},t_{q}, t_{v_{p}})\union F = \emptyset$}
-        		\If{$t_{q}<t^{a}_r$}
-			\State $t^{a}_r \gets t_{q}$;
-		\EndIf
-        \ElsIf{$\texttt{Cost}(q)/ v_{max} < t_{v} - t_{q}$ and $\cE(q, v_{p},t_{q},t_{v_{p}})\union F = \emptyset$}
-        		\If{$t_{q}>t^{d}_r$}
-			\State $t^{d}_r \gets t_{q}$;
-		\EndIf
-        \EndIf
-    \EndFor
-    \If{$t^{d}_r \neq -\infty $ and $t^{a}_r \neq \infty$}
-    \State $v_{a} \gets (q(t^{a}_r),t^{a}_r)$; $v_{d} \gets(q(t^{d}_r), t^{d}_r)$;
-    \State $V_{q}\gets V_{q} \union v_{a}$; $V_{q}\gets V_{q} \union v_{d}$;
-    \State $E_{q}\gets E_{q} \union (v_{p} \rightarrow v_{a})$; $E_{q}\gets E_{q} \union (v_{d} \rightarrow v_{p})$
-    \EndIf
-    \State \Return $V_{q},E_{q}$
-    \EndProcedure
-   \end{algorithmic}
-\end{algorithm}
+For each $v_{p} \in V_{p}$ found through \Cref{alg:checkpoint-gen}, we add all the latest departure and earliest arrival nodes to $V_{q}$, and their corresponding paths as cross-trajectory edges $E_{q}$. Examples are shown in Figure \ref{fig:two-edges}.
 
 \subsubsection{In-trajectory edges}\label{sec:Graph-intro}
 
 %With vertices $V_{q}$ and cross-trajectory edges $E_{q}$ found in Algorithm \ref{alg:cross-trajectory-edges}, we can construct a security graph $G_{q}$. 
-We add to $E_q$ the \emph{in-trajectory edges} $(v^{p}_{i}\rightarrow v^{p}_{i+1})$ obtained by connecting all checkpoints $v^p_{i}\in V_q$ found in Section~\ref{sec:security-checkpoint} with the checkpoints $v^p_{i+1}$ that  follow them in their original trajectories.
-%For all  and \ref{sec:cross-traj-edges}, can be divided by the corresponding sub-team and sorted in ascending order of time into $N_{p}$ subsets $V_{p}=\{v^{p}_{0}, v^{p}_{1}, \dots , v^{p}_{T}\}$ where $p\in \{1,\dots, N_{p}\}$. Consecutive edges in the same subset are added to $E_{q}$ as  . 
-Examples are shown in Figure \ref{fig:security-graph-generate}.
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=0.6\linewidth]{security_graph}
-\caption{Example of a two trajectory security graph. Round vertices are checkpoint generated through the heuristic search and triangle vertices are added with the cross-trajectory edges. Additional virtual source $v^{+}$ and sink $v^{-}$ is used later in planning problem.}
-\label{fig:security-graph-generate}
-\end{center}
-\end{figure}
+For all $V_{p}=\union_p \{v^0_{p}, \dots ,v^T_{p}\}$ found in \Cref{sec:security-checkpoint,sec:cross-traj-edges} arranged in ascending order of $t_{v^i_{p}}$. We add to $E_q$ the \emph{in-trajectory edges} $\{(v^i_{p}\rightarrow v^{i+1}_{p})\}$ obtained by connecting all consecutive checkpoints $v^i_{p}\in V_q$ with the checkpoints $v^{i+1}_{p}$ that follow them in their original trajectories. Examples are shown in Figure \ref{fig:security-graph-generate}. \zyang{any better explaination?}
 
 %For convenience, we use $|V_{q}|$ and $|E_{q}|$ to denote the cardinality of the sets $V_{q}$ and $E_{q}$ 
 
@@ -776,15 +744,14 @@ Examples are shown in Figure \ref{fig:security-graph-generate}.
 In this section, we describe in detail how to formulate the cross-trajectory planning problem as a network flow problem, and solve it using mixed-integer linear programs (MILP). We assume that $n_p$ \emph{reference robots} are dedicated (one in each sub-team) to follow the reference trajectory.  The goal of this section is to minimize the number and plan the routes of $n-n_p$  additional \emph{cross-trajectory robots} dedicated to perform co-observations with the reference robots. 
 
 \begin{remark}
-\rtron{Note that we assign fixed roles to reference robots for convenience in explaining the multiflow formulation. In practice, after a cross-trajectory robot joins a team, it is considered interchangable, and could switch roles with the reference robot of that trajectory (i.e., the original reference robot might serve as a cross-trajectory robot in a later cross-trajectory co-observation.}
+Note that we assign fixed roles to reference robots for convenience in explaining the multiflow formulation. In practice, after a cross-trajectory robot joins a team, it is considered interchangable, and could switch roles with the reference robot of that trajectory (i.e., the original reference robot might serve as a cross-trajectory robot in a later cross-trajectory co-observation).
 \end{remark}
 
-To formulate the planning problem as a network multi-flow problem \rtron{Check that multiflow/multi-flow/flow problem is indicated consistently across the entire paper}, we augment the checkpoint graph $G_{q}$ to a flow graph $G=(V, E)$. The vertices of the new graph $G$ are defined as $V= V_{q} \union \{v^{+},v^{-}\}$, where $v^{+}$ is a \emph{virtual source} node, and $v^{-}$ is a \emph{virtual sink} node. The edges of the new graph are defined as $E = E_{q} \union \{( v^{e}_{p},v_{-})\}_{p} \union \{(v_{+},v^{0}_{p})\}_{p}$, i.e., we add directed edges from $v^{+}$ to all the start vertices, and from all end vertices to $v^{-}$, with $v^0_p$ and $v^e_p$ representing the start and end vertices of sub-team $\cI_p$.
+To formulate the planning problem as a network multi-flow problem, we augment the checkpoint graph $G_{q}$ to a flow graph $G=(V, E)$. The vertices of the new graph $G$ are defined as $V= V_{q} \union \{v^{+},v^{-}\}$, where $v^{+}$ is the \emph{virtual source} node, and $v^{-}$ is the \emph{virtual sink} node. The edges of the new graph are defined as $E = E_{q} \union \{(v_{+},v^{0}_{p})\}_{p} \union \{( v^{T}_{p},v_{-})\}_{p}$, i.e., we add directed edges from $v^{+}$ to all the start vertices, and from all end vertices to $v^{-}$, with $v^0_p$ and $v^T_p$ representing the start and end vertices of sub-team $\cI_p$.
 
-Our goal is then to find a path in $G$ for all the cross-trajectory robots that starts from the virtual source $v^{+}$ and ends in the virtual sink $v^{-}$.
-%,  Each robot then may move according to the edges in $G$ from vertex $v_{i}$ to $v_{j}$ if $(v_{i},v_{j})\in E_{q}$. 
+Our goal is to find a path in $G$ for all the cross-trajectory robots that starts from the virtual source $v^{+}$ and ends in the virtual sink $v^{-}$.
 The path of a robot $k$ can be represented as a flow vector $\vf^{k} = \{ f^{k}_{ij} \}$, where $f^{k}_{ij} \in \{1,0\}$ is an indicator variable representing whether robot $k$'s path contains the edge $v_{i}\to v_{j}$. 
-\rtronhl{Spell out this requirement at the beginning of the section (around $\star$, and reference it here}{As required by the security guarantee, reference robots must be seen by at least one cross-reference robot at every checkpoint.}
+As required by the security guarantee in \Cref{rmk:revised-security}, reference robots must be seen by at least one cross-reference robot at every checkpoint.
 Thus, the planning problem can then be formulated as a path cover problem on $G_{q}$, i.e., as finding a set of paths $F=[\vf_{1},\dots, \vf_{\cK}]$ for cross-trajectory robots such that every checkpoint in $V_{p}$ is included in at least one path in $F$. Additionally, to encourage the robots' exchange between different sub-teams, cross-trajectory co-observations should be preferred compared to co-observation within the same team. \rtron{Finally, edges from the virtual source and to the virtual sink should have zero cost, to allow robots to automatically get assigned to the starting point that is most convenient for the overall solution.}
 These requirements are achieved with the weights for edges $(v_{i},v_{j})\in E$ defined as:
 \begin{equation}
