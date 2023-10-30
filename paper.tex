@@ -49,19 +49,18 @@ Enhancing Security in Multi-Robot Systems through Co-Observation Planning on Uns
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-This paper addresses the critical issue of security in multi-robot systems (MRS) when facing threats from adversaries attempting to compromise the robots' control. Such compromises could lead to unauthorized access to forbidden areas, potentially causing harm or disrupting the mission. To tackle this problem, we propose a novel multi-robot planning algorithm that leverages mutual observations between robots as an additional security measure. Our approach guarantees that even in the face of adversarial movement by attackers, compromised robots cannot reach forbidden regions without missing scheduled co-observations. 
-We achieve this by introducing \emph{reachability} constraints into continuous trajectory planning algorithm. These constraints ensure an empty intersection between the sets of locations that the agents could potentially reach and the forbidden regions. 
-\rtron{The reachability constraint is implemented with ellipsoidal over-approximation; this allows to quickly check intersection and compute gradients.}
-Furthermore, to enhance system resilience and feasibility of the planning problem, we introduce the concept of \emph{sub-teams}, where multiple robots form cohesive units along each route, replacing individual robot assignments. This redundancy enables robots to deviate from their assigned sub-teams and join others to perform cross-trajectory co-observations, thereby securing multiple trajectories simultaneously. To efficiently plan cross-trajectory co-observations that maintain security against plan-deviation attacks, we formulate the multi-flow problem on unsecured MRS trajectories. 
-\rtron{This second part fixes the feasiblity problems of the first one, and uses the same reacheability constraints to build inter-team trajectories.}
+This paper addresses the critical issue of security in multi-robot systems (MRS) when facing threats from adversaries attempting to compromise the robots' control which could lead to unauthorized access to forbidden areas, potentially causing harm or disrupting the mission. To tackle this problem, we propose a novel multi-robot planning algorithm that leverages mutual observations between robots, and introducing  \emph{reachability} constraints as additional security measures. By enforcing an empty intersection between the locations that the agents could potentially reach (using reachability constraint) and the forbidden regions, we provide guarantees that even in the face of adversarial movement by attackers, compromised robots cannot reach forbidden regions without missing scheduled co-observations. The reachability constraint is implemented with ellipsoidal over-approximation; this allows to quickly check intersection and compute gradients.
+
+Furthermore, to further enhance system resilience and address the feasibility challenges encountered in the initial stage, we introduce the concept of \emph{sub-teams}, where multiple robots form cohesive units along each route, replacing individual robot assignments. This allows redundant robots to deviate for co-observations across different sub-teams, ensuring the security of multiple trajectories without the need for trajectory modifications of the entire sub-team. To plan cross-trajectory co-observations that maintain security against plan-deviation attacks, we formulate the multi-flow problem on unsecured MRS trajectories, 
+
 We demonstrate the effectiveness and robustness of our proposed algorithm, which significantly strengthens the security of multi-robot systems in the face of adversarial threats.
 \end{abstract}
 
 
 \section{Introduction}\label{sec:introduction}
-Multi-robot systems (MRS) have witnessed increasing adoption in diverse fields, such as warehouse organization, surveillance, forest fire monitoring, and precision agriculture, owing to their capacity for complex task execution through cooperation and coordination \cite{pajares2015overview, julian2012distributed}. The use of MRS offers numerous advantages, but it also introduces new cybersecurity challenges, including unauthorized access, malicious attacks, and data manipulation \cite{brunner2010infiltrating}. Given their distributed nature and reliance on network communication, MRS are particularly vulnerable to cyber threats. In this paper, we address the specific scenario where attackers compromise robots and direct them to restricted regions, potentially leading to the exploitation of confidential information, physical property damages, or even human injuries \cite{forrest_2017}. We refer to these restricted regions as \emph{forbidden regions}, which might contain security-sensitive equipment or human workers.
+Multi-robot systems (MRS) have witnessed increasing adoption in diverse fields, such as warehouse organization, surveillance, forest fire monitoring, and precision agriculture, owing to their capacity for complex task execution through cooperation and coordination \cite{pajares2015overview, julian2012distributed}. The use of MRS offers numerous advantages, but given their distributed nature and reliance on network communication, MRS are particularly vulnerable to cyber threats which introduces new cybersecurity challenges (e.g. unauthorized access, malicious attacks, and data manipulation \cite{brunner2010infiltrating}). In this paper, we address the specific scenario where attackers compromise robots and direct them to restricted regions, potentially leading to the exploitation of confidential information, physical property damages, or even human injuries \cite{forrest_2017}. We refer to these restricted regions as \emph{forbidden regions}, which might contain security-sensitive equipment or human workers.
 
-These deliberate deviations, termed \emph{plan-deviation attacks}, have been previously identified and tackled in the literature \cite{wardega2019resilience} \zyang{add most recent articles}. The work of \cite{wardega2019resilience} provide exact solution for grid-world configuration. Using the onboard sensing capabilities, robots can perform inter-robot observations as an additional security measure. Each robot' self-report includes not only its own status, but also additional observations of other robots' status. For example, robot $i$'s self-report may include its observation of robot $j$, ``$i$ report its arrival at $v$ and $i$ observes $j$ at location $w$''. Similarly, robot $j$ also reports its observations of robot $i$ to the CE. This solution provides paths with an observation schedule such that any attempts by a compromised robot to violate the safety constraints would necessarily break the observation plan and be detected.
+These deliberate deviations, termed \emph{plan-deviation attacks}, have been previously identified and tackled in the literature \cite{wardega2019resilience, wardega2023byzantine, wardega2023hola, yang2021multi, yang2020multi} \zyang{add most recent articles}. These works initial solution for grid-world configuration, where robots is tasked perform inter-robot observations (usilizing the onboard sensing capabilities) as an additional security measure. Each robot' self-report includes not only its own status, but also additional observations of other robots' status. For example, robot $i$'s self-report may include its observation of robot $j$, ``$i$ report its arrival at $v$ and $i$ observes $j$ at location $w$''. Similarly, robot $j$ also reports its observations of robot $i$ to the CE \cite{wardega2019resilience}. This solution provides paths with an observation schedule such that any attempts by a compromised robot to violate the safety constraints would necessarily break the observation plan and be detected.
 
 When transforming the solution to continuous configuration spaces, additional analysis is needed on the reachability of robots in order for the security of co-observation schedule to hold. More broadly, the problem of solving a path optimization problem with constraints based on the sets of locations that the agents could \emph{potentially} reach, which we call \emph{reachability regions}, has not received attention in the literature.  This constraint is formulated using an ellipsoidal bound of the reachability region, and the idea of using an ellipsoidal bound to limit the search space is inspired by the \emph{heuristic sampling domain} introduced by \cite{gammell2014informed} in the context of the $\mathtt{RRT^*}$ path planning algorithm.
 
@@ -91,10 +90,10 @@ We propose to incorporate redundancy in the form of \emph{sub-team}s of multiple
 In this section, we aim to enhance the security of MRSs against malicious takeovers and deviations by attackers. Specifically, we design an inter-robot observation plan (co-observation schedule) to ensures that, during the task period, robots are constantly in proximity to one another according to a schedule, in order to observe and detect potential hazardous behaviors. 
 This is achieved by keeping the potential region that the robots can possibly reach between each consecutive co-observations away from the forbidden regions. 
 \begin{definition}\label{def:secured-plan}
-  A multi-robot trajectory plan is secure against single-agent plan-deviation attacks if any deviation reaching a forbidden regions will cause the corresponding robot to miss their next co-observation with other robots.
+  A multi-robot trajectory plan is secure again plan-deviation attacks if it ensure that any potential deviations to these forbidden regions will cause the corresponding robot to miss their next co-observation with other robots. 
 \end{definition}
 
-This problem is first solved by \cite{wardega2019resilience} in a grid world for robots with fixed start and goal locations (Figure~\ref{fig:Grid-example-application}) but does not offer the ability to optimize arbitrary smooth cost functions of the trajectories. 
+This problem is first solved by \cite{wardega2019resilience} in grid world for robots with fixed start and goal locations (Figure~\ref{fig:Grid-example-application}) but does not offer the ability to optimize arbitrary smooth cost functions of the trajectories. 
 
 We formulate the planning problem as an optimal trajectory optimization problem to minimize arbitrary smooth objective functions. 
 We denote as $q_{ij}\in\real{m}$ the position of agent $i$ at the discrete-time index $j$, with $m$ representing the dimension of the state space. For a total of $n_p$ robots, and a task time horizon of $T$, a total of $n_p$ trajectories can be represented as an aggregated vector $\vq\in \real{n m T}$. 
@@ -470,28 +469,31 @@ The point-to-ellipse projection function in $\cF$ is then:
 \end{center}
 \end{figure}
 
-For forbidden region in the shape of a hyperplane $\mathcal{L} = \{\Fframe{q}\in\mathbb{R}^n: \vn\transpose \Fframe{q} = d\}$ (as shown in Figure \ref{fig:Ellipse-to-plane}), the reachability constraint can be defined as $\mathcal{L} \cap \mathcal{E}(q_1,q_2,a) = \emptyset$. 
-When transformed into the canonical frame, the hyperplane can be written as $\Eframe \cL = \{  \Eframe{q}\in\mathbb{R}^m:  \vn_\cE\transpose \Eframe{q} = d_{\cE}\}$, where,
+For forbidden region in the shape of a hyperplane $\mathcal{L}(\Fframe{q}) = \{\Fframe{q}\in\mathbb{R}^n: \vn\transpose \Fframe{q} = d\}$ (as shown in Figure \ref{fig:Ellipse-to-plane}), the reachability constraint can be defined as $\mathcal{L} \cap \mathcal{E}(q_1,q_2,a) = \emptyset$. When transformed into the canonical frame, the hyperplane can be written as $\Eframe \cL(\Eframe{q}) = \{  \Eframe{q}\in\mathbb{R}^m:  \vn_\cE\transpose \Eframe{q} = d_{\cE}\}$, where,
   \begin{equation}
     \vn_\cE = H(q_1,q_2)\vn, \quad d_\cE =-\vn\transpose o + d.
 \end{equation}
-Intuitively, $d_\cE$ can be thought as a distance between the plane $\cL$ and the origin (i.e., the center of $\cE$).
+Intuitively, $d_\cE$ can be thought as a distance between the the plane $\cL$ and the origin (i.e., the center of $\cE$).
 
-For every $\Eframe \cL$, there always exist two planes that are both parallel to $\cL$ and tangent to the ellipse (i.e. that have exactly one intersection point): $\cL_1^{\cE} = \{\Eframe{q}\in\mathbb{R}^m: \vn_\cE \transpose \Eframe{q} =  d_{\cE t} \}$ and $\cL_2^{\cE} = \{\Eframe{q}\in\mathbb{R}^m: \vn_\cE \transpose \Eframe{q} = - d_{\cE t} \}$  (see \Cref{fig:Ellipse-to-plane}). The intersection point for each plane can be written as:
+For every $\Eframe \cL(\Eframe{q})$, there always exist two planes that are both parallel to $\cL$ and tangential to the ellipse (i.e. resulting in a unique intersection point), $\cL_1^{\cE} = \{\Eframe{q}\in\mathbb{R}^m: \vn_\cE \transpose \Eframe{q} =  d_{\cE t} \}$ and $\cL_2^{\cE} = \{\Eframe{q}\in\mathbb{R}^m: \vn_\cE \transpose \Eframe{q} = - d_{\cE t} \}$  (\Cref{fig:Ellipse-to-plane}). And the intersection point can be written as:
 \begin{equation}
     p^\cE_{t_{1}} = \frac{ d_{\cE t} Q^{-1}   n_\cE}{ n_\cE \transpose Q^{-1}  n_\cE} = \frac{Q^{-1} n_\cE}{ d_{\cE t}},\quad  p^\cE_{t_{2}} = -  p^\cE_{t_{1}},
 \end{equation}
 where $d_{\cE t} = \sqrt{ n_\cE\transpose Q^{-1} n_\cE}$; intuitively, $d_{\cE t}$ can be thought as a distance between the tangent plane $\cL_1^\cE$ (or $\cL_2^\cE$) and the origin (i.e., the center of the ellipse $\cE$).
 
-We introduce the concept of a tangent interpolation point to characterize the relation between the original constraint hyperplane $\cL$ and the ellipse.
+We introduce the concept of a tangent interpolation point on the hyperplane to characterize the relationship between the plane and the ellipse.
 
 \begin{definition}
-The \emph{tangent interpolation point} $p^\cE_{\cL} \in \mathcal{L}$ is the point on the constraint hyperplane $\cL$ defined by 
+The \emph{tangent interpolation point} $p^\cE_{\cL} \in \mathcal{L}$ is defined on the plane by 
     \begin{equation}\label{equ:ProjectPoint}
       p^\cE_{\cL} = \frac{ d_\cE Q^{-1} n_\cE}{ n_\cE\transpose Q^{-1} n_\cE}.
     \end{equation}
+  Intuitively, the point $p^\cE_\cL$ is the point on $\cL$ which is closest to either $p^\cE_1$ or $p^\cE_2$.
+  Note that when  $d_\cE=d_{\cE t}$ or $d_\cE=-d_{\cE t}$, $p^\cE_{\cL}=p^\cE_{t_1}$ or $p^\cE_{\cL}=p^\cE_{t_2}$, respectively. When $ d_\cE \in [- d_{\cE t},  d_{\cE t}]$, the plane $\cL$ and the ellipsoid $\cE$ have at least one intersection, thus violating our desired reachability constraint. 
 \end{definition}
-Intuitively, the point $p^\cE_\cL$ is the point on $\cL$ which is closest to either $p^\cE_1$ or $p^\cE_2$. When $ d_\cE \in (- d_{\cE t},  d_{\cE t})$, the plane $\cL$ and the ellipsoid $\cE$ have two intersections and when $d_\cE=d_{\cE t}$ or $d_\cE=-d_{\cE t}$, $p^\cE_{\cL}=p^\cE_{t_1}$ or $p^\cE_{\cL}=p^\cE_{t_2}$, respectively. We can therefore use $d_\cE$ to define our desired reachability constraint, and $p^\cE_\cL$ to compute the corresponding differential.
+
+With these definitions, the constraint can be written as:
+
 \begin{constraint}[Plane-ellipsoid reachability constraint]
 \begin{align}
 D(\vq) &= H^{-1}(q_{1},q_2)\pi^\cE_{\vn_\cE}(\vq)+o, \label{eq:plane_ellipsoid_constraint}\\
@@ -545,9 +547,8 @@ where $\pi^\cE_{\vn_\cE}(q)$ is the projection operator defined as:
 \end{center}
 \end{figure}
 
-This section builds upon the hyperplane case in \rtronref{previous section}, with the difference that we consider a segment of finite dimensions. This represents an intermediate step toward polygon-shaped forbidden regions in \rtronref{next section}.
-
-Assume a segment on hyperplane $\Eframe \cL = \{ \Eframe q\in\mathbb{R}^m:  \vn_\cE\transpose \Eframe q = d_{\cE}\}$ with endpoints $\Eframe {p_1}$ and $\Eframe{p_2}$; the segment can be defined as:
+For a intermediate step to get the relationship between a polygon shaped forbidden region, the relative position between the ellipse and segment of the hyperplane that defines the region is studied. 
+Assume the segment on hyperplane $\Eframe \cL(\Eframe q) = \{ \Eframe q\in\mathbb{R}^m:  \vn_\cE\transpose \Eframe q = d_{\cE}\}$ has endpoints $\Eframe {p_1}$ and $\Eframe{p_2}$; then the segment can be defined as:
 \begin{equation}
 \bmat{(\Eframe {p_1}- \Eframe{p_2})\transpose\\( \Eframe{p_2} - \Eframe{p_1})\transpose}  \Eframe p \leq \bmat{ \Eframe{p_2}\transpose\\- \Eframe{p_1}\transpose}( \Eframe{p_1}- \Eframe{p_2}), \quad \vn_\cE\transpose \Eframe q = d_{\cE}.
 \end{equation}
@@ -576,27 +577,18 @@ D(\vq) &= \bmat{D_{seg1}(\vq)\\D_{seg2}(\vq)\\ \vdots} \label{eq:region_ellipsoi
    \Pi_\sZ(\vz) & = 0, 
 \end{align}
 \end{constraint}
-where $D_{seg}$ are the constraint functions for each line segment used to define convex polygon region. 
-Second, the ADMM constraint~\ref{constraint:polygon-ellipsoid} needs to be supplemented with a convex obstacle constraint for the polygon (as introduced in section \ref{sec:obstacle-constraint}) to prevent cases where the ellipse is a subset of the region.
+where $D_{seg}$ are the constraint functions for each line segment used to define convex polygon region. ADMM constraint~\ref{constraint:polygon-ellipsoid} needs to be supplemented with a convex obstacle constraint for the polygon (as introduced in section \ref{sec:obstacle-constraint}) to prevent cases where the ellipse is a subset of the region.
 
 \subsection{Secured planning results and limitation}
-In this section, we apply our ADMM path planning algorithm to an instance of a map exploration problem (Figure~\ref{fig:ADMM-example-application}), and test the algorithm in both simulations and an experimental testbed. The environment to be explored, with three agents, is a $10m\times10m$ region and two forbidden regions \emph{Zone 2, 3} which is shown in Fig.\ref{fig:Grid-example-application}. We assume that the robots can meaningfully collect information on the underlying vector field for data locations no further than $3m$. The maximum velocity constraint $v_{max}$ is set to~$0.5m/dt$ \rtronhl{clarify}{a time limit of 20}. 
+In this section, we apply our ADMM path planning algorithm to an instance of a map exploration problem (Figure~\ref{fig:ADMM-example-application}), and test the algorithm in both simulations and an experimental testbed. The environment to be explored, with three agents, is a $10m\times10m$ region and two forbidden regions \emph{Zone 2, 3} which is shown in Fig.\ref{fig:Grid-example-application}.We assume that the robots can meaningfully collect information on the underlying vector field for data locations no further than $3m$. The maximum velocity constraint $v_{max}$ is set to~$0.5m/dt$ a time limit of 20. 
 
-We utilize the APMAPF solver introduced in \cite{wardega2019resilience} to generate a MAPF plan with co-observation schedule on a grid-world approximation (Fig.\ref{fig:Grid-example-application}) and transform the result to a continuous configuration space, under the map exploration tasks.  All robots have the task of collecting sensor information on the underlying vector field.
-Assuming that the sensors on the robots return data with higher accuracy for locations closer to the agent, the robots should ideally perform a boustrophedon-like pattern (like the unconstraint result in Figure~\ref{fig:ADMM-example-application}). 
-We first set up a co-observation schedules considering two forbidden regions using the APMAPF algorithm, and add reachability constraints ensure a empty intersection between all robots' reachability regions between co-observations and forbidden regions.
+We utilize the APMAPF solver introduced in \cite{wardega2019resilience} to generate a MAPF plan with co-observation schedule on a grid-world application (Fig.\ref{fig:Grid-example-application}) and transform the result to a continuous configuration space, under the map exploration tasks.  All robots have the task of collecting sensor information on the underlying vector field, with agent 3 having an additional task to visit the \emph{checkpoint} at time $8$. Assuming that the sensors on the robots return data with higher accuracy for locations closer to the agent, the robots should ideally perform a boustrophedon pattern (like the unconstraint result in Figure~\ref{fig:ADMM-example-application}). We first set up an co-observation schedules considering two forbidden regions using the APMAPF algorithm, and add reachability constraints ensure a empty intersection between all robots' reachability regions between co-observations and forbidden regions.
 
-%As shown in Fig.\ref{fig:Grid-example-application}, no task has been assigned to the agent besides the start and goal location. 
-Agent 1 and 2 need to meet at time 8 and 14, whereas agent 2 and 3 need to meet at time 18. This result is also used as the initial trajectory input for the ADMM solver. 
-%Based on the schedule, reachability for agent 1 in-between the scheduled co-observations are constrained. 
+As shown in Fig.\ref{fig:Grid-example-application}, no task has been assigned to the agent besides the start and goal location. Agent 1 and 2 need to meet at time 8 and 14, whereas agent 2 and 3 need to meet at time 18. This result is also used as the initial trajectory input for the ADMM solver. 
 
-\rtron{Expand this discussion/merge with discussion of Limitations below}
-Agent 3 has an additional task to visit the \emph{checkpoint} at time $8$. 
-Notice that additional checkpoint (i.e. stationary security camera) need to be incorporated in order to generated an attack-proof solution. Additional solutions to avoid these checkpoints will be discussed in \Cref{sec:cross-trajectory}.  
+Based on the schedule, reachability for agent 1 in-between the scheduled co-observations are constrained. Notice that additional checkpoint (i.e. stationary security camera) need to be incorporated in order to generated an attack-proof solution. Additional solutions to avoid these checkpoints will be discussed in \Cref{sec:cross-trajectory}.  
 
-
-
-The result of the simulation is shown in Fig.~\ref{fig:ReachabilitySimulation}. The reachability regions are shown as black ellipsoids, and we can show that all of them have empty intersections with Zone 2 and 3. Notice that no explicit constraints have been enabled between reachability regions and obstacles, because we assume that robots have basic obstacle avoidance capability and cannot physically penetrate hard obstacles. Therefore, intersections between obstacles and ellipsoids (e.g., the case here between agent 3 and zone 1), are tolerable. All constraints have been satisfied and the agents spread out across the map to perform the best possible exploration task under the given constraints. 
+The result of the simulation is shown in Fig.~\ref{fig:ReachabilitySimulation}. The reachability regions are shown as black ellipsoids, and we can show that all of them have empty intersections with Zone 2 and 3. Notice that no explicit constraints have been enabled between reachability regions and obstacles, because we assume that robots have the basic obstacle avoidance capability and can not go through any hard obstacles. Therefore, the intersections between obstacles and ellipsoids, i.e. the case here between agent 3 and zone 1, are tolerable. All constraints have been satisfied and, to the best of their capability, agents have spread out across the map to perform the best possible exploration task. 
 
 \begin{figure}[htbp]
 \begin{center}
@@ -607,9 +599,7 @@ The result of the simulation is shown in Fig.~\ref{fig:ReachabilitySimulation}. 
 \end{figure}
 
 \subsubsection{Limitations}\label{sec:reachability-discussion}
-Our solution shows that planning with reachability and co-observation is a promising approach to enhance the security of multi-agent systems. However, two main challenges have been identified in \cite{wardega2023hola}. 
-Firstly, finding a co-observation and reachability secured plan may not always be feasible when robots are separated from others by obstacles or forbidden regions, or are located far away from each other. In such case, it is impossible for other robots to get close enough to establish co-observation schedules or find a reachability-secured path. Agent 3 in the Figure \ref{fig:ReachabilitySimulation} is a good example, as it required additional security checkpoint to create secured reachability areas. 
-Secondly, security requirements may come at the cost of overall system performance, as illustrated by the comparison of Figure \ref{fig:ADMM-example-application} and \ref{fig:ReachabilitySimulation}: after the introduction of THE security constraints, the top left corner is never explored by any robot. This is might be concerning given that system performance is a key factor in multi-agent systems. These challenges are addressed by relaxing the solution (while still maintaining the security guarantees) via the introduction of additional agents in \Cref{sec:cross-trajectory} below. %, in order to ensure the effectiveness of planning with reachability and co-observation in securing multi-agent systems.
+Our solution shows that planning with reachability and co-observation is a promising approach to enhance the security of multi-agent systems. However, two main challenges have been identified in \cite{wardega2023hola}. Firstly, finding a co-observation and reachability secured plan may not always be feasible when robots are separated from others by obstacles or forbidden regions, or are located far away from each other. In such case, it is impossible for other robots to get close enough to establish co-observation schedules or find a reachability-secured path. Agent 3 in the Figure \ref{fig:ReachabilitySimulation} is a good example, as it required additional security checkpoint to create secured reachability areas. Secondly, security requirements may come at the cost of overall system performance, as illustrated by the comparison of Figure \ref{fig:ADMM-example-application} and \ref{fig:ReachabilitySimulation} where, after the introduction of security constraints, the top left corner is never explored by any robots. This is particularly concerning given that system performance is a key factor in the decision to use multi-agent systems. These challenges are addressed in Chapter \ref{sec:cross-trajectory}, in order to ensure the effectiveness of planning with reachability and co-observation in securing multi-agent systems.
 
 \section{Cross-trajectory co-observation planning}\label{sec:cross-trajectory}
 
@@ -789,6 +779,7 @@ The first term in \ref{eq:flow-cost} is total outgoing flow from the source $v^{
 
 \subsection{Co-observation performance}
 Notice that problem \eqref{eq:flow-coverage-problem} is guaranteed to have a solution for $\cK=N_{p}$ where all $\cK$ robots follows the reference trajectory ($f^{k}_{ij}=1, \forall \cI_{v_{i}}=\cI_{v_{j}}=k$).  Additionally, for a fixed number of robots $\cK \geq N_{p}$, it is possible to have a subset of flows $F_{e} \in F$ that is empty, i.e. $f_{ij}=0, \forall (v_{i},v_{j})\in E$, $f\in F_{e}$, these flow will not increase the cost and will not have any impact on the solution.  
+
 The trade-off between the number of surveillance robots and security performance is crucial, with an increase in robots generally enhancing security via cross-trajectory co-observations. However, this improvement can be offset by heightened complexity and coordination challenges. To balance these aspects, the penalty parameter $\rho$ in the cost function \ref{eq:flow-cost} is optimized, achieving an equilibrium between security enhancement and operational efficiency. An iterative approach with $\cK=1$ gradually increases until $F$ contains an empty flow, indicating the point where further robot additions do not improve performance. To control unbounded growth, $\rho$ regulates the second term for a single flow in \eqref{eq:flow-cost} $ \rho \sum_{(ij)\in E} w_{ij} f^k_{ij}$ is always smaller than $1$.
 
 \subsection{Result and simulation}
@@ -812,7 +803,7 @@ In this section, we test the proposed method starting from the results in Figure
 
 We start by adding a total of $\cK=3$ surveillance robots into the workspace using the parameters $w_{c}=10$, $w_{t}=1$ and $\rho = 0.01$. The three trajectories are transformed into the graph $G$ shown in Figure \ref{fig:security-graph-3-flow}, where the number on each vertex $v_{i}$ represents the corresponding time $t_{i}$. Vertices in each column belong to the same trajectory, and edges across different columns are cross-trajectory edges. 
 
-The flows derived from the solution of the optimization problem \eqref{eq:flow-coverage-problem} are highlighted in the graph. The planning result in the workspace is shown in \ref{fig:workspace-3-flow} as dash-dotted arrows with the same color used for each flow in \ref{fig:security-graph-3-flow}. Notice that flows represent the robot co-observation plan instead of actual robots, such that the red flow, for example, shows that the sub-team 2 is expecting a robot from sub-team 1, departing at $t=0$ and arriving at $t=10$, and needs to send a robot (not necessarily the same one received from sub-team 1) to sub-team 3, departing at $t=67$ and arriving at $t=79$. This plan is not ideal in terms of our security criteria since co-observations happens between the same pair of surveillance robot and sub-team for the majority of the time with only three cross-trajectory edges that are covered.
+The flows derived from the solution of the optimization problem \eqref{eq:flow-coverage-problem} are highlighted in the graph. The planning result in the workspace is shown in \ref{fig:workspace-3-flow} as dash-dotted arrows with the same color used for each flow in \ref{fig:security-graph-3-flow}.  This plan is not ideal in terms of our security criteria since co-observations happens between the same pair of surveillance robot and sub-team for the majority of the time with only three cross-trajectory edges that are covered.
 
 \begin{figure}[t]
 \begin{center}

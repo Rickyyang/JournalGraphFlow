@@ -33,12 +33,13 @@ Kacper Wardega, Roberto Tron, and Wenchao Li.
 \newblock In {\em 2019 IEEE Security and Privacy Workshops (SPW)}, pages
   120--125. IEEE, 2019.
 
-\bibitem{gammell2014informed}
-Jonathan~D Gammell, Siddhartha~S Srinivasa, and Timothy~D Barfoot.
-\newblock Informed rrt*: Optimal sampling-based path planning focused via
-  direct sampling of an admissible ellipsoidal heuristic.
-\newblock In {\em 2014 IEEE/RSJ International Conference on Intelligent Robots
-  and Systems}, pages 2997--3004. IEEE, 2014.
+\bibitem{wardega2023byzantine}
+Kacper Wardega, Max von Hippel, Roberto Tron, Cristina Nita-Rotaru, and Wenchao
+  Li.
+\newblock Byzantine resilience at swarm scale: A decentralized blocklist
+  protocol from inter-robot accusations.
+\newblock In {\em Proceedings of the 2023 International Conference on
+  Autonomous Agents and Multiagent Systems}, pages 1430--1438, 2023.
 
 \bibitem{wardega2023hola}
 Kacper Wardega, Max von Hippel, Roberto Tron, Cristina Nita-Rotaru, and Wenchao
@@ -46,6 +47,26 @@ Kacper Wardega, Max von Hippel, Roberto Tron, Cristina Nita-Rotaru, and Wenchao
 \newblock Hola robots: Mitigating plan-deviation attacks in multi-robot systems
   with co-observations and horizon-limiting announcements.
 \newblock {\em arXiv preprint arXiv:2301.10704}, 2023.
+
+\bibitem{yang2021multi}
+Ziqi Yang and Roberto Tron.
+\newblock Multi-agent trajectory optimization against plan-deviation attacks
+  using co-observations and reachability constraints.
+\newblock In {\em 2021 60th IEEE Conference on Decision and Control (CDC)},
+  pages 241--247. IEEE, 2021.
+
+\bibitem{yang2020multi}
+Ziqi Yang and Roberto Tron.
+\newblock Multi-agent path planning under observation schedule constraints.
+\newblock In {\em 2020 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems (IROS)}, pages 6990--6997. IEEE, 2020.
+
+\bibitem{gammell2014informed}
+Jonathan~D Gammell, Siddhartha~S Srinivasa, and Timothy~D Barfoot.
+\newblock Informed rrt*: Optimal sampling-based path planning focused via
+  direct sampling of an admissible ellipsoidal heuristic.
+\newblock In {\em 2014 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems}, pages 2997--3004. IEEE, 2014.
 
 \bibitem{anderson2012optimal}
 Brian~DO Anderson and John~B Moore.
@@ -57,12 +78,6 @@ Alston~S Householder.
 \newblock Unitary triangularization of a nonsymmetric matrix.
 \newblock {\em Journal of the ACM (JACM)}, 5(4):339--342, 1958.
 
-\bibitem{yang2020multi}
-Ziqi Yang and Roberto Tron.
-\newblock Multi-agent path planning under observation schedule constraints.
-\newblock In {\em 2020 IEEE/RSJ International Conference on Intelligent Robots
-  and Systems (IROS)}, pages 6990--6997. IEEE, 2020.
-
 \bibitem{Boyd2011}
 Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, Jonathan Eckstein, et~al.
 \newblock Distributed optimization and statistical learning via the alternating
@@ -70,25 +85,10 @@ Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, Jonathan Eckstein, et~al.
 \newblock {\em Foundations and Trends{\textregistered} in Machine learning},
   3(1):1--122, 2011.
 
-\bibitem{yang2021multi}
-Ziqi Yang and Roberto Tron.
-\newblock Multi-agent trajectory optimization against plan-deviation attacks
-  using co-observations and reachability constraints.
-\newblock In {\em 2021 60th IEEE Conference on Decision and Control (CDC)},
-  pages 241--247. IEEE, 2021.
-
 \bibitem{eberly}
 David Eberly.
 \newblock Distance from a point to an ellipse, an ellipsoid, or a
   hyperellipsoid, 2013.
-
-\bibitem{wardega2023byzantine}
-Kacper Wardega, Max von Hippel, Roberto Tron, Cristina Nita-Rotaru, and Wenchao
-  Li.
-\newblock Byzantine resilience at swarm scale: A decentralized blocklist
-  protocol from inter-robot accusations.
-\newblock In {\em Proceedings of the 2023 International Conference on
-  Autonomous Agents and Multiagent Systems}, pages 1430--1438, 2023.
 
 \bibitem{yu2013multi}
 Jingjin Yu and Steven~M LaValle.
