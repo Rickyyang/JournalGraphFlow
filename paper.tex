@@ -68,9 +68,9 @@ In this paper, we transform the solution to continuous configuration spaces, all
 
 A preliminary version of the paper was presented at conferences \cite{yang2020multi,yang2021multi}. Our proposed approach enforces an empty intersection between forbidden regions and an ellipsoidal reachability region during trajectory optimization, preventing undetected attacks if an adversary gains control of the robots. Inspired by the \emph{heuristic sampling domain} introduced by \cite{gammell2014informed} within the context of the $\mathtt{RRT^*}$ path planning algorithm, we utilize an ellipsoidal boundary to constrain the search space and formulate the ellipsoid as the reachability region constraint. We present a mathematical formulation of reachability regions compatible with the solver as a spatio-temporal constraint.
 
-In this paper, we first transform the solution to continuous configuration spaces and allows for more flexible objectives, providing additional analysis on the reachability of robots in order for the security of co-observation schedule to hold. This problem of solving a path optimization problem with constraints based on the sets of locations that the agents could \emph{potentially} reach, which we call \emph{reachability regions}, has not received attention in the literature. 
+%In this paper, we first transform the solution to continuous configuration spaces and allows for more flexible objectives, providing additional analysis on the reachability of robots in order for the security of co-observation schedule to hold. This problem of solving a path optimization problem with constraints based on the sets of locations that the agents could \emph{potentially} reach, which we call \emph{reachability regions}, has not received attention in the literature. 
 
-A preliminary version of the paper was presented at conferences \cite{yang2020multi,yang2021multi}. We formulate a way to enforce an empty intersection between forbidden regions and ellipsoidal reachability region while optimizing the trajectory, such that if an attacker takes control of the robots, they cannot perform an undetected attack without breaking the co-observation schedule. Inspired by the \emph{heuristic sampling domain} introduced by \cite{gammell2014informed} in the context of the $\mathtt{RRT^*}$ path planning algorithm, we use an ellipsodial bound to limit the search space and formulated the ellipsoid as the reachability region constraint. In our case, we use a similar bound to optimize the location of the two states to exclude the forbidden region from the ellipsoidal region. We propose a mathematical formulation of reachability regions that is compatible with the solver from  as a spatio-temporal constraint. 
+%A preliminary version of the paper was presented at conferences \cite{yang2020multi,yang2021multi}. We formulate a way to enforce an empty intersection between forbidden regions and ellipsoidal reachability region while optimizing the trajectory, such that if an attacker takes control of the robots, they cannot perform an undetected attack without breaking the co-observation schedule. Inspired by the \emph{heuristic sampling domain} introduced by \cite{gammell2014informed} in the context of the $\mathtt{RRT^*}$ path planning algorithm, we use an ellipsodial bound to limit the search space and formulated the ellipsoid as the reachability region constraint. In our case, we use a similar bound to optimize the location of the two states to exclude the forbidden region from the ellipsoidal region. We propose a mathematical formulation of reachability regions that is compatible with the solver from  as a spatio-temporal constraint. 
 
 This paper also extend the previous works by fixing two main challenges identified in \cite{wardega2023hola, yang2020multi,yang2021multi}. Firstly, finding a co-observation and reachability secured plan may not always be feasible when robots are separated from others by obstacles or forbidden regions, or are located far away from each other. In such case, it is impossible for other robots to get close enough to establish co-observation schedules or find a reachability-secured path. Agent 3 in the Figure \zyang{ref fig:ReachabilitySimulation} is a good example, as it required additional security checkpoint to create secured reachability areas. Secondly, security requirements may come at the cost of overall system performance, as illustrated by the comparison of Figure \zyang{ref fig:trajectories-more-constraint} and \zyang{ref fig:ReachabilitySimulation} where, after the introduction of security constraints, the top left corner is never explored by any robots. This is particularly concerning given that system performance is a key factor in the decision to use multi-agent systems. These challenges are addressed in Chapter \ref{sec:cross-trajectory}, in order to ensure the effectiveness of planning with reachability and co-observation in securing multi-agent systems.
 
@@ -621,11 +621,12 @@ These \emph{cross-trajectory co-observations} allow sub-teams to preserve the op
 \zyang{security or safety?}
 
 In \Cref{sec:ADMM-planning} we assumed that the number of robot is equal to the number of routes $n_p$.
-In this section, we assume that we have a total of $n>n_p$ robots available. During initialization, $n$ robots are formed into \emph{sub-teams} by a time-varying partition $\cI(t)=\union_p \cI_p(t)$ of the robots where robots in each \emph{sub-team} $\cI_p$ share the same nominal trajectory. The planner introduced in \Cref{sec:ADMM-planning} is used to generate $n_p$ routes $\{q_p\}_{p=1}^{N_p}$ without reachability and co-observation constraints, where the state $q_p(t), p \in\{\cI_0,\ldots,\cI_{p}\}$ represents the reference position of the $i$-th sub-team at time $t\in\{0, \dots, T\}$. \zyang{should we mention admm is used here but other planners can be used as well?}
+In this section, we assume that we have a total of $n>n_p$ robots available. During initialization, $n$ robots are formed into \emph{sub-teams} by a time-varying partition $\cI(t)=\union_p \cI_p(t)$ of the robots where robots in each \emph{sub-team} $\cI_p$ share the same nominal trajectory. The planner introduced in \Cref{sec:ADMM-planning} is used to generate $n_p$ routes $\{q_p\}_{p=1}^{N_p}$ \rtronhl{It seems that this obviates the need for Section II; instead phrase it such that we use it to fix the feasibility problems of Section II}{without reachability and co-observation constraints}, where the state $q_p(t), p \in\{\cI_0,\ldots,\cI_{p}\}$ represents the reference position of the $i$-th sub-team at time $t\in\{0, \dots, T\}$. \zyang{should we mention admm is used here but other planners can be used as well?}
 
+\rtronhl{As we discussed, this will become a proposition and moved in the previous section}
 Expanding upon the concept of \emph{co-observation} and \emph{reachability}, \Cref{def:secured-plan} can be written as,
 \begin{remark}\label{rmk:revised-security}
-  a multi-robot trajectory is secured against plan-deviation attacks if there exist a co-observation plan such that the reachability region between each consecutive co-observation does not intersect with any forbidden regions.
+  A multi-robot trajectory is secured against plan-deviation attacks if there exist a co-observation plan such that the reachability region between each consecutive co-observation does not intersect with any forbidden regions.
 \end{remark}
 
 We capitalize on the presence of additional $n_p-n$ robots to enhance security.
@@ -703,10 +704,13 @@ We provide a heuristic approach to locate the checkpoints on given trajectories 
 \end{figure}
 
 \subsubsection{Cross-trajectory edges}\label{sec:cross-traj-edges}
-After identifying checkpoints $\union_p V_p$ for all sub-teams, the next step is to search for cross-trajectory edges connecting all checkpoints to the respective trajectories. These cross-trajectory edges define viable paths between two reference trajectories, allowing robots to closely approach and collaborate with robots on a different reference trajectory for co-observations with the relevant sub-teams. Consequently, at least one endpoint of each edge must correspond to a security checkpoint $v_{p} \in \union_p V_p$. Assuming a single robot is transferred at a time between trajectories, the cross-trajectory edges must adhere to the reachability constraints detailed in ~\Cref{sec:reachability} to ensure that no deviations into forbidden areas can occur during trajectory switches.  
+After identifying checkpoints $\union_p V_p$ for all sub-teams, the next step is to search for cross-trajectory edges connecting all checkpoints to the respective trajectories. 
+\rtron{Add definition here for edges to be the counterpart of Definition 8}
+These cross-trajectory edges define viable paths between two reference trajectories, allowing robots to closely approach and collaborate with robots on a different reference trajectory for co-observations with the relevant sub-teams. Consequently, at least one endpoint of each edge must correspond to a security checkpoint $v_{p} \in \union_p V_p$. Assuming a single robot is transferred at a time between trajectories, the cross-trajectory edges must adhere to the reachability constraints detailed in ~\Cref{sec:reachability} to ensure that no deviations into forbidden areas can occur during trajectory switches.  
 
 \begin{figure}[htbp]
-  \subfloat[Cross-trajectory edge generation\label{fig:two-edges}]{\includegraphics[width=0.45\linewidth]{two_edges}}
+    \centering
+  \subfloat[Cross-trajectory edge generation\label{fig:two-edges}]{\includegraphics[width=0.45\linewidth]{two_edges}}\hspace{2mm}
   \subfloat[Full checkpoint graph\label{fig:security-graph-generate}]{\includegraphics[width=0.45\linewidth]{security_graph}}
   \caption{\Cref{fig:two-edges}, Latest departure node $q^{d}_{b}$ found for $v_{r1}$ and earliest arrival node $q^{a}_{b}$ found for $v_{r3}$. \Cref{fig:security-graph-generate}, example of a full checkpoint graph where round vertices are checkpoint generated through the heuristic search and triangle vertices are added with the cross-trajectory edges. Virtual source $v^{+}$ and sink $v^{-}$ are added to be used later in planning problem.}  
 \end{figure}
@@ -714,25 +718,25 @@ After identifying checkpoints $\union_p V_p$ for all sub-teams, the next step is
 To find cross-trajectory edges, we first find trees of feasible paths using \rrtstar{} and position information alone; we then prune these trees by considering time constraints (that consider the time needed to physically travel from one trajectory to the other while meeting other robots at the two endpoints) and ellipsoidal reachability constraints.
 
 We search for feasible paths between each security checkpoint and all other trajectories (ignoring, for the moment, any timing constraint), as shown in \Cref{fig:RRT*}
-More precisely, after a fixed number of  iterations, \rrtstar{}  finds all feasible, quasi-optimal paths between one security checkpoint location $q_{v_p}(t_{v_p})$ where $v_{p} \in V_{p}$ for sub-team $\cI_p$, and the entire waypoints $\{q_{r}(t_{{r}_{i}}) \}$ on a reference trajectories for a different sub-team $\cI_{r}$.
-We then calculate the minimal travel time $t_{\textrm{path}}=\texttt{Cost}(q)/v_{max}$ for a robot to traverse each path in order to see if the deviating robot is able to catch up with the corresponding sub-team when merging to a different reference trajectory. Among all the viable paths, two type of nodes could be found.
+More precisely, after a fixed number of  iterations, \rrtstar{}  finds all feasible, quasi-optimal paths between one security checkpoint location $q_{v_p}(t_{v_p})$ where $v_{p} \in V_{p}$ for sub-team $\cI_p$, and all the waypoints $\{q_{r}(t_{{r}_{i}}) \}$ on any reference trajectory for a different sub-team $\cI_{r}$.
+We then calculate the minimal travel time $t_{\textrm{path}}=\texttt{Cost}(q)/v_{max}$ for a robot to traverse each path.  In order to see if the deviating robot is able to catch up and merge with the corresponding sub-team, we define two types of nodes.
 \begin{figure}
   \begin{center}
     \includegraphics[width=0.6\linewidth]{RRT_example_new}
-\caption{ALL viable path found from a waypoint to all reference trajectories of other sub-teams.}
+\caption{All viable path found from a waypoint to all reference trajectories of other sub-teams.}
 \label{fig:RRT*}
   \end{center}
 \end{figure}
 
 \begin{description}
-\item[Arrival node] are waypoints on $\{q_r\}$ where robots from sub-team $\cI_p$, deviating at $v_p$, can meet with sub-team $\cI_r$ at $(q_r(t_{r_i}),t_{r_i})$. \emph{Arrival node}s need to satisfy that \rrtstar{} can find a path from $v_p$ to $q_{r}(t^{a}_r)$ with $t_{p}+t_{\textrm{path}}<t_{{r}_{i}}$, and $\mathcal{E}(q_{r}(t_{{r}_{i}}),q_{p},t_{{r}_{i}},t_{p}) \intersect F = \emptyset$.
+\item[Arrival nodes] are waypoints on $\{q_r\}$ where robots from sub-team $\cI_p$, deviating at $v_p$, can meet with sub-team $\cI_r$ at $(q_r(t_{r_i}),t_{r_i})$. For these, \rrtstar{} must have found a path from $v_p$ to $q_{r}(t^{a}_r)$ with $t_{p}+t_{\textrm{path}}<t_{{r}_{i}}$, and $\mathcal{E}(q_{r}(t_{{r}_{i}}),q_{p},t_{{r}_{i}},t_{p}) \intersect F = \emptyset$.
 
-\emph{Earliest arrival node} $(q_{r}(t^{a}_r),t^{a}_r)$ is defined as the arrival node characterized by the minimum $t^{a}_r$ discovered. 
+For each trajectory $r\neq p$, we define the \emph{earliest arrival node} from $v_p$ to $(q_{r}(t^{a}_r),t^{a}_r)$ as the arrival node characterized by the minimum $t^{a}_r$ discovered. 
 %$t^{a}_r$ is designated as the \emph{earliest arrival time}.
 
-\item[Departure node] are the waypoints on $\{q_r\}$ such that a robot from sub-team $\cI_r$, deviating from $(q_{r}(t_{{r}_{i}}),t_{{r}_{i}})$, can meet with robots in sub-team $\cI_p$ at $v_{p}$. \emph{Departure node}s need to satisfy that \rrtstar{} can find a path from $v_p$ to $q_{r}(t_{{r}_{i}})$ for $v_p$ if  $t_{p}>t_{{r}_{i}}+t_{\textrm{path}}$ and $\mathcal{E}(q_{p}, q_{r}(t_{{r}_{i}}),t_{p}, t_{{r}_{i}}) \intersect F = \emptyset$. 
+\item[Departure nodes] are the waypoints on $\{q_r\}$ such that a robot from sub-team $\cI_r$, deviating from $(q_{r}(t_{{r}_{i}}),t_{{r}_{i}})$, can meet with robots in sub-team $\cI_p$ at $v_{p}$. For these nodes, \rrtstar{} must find a path from $v_p$ to $q_{r}(t_{{r}_{i}})$ for $v_p$ if  $t_{p}>t_{{r}_{i}}+t_{\textrm{path}}$ and $\mathcal{E}(q_{p}, q_{r}(t_{{r}_{i}}),t_{p}, t_{{r}_{i}}) \intersect F = \emptyset$. 
 
-\emph{Latest departure node} $(q_{r}(t^{d}_r),t^{d}_r)$ is defined as the departure node characterized by the maximum $t^{d}_r$ discovered.
+For each trajectory $r\neq p$, we define the \emph{latest departure node} $(q_{r}(t^{d}_r),t^{d}_r)$ as the departure node characterized by the maximum $t^{d}_r$ discovered.
 % $t^{d}_r$ is designated as the \emph{latest departure time}.
 \end{description}
 
@@ -741,23 +745,25 @@ For each $v_{p} \in V_{p}$ found through \Cref{alg:checkpoint-gen}, we add all t
 \subsubsection{In-trajectory edges}\label{sec:Graph-intro}
 
 %With vertices $V_{q}$ and cross-trajectory edges $E_{q}$ found in Algorithm \ref{alg:cross-trajectory-edges}, we can construct a security graph $G_{q}$. 
-For all $V_{p}=\union_p \{v^0_{p}, \dots ,v^T_{p}\}$ found in \Cref{sec:security-checkpoint,sec:cross-traj-edges} arranged in ascending order of $t_{v^i_{p}}$. We add to $E_q$ the \emph{in-trajectory edges} $\{(v^i_{p}\rightarrow v^{i+1}_{p})\}$ obtained by connecting all consecutive checkpoints $v^i_{p}\in V_q$ with the checkpoints $v^{i+1}_{p}$ that follow them in their original trajectories. Examples are shown in Figure \ref{fig:security-graph-generate}. \zyang{any better explaination?}
+We arrange all $V_{p}=\union_p \{v^0_{p}, \dots ,v^T_{p}\}$ found in \Cref{sec:security-checkpoint,sec:cross-traj-edges} in ascending order of $t_{v^i_{p}}$. We then add to $E_q$ the \emph{in-trajectory edges} $\{(v^i_{p}\rightarrow v^{i+1}_{p})\}$ obtained by connecting all consecutive checkpoints $v^i_{p}\in V_q$ with the checkpoints $v^{i+1}_{p}$ that follow them in their original trajectories. Examples are shown in Figure \ref{fig:security-graph-generate}. %\zyang{any better explaination?}
 
 %For convenience, we use $|V_{q}|$ and $|E_{q}|$ to denote the cardinality of the sets $V_{q}$ and $E_{q}$ 
 
 \subsection{Co-observation planning problem}
-In this section, we describe in detail how to formulate the cross-trajectory planning problem as a network multi-flow problem, and solve it using mixed-integer linear programs (MILP). We assume that $n_p$ \emph{reference robots} are dedicated (one in each sub-team) to follow the reference trajectory.  The goal of this section is to minimize the number and plan the routes of $n-n_p$  additional \emph{cross-trajectory robots} dedicated to perform co-observations with the reference robots. 
+In this section, we describe in detail how to formulate the cross-trajectory planning problem as a network multi-flow problem, and solve it using mixed-integer linear programs (MILP). We assume that $n_p$ \emph{reference robots} are dedicated (one in each sub-team) to follow the reference trajectory.  The goal of this section is to minimize the number and plan the routes of the $n-n_p$  additional \emph{cross-trajectory robots} dedicated to cross-trajectory co-observations. 
 
 \begin{remark}
 Note that we assign fixed roles to reference robots for convenience in explaining the multi-flow formulation. In practice, after a cross-trajectory robot joins a team, it is considered interchangable, and could switch roles with the reference robot of that trajectory (i.e., the original reference robot might serve as a cross-trajectory robot in a later cross-trajectory co-observation).
 \end{remark}
 
-To formulate the planning problem as a network multi-flow problem, we augment the checkpoint graph $G_{q}$ to a flow graph $G=(V, E)$. The vertices of the new graph $G$ are defined as $V= V_{q} \union \{v^{+},v^{-}\}$, where $v^{+}$ is the \emph{virtual source} node, and $v^{-}$ is the \emph{virtual sink} node. The edges of the new graph are defined as $E = E_{q} \union \{(v_{+},v^{0}_{p})\}_{p} \union \{( v^{T}_{p},v_{-})\}_{p}$, i.e., we add directed edges from $v^{+}$ to all the start vertices, and from all end vertices to $v^{-}$, with $v^0_p$ and $v^T_p$ representing the start and end vertices of sub-team $\cI_p$.
+To formulate the planning problem as a network multi-flow problem, we augment the checkpoint graph $G_{q}$ to a flow graph $G=(V, E)$. The vertices of the new graph $G$ are defined as $V= V_{q} \union \{v^{+},v^{-}\}$, where $v^{+}$ is a \emph{virtual source} node, and $v^{-}$ is a \emph{virtual sink} node. The edges of the new graph are defined as $E = E_{q} \union \{(v_{+},v^{0}_{p})\}_{p} \union \{( v^{T}_{p},v_{-})\}_{p}$, i.e., we add directed edges from $v^{+}$ to all the start vertices, and from all end vertices to $v^{-}$, with $v^0_p$ and $v^T_p$ representing the start and end vertices of sub-team $\cI_p$.
 
 Our goal is to find a path in $G$ for all the cross-trajectory robots that starts from the virtual source $v^{+}$ and ends in the virtual sink $v^{-}$.
 The path of a robot $k$ can be represented as a flow vector $\vf^{k} = \{ f^{k}_{ij} \}$, where $f^{k}_{ij} \in \{1,0\}$ is an indicator variable representing whether robot $k$'s path contains the edge $v_{i}\to v_{j}$. 
 In order to perform co-observations as required by the security introduced in \Cref{rmk:revised-security}, reference robots must be seen by at least one cross-trajectory robot at every checkpoint.
 Thus, the planning problem can be formulated as a path cover problem on $G_{q}$, i.e., as finding a set of paths $F=[\vf_{1},\dots, \vf_{\cK}]$ for cross-trajectory robots such that every checkpoint in $V_{p}$ is included in at least one path in $F$. Additionally, to encourage the robots' exchange between different sub-teams, cross-trajectory co-observations should be preferred compared to co-observation within the same team. 
+
+\rtron{Move remark about the distributed blocklist here}
 
 Finally, edges from the virtual source and to the virtual sink should have zero cost, to allow robots to automatically get assigned to the starting point that is most convenient for the overall solution.
 These requirements are achieved with the weights for edges $(v_{i},v_{j})\in E$ defined as:
@@ -776,22 +782,28 @@ With the formulation above, the planning problem can be written as an optimizati
         \min_{F} & \sum^{\cK}_{k} \sum_{(+i)\in E} f^{k}_{+i} - \rho \sum^{\cK}_k \sum_{(ij)\in E} w_{ij} f^k_{ij} \label{eq:flow-cost}\\
         s.t. & \sum_{\{h:(hi) \in E\}}f^k_{hi}=\sum_{\{j:(ij) \in E\}}f^k_{ij},  \forall k,\forall v \in V_{q} / \{v^{+}, v^{-}\}  \label{eq:FlowBalanceConstraint}\\
         & \sum^{\cK}_k\sum_{\{i:(ij)\in E \}} f^k_{ij} \geq 1, \forall v_{j} \in \{V^{s}_{p}\} \label{eq:FlowCoverage}\\
-        & f^k_{ij} \in \{0,1\} ,  \forall (ij)\in E\label{eq:SingleFLowCapacity}
+        & f^k_{ij} \in \{0,1\} \,  \forall (ij)\in E\label{eq:SingleFLowCapacity}
      \end{align}
  \end{subequations}
 where, for convenience, we used $(ij)$ to represent the edge $(v_{i},v_{j})$, and $(+i)$ to represent the edge $(v^{+},v_{i})$.
 
-The first term in \ref{eq:flow-cost} is total outgoing flow from the source $v^{+}$ while the second term is the total cost of all flows representing the overall co-observation performance (defined as the total number of cross-trajectory edges taken by all flows beyond the regular trajectory edges). The constant $\rho$ is a manually selected penalty parameter to balance between two terms in the cost function. The constraint \eqref{eq:FlowBalanceConstraint} is the flow conservation constraint, which ensures that the amount of flow entering and leaving a given node $v$ is equal (except for $v^{+}$ and $v^{-}$). The constratin \eqref{eq:FlowCoverage} is the flow coverage constraints, which ensures that all security checkpoints $ \{V^{s}_{p}\}$ have been visited by at least one flow (robot). Since the security graph $G_{q}$ is acyclic, this problem is in complexity class $P$, and can be solved in polynominal time \cite{1702662}. 
+The first term in the cost \ref{eq:flow-cost} is total outgoing flow from the source $v^{+}$ while the second term is the total cost of all flows representing the overall co-observation performance (defined as the total number of cross-trajectory edges taken by all flows beyond the regular trajectory edges); the constant $\rho$ is a manually selected penalty parameter to balance between the two terms. The constraint \eqref{eq:FlowBalanceConstraint} is the flow conservation constraint, which ensures that the amount of flow entering and leaving a given node $v$ is equal (except for $v^{+}$ and $v^{-}$). The constratin \eqref{eq:FlowCoverage} is the flow coverage constraints, which ensures that all security checkpoints $ \{V^{s}_{p}\}$ have been visited by at least one flow (robot). Since the security graph $G_{q}$ is acyclic, this problem is in complexity class $P$, and can be solved in polynominal time \cite{1702662}. 
 
 \subsection{Co-observation performance}
-Notice that problem \eqref{eq:flow-coverage-problem} is guaranteed to have a solution for $\cK=N_{p}$ where all $\cK$ robots follows the reference trajectory ($f^{k}_{ij}=1, \forall \cI_{v_{i}}=\cI_{v_{j}}=k$).  Additionally, for a fixed number of robots $\cK \geq N_{p}$, it is possible to have a subset of flows $F_{e} \in F$ that is empty, i.e. $f_{ij}=0, \forall (v_{i},v_{j})\in E$, $f\in F_{e}$, these flow will not increase the cost and will not have any impact on the solution.  
+Notice that problem \eqref{eq:flow-coverage-problem} is guaranteed to have a solution for $\cK=N_{p}$ where all $\cK$ robots follows the reference trajectory ($f^{k}_{ij}=1, \forall \cI_{v_{i}}=\cI_{v_{j}}=k$).  Additionally, for a fixed number of robots $\cK \geq N_{p}$, it is possible to have a subset of flows $F_{e} \in F$ that is empty, i.e. $f_{ij}=0, \forall (v_{i},v_{j})\in E$, $f\in F_{e}$; these flow will not increase the cost and can be discarded from the solution.  
 
-The trade-off between the number of surveillance robots and security performance is crucial, with an increase in robots generally enhancing security via cross-trajectory co-observations. However, this improvement can be offset by heightened complexity and coordination challenges. To balance these aspects, the penalty parameter $\rho$ in the cost function \ref{eq:flow-cost} is optimized, achieving an equilibrium between security enhancement and operational efficiency. An iterative approach with $\cK=1$ gradually increases until $F$ contains an empty flow, indicating the point where further robot additions do not improve performance. To control unbounded growth, $\rho$ regulates the second term for a single flow in \eqref{eq:flow-cost} $ \rho \sum_{(ij)\in E} w_{ij} f^k_{ij}$ is always smaller than $1$.
+The constant $\rho$ selects the trade-off between the number of surveillance robots and security performance. An increase in robots generally enhancing security via cross-trajectory co-observations; this also increases the complexity of the coordination across robots. %To balance these aspects, the penalty parameter $\rho$ in the cost function \ref{eq:flow-cost} is optimized, achieving an equilibrium between security enhancement and operational efficiency. 
+\begin{remark} 
+The value of row $\rho$ is upper bounded such that the second term for each single flow in \eqref{eq:flow-cost} is always smaller than one, i.e., $ \rho \sum_{(ij)\in E} w_{ij} f^k_{ij}\leq 1$. This is because, otherwise \rtron{... explain why the optimal cost would be unbounded}.
+\end{remark}
+
+In order to identify the minimum number of robots necessary, we propose an iterative approach where we start with $\cK=1$ and gradually increases it $F$ contains an empty flow, indicating the point where further robot additions do not improve performance. 
 
 \subsection{Result and simulation}
 In this section, we test the proposed method starting from the results in Figure \ref{fig:trajectories-more-constraint}, where three trajectories are provided for the map exploration task with no security related constraints (co-observation schedule and reachability). We use the same environment and dynamic setup, where we have a $10m\times10m$ task space, two forbidden regions (two rectangles in  \ref{fig:trajectories-more-constraint}) and robots with a max velocity of $0.5m/dt$.
 
 \begin{figure}[t]
+\rtron{Collect these four figures into a single figure. Maybe plot the graphs rotated 90 degrees so that "time" goes from left to right, and to use the space more efficiently.}
 \begin{center}
 \includegraphics[width=0.4\linewidth]{graph_flow_result_3}
 \caption{Security Graph and result for 3 flows}
@@ -809,7 +821,7 @@ In this section, we test the proposed method starting from the results in Figure
 
 We start by adding a total of $\cK=3$ surveillance robots into the workspace using the parameters $w_{c}=10$, $w_{t}=1$ and $\rho = 0.01$. The three trajectories are transformed into the graph $G$ shown in Figure \ref{fig:security-graph-3-flow}, where the number on each vertex $v_{i}$ represents the corresponding time $t_{i}$. Vertices in each column belong to the same trajectory, and edges across different columns are cross-trajectory edges. 
 
-The flows derived from the solution of the optimization problem \eqref{eq:flow-coverage-problem} are highlighted in the graph. The planning result in the workspace is shown in \ref{fig:workspace-3-flow} as dash-dotted arrows with the same color used for each flow in \ref{fig:security-graph-3-flow}.  This plan is not ideal in terms of our security criteria since co-observations happens between the same pair of surveillance robot and sub-team for the majority of the time with only three cross-trajectory edges that are covered.
+The flows derived from the solution of the optimization problem \eqref{eq:flow-coverage-problem} are highlighted in the graph. The planning result in the workspace is shown in \Cref{fig:workspace-3-flow} as dash-dotted arrows with the same color used for each flow in \Cref{fig:security-graph-3-flow}.  This plan is not ideal in terms of our security criteria since co-observations happens between the same pair of surveillance robot and sub-team for the majority of the time with only three cross-trajectory edges that are covered.
 
 \begin{figure}[t]
 \begin{center}
@@ -827,9 +839,8 @@ The flows derived from the solution of the optimization problem \eqref{eq:flow-c
 \end{center}
 \end{figure}
 
-For the case where $\cK=4$, the results are shown in Figure \ref{fig:security-graph-4-flow}-\ref{fig:workspace-4-flow}. With one additional robot added, there are significant increase in the total cross-trajectory edges covered, and sub-teams performs co-observation with different robots during the task period.
-
-If we further increase $\cK>4$, we do not get a better result; instead, the planner will generate 4 flows with the rest $\cK-4$ flows empty.
+For the case where $\cK=4$, the results are shown in Figure \ref{fig:security-graph-4-flow}-\ref{fig:workspace-4-flow}. With one additional robot added, there is a significant increase in the total cross-trajectory edges covered, and sub-teams performs co-observation with different robots during the task period.
+If we further increase $\cK>4$, we do not get a better result; instead, the planner will generate four flows with the rest $\cK-4$ flows empty. \rtron{Reference Fig. 15}
 
 \begin{figure}[htbp]
 \begin{center}
@@ -839,8 +850,10 @@ If we further increase $\cK>4$, we do not get a better result; instead, the plan
 \end{center}
 \end{figure}
 
+\rtron{Run the ADMM planner again on Fig. 14, and show that you get a $\Phi(q)$ (i.e., better mapping).}
+
 \section{Summary}
-In this paper, we provide a method to enhance the security of a multi-robot system without sacrificing the performance. This is done by introducing additional robots to perform cross-trajectory co-observations by traveling between different trajectories. We model the unsecured multi-robot trajectories as a checkpoint graph by identifying checkpoints that requires observation and cross-trajectory paths that can safely access the checkpoints from different trajectories. We have shown that the co-observation planning problem across different trajectories can be transformed into a multi-flow problem on the graph, and that we can find the minimal number of robot needed to finish the co-observation task.
+In this paper, we provide a method to enhance the security of a multi-robot system without sacrificing the performance. This is done by introducing additional robots to perform cross-trajectory co-observations by traveling between different trajectories. For cases where the secured planning problem is infeasible (or where the user desires to improve the optimality of the trajectories), we model the unsecured multi-robot trajectories as a checkpoint graph by identifying checkpoints that requires observation and cross-trajectory paths that can safely access the checkpoints from different trajectories. We have shown that the co-observation planning problem across different trajectories can be transformed into a multi-flow problem on the graph, and that we can find the minimal number of robot needed to finish the co-observation task.
 
 \appendix
 
