@@ -337,6 +337,11 @@ This region can be analytically bounded via an ellipsoid:
 The region $\cE(q_1,q_2)$ is an ellipsoid with foci at $q_1,q_2$, center $o_{\cE} = \frac{1}{2}(q_1+q_2)$, and the major radius equal to $a$. We denote as $c_\cE=\frac{1}{2}\norm{q_1-q_2}=\norm{o_\cE-q_1}$ the semi-axis distance from the center to a foci.
 The reachability ellipsoid is an over-approximation of the exact reachability region in \Cref{sec:ellipsoidal definition}; the difference between the two is due to the discretization of the trajectory, and the fact that $\cE$ does not consider the presence of obstacles.
 
+Expanding upon the concept of \emph{co-observation} and \emph{reachability}, \Cref{def:secured-plan} can be written as,
+\begin{remark}\label{rmk:revised-security}
+  A multi-robot trajectory is secured against plan-deviation attacks if there exist a co-observation plan such that the reachability region between each consecutive co-observation does not intersect with any forbidden regions.
+\end{remark}
+
 \subsubsection{Transformation to canonical coordinates}\label{sec:rotation2Standard}
 To simplify the problem, we employ a canonical rigid body transformation that repositions the ellipse $\cE$ from the global frame $\cF$ to a canonical frame $\cF_\cE$. 
 
@@ -609,28 +614,20 @@ Our solution shows that planning with reachability and co-observation is a promi
 
 \section{Cross-trajectory co-observation planning}\label{sec:cross-trajectory}
 
-To address the feasibility challenge and performance trade-off of the ADMM problem discussed in \Cref{sec:reachability-discussion}, we propose to form \emph{sub-teams} on each route, and setup additional co-observations both within the sub-team and across different sub-teams (as shown in \Cref{fig:cross-traj-comparison-set})
-These \emph{cross-trajectory co-observations} allow sub-teams to preserve the optimal unsecured trajectories (as shown in Figure \ref{fig:cross-traj-comparison-set}), as it does not require the entire \emph{sub-team} to maintain a close distance with other teams when co-observation occurs. To prevent potential situations where the entire sub-team is compromised and take the advantage of the decentralized blocklist protocol introduced in \cite{wardega2023byzantine} for additional Byzantine resilience, we always prefer \emph{cross-trajectory co-observation} when feasible. 
+To address the feasibility and performance trade-offs of the ADMM problem discussed in \Cref{sec:reachability-discussion}, we propose to form \emph{sub-teams} on each route, and setup additional co-observations both within the sub-team and across different sub-teams (as shown in \Cref{fig:cross-traj-comparison-set}).
+These \emph{cross-trajectory co-observations} allow sub-teams to obtain trajectories that are closer to the optimal (as shown in Figure \ref{fig:cross-traj-comparison-set}), because they do not require the entire \emph{sub-team} to meet with other teams for co-observations, thus providing more flexibility. 
+
+Technically, we can always create a trivial schedule that involves only co-observations between members of the same team; this, however, would make the solution more vulnerable in the case where multiple agents are compromised in the same team. While in this paper we explicitly consider only the single attacker scenario, multi-attacks can be potentially handled by taking advantage of the \emph{decentralized blocklist protocol} introduced in \cite{wardega2023byzantine}. For this reason, we setup the methods presented below to always prefer \emph{cross-trajectory co-observation} when feasible.
+
 
 %\rtronhl{Move to discussion}{In this section, we consider only the high-level path planning, while the assignment of the duties in the team will be performed dynamically, making it more difficult for attackers to successfully plan and execute attacks.}
 
 
 \subsection{Problem overview}
 
-\zyang{change all later te to T}
-\zyang{security or safety?}
+To solve the infeasibility problem like the cases shown in \Cref{fig:ReachabilitySimulation} where a secured co-observation schedule cannot be found without external observation approach (Checkpoint at the buttom right of the map), we first use planner (in this paper, an ADMM-based planner introduced in \Cref{sec:ADMM-planning} is used, but other planners are applicable) to generate $n_p$ routes $\{q_p\}_{p=1}^{N_p}$ without reachability and co-observation constraints. Here, the state $q_p(t), p \in\{\cI_0,\ldots,\cI_{p}\}$ represents the reference position of the $i$-th sub-team at time $t\in\{0, \dots, T\}$. Instead of having the number of robot equal to the number of routes $n_p$, in this section, we assume a total of $n > n_p$ robots are available and organized into \emph{sub-teams} through a time-varying partition $\cI(t)=\union_p \cI_p(t)$ where robots in each \emph{sub-team} $\cI_p$ share the same nominal trajectory. \zyang{refrased}Tasking at least one robot to adhere to the reference trajectory to fulfill essential tasks, we capitalize on the presence of additional $n_p-n$ robots to enhance security. These additional robots are initialized to focus are on performing co-observations within their respective sub-teams and 
 
-In \Cref{sec:ADMM-planning} we assumed that the number of robot is equal to the number of routes $n_p$.
-In this section, we assume that we have a total of $n>n_p$ robots available. During initialization, $n$ robots are formed into \emph{sub-teams} by a time-varying partition $\cI(t)=\union_p \cI_p(t)$ of the robots where robots in each \emph{sub-team} $\cI_p$ share the same nominal trajectory. The planner introduced in \Cref{sec:ADMM-planning} is used to generate $n_p$ routes $\{q_p\}_{p=1}^{N_p}$ \rtronhl{It seems that this obviates the need for Section II; instead phrase it such that we use it to fix the feasibility problems of Section II}{without reachability and co-observation constraints}, where the state $q_p(t), p \in\{\cI_0,\ldots,\cI_{p}\}$ represents the reference position of the $i$-th sub-team at time $t\in\{0, \dots, T\}$. \zyang{should we mention admm is used here but other planners can be used as well?}
-
-\rtronhl{As we discussed, this will become a proposition and moved in the previous section}
-Expanding upon the concept of \emph{co-observation} and \emph{reachability}, \Cref{def:secured-plan} can be written as,
-\begin{remark}\label{rmk:revised-security}
-  A multi-robot trajectory is secured against plan-deviation attacks if there exist a co-observation plan such that the reachability region between each consecutive co-observation does not intersect with any forbidden regions.
-\end{remark}
-
-We capitalize on the presence of additional $n_p-n$ robots to enhance security.
-In scenarios where at least one robot is mandated to adhere to the reference trajectory to fulfill essential tasks, these additional robots' initial focus are on performing co-observations within their respective sub-teams. Whenever necessary, they are designed to seamlessly transition between sub-teams. By deviating from their original sub-team's route and joining teams requiring heightened attention, they become instrumental in providing co-observations at critical junctures. 
+Whenever necessary, they are designed to seamlessly transition between sub-teams. By deviating from their original sub-team's route and joining teams requiring heightened attention, they become instrumental in providing co-observations at critical junctures. 
 
 We refer to the new type of co-observations as \emph{cross-trajectory co-observations}. Our objective is to formulate a cross-trajectory co-observation strategy that fortifies an unsecured Multi-Robot System (MRS) trajectory, while minimizing the number of additional robots required.
 
