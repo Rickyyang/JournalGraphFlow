@@ -57,6 +57,7 @@
 \newlabel{def:secured-plan@cref}{{[definition][1][]1}{[1][2][]2}}
 \newlabel{eq:general-problem}{{1}{2}{Multi-robot trajectory planning with co-observation}{equation.2.1}{}}
 \newlabel{eq:general-problem@cref}{{[equation][1][]1}{[1][2][]2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Preliminaries}{2}{subsection.2.1}\protected@file@percent }
 \citation{householder1958unitary}
 \citation{yang2020multi}
 \citation{Boyd2011}
@@ -71,7 +72,6 @@
 \newlabel{fig:example-application@cref}{{[figure][2][]2}{[1][2][]3}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Continuous world trajectory }}}{3}{subfigure.2.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Grid-world trajectory. }}}{3}{subfigure.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Preliminaries}{3}{subsection.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {II-A}1}Differentials}{3}{subsubsection.2.1.1}\protected@file@percent }
 \newlabel{equ:dt_to_dx}{{2}{3}{Differentials}{equation.2.2}{}}
 \newlabel{equ:dt_to_dx@cref}{{[equation][2][]2}{[1][3][]3}}
@@ -95,14 +95,14 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {II-A}3}Alternating Directions Method of Multipliers (ADMM)}{3}{subsubsection.2.1.3}\protected@file@percent }
 \newlabel{eq:ADMMSetConstraint_modified}{{8}{3}{Alternating Directions Method of Multipliers (ADMM)}{equation.2.8}{}}
 \newlabel{eq:ADMMSetConstraint_modified@cref}{{[equation][8][]8}{[1][3][]3}}
-\newlabel{eq:ADMMupdate}{{9}{4}{Alternating Directions Method of Multipliers (ADMM)}{equation.2.9}{}}
-\newlabel{eq:ADMMupdate@cref}{{[subequation][9][]9}{[1][3][]4}}
-\newlabel{eq:admm-mod-update-q}{{9a}{4}{Alternating Directions Method of Multipliers (ADMM)}{equation.2.9a}{}}
-\newlabel{eq:admm-mod-update-q@cref}{{[subequation][1][9]9a}{[1][3][]4}}
-\newlabel{eq:primal-residual}{{10}{4}{Alternating Directions Method of Multipliers (ADMM)}{equation.2.10}{}}
-\newlabel{eq:primal-residual@cref}{{[equation][10][]10}{[1][4][]4}}
+\newlabel{eq:ADMMupdate}{{9}{3}{Alternating Directions Method of Multipliers (ADMM)}{equation.2.9}{}}
+\newlabel{eq:ADMMupdate@cref}{{[subequation][9][]9}{[1][3][]3}}
+\newlabel{eq:admm-mod-update-q}{{9a}{3}{Alternating Directions Method of Multipliers (ADMM)}{equation.2.9a}{}}
+\newlabel{eq:admm-mod-update-q@cref}{{[subequation][1][9]9a}{[1][3][]3}}
+\newlabel{eq:primal-residual}{{10}{3}{Alternating Directions Method of Multipliers (ADMM)}{equation.2.10}{}}
+\newlabel{eq:primal-residual@cref}{{[equation][10][]10}{[1][3][]3}}
 \newlabel{eq:dual-residual}{{11}{4}{Alternating Directions Method of Multipliers (ADMM)}{equation.2.11}{}}
-\newlabel{eq:dual-residual@cref}{{[equation][11][]11}{[1][4][]4}}
+\newlabel{eq:dual-residual@cref}{{[equation][11][]11}{[1][3][]4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Velocity constraints}{4}{subsection.2.2}\protected@file@percent }
 \newlabel{sec:velocity-constraint}{{\mbox  {II-B}}{4}{Velocity constraints}{subsection.2.2}{}}
 \newlabel{sec:velocity-constraint@cref}{{[subsection][2][2]\mbox  {II-B}}{[1][4][]4}}
@@ -125,18 +125,20 @@
 \newlabel{sec:co-observation-constraint@cref}{{[subsection][5][2]\mbox  {II-E}}{[1][4][]4}}
 \newlabel{constraint:coobservation}{{4}{4}{Co-observation constraint}{constraint.4}{}}
 \newlabel{constraint:coobservation@cref}{{[constraint][4][]4}{[1][4][]4}}
+\newlabel{eq:coobservation_constraint}{{22}{4}{Co-observation constraint}{equation.2.22}{}}
+\newlabel{eq:coobservation_constraint@cref}{{[equation][22][]22}{[1][4][]4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-F}}Definition of ellipsoidal reachability regions}{4}{subsection.2.6}\protected@file@percent }
+\newlabel{sec:reachability}{{\mbox  {II-F}}{4}{Definition of ellipsoidal reachability regions}{subsection.2.6}{}}
+\newlabel{sec:reachability@cref}{{[subsection][6][2]\mbox  {II-F}}{[1][4][]4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces The ellipse showcases the reachability region. The black line is the planned trajectory of a robot, $q_1$ and $q_2$ are two locations this robot are expected at given time $t_1$ and $t_2$, dashed line is a possible trajectory if the robot is compromised after reaching $q_1$. Axis of global frame $\mathcal  {F}$ and canonical frame $\mathcal  {F}_{\mathcal  {E}}$ are shown as $x_{\mathcal  {F}}, y_{\mathcal  {F}}$ and $x_{\mathcal  {E}}, y_{\mathcal  {E}}$ respectively. \relax }}{5}{figure.caption.3}\protected@file@percent }
 \newlabel{fig:EllipseConstraintExample}{{3}{5}{The ellipse showcases the reachability region. The black line is the planned trajectory of a robot, $q_1$ and $q_2$ are two locations this robot are expected at given time $t_1$ and $t_2$, dashed line is a possible trajectory if the robot is compromised after reaching $q_1$. Axis of global frame $\cF $ and canonical frame $\cF _{\cE }$ are shown as $x_{\cF }, y_{\cF }$ and $x_{\cE }, y_{\cE }$ respectively. \relax }{figure.caption.3}{}}
 \newlabel{fig:EllipseConstraintExample@cref}{{[figure][3][]3}{[1][5][]5}}
-\newlabel{eq:coobservation_constraint}{{22}{5}{Co-observation constraint}{equation.2.22}{}}
-\newlabel{eq:coobservation_constraint@cref}{{[equation][22][]22}{[1][4][]5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-F}}Definition of ellipsoidal reachability regions}{5}{subsection.2.6}\protected@file@percent }
-\newlabel{sec:reachability}{{\mbox  {II-F}}{5}{Definition of ellipsoidal reachability regions}{subsection.2.6}{}}
-\newlabel{sec:reachability@cref}{{[subsection][6][2]\mbox  {II-F}}{[1][5][]5}}
 \newlabel{sec:ellipsoidal definition}{{3}{5}{}{definition.3}{}}
 \newlabel{sec:ellipsoidal definition@cref}{{[definition][3][]3}{[1][5][]5}}
 \newlabel{def:Reachability}{{4}{5}{}{definition.4}{}}
 \newlabel{def:Reachability@cref}{{[definition][4][]4}{[1][5][]5}}
+\newlabel{rmk:revised-security}{{1}{5}{}{remark.1}{}}
+\newlabel{rmk:revised-security@cref}{{[remark][1][]1}{[1][5][]5}}
 \newlabel{sec:rotation2Standard}{{\mbox  {II-F}1}{5}{Transformation to canonical coordinates}{subsubsection.2.6.1}{}}
 \newlabel{sec:rotation2Standard@cref}{{[subsubsection][1][2,6]\mbox  {II-F}1}{[1][5][]5}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {II-F}1}Transformation to canonical coordinates}{5}{subsubsection.2.6.1}\protected@file@percent }
@@ -149,9 +151,9 @@
 \citation{yang2021multi,yang2020multi,eberly}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-G}}Point-ellipsoid reachability constraint}{6}{subsection.2.7}\protected@file@percent }
 \newlabel{sec:ellipsoid-point}{{\mbox  {II-G}}{6}{Point-ellipsoid reachability constraint}{subsection.2.7}{}}
-\newlabel{sec:ellipsoid-point@cref}{{[subsection][7][2]\mbox  {II-G}}{[1][6][]6}}
+\newlabel{sec:ellipsoid-point@cref}{{[subsection][7][2]\mbox  {II-G}}{[1][5][]6}}
 \newlabel{eq:point_ellipsoid_constraint}{{32}{6}{Point-ellipsoid reachability constraint}{equation.2.32}{}}
-\newlabel{eq:point_ellipsoid_constraint@cref}{{[equation][32][]32}{[1][6][]6}}
+\newlabel{eq:point_ellipsoid_constraint@cref}{{[equation][32][]32}{[1][5][]6}}
 \newlabel{eq:ellipse-point-projection}{{35}{6}{Point-ellipsoid reachability constraint}{equation.2.35}{}}
 \newlabel{eq:ellipse-point-projection@cref}{{[equation][35][]35}{[1][6][]6}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Point-ellipsoid constraint, a point $q_{avoid}$ inside ellipsoid is projected to the areas outside the ellipsoid $f_{p}$.\relax }}{6}{figure.caption.4}\protected@file@percent }
@@ -168,19 +170,19 @@
 \newlabel{fig:Ellipse-to-plane}{{5}{6}{Plane-ellipse constraint. Projected a ellipsoid to one side of a plane. The projection is simplified to the point-ellipse constraint as projecting a point inside ellipse $p_{L}$ to $p_{t}$ on outside the ellipse.\relax }{figure.caption.5}{}}
 \newlabel{fig:Ellipse-to-plane@cref}{{[figure][5][]5}{[1][6][]6}}
 \newlabel{equ:ProjectPoint}{{43}{7}{}{equation.2.43}{}}
-\newlabel{equ:ProjectPoint@cref}{{[equation][43][]43}{[1][7][]7}}
+\newlabel{equ:ProjectPoint@cref}{{[equation][43][]43}{[1][6][]7}}
 \newlabel{eq:plane_ellipsoid_constraint}{{44}{7}{Plane-ellipsoid reachability constraint}{equation.2.44}{}}
 \newlabel{eq:plane_ellipsoid_constraint@cref}{{[equation][44][]44}{[1][7][]7}}
 \newlabel{equ:plane2ellipse}{{47}{7}{Plane-ellipsoid reachability constraint}{equation.2.47}{}}
 \newlabel{equ:plane2ellipse@cref}{{[equation][47][]47}{[1][7][]7}}
 \newlabel{prop:dpi_ne_dt}{{4}{7}{}{proposition.4}{}}
 \newlabel{prop:dpi_ne_dt@cref}{{[proposition][4][]4}{[1][7][]7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Polygon-ellipse constraint. This constraint is simplified to either a plane-ellipse constraint $D_{1}$ or a point-ellipse constraint $D_{2}$.\relax }}{7}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:Ellipse-to-safezone}{{6}{7}{Polygon-ellipse constraint. This constraint is simplified to either a plane-ellipse constraint $D_{1}$ or a point-ellipse constraint $D_{2}$.\relax }{figure.caption.6}{}}
-\newlabel{fig:Ellipse-to-safezone@cref}{{[figure][6][]6}{[1][7][]7}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-I}}Line-segment-ellipse reachability constraint}{7}{subsection.2.9}\protected@file@percent }
 \newlabel{chapter:ellipse to segment}{{\mbox  {II-I}}{7}{Line-segment-ellipse reachability constraint}{subsection.2.9}{}}
 \newlabel{chapter:ellipse to segment@cref}{{[subsection][9][2]\mbox  {II-I}}{[1][7][]7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Polygon-ellipse constraint. This constraint is simplified to either a plane-ellipse constraint $D_{1}$ or a point-ellipse constraint $D_{2}$.\relax }}{7}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:Ellipse-to-safezone}{{6}{7}{Polygon-ellipse constraint. This constraint is simplified to either a plane-ellipse constraint $D_{1}$ or a point-ellipse constraint $D_{2}$.\relax }{figure.caption.6}{}}
+\newlabel{fig:Ellipse-to-safezone@cref}{{[figure][6][]6}{[1][7][]7}}
 \newlabel{eq:segment_ellipsoid_constraint}{{53}{7}{Line-segment-ellipsoid reachability constraint}{equation.2.53}{}}
 \newlabel{eq:segment_ellipsoid_constraint@cref}{{[equation][53][]53}{[1][7][]7}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-J}}Convex-polygon-ellipse reachability constraint}{7}{subsection.2.10}\protected@file@percent }
@@ -188,42 +190,40 @@
 \newlabel{sec:ellipse-region-constraint@cref}{{[subsection][10][2]\mbox  {II-J}}{[1][7][]7}}
 \newlabel{constraint:polygon-ellipsoid}{{8}{7}{Convex-polygon-ellipsoid reachability constraint}{constraint.8}{}}
 \newlabel{constraint:polygon-ellipsoid@cref}{{[constraint][8][]8}{[1][7][]7}}
+\newlabel{eq:region_ellipsoid_constraint}{{56}{7}{Convex-polygon-ellipsoid reachability constraint}{equation.2.56}{}}
+\newlabel{eq:region_ellipsoid_constraint@cref}{{[equation][56][]56}{[1][7][]7}}
 \citation{wardega2019resilience}
 \citation{wardega2023hola}
 \citation{wardega2023byzantine}
-\newlabel{eq:region_ellipsoid_constraint}{{56}{8}{Convex-polygon-ellipsoid reachability constraint}{equation.2.56}{}}
-\newlabel{eq:region_ellipsoid_constraint@cref}{{[equation][56][]56}{[1][7][]8}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-K}}Secured planning results and limitation}{8}{subsection.2.11}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Simulation result for map exploration task. Reachability regions are shown as black ellipses in the result. Zone 1 is obstacle, Zone 2 and Zone 3 are safe zones\relax }}{8}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:ReachabilitySimulation}{{7}{8}{Simulation result for map exploration task. Reachability regions are shown as black ellipses in the result. Zone 1 is obstacle, Zone 2 and Zone 3 are safe zones\relax }{figure.caption.7}{}}
-\newlabel{fig:ReachabilitySimulation@cref}{{[figure][7][]7}{[1][8][]8}}
 \newlabel{sec:reachability-discussion}{{\mbox  {II-K}1}{8}{Limitations}{subsubsection.2.11.1}{}}
 \newlabel{sec:reachability-discussion@cref}{{[subsubsection][1][2,11]\mbox  {II-K}1}{[1][8][]8}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {II-K}1}Limitations}{8}{subsubsection.2.11.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Simulation result for map exploration task. Reachability regions are shown as black ellipses in the result. Zone 1 is obstacle, Zone 2 and Zone 3 are safe zones\relax }}{8}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:ReachabilitySimulation}{{7}{8}{Simulation result for map exploration task. Reachability regions are shown as black ellipses in the result. Zone 1 is obstacle, Zone 2 and Zone 3 are safe zones\relax }{figure.caption.7}{}}
+\newlabel{fig:ReachabilitySimulation@cref}{{[figure][7][]7}{[1][8][]8}}
 \@writefile{toc}{\contentsline {section}{\numberline {III}Cross-trajectory co-observation planning}{8}{section.3}\protected@file@percent }
 \newlabel{sec:cross-trajectory}{{III}{8}{Cross-trajectory co-observation planning}{section.3}{}}
 \newlabel{sec:cross-trajectory@cref}{{[section][3][]III}{[1][8][]8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Problem overview}{8}{subsection.3.1}\protected@file@percent }
 \citation{yu2013multi}
 \citation{karaman2010incremental}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Problem overview}{9}{subsection.3.1}\protected@file@percent }
-\newlabel{rmk:revised-security}{{1}{9}{}{remark.1}{}}
-\newlabel{rmk:revised-security@cref}{{[remark][1][]1}{[1][9][]9}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Rapidly-exploring Random Trees}{9}{subsection.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Checkpoint graph construction}{9}{subsection.3.3}\protected@file@percent }
 \newlabel{sec:security-checkpoint}{{\mbox  {III-C}1}{9}{Checkpoints}{subsubsection.3.3.1}{}}
 \newlabel{sec:security-checkpoint@cref}{{[subsubsection][1][3,3]\mbox  {III-C}1}{[1][9][]9}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}1}Checkpoints}{9}{subsubsection.3.3.1}\protected@file@percent }
-\newlabel{sec:cross-traj-edges}{{\mbox  {III-C}2}{9}{Cross-trajectory edges}{subsubsection.3.3.2}{}}
-\newlabel{sec:cross-traj-edges@cref}{{[subsubsection][2][3,3]\mbox  {III-C}2}{[1][9][]9}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}2}Cross-trajectory edges}{9}{subsubsection.3.3.2}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Secure Checkpoint Generate for sub-team $p$\relax }}{10}{algorithm.1}\protected@file@percent }
-\newlabel{alg:checkpoint-gen}{{1}{10}{Secure Checkpoint Generate for sub-team $p$\relax }{algorithm.1}{}}
-\newlabel{alg:checkpoint-gen@cref}{{[algorithm][1][]1}{[1][9][]10}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Secure Checkpoint Generate for sub-team $p$\relax }}{9}{algorithm.1}\protected@file@percent }
+\newlabel{alg:checkpoint-gen}{{1}{9}{Secure Checkpoint Generate for sub-team $p$\relax }{algorithm.1}{}}
+\newlabel{alg:checkpoint-gen@cref}{{[algorithm][1][]1}{[1][9][]9}}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Checkpoint generation example\relax }}{10}{figure.caption.8}\protected@file@percent }
 \newlabel{fig:checkpoint-generate}{{8}{10}{Checkpoint generation example\relax }{figure.caption.8}{}}
 \newlabel{fig:checkpoint-generate@cref}{{[figure][8][]8}{[1][9][]10}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{10}{subfigure.8.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{10}{subfigure.8.2}\protected@file@percent }
+\newlabel{sec:cross-traj-edges}{{\mbox  {III-C}2}{10}{Cross-trajectory edges}{subsubsection.3.3.2}{}}
+\newlabel{sec:cross-traj-edges@cref}{{[subsubsection][2][3,3]\mbox  {III-C}2}{[1][9][]10}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}2}Cross-trajectory edges}{10}{subsubsection.3.3.2}\protected@file@percent }
 \newlabel{fig:two-edges}{{9a}{10}{Subfigure 9a}{subfigure.9.1}{}}
 \newlabel{sub@fig:two-edges}{{(a)}{a}{Subfigure 9a\relax }{subfigure.9.1}{}}
 \newlabel{fig:two-edges@cref}{{[subfigure][1][9]9a}{[1][10][]10}}
@@ -233,14 +233,14 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces \Cref  {fig:two-edges}, Latest departure node $q^{d}_{b}$ found for $v_{r1}$ and earliest arrival node $q^{a}_{b}$ found for $v_{r3}$. \Cref  {fig:security-graph-generate}, example of a full checkpoint graph where round vertices are checkpoint generated through the heuristic search and triangle vertices are added with the cross-trajectory edges. Virtual source $v^{+}$ and sink $v^{-}$ are added to be used later in planning problem.\relax }}{10}{figure.caption.9}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Cross-trajectory edge generation}}}{10}{subfigure.9.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Full checkpoint graph}}}{10}{subfigure.9.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces ALL viable path found from a waypoint to all reference trajectories of other sub-teams.\relax }}{10}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:RRT*}{{10}{10}{ALL viable path found from a waypoint to all reference trajectories of other sub-teams.\relax }{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces All viable path found from a waypoint to all reference trajectories of other sub-teams.\relax }}{10}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:RRT*}{{10}{10}{All viable path found from a waypoint to all reference trajectories of other sub-teams.\relax }{figure.caption.10}{}}
 \newlabel{fig:RRT*@cref}{{[figure][10][]10}{[1][10][]10}}
 \newlabel{sec:Graph-intro}{{\mbox  {III-C}3}{10}{In-trajectory edges}{subsubsection.3.3.3}{}}
 \newlabel{sec:Graph-intro@cref}{{[subsubsection][3][3,3]\mbox  {III-C}3}{[1][10][]10}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}3}In-trajectory edges}{10}{subsubsection.3.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Co-observation planning problem}{10}{subsection.3.4}\protected@file@percent }
 \citation{1702662}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Co-observation planning problem}{11}{subsection.3.4}\protected@file@percent }
 \newlabel{eq:flow-coverage-problem}{{60}{11}{Co-observation planning problem}{equation.3.60}{}}
 \newlabel{eq:flow-coverage-problem@cref}{{[subequation][60][]60}{[1][11][]11}}
 \newlabel{eq:flow-cost}{{60a}{11}{Co-observation planning problem}{equation.3.60a}{}}
@@ -258,14 +258,14 @@
 \newlabel{fig:security-graph-3-flow@cref}{{[figure][11][]11}{[1][11][]12}}
 \@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Result of 3 surveillance agents' plan in workspace\relax }}{12}{figure.caption.12}\protected@file@percent }
 \newlabel{fig:workspace-3-flow}{{12}{12}{Result of 3 surveillance agents' plan in workspace\relax }{figure.caption.12}{}}
-\newlabel{fig:workspace-3-flow@cref}{{[figure][12][]12}{[1][12][]12}}
+\newlabel{fig:workspace-3-flow@cref}{{[figure][12][]12}{[1][11][]12}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Summary}{12}{section.4}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Security Graph and result for 4 flows.\relax }}{12}{figure.caption.13}\protected@file@percent }
 \newlabel{fig:security-graph-4-flow}{{13}{12}{Security Graph and result for 4 flows.\relax }{figure.caption.13}{}}
 \newlabel{fig:security-graph-4-flow@cref}{{[figure][13][]13}{[1][12][]12}}
 \@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Result of 3 surveillance agents' plan in work space.\relax }}{12}{figure.caption.14}\protected@file@percent }
 \newlabel{fig:workspace-4-flow}{{14}{12}{Result of 3 surveillance agents' plan in work space.\relax }{figure.caption.14}{}}
 \newlabel{fig:workspace-4-flow@cref}{{[figure][14][]14}{[1][12][]12}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Summary}{12}{section.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{Appendix}{12}{section*.16}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {A}Proof of proposition \ref  {prop:HProperty}}{12}{subsection.Appendix.A.1}\protected@file@percent }
 \newlabel{proof:HProperty}{{A}{12}{Proof of proposition \ref {prop:HProperty}}{subsection.Appendix.A.1}{}}
