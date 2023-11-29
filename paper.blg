@@ -8,46 +8,48 @@ Database file #3: tron.bib
 Warning--string name "arxiv" is undefined
 --line 207 of file tron.bib
 Database file #4: ziqi.bib
+Database file #5: reachability.bib
+Warning--I didn't find a database entry for ""
 Warning--empty note in Tron:Arxiv14
-You've used 18 entries,
+You've used 23 entries,
             1791 wiz_defined-function locations,
-            558 strings with 7184 characters,
-and the built_in function-call counts, 4806 in all, are:
-= -- 461
-> -- 182
-< -- 6
-+ -- 68
-- -- 50
-* -- 290
-:= -- 703
-add.period$ -- 58
-call.type$ -- 18
-change.case$ -- 17
+            593 strings with 8359 characters,
+and the built_in function-call counts, 6501 in all, are:
+= -- 630
+> -- 250
+< -- 8
++ -- 92
+- -- 69
+* -- 421
+:= -- 949
+add.period$ -- 75
+call.type$ -- 23
+change.case$ -- 22
 chr.to.int$ -- 0
-cite$ -- 19
-duplicate$ -- 226
-empty$ -- 473
-format.name$ -- 50
-if$ -- 1121
+cite$ -- 24
+duplicate$ -- 299
+empty$ -- 629
+format.name$ -- 69
+if$ -- 1508
 int.to.chr$ -- 0
-int.to.str$ -- 18
-missing$ -- 16
-newline$ -- 92
-num.names$ -- 18
-pop$ -- 69
+int.to.str$ -- 23
+missing$ -- 22
+newline$ -- 117
+num.names$ -- 23
+pop$ -- 79
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 135
+skip$ -- 174
 stack$ -- 0
-substring$ -- 362
-swap$ -- 83
-text.length$ -- 6
+substring$ -- 532
+swap$ -- 108
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 47
-width$ -- 20
-write$ -- 196
-(There were 2 warnings)
+while$ -- 66
+width$ -- 25
+write$ -- 254
+(There were 3 warnings)

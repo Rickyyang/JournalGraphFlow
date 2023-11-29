@@ -21,12 +21,6 @@ Martin Brunner, Hans Hofinger, Christoph Krau{\ss}, Christopher Roblee,
 \newblock {\em Fraunhofer Institute for Secure Information Technology (SIT),
   Munich}, 2010.
 
-\bibitem{forrest_2017}
-Conner Forrest.
-\newblock Robot kills worker on assembly line, raising concerns about
-  human-robot collaboration.
-\newblock \url{https://tinyurl.com/y2tzg4te}, March 2017.
-
 \bibitem{wardega2019resilience}
 Kacper Wardega, Roberto Tron, and Wenchao Li.
 \newblock Resilience of multi-robot systems to physical masquerade attacks.
@@ -60,6 +54,45 @@ Ziqi Yang and Roberto Tron.
 \newblock Multi-agent path planning under observation schedule constraints.
 \newblock In {\em 2020 IEEE/RSJ International Conference on Intelligent Robots
   and Systems (IROS)}, pages 6990--6997. IEEE, 2020.
+
+\bibitem{gueguen2009safety}
+Herv{\'e} Gu{\'e}guen, Marie-Anne Lefebvre, Janan Zaytoon, and Othman Nasri.
+\newblock Safety verification and reachability analysis for hybrid systems.
+\newblock {\em Annual Reviews in Control}, 33(1):25--36, 2009.
+
+\bibitem{ding2020secure}
+Derui Ding, Qing-Long Han, Xiaohua Ge, and Jun Wang.
+\newblock Secure state estimation and control of cyber-physical systems: A
+  survey.
+\newblock {\em IEEE Transactions on Systems, Man, and Cybernetics: Systems},
+  51(1):176--190, 2020.
+
+\bibitem{kurzhanski2000ellipsoidal}
+Alexander~B Kurzhanski and Pravin Varaiya.
+\newblock Ellipsoidal techniques for reachability analysis.
+\newblock In {\em International workshop on hybrid systems: Computation and
+  control}, pages 202--214. Springer, 2000.
+
+\bibitem{lakhal2019interval}
+Nadhir Mansour~Ben Lakhal, Lounis Adouane, Othman Nasri, and Jaleleddine
+  Ben~Hadj Slama.
+\newblock Interval-based solutions for reliable and safe navigation of
+  intelligent autonomous vehicles.
+\newblock In {\em 2019 12th International Workshop on Robot Motion and Control
+  (RoMoCo)}, pages 124--130. IEEE, 2019.
+
+\bibitem{maiga2015comprehensive}
+Moussa Maiga, Nacim Ramdani, Louise Trav{\'e}-Massuy{\`e}s, and Christophe
+  Combastel.
+\newblock A comprehensive method for reachability analysis of uncertain
+  nonlinear hybrid systems.
+\newblock {\em IEEE Transactions on Automatic Control}, 61(9):2341--2356, 2015.
+
+\bibitem{kwon2017reachability}
+Cheolhyeon Kwon and Inseok Hwang.
+\newblock Reachability analysis for safety assurance of cyber-physical systems
+  against cyber attacks.
+\newblock {\em IEEE Transactions on Automatic Control}, 63(7):2272--2279, 2017.
 
 \bibitem{gammell2014informed}
 Jonathan~D Gammell, Siddhartha~S Srinivasa, and Timothy~D Barfoot.

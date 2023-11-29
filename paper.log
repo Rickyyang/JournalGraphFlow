@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  20 NOV 2023 11:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  29 NOV 2023 19:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1158,13 +1158,13 @@ File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 69.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 66.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 69.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 66.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -1174,16 +1174,23 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 75.
- (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1phv.fd
-File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `phv' (encoding: OT1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
+<Figs//plan-deviation.png, id=173, 398.54779pt x 367.59392pt>
+File: Figs//plan-deviation.png Graphic file (type png)
+<use Figs//plan-deviation.png>
+Package pdftex.def Info: Figs//plan-deviation.png  used on input line 72.
+(pdftex.def)             Requested size: 80.64185pt x 74.37566pt.
+<Figs//co-observ.png, id=175, 398.54779pt x 367.59392pt>
+File: Figs//co-observ.png Graphic file (type png)
+<use Figs//co-observ.png>
+Package pdftex.def Info: Figs//co-observ.png  used on input line 73.
+(pdftex.def)             Requested size: 80.64185pt x 74.37566pt.
+<Figs//cross-traj.png, id=176, 398.54779pt x 367.59392pt>
+File: Figs//cross-traj.png Graphic file (type png)
+<use Figs//cross-traj.png>
+Package pdftex.def Info: Figs//cross-traj.png  used on input line 74.
+(pdftex.def)             Requested size: 80.64185pt x 74.37566pt.
 
-Underfull \vbox (badness 1454) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [1{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
@@ -1191,61 +1198,53 @@ Underfull \vbox (badness 1454) has occurred while \output is active []
 
 
 ]
-<Figs//plan-deviation.png, id=181, 398.54779pt x 367.59392pt>
-File: Figs//plan-deviation.png Graphic file (type png)
-<use Figs//plan-deviation.png>
-Package pdftex.def Info: Figs//plan-deviation.png  used on input line 82.
-(pdftex.def)             Requested size: 80.64185pt x 74.37566pt.
-<Figs//co-observ.png, id=183, 398.54779pt x 367.59392pt>
-File: Figs//co-observ.png Graphic file (type png)
-<use Figs//co-observ.png>
-Package pdftex.def Info: Figs//co-observ.png  used on input line 83.
-(pdftex.def)             Requested size: 80.64185pt x 74.37566pt.
-<Figs//cross-traj.png, id=184, 398.54779pt x 367.59392pt>
-File: Figs//cross-traj.png Graphic file (type png)
-<use Figs//cross-traj.png>
-Package pdftex.def Info: Figs//cross-traj.png  used on input line 84.
-(pdftex.def)             Requested size: 80.64185pt x 74.37566pt.
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 120.
+ (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1phv.fd
+File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
+)
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 125.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 120.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `phv' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <10> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 125.
-<Figs//Example_application.pdf, id=193, 903.375pt x 843.15pt>
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 120.
+<Figs//Example_application.pdf, id=218, 903.375pt x 843.15pt>
 File: Figs//Example_application.pdf Graphic file (type pdf)
 <use Figs//Example_application.pdf>
-Package pdftex.def Info: Figs//Example_application.pdf  used on input line 131.
+Package pdftex.def Info: Figs//Example_application.pdf  used on input line 126.
 (pdftex.def)             Requested size: 113.39923pt x 104.7443pt.
-<Figs//Kacper_result.pdf, id=194, 677.53125pt x 602.25pt>
+<Figs//Kacper_result.pdf, id=219, 677.53125pt x 602.25pt>
 File: Figs//Kacper_result.pdf Graphic file (type pdf)
 <use Figs//Kacper_result.pdf>
-Package pdftex.def Info: Figs//Kacper_result.pdf  used on input line 132.
+Package pdftex.def Info: Figs//Kacper_result.pdf  used on input line 127.
 (pdftex.def)             Requested size: 113.39923pt x 97.03969pt.
- [2 <./Figs//plan-deviation.png> <./Figs//co-observ.png> <./Figs//cross-traj.png>] [3 <./Figs//Example_application.pdf> <./Figs//Kacper_result.pdf>]
+ [2 <./Figs//plan-deviation.png> <./Figs//co-observ.png> <./Figs//cross-traj.png>] [3 <./Figs//Example_application.pdf> <./Figs//Kacper_result.pdf>] [4]
 
-LaTeX Warning: Cref reference format for label type `constraint' undefined on input line 317.
+LaTeX Warning: Cref reference format for label type `constraint' undefined on input line 312.
 
-[4]
-<Figs//Reachability.png, id=311, 551.67938pt x 467.27245pt>
+<Figs//Reachability.png, id=335, 551.67938pt x 467.27245pt>
 File: Figs//Reachability.png Graphic file (type png)
 <use Figs//Reachability.png>
-Package pdftex.def Info: Figs//Reachability.png  used on input line 331.
+Package pdftex.def Info: Figs//Reachability.png  used on input line 326.
 (pdftex.def)             Requested size: 201.60077pt x 116.88933pt.
- [5 <./Figs//Reachability.png>]
-<Figs//Ellipse2point.png, id=341, 170.71654pt x 185.28435pt>
+[5 <./Figs//Reachability.png>]
+<Figs//Ellipse2point.png, id=367, 170.71654pt x 185.28435pt>
 File: Figs//Ellipse2point.png Graphic file (type png)
 <use Figs//Ellipse2point.png>
-Package pdftex.def Info: Figs//Ellipse2point.png  used on input line 418.
+Package pdftex.def Info: Figs//Ellipse2point.png  used on input line 413.
 (pdftex.def)             Requested size: 151.20154pt x 109.53871pt.
-<Figs//Ellipse2line_V2.png, id=348, 170.71654pt x 185.28435pt>
+<Figs//Ellipse2line_V2.png, id=374, 170.71654pt x 185.28435pt>
 File: Figs//Ellipse2line_V2.png Graphic file (type png)
 <use Figs//Ellipse2line_V2.png>
-Package pdftex.def Info: Figs//Ellipse2line_V2.png  used on input line 477.
+Package pdftex.def Info: Figs//Ellipse2line_V2.png  used on input line 472.
 (pdftex.def)             Requested size: 151.20154pt x 126.33931pt.
  [6 <./Figs//Ellipse2point.png> <./Figs//Ellipse2line_V2.png>]
-<Figs//Ellipse2safezone_V2.png, id=380, 170.71654pt x 185.28435pt>
+<Figs//Ellipse2safezone_V2.png, id=404, 170.71654pt x 185.28435pt>
 File: Figs//Ellipse2safezone_V2.png Graphic file (type png)
 <use Figs//Ellipse2safezone_V2.png>
-Package pdftex.def Info: Figs//Ellipse2safezone_V2.png  used on input line 555.
+Package pdftex.def Info: Figs//Ellipse2safezone_V2.png  used on input line 550.
 (pdftex.def)             Requested size: 151.20154pt x 132.9566pt.
  [7 <./Figs//Ellipse2safezone_V2.png>]
 Package epstopdf Info: Source file: <Figs//FinalResult.eps>
@@ -1255,15 +1254,15 @@ Package epstopdf Info: Source file: <Figs//FinalResult.eps>
 (epstopdf)                    date: 2023-04-04 10:02:11
 (epstopdf)                    size: 105831 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figs//FinalResult-eps-converted-to.pdf Figs//FinalResult.eps>
-(epstopdf)             \includegraphics on input line 606.
+(epstopdf)             \includegraphics on input line 601.
 Package epstopdf Info: Output file is already uptodate.
-<Figs//FinalResult-eps-converted-to.pdf, id=427, 677.53125pt x 602.25pt>
+<Figs//FinalResult-eps-converted-to.pdf, id=451, 677.53125pt x 602.25pt>
 File: Figs//FinalResult-eps-converted-to.pdf Graphic file (type pdf)
 <use Figs//FinalResult-eps-converted-to.pdf>
-Package pdftex.def Info: Figs//FinalResult-eps-converted-to.pdf  used on input line 606.
+Package pdftex.def Info: Figs//FinalResult-eps-converted-to.pdf  used on input line 601.
 (pdftex.def)             Requested size: 151.20154pt x 134.39764pt.
  [8 <./Figs//FinalResult-eps-converted-to.pdf>]
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 641.
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 628.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
@@ -1271,72 +1270,75 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `pcr' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 673.
-<Figs//SC_gen_1.png, id=457, 512.55319pt x 410.04256pt>
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 655.
+<Figs//SC_gen_1.png, id=482, 512.55319pt x 410.04256pt>
 File: Figs//SC_gen_1.png Graphic file (type png)
 <use Figs//SC_gen_1.png>
-Package pdftex.def Info: Figs//SC_gen_1.png  used on input line 698.
+Package pdftex.def Info: Figs//SC_gen_1.png  used on input line 680.
 (pdftex.def)             Requested size: 113.39923pt x 90.71643pt.
-<Figs//SC_gen_2.png, id=458, 512.55319pt x 410.04256pt>
+<Figs//SC_gen_2.png, id=483, 512.55319pt x 410.04256pt>
 File: Figs//SC_gen_2.png Graphic file (type png)
 <use Figs//SC_gen_2.png>
-Package pdftex.def Info: Figs//SC_gen_2.png  used on input line 699.
+Package pdftex.def Info: Figs//SC_gen_2.png  used on input line 681.
 (pdftex.def)             Requested size: 113.39923pt x 90.71643pt.
- [9]
-<Figs//two_edges.png, id=490, 389.10457pt x 156.43481pt>
+ [9 <./Figs//SC_gen_1.png> <./Figs//SC_gen_2.png>]
+<Figs//two_edges.png, id=500, 389.10457pt x 156.43481pt>
 File: Figs//two_edges.png Graphic file (type png)
 <use Figs//two_edges.png>
-Package pdftex.def Info: Figs//two_edges.png  used on input line 710.
+Package pdftex.def Info: Figs//two_edges.png  used on input line 694.
 (pdftex.def)             Requested size: 113.39923pt x 45.5893pt.
-<Figs//security_graph.png, id=491, 500.12282pt x 185.45094pt>
+<Figs//security_graph.png, id=501, 500.12282pt x 185.45094pt>
 File: Figs//security_graph.png Graphic file (type png)
 <use Figs//security_graph.png>
-Package pdftex.def Info: Figs//security_graph.png  used on input line 711.
+Package pdftex.def Info: Figs//security_graph.png  used on input line 695.
 (pdftex.def)             Requested size: 113.39923pt x 42.04724pt.
-<Figs//RRT_example_new.png, id=497, 1806.75pt x 1686.3pt>
+<Figs//RRT_example_new.png, id=507, 1806.75pt x 1686.3pt>
 File: Figs//RRT_example_new.png Graphic file (type png)
 <use Figs//RRT_example_new.png>
-Package pdftex.def Info: Figs//RRT_example_new.png  used on input line 722.
+Package pdftex.def Info: Figs//RRT_example_new.png  used on input line 706.
 (pdftex.def)             Requested size: 151.20154pt x 141.10788pt.
- [10 <./Figs//SC_gen_1.png> <./Figs//SC_gen_2.png> <./Figs//two_edges.png> <./Figs//security_graph.png> <./Figs//RRT_example_new.png (PNG copy)>]
+ [10 <./Figs//two_edges.png> <./Figs//security_graph.png> <./Figs//RRT_example_new.png (PNG copy)>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 11 undefined on input line 800.
 
 
-LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 11 undefined on input line 800.
+LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 11 undefined on input line 785.
 
-<Figs//graph_flow_result_3.png, id=525, 1204.5pt x 1686.3pt>
+
+LaTeX Warning: Reference `fig:trajectories-more-constraint' on page 11 undefined on input line 785.
+
+[11]
+<Figs//graph_flow_result_3.png, id=565, 1204.5pt x 1686.3pt>
 File: Figs//graph_flow_result_3.png Graphic file (type png)
 <use Figs//graph_flow_result_3.png>
-Package pdftex.def Info: Figs//graph_flow_result_3.png  used on input line 805.
+Package pdftex.def Info: Figs//graph_flow_result_3.png  used on input line 790.
 (pdftex.def)             Requested size: 100.79846pt x 141.10788pt.
-<Figs//3_flow_result.png, id=526, 1606.0pt x 1405.25pt>
+<Figs//3_flow_result.png, id=566, 1606.0pt x 1405.25pt>
 File: Figs//3_flow_result.png Graphic file (type png)
 <use Figs//3_flow_result.png>
-Package pdftex.def Info: Figs//3_flow_result.png  used on input line 813.
+Package pdftex.def Info: Figs//3_flow_result.png  used on input line 798.
 (pdftex.def)             Requested size: 151.20154pt x 132.29936pt.
-[11]
-<Figs//graph_flow_result_4.png, id=545, 1204.5pt x 1686.3pt>
+<Figs//graph_flow_result_4.png, id=571, 1204.5pt x 1686.3pt>
 File: Figs//graph_flow_result_4.png Graphic file (type png)
 <use Figs//graph_flow_result_4.png>
-Package pdftex.def Info: Figs//graph_flow_result_4.png  used on input line 825.
+Package pdftex.def Info: Figs//graph_flow_result_4.png  used on input line 810.
 (pdftex.def)             Requested size: 100.79846pt x 141.10788pt.
-<Figs//4_flow_result.png, id=546, 1606.0pt x 1405.25pt>
+<Figs//4_flow_result.png, id=572, 1606.0pt x 1405.25pt>
 File: Figs//4_flow_result.png Graphic file (type png)
 <use Figs//4_flow_result.png>
-Package pdftex.def Info: Figs//4_flow_result.png  used on input line 833.
+Package pdftex.def Info: Figs//4_flow_result.png  used on input line 818.
 (pdftex.def)             Requested size: 151.20154pt x 132.29936pt.
-<Figs//nflow_vs_cost.png, id=549, 1232.605pt x 375.4025pt>
+<Figs//nflow_vs_cost.png, id=575, 1232.605pt x 375.4025pt>
 File: Figs//nflow_vs_cost.png Graphic file (type png)
 <use Figs//nflow_vs_cost.png>
-Package pdftex.def Info: Figs//nflow_vs_cost.png  used on input line 844.
+Package pdftex.def Info: Figs//nflow_vs_cost.png  used on input line 829.
 (pdftex.def)             Requested size: 151.20154pt x 46.04878pt.
  [12 <./Figs//graph_flow_result_3.png (PNG copy)> <./Figs//3_flow_result.png (PNG copy)> <./Figs//graph_flow_result_4.png (PNG copy)> <./Figs//4_flow_result.png (PNG copy)> <./Figs//nflow_vs_cost.png (PNG copy)>]
 
-LaTeX Warning: Reference `eq:asymmetric to cross' on page 13 undefined on input line 901.
+LaTeX Warning: Reference `eq:asymmetric to cross' on page 13 undefined on input line 888.
 
 [13] (./paper.bbl
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 85.
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 118.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )) 
@@ -1358,21 +1360,21 @@ Package pageslts Info: Total number of pages is even.
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 14D5AA4570DA9E41D26B4A22EC3ECEF0;2943.
+(rerunfilecheck)             Checksum: 84976A98E58A790B59E576411600C29E;3073.
  ) 
 Here is how much of TeX's memory you used:
- 39641 strings out of 478268
- 780327 string characters out of 5846348
- 1169939 words of memory out of 5000000
- 56444 multiletter control sequences out of 15000+600000
- 535708 words of font info for 394 fonts, out of 8000000 for 9000
+ 39578 strings out of 478268
+ 778968 string characters out of 5846348
+ 1168939 words of memory out of 5000000
+ 56373 multiletter control sequences out of 15000+600000
+ 532254 words of font info for 384 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 119i,20n,111p,1381b,642s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 119i,20n,111p,1807b,551s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (14 pages, 2704587 bytes).
+Output written on paper.pdf (14 pages, 2706744 bytes).
 PDF statistics:
- 757 PDF objects out of 1000 (max. 8388607)
- 638 compressed objects within 7 object streams
- 232 named destinations out of 1000 (max. 500000)
- 84891 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 785 PDF objects out of 1000 (max. 8388607)
+ 666 compressed objects within 7 object streams
+ 240 named destinations out of 1000 (max. 500000)
+ 81835 words of extra memory for PDF output out of 89155 (max. 10000000)
 
