@@ -1,19 +1,5 @@
 \begin{thebibliography}{10}
 
-\bibitem{pajares2015overview}
-Gonzalo Pajares.
-\newblock Overview and current status of remote sensing applications based on
-  unmanned aerial vehicles (uavs).
-\newblock {\em Photogrammetric Engineering \& Remote Sensing}, 81(4):281--330,
-  2015.
-
-\bibitem{julian2012distributed}
-Brian~J Julian, Michael Angermann, Mac Schwager, and Daniela Rus.
-\newblock Distributed robotic sensor networks: An information-theoretic
-  approach.
-\newblock {\em The International Journal of Robotics Research},
-  31(10):1134--1154, 2012.
-
 \bibitem{brunner2010infiltrating}
 Martin Brunner, Hans Hofinger, Christoph Krau{\ss}, Christopher Roblee,
   P~Schoo, and S~Todt.
@@ -55,6 +41,79 @@ Ziqi Yang and Roberto Tron.
 \newblock In {\em 2020 IEEE/RSJ International Conference on Intelligent Robots
   and Systems (IROS)}, pages 6990--6997. IEEE, 2020.
 
+\bibitem{gammell2014informed}
+Jonathan~D Gammell, Siddhartha~S Srinivasa, and Timothy~D Barfoot.
+\newblock Informed rrt*: Optimal sampling-based path planning focused via
+  direct sampling of an admissible ellipsoidal heuristic.
+\newblock In {\em 2014 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems}, pages 2997--3004. IEEE, 2014.
+
+\bibitem{yu2013multi}
+Jingjin Yu and Steven~M LaValle.
+\newblock Multi-agent path planning and network flow.
+\newblock In {\em Algorithmic Foundations of Robotics X: Proceedings of the
+  Tenth Workshop on the Algorithmic Foundations of Robotics}, pages 157--173.
+  Springer, 2013.
+
+\bibitem{liu2014solving}
+Xinfu Liu and Ping Lu.
+\newblock Solving nonconvex optimal control problems by convex optimization.
+\newblock {\em Journal of Guidance, Control, and Dynamics}, 37(3):750--765,
+  2014.
+
+\bibitem{VanParys2016}
+Ruben {Van Parys} and Goele Pipeleers.
+\newblock {Online distributed motion planning for multi-vehicle systems}.
+\newblock {\em 2016 European Control Conference, ECC 2016}, pages 1580--1585,
+  2016.
+
+\bibitem{Schulman2014}
+John Schulman, Yan Duan, Jonathan Ho, Alex Lee, Ibrahim Awwal, Henry Bradlow,
+  Jia Pan, Sachin Patil, Ken Goldberg, and Pieter Abbeel.
+\newblock {Motion planning with sequential convex optimization and convex
+  collision checking}.
+\newblock {\em International Journal of Robotics Research}, 33(9):1251--1270,
+  2014.
+
+\bibitem{mellinger2012mixed}
+Daniel Mellinger, Alex Kushleyev, and Vijay Kumar.
+\newblock Mixed-integer quadratic program trajectory generation for
+  heterogeneous quadrotor teams.
+\newblock In {\em 2012 IEEE international conference on robotics and
+  automation}, pages 477--483. IEEE, 2012.
+
+\bibitem{bento2013message}
+Jos{\'e} Bento, Nate Derbinsky, Javier Alonso-Mora, and Jonathan~S Yedidia.
+\newblock A message-passing algorithm for multi-agent trajectory planning.
+\newblock In {\em Advances in neural information processing systems}, pages
+  521--529, 2013.
+
+\bibitem{tanner2004leader}
+Herbert~G Tanner, George~J Pappas, and Vijay Kumar.
+\newblock Leader-to-formation stability.
+\newblock {\em IEEE Transactions on robotics and automation}, 20(3):443--455,
+  2004.
+
+\bibitem{hu2019distributed}
+Junyan Hu, Parijat Bhowmick, and Alexander Lanzon.
+\newblock Distributed adaptive time-varying group formation tracking for
+  multiagent systems with multiple leaders on directed graphs.
+\newblock {\em IEEE Transactions on Control of Network Systems}, 7(1):140--150,
+  2019.
+
+\bibitem{stern2019multi}
+Roni Stern, Nathan Sturtevant, Ariel Felner, Sven Koenig, Hang Ma, Thayne
+  Walker, Jiaoyang Li, Dor Atzmon, Liron Cohen, TK~Kumar, et~al.
+\newblock Multi-agent pathfinding: Definitions, variants, and benchmarks.
+\newblock In {\em Proceedings of the International Symposium on Combinatorial
+  Search}, volume~10, pages 151--158, 2019.
+
+\bibitem{yu2016optimal}
+Jingjin Yu and Steven~M LaValle.
+\newblock Optimal multirobot path planning on graphs: Complete algorithms and
+  effective heuristics.
+\newblock {\em IEEE Transactions on Robotics}, 32(5):1163--1177, 2016.
+
 \bibitem{gueguen2009safety}
 Herv{\'e} Gu{\'e}guen, Marie-Anne Lefebvre, Janan Zaytoon, and Othman Nasri.
 \newblock Safety verification and reachability analysis for hybrid systems.
@@ -94,13 +153,6 @@ Cheolhyeon Kwon and Inseok Hwang.
   against cyber attacks.
 \newblock {\em IEEE Transactions on Automatic Control}, 63(7):2272--2279, 2017.
 
-\bibitem{gammell2014informed}
-Jonathan~D Gammell, Siddhartha~S Srinivasa, and Timothy~D Barfoot.
-\newblock Informed rrt*: Optimal sampling-based path planning focused via
-  direct sampling of an admissible ellipsoidal heuristic.
-\newblock In {\em 2014 IEEE/RSJ International Conference on Intelligent Robots
-  and Systems}, pages 2997--3004. IEEE, 2014.
-
 \bibitem{anderson2012optimal}
 Brian~DO Anderson and John~B Moore.
 \newblock {\em Optimal filtering}.
@@ -122,13 +174,6 @@ Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, Jonathan Eckstein, et~al.
 David Eberly.
 \newblock Distance from a point to an ellipse, an ellipsoid, or a
   hyperellipsoid, 2013.
-
-\bibitem{yu2013multi}
-Jingjin Yu and Steven~M LaValle.
-\newblock Multi-agent path planning and network flow.
-\newblock In {\em Algorithmic Foundations of Robotics X: Proceedings of the
-  Tenth Workshop on the Algorithmic Foundations of Robotics}, pages 157--173.
-  Springer, 2013.
 
 \bibitem{karaman2010incremental}
 Sertac Karaman and Emilio Frazzoli.
