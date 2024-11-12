@@ -1,5 +1,5 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{Multi-robot\040trajectory\040planning\040with\040co-observation}{}% 2
+\BOOKMARK [1][-]{section.2}{Secured\040Multi-robot\040trajectory\040planning}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Preliminaries}{section.2}% 3
 \BOOKMARK [3][-]{subsubsection.2.1.1}{Differentials}{subsection.2.1}% 4
 \BOOKMARK [3][-]{subsubsection.2.1.2}{Householder\040rotations}{subsection.2.1}% 5
@@ -24,9 +24,9 @@
 \BOOKMARK [2][-]{subsection.3.5}{Co-observation\040performance}{section.3}% 24
 \BOOKMARK [2][-]{subsection.3.6}{Result\040and\040simulation}{section.3}% 25
 \BOOKMARK [1][-]{section.4}{Summary}{}% 26
-\BOOKMARK [1][-]{section*.8}{Appendix}{}% 27
-\BOOKMARK [2][-]{subsection.Appendix.A.1}{Proof\040of\040proposition\0401}{section*.8}% 28
-\BOOKMARK [2][-]{subsection.Appendix.A.2}{Proof\040or\040proposition\0402}{section*.8}% 29
-\BOOKMARK [2][-]{subsection.Appendix.A.3}{Proof\040of\040proposition\0403}{section*.8}% 30
-\BOOKMARK [2][-]{subsection.Appendix.A.4}{Proof\040of\040proposition\0404}{section*.8}% 31
-\BOOKMARK [1][-]{section*.9}{References}{}% 32
+\BOOKMARK [1][-]{section*.7}{Appendix}{}% 27
+\BOOKMARK [2][-]{subsection.Appendix.A.1}{Proof\040of\040proposition\0401}{section*.7}% 28
+\BOOKMARK [2][-]{subsection.Appendix.A.2}{Proof\040or\040proposition\0402}{section*.7}% 29
+\BOOKMARK [2][-]{subsection.Appendix.A.3}{Proof\040of\040proposition\0403}{section*.7}% 30
+\BOOKMARK [2][-]{subsection.Appendix.A.4}{Proof\040of\040proposition\0404}{section*.7}% 31
+\BOOKMARK [1][-]{section*.8}{References}{}% 32

@@ -55,7 +55,7 @@ tron@bu.edu).}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-This paper addresses security challenges in multi-robot systems (MRS) where adversaries may compromise robot control, risking unauthorized access to forbidden areas. We propose a novel multi-robot optimal planning algorithm that integrates mutual observations and introduces \emph{reachability} constraints for enhanced security. This ensures that, even with adversarial movements, compromised robots cannot breach forbidden regions without missing scheduled co-observations. The reachability constraint uses ellipsoidal over-approximation for efficient intersection checking and gradient computation. To enhance system resilience and tackle feasibility challenges, we also introduce \emph{sub-teams}. These cohesive units replace individual robot assignments along each route, enabling redundant robots to deviate for co-observations across sub-teams, securing multiple trajectories without requiring modifications. The planning of cross-trajectory co-observations that maintain security against plan-deviation attacks is sloved by formulating the multi-flow problem on unsecured MRS trajectories. We demonstrate the effectiveness and robustness of our proposed algorithm, which significantly strengthens the security of multi-robot systems in the face of adversarial threats.
+This paper addresses security challenges in multi-robot systems (MRS) where adversaries may compromise robot control, risking unauthorized access to forbidden areas. We propose a novel multi-robot optimal planning algorithm that integrates mutual observations and introduces \emph{reachability} constraints for enhanced security. This ensures that, even with adversarial movements, compromised robots cannot breach forbidden regions without missing scheduled co-observations. The reachability constraint uses ellipsoidal over-approximation for efficient intersection checking and gradient computation. To enhance system resilience and tackle feasibility challenges, we also introduce \emph{sub-teams}. These cohesive units replace individual robot assignments along each route, enabling redundant robots to deviate for co-observations across different trajectories, securing multiple sub-teams without requiring modifications. We formulate the \emph{cross-trajectory co-observation} plan by solving a network flow coverage problem on the checkpoint graph generated from the original unsecured MRS trajectories, providing the same security guarantees against plan-deviation attacks. We demonstrate the effectiveness and robustness of our proposed algorithm, which significantly strengthens the security of multi-robot systems in the face of adversarial threats.
 \end{abstract}
 \begin{IEEEkeywords}
   Multi-robot system, cyber-physical attack, trajectory optimization, reachability analysis, network flow
@@ -94,16 +94,12 @@ In this paper, two main contributions have been presented.
 \end{itemize}
 
 \noindent\myparagraph{Paper Outline}
-The rest of this paper is organized as follows. In \Cref{sec:ADMM-planning}, we begin by providing an overview of the ADMM-based optimal trajectory solver. We then introduced the ellipsoidal reachability region and formulate it to different constraints with respect to different type of forbidden regions. In \Cref{sec:cross-trajectory}, we proposed the formulation of sub-teams and introduced the planning algorithm of the cross-trajectory co-observation planning problem. Finally, in \Cref{sec:summary}, we provide summary of this paper.
+The rest of this paper is organized as follows. \Cref{sec:ADMM-planning}provide an overview of the ADMM-based optimal trajectory solver and introduce the security constraints including co-observation constraints and ellipsoidal reachability constraints. \Cref{sec:cross-trajectory} introduced the enhanced security planning algorithm by the incorporation of redundant robots for cross-trajectory co-observation. \Cref{sec:summary} concludes this article.
 
-\section{Multi-robot trajectory planning with co-observation}\label{sec:ADMM-planning}
+\section{Secured Multi-robot trajectory planning}\label{sec:ADMM-planning}
 
-In this section, we design an inter-robot observation plan (co-observation schedule) to ensures that, during the task period, robots are constantly in proximity to one another according to a schedule, in order to observe and detect potential hazardous behaviors. 
-This is achieved by keeping the potential region that the robots can possibly reach between each consecutive co-observations away from the forbidden regions. 
-\begin{definition}\label{def:secured-plan}
-  A multi-robot trajectory plan is secure again plan-deviation attacks if it ensure that any potential deviations to these forbidden regions will cause the corresponding robot to miss their next co-observation with other robots. 
-\end{definition}
-
+%In this section, we design an inter-robot observation plan (co-observation schedule) to ensures that, during the task period, robots are constantly in proximity to one another according to a schedule, in order to observe and detect potential hazardous behaviors. 
+%This is achieved by keeping the potential region that the robots can possibly reach between each consecutive co-observations away from the forbidden regions. 
 %This problem is first solved by \cite{wardega2019resilience} in grid world for robots with fixed start and goal locations (Figure~\ref{fig:Grid-example-application}) but does not offer the ability to optimize arbitrary smooth cost functions of the trajectories. 
 
 We formulate the planning problem as an optimal trajectory optimization problem to minimize arbitrary smooth objective functions. We denote as $q_{ij}\in\real{m}$ the position of agent $i$ at the discrete-time index $j$, with $m$ representing the dimension of the state space. For a total of $n_p$ robots, and a task time horizon of $T$, a total of $n_p$ trajectories can be represented as an aggregated vector $\vq\in \real{n m T}$. 
@@ -122,13 +118,10 @@ Robots are tasked to navigate, collecting sensory data to construct a correspond
 We associate a Kalman Filter (KF)~(cf. \cite{anderson2012optimal}) to each point $j$, and use it to track the uncertainty through its estimated covariance $P_j$. The updates of the filters are based on measurements from the robot centered at $q$, and we use a Gaussian radial basis function  modeling spatially-varying measurement quality. The optimization objective $\varPhi(\vq)$ is written as the maximum uncertainty $\max_j P_{j}$ (detailed formulation can be found in \cite{yang2020multi}). %The set $\Omega$ includes traditional constraints like bounded velocity, convex obstacles, waypoints to reach with deadlines, in addition to security constraints including co-observation and reachability constraints.
 \end{example}
 
-\begin{figure}
-     \centering
-     \subfloat[Grid-world trajectory. \label{fig:Grid-example-application}]{\includegraphics[width=0.45\linewidth, trim = 2cm 0.5cm 0cm 2cm]{Kacper_result}}
-     \subfloat[Continuous world trajectory \label{fig:SecurityBreak}]{\includegraphics[width=0.45\linewidth, trim = 2cm 2cm 2cm 2cm]{SecurityBreak}}
-     \caption{Trajectory design of an example map exploration task for a three-robot system with start locations and destinations fixed. Task are planned in a $8 \times 8$ grid world. Zone 1 is obstacle, Zone 2 and Zone 3 are safe zones. Fig~\ref{fig:Grid-example-application} shows the planned trajectory with co-observation schedule in grid-world. Fig~\ref{fig:SecurityBreak} shows the unsecured trajectory design in continuous world optimized with respect to a map exploration task where Zone 1 and 2 are considered together as one obstacle.  A potential path that could break the security by entering region 1 is highlighted in dashline.}
-     \label{fig:example-application}
- \end{figure}
+To incorporate the security against malicious deviations (through co-observation and reachability analysis) as constraints in the optimal trajectory planning problem, we define the security as:
+\begin{definition}\label{def:secured-plan}
+  A multi-robot trajectory plan is secure again plan-deviation attacks if it ensure that any potential deviations to these forbidden regions will cause the corresponding robot to miss their next co-observation with other robots. 
+\end{definition}
 
 % This section is organized as follows. We begin with foundational mathematical concepts needed for the optimal trajectory solver and reachability constraints. Subsequently, we integrate security constraints, including co-observation schedule and reachability constraints. Finally, we present the obtained results alongside limitations that are then addressed in \Cref{sec:cross-trajectory}.
 
@@ -227,7 +220,7 @@ Checking the primal residuals alongside with the dual residuals
 after each iteration, the steps are reiterated until convergence when the primal and dual residuals are small, or divergence when primal and dual residual remains large after a fixed number of iterations.
 
 We now provide the functions $D(\vq)$, the sets $\cZ$, and the corresponding projection operators $\Pi_\cZ$ for security constraints including co-observation security constraints (\Cref{sec:co-observation-constraint}), and reachability constraints (\Cref{sec:ellipsoid-point}-\Cref{eq:region_ellipsoid_constraint}). The latter are based on the definition of \emph{ellipse-region-constraint} (\Cref{sec:reachability}).
-Formulation of traditional path planning constraints like velocity constraints, convex obstacle constraints can be found in \cite{yang2020multi}.
+Formulation of traditional path planning constraints like velocity constraints, convex obstacle constraints can be found in \cite{yang2020multi}, thus are omitted in this paper.
 
 % \subsection{Velocity constraints}\label{sec:velocity-constraint}
 % We constraint for the movement of each agent by a maximum velocity defined as the distance in any direction over a single discrete time step. The function $D(\vq)$ returns the velocity vectors for the $i$-th agent at each time step $j$, and constrain its result to a sphere.
@@ -552,9 +545,10 @@ where $D_{seg}$ are the constraint functions for each line segment used to defin
 
 \subsection{Secured planning results and limitation}\label{sec:ADMM-simulation}
 
-In this section, we apply the newly introduced security constraints to a map exploration problem, illustrated in \Cref{fig:example-application}. The algorithm is tested in both simulations and on an experimental testbed, involving a 3-robot system assigned to explore a $10m\times10m$ region with one obstacle, \emph{Zone 1}, and two forbidden zones, \emph{Zone 2} and \emph{Zone 3}. The maximum velocity constraint $v_{max}=0.5m/dt$, time horizon $T=20$. All robots are tasked with collecting sensor information on the vector field, with higher accuracy of sensor data for locations closer to the agent. %robots are expected to follow a boustrophedon pattern (similar to the unconstrained result in Figure~\ref{fig:SecurityBreak}). %We apply the new security constraints on the map exploration problem shown in \Cref{fig:example-application}, test the algorithm in both simulations and an experimental testbed. The 3-robot system is tasked to explore a $10m\times10m$ region with two forbidden regions \emph{Zone 2, 3}. The maximum velocity constraint $v_{max}$ is set to~$0.5m/dt$ a time limit of 20. 
+We test the newly introduced security constraints to a map exploration problem, illustrated in \Cref{fig:example-application} in both simulations and on an experimental testbed, involving a 3-robot system assigned to explore a $10m\times10m$ region with one obstacle, \emph{Zone 1}, and two forbidden zones, \emph{Zone 2} and \emph{Zone 3}. The maximum velocity constraint $v_{max}=0.5m/dt$, time horizon $T=20$. %All robots are tasked with collecting sensor information on the vector field, with higher accuracy of sensor data for locations closer to the agent. %robots are expected to follow a boustrophedon pattern (similar to the unconstrained result in Figure~\ref{fig:SecurityBreak}). %We apply the new security constraints on the map exploration problem shown in \Cref{fig:example-application}, test the algorithm in both simulations and an experimental testbed. The 3-robot system is tasked to explore a $10m\times10m$ region with two forbidden regions \emph{Zone 2, 3}. The maximum velocity constraint $v_{max}$ is set to~$0.5m/dt$ a time limit of 20. 
 
-We employ the APMAPF solver from \cite{wardega2019resilience} to generate a MAPF plan with a co-observation schedule in a grid-world application (Fig.\ref{fig:Grid-example-application}). Agents 1 and 2 need to meet at times 8 and 14, while agents 2 and 3 need to meet at time 18. This result serves as the initial trajectory input for the ADMM solver. This obtained plan is then transformed to a continuous configuration space, addressing map exploration tasks. Co-observation schedules are set up using the APMAPF algorithm for two forbidden regions. Reachability constraints are added to ensure an empty intersection between all robots' reachability regions during co-observations and the forbidden regions. It's important to note that the secured attack-proof solution is initially infeasible in the continues setting, unless additional checkpoints (e.g., stationary security cameras) are incorporated (additional task added for agent 3 to visit the \emph{checkpoint} at time $8$). Further solutions to avoid these checkpoints are discussed in \Cref{sec:cross-trajectory}.
+We employ the APMAPF solver (\cite{wardega2019resilience}) to generate a MAPF plan with a co-observation schedule in a grid-world application (Fig.\ref{fig:Grid-example-application}). %Agents 1 and 2 need to meet at times 8 and 14, while agents 2 and 3 need to meet at time 18. 
+This result serves as the initial trajectory input for the ADMM solver. This obtained plan is then transformed to a continuous configuration space, addressing map exploration tasks. Co-observation schedules are set up using the APMAPF algorithm for two forbidden regions. Reachability constraints are added to ensure an empty intersection between all robots' reachability regions during co-observations and the forbidden regions. It's important to note that the secured attack-proof solution is initially infeasible in the continues setting, unless additional checkpoints (e.g., stationary security cameras) are incorporated (additional task added for agent 3 to visit the \emph{checkpoint} at time $8$). Further solutions to avoid these checkpoints are discussed in \Cref{sec:cross-trajectory}.
 
 The simulation result, shown in Fig.~\ref{fig:ReachabilitySimulation}, displays reachability regions as black ellipsoids, demonstrating empty intersections with Zones 2 and 3. Explicit constraints between reachability regions and obstacles are not activated, assuming basic obstacle avoidance capabilities in robots. The intersections between obstacles and ellipsoids, as observed between agent 3 and Zone 1, are deemed tolerable. All constraints are satisfied, and agents have effectively spread across the map for optimal exploration tasks.
 
@@ -567,14 +561,23 @@ The simulation result, shown in Fig.~\ref{fig:ReachabilitySimulation}, displays 
 
 %Based on the schedule, reachability for agent 1 in-between the scheduled co-observations are constrained. Notice that additional checkpoint (i.e. stationary security camera) need to be incorporated in order to generated an attack-proof solution. Additional solutions to avoid these checkpoints will be discussed in \Cref{sec:cross-trajectory}.  
 %The result of the simulation is shown in Fig.~\ref{fig:ReachabilitySimulation}. The reachability regions are shown as black ellipsoids, and we can show that all of them have empty intersections with Zone 2 and 3. Notice that no explicit constraints have been enabled between reachability regions and obstacles, because we assume that robots have the basic obstacle avoidance capability and can not go through any hard obstacles. Therefore, the intersections between obstacles and ellipsoids, i.e. the case here between agent 3 and zone 1, are tolerable. All constraints have been satisfied and, to the best of their capability, agents have spread out across the map to perform the best possible exploration task. 
-
 \begin{figure}
-\begin{center}
-  \includegraphics[width=0.6\linewidth,trim =1cm 1.5cm 1cm 1.5cm, clip]{FinalResult}
-  \caption{Securd result using co-observation and reachability constraints.}
-\label{fig:ReachabilitySimulation}
-\end{center}  
+  \centering
+  \subfloat[Grid-world trajectory. \label{fig:Grid-example-application}]{\includegraphics[width=0.45\linewidth, trim = 2cm 0.5cm 0cm 2cm]{Kacper_result}}
+  \subfloat[Continuous world trajectory \label{fig:SecurityBreak}]{\includegraphics[width=0.45\linewidth, trim = 2cm 2cm 2cm 2cm]{SecurityBreak}}
+
+  \subfloat[Securd result \label{fig:ReachabilitySimulation}]{\includegraphics[width=0.6\linewidth,trim =1cm 1.5cm 1cm 1.5cm, clip]{FinalResult}}
+  \caption{Trajectory design of an example map exploration task for a three-robot system with start locations and destinations fixed. Task are planned in a $8 \times 8$ grid world. Zone 1 is obstacle, Zone 2 and Zone 3 are safe zones. \Cref{fig:Grid-example-application} shows the planned trajectory with co-observation schedule in grid-world. \Cref{fig:SecurityBreak} shows the unsecured trajectory design in continuous world optimized with respect to a map exploration task where Zone 1 and 2 are considered together as one obstacle.  A potential path that could break the security by entering region 1 is highlighted in dashline. \Cref{fig:ReachabilitySimulation} shows the secured trajectory with the incorporation of co-observation and reachability constraints.}
+  \label{fig:example-application}
 \end{figure}
+
+% \begin{figure}
+% \begin{center}
+%   \includegraphics[width=0.6\linewidth,trim =1cm 1.5cm 1cm 1.5cm, clip]{FinalResult}
+%   \caption{Securd result using co-observation and reachability constraints.}
+% \label{fig:ReachabilitySimulation}
+% \end{center}  
+% \end{figure}
 
 % \begin{figure}[htbp]
 % \centering
@@ -783,9 +786,10 @@ We then test the proposed method for a 4-team and 7-team case with result shown 
 % \end{figure}
 
 \section{Summary}\label{sec:summary}
-This paper introduces security measures to protect Multi-Robot Systems (MRS) from plan-deviation attacks. By incorporating co-observation schedules and ensuring the reachability of robots during unobserved periods avoid forbidden regions, we present a secured trajectory optimized for specific scenarios. This guarantees that any deviations into forbidden regions will break the schedule and trigger detection. In scenarios where a secured plan is infeasible or better task performance is needed, we propose the use of redundant robots for cross-trajectory co-observations. We formulate the co-observation plan for the redundant robots by solving a network flow coverage problem on the checkpoint graph generated from the original unsecured MRS trajectories, providing the same security guarantees against plan-deviation attacks.
 
-However, given the time-sensitive nature of co-observation and the need for close proximity, collision avoidance during co-observation planning becomes crucial. Future work will focus on integrating collision avoidance into the planning phase. Additionally, dynamic assignment of duties within sub-teams will be explored, making it more challenging for attackers to plan and execute successful attacks. Real-time task assignment and control will be a key area of investigation
+This paper introduces security measures for protecting Multi-Robot Systems (MRS) from plan-deviation attacks. We establish a mutual observation schedule to ensure that any deviations into forbidden regions break the schedule, triggering detection. Co-observation requirements and reachability analysis are incorporated into the trajectory planning phase, formulated as constraints for the optimal problem. In scenarios where a secured plan is infeasible or enhanced task performance is necessary, we propose using redundant robots for cross-trajectory co-observations, offering the same security guarantees against plan-deviation attacks. However, the time-sensitive and proximity-dependent nature of co-observation necessitates a focus on collision avoidance during planning. Future work will integrate collision avoidance and explore dynamic duty assignments within sub-teams, increasing the challenge for potential attackers.
+
+%This paper introduces security measures to protect Multi-Robot Systems (MRS) from plan-deviation attacks by setting up mutual obversation schedule to guarangee that any deviations into forbidden regions will break the schedule and trigger detection. We incorporate the co-observation requirements and reachability analysis into the trajectory planning phase and formulate them as constraints for the optimal problem. In scenarios where a secured plan is infeasible or better task performance is needed, we propose the use of redundant robots for cross-trajectory co-observations, providing the same security guarantees against plan-deviation attacks. However, given the time-sensitive nature of co-observation and the need for close proximity, collision avoidance during co-observation planning becomes crucial. Future work will focus on integrating collision avoidance into the planning phase. Additionally, dynamic assignment of duties within sub-teams will be explored, making it more challenging for attackers to plan and execute successful attacks. 
 
 %In this paper, we provide methods to enhance the security of a MRS against plan-deviation attacks. First, by introducing co-observation schedule and keeping reachability region during unobserved periods away from the forbidden regions, we provide an secured trajectory optimized for certain scenarios with guarantees that any deviations to forbidden regions will for sure break the schedule and get detected. Additionally, for scenarios that requires better task performance or when a secured plan is not feasible, we introduce redundant robots to performs cross-trajectory co-observations that can provide any unsecured MRS trajectories with the same security guarantee.
 
