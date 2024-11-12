@@ -81,6 +81,7 @@ However, such plans are not guaranteed to exist, and the secured trajectory alwa
 \noindent\myparagraph{Related research} Trajectory planning problem of MRS systems remained as a subject of intense study for many decades, and optimization is a common approaches in such area. Optimization based approaches are customizable to a variable of constraints (e.g. speed limit, avoid obstacles) and task specifications (e.g. maximum surveillance coverage, minimal energy cost). In constract to our work in \Cref{sec:ADMM-planning}, many motion planning tasks require a non-convex constraint problem formulation, most contributors focused on convex problems, and only allow for a few types of pre-specified non-convex constraints through convexification\cite{liu2014solving}\cite{VanParys2016}\cite{Schulman2014}. Several optimization techniques like MIQP~\cite{mellinger2012mixed} and ADMM~\cite{bento2013message} have been used to reduce computational complexity, and to incorporate more complex non-convex constraints.
 
 Graph-based search is another extensively explored approach in trajectory planning problems, such as formation control \cite{tanner2004leader,hu2019distributed} and Multi-Agent Path Finding (MAPF) problems \cite{stern2019multi}. In traditional MAPF formulations, environments are abstracted as graphs, with nodes representing positions and edges denoting possible transitions between positions and solved as a network flow problem \cite{yu2013multi,yu2016optimal}. This formulation allows for the application of combinatorial network flow algorithms and linear program techniques, offering efficient and more flexible solutions to the planning problem. %In contrast with such approach, our research in \Cref{sec:cross-trajectory} abstracts the existing Multi-Robot System (MRS) trajectory (instead of the environment) into a directed graph and formulates the cross-trajectory co-observation paths as flows.
+\rtron{Cite the paper from the reviewer, as well as the paper from Tedrake on the IRIS decomposition, saying that ellipsoids have been used to create approximations of the free configuration space, not to bound reacheability, and not for security application here.}
 
 In \Cref{sec:ADMM-planning}, we incorporate reachability constraints to increase overall security Reachability analysis is a important step in the security and safety verification synthesis for cyber-physical systems (CPSs) \cite{gueguen2009safety,ding2020secure}. One typical approach involves computing an over-approximation of the reachable space for checking safety properities. Previous studies \cite{kurzhanski2000ellipsoidal,lakhal2019interval,maiga2015comprehensive} often use geometric representation, such as zonotopes and ellipsoids, as a compact enclosure of the reachability sets. In the realm of online safety assessment against cyber attacks, \cite{kwon2017reachability} computed the reachable set of CPS states achievable by potential cyber attacks and compared it with the safe region, set based on current state estimation and environmental conditions. 
 
@@ -101,11 +102,12 @@ The rest of this paper is organized as follows. In \Cref{sec:ADMM-planning}, we 
 In this section, we design an inter-robot observation plan (co-observation schedule) to ensures that, during the task period, robots are constantly in proximity to one another according to a schedule, in order to observe and detect potential hazardous behaviors. 
 This is achieved by keeping the potential region that the robots can possibly reach between each consecutive co-observations away from the forbidden regions. 
 \begin{definition}\label{def:secured-plan}
-  A multi-robot trajectory plan is secure again plan-deviation attacks if it ensure that any potential deviations to these forbidden regions will cause the corresponding robot to miss their next co-observation with other robots. 
+  A multi-robot trajectory plan is secure again plan-deviation attacks if it ensures that any potential deviations to these forbidden regions will cause the corresponding robot to miss their next co-observation with other robots. 
 \end{definition}
 
 %This problem is first solved by \cite{wardega2019resilience} in grid world for robots with fixed start and goal locations (Figure~\ref{fig:Grid-example-application}) but does not offer the ability to optimize arbitrary smooth cost functions of the trajectories. 
 
+\rtron{Clarify when we use bold symbols. Make sure this is used consistently.}
 We formulate the planning problem as an optimal trajectory optimization problem to minimize arbitrary smooth objective functions. We denote as $q_{ij}\in\real{m}$ the position of agent $i$ at the discrete-time index $j$, with $m$ representing the dimension of the state space. For a total of $n_p$ robots, and a task time horizon of $T$, a total of $n_p$ trajectories can be represented as an aggregated vector $\vq\in \real{n m T}$. 
 The overall goal is to minimize or maximize an objective function $\varPhi(\vq)$ under a set of nonlinear constraints described by a set $\Omega$, which is given by the intersection of spatio-temporal sets given by traditional path planning constraintsand the security constraints (co-observation schedule, reachability analysis). Formally:
 \begin{equation}\label{eq:general-problem}
@@ -120,6 +122,7 @@ To give a concrete example of the cost $\varPhi$ and the set $\Omega$, we introd
 \begin{example} 
 Robots are tasked to navigate, collecting sensory data to construct a corresponding map for the slowly-varying field, denoted as $\vx$, of an unknown environment (see Figure~\ref{fig:SecurityBreak}). The map comprises points of interest arranged on a grid, each associated with a slowly-changing value. Our goal is to find paths that minimize uncertainty and effectively reconstruct the field. 
 We associate a Kalman Filter (KF)~(cf. \cite{anderson2012optimal}) to each point $j$, and use it to track the uncertainty through its estimated covariance $P_j$. The updates of the filters are based on measurements from the robot centered at $q$, and we use a Gaussian radial basis function  modeling spatially-varying measurement quality. The optimization objective $\varPhi(\vq)$ is written as the maximum uncertainty $\max_j P_{j}$ (detailed formulation can be found in \cite{yang2020multi}). %The set $\Omega$ includes traditional constraints like bounded velocity, convex obstacles, waypoints to reach with deadlines, in addition to security constraints including co-observation and reachability constraints.
+\rtron{Relate to Fig. 2}
 \end{example}
 
 \begin{figure}
@@ -146,7 +149,7 @@ With a slight abuse of notation, we use the same notation $\partial_xf$ for the 
  \subsubsection{Householder rotations}\label{sec:householder}
   We define a differentiable transformation to a canonical ellipse that is used in the derivation of the reachability constraints in \Cref{sec:reachability,sec:ellipse-region-constraint}. This transformation includes a rotation derived from a modified version of Householder transformations \cite{householder1958unitary}. With respect to the standard definition, our modification ensures that the final operator is a proper rotation (i.e., not a reflection). We call our version of the operator a \emph{Householder rotation}. In this section we derive Householder rotations and their differentials for the 3-D case; the 2-D case can be easily obtained by embedding it in the $z=0$ plane.
 
-  \begin{definition} Let $\nu_\cF$ and $\nu_\cE$ be two unitary vectors ($\norm{\nu_\cF}=\norm{\nu_\cE}=1$). Define the normalized vector $u$ as
+  \begin{definition} Let $\nu_\cF$ and $\nu_\cE$ be two unitary vectors ($\norm{\nu_\cF}=\norm{\nu_\cE}=1$). \rtron{Add the explicit dependency of $u$, $u'$ on $\nu_F,\nu_E$.} Define the normalized vector $u$ as
     \begin{equation}
       u'=\nu_\cF+\nu_\cE,\quad u =\frac{u'}{\norm{u'}}.
     \end{equation}
@@ -155,7 +158,7 @@ With a slight abuse of notation, we use the same notation $\partial_xf$ for the 
       H(\nu_\cF,\nu_\cE) = 2 u u\transpose-I.
     \end{equation}
   \end{definition}
-  Here $H$ is a rotation mapping $\hat{\nu_\cF}$ to $\hat{\nu_\cE}$, as shown by the following.
+  Here $H$ is a rotation mapping \rtronhl{Remove hats}{$\hat{\nu_\cF}$ to $\hat{\nu_\cE}$}, as shown by the following.
   \begin{proposition}\label{prop:HProperty}
     The matrix $H$ has the following properties:
     \begin{enumerate}
@@ -225,6 +228,7 @@ Checking the primal residuals alongside with the dual residuals
 	\vs^{k}=-\rho(\vz^{k}-\vz^{k-1})
 \end{equation}
 after each iteration, the steps are reiterated until convergence when the primal and dual residuals are small, or divergence when primal and dual residual remains large after a fixed number of iterations.
+\rtron{Maybe state here that (9a) is solved iteratively, while (9b) and (9c) are closed-form.}
 
 We now provide the functions $D(\vq)$, the sets $\cZ$, and the corresponding projection operators $\Pi_\cZ$ for security constraints including co-observation security constraints (\Cref{sec:co-observation-constraint}), and reachability constraints (\Cref{sec:ellipsoid-point}-\Cref{eq:region_ellipsoid_constraint}). The latter are based on the definition of \emph{ellipse-region-constraint} (\Cref{sec:reachability}).
 Formulation of traditional path planning constraints like velocity constraints, convex obstacle constraints can be found in \cite{yang2020multi}.
@@ -301,11 +305,11 @@ In this section, we define \emph{ellipsoidal reachability regions} based on pair
 %The reachability region is defined as the set of locations $q(t)$ that a robot can reach between two given fixed positions:
 
 \begin{definition}\label{sec:ellipsoidal definition}
-	The \emph{reachability region} for two waypoints $q(t_1)=q_1$, $q(t_2)=q_2$ is defined as the sets of points $q'$ in the workspace such that there exist a trajectory $q(t)$ where $q(t')=q'$, $t_1\leq t' \leq t_2$ and $q(t)$ satisfies the velocity constraint $d(q(t),q(t+1))\leq v_{max}$.
+	The \emph{reachability region} for two waypoints $q(t_1)=q_1$, $q(t_2)=q_2$ is defined as the sets of points $q'$ in the \rtronhl{free configuration space}{workspace} such that there exist a \rtronhl{this $q$ should be probably $q_{dev}$ or something similar, to distinguish it from the planned $q$}{trajectory $q(t)$ where $q(t')=q'$, $t_1\leq t' \leq t_2$ and $q(t)$ satisfies the velocity constraint $d(q(t),q(t+1))\leq v_{max}$}\rtron{, where $d(\cdot,\cdot)$ represents the distance between two points}. 
 \end{definition}
 This region can be analytically bounded via an ellipsoid:
 \begin{definition}\label{def:Reachability}
-	The \emph{reachability ellipsoid $\cE$} is defined as the region  $\mathcal{E}(q_1,q_2,t_{1},t_{2})=\{\tilde{q}\in\mathbb{R}^n: d(q_1,\tilde{q})+d(\tilde{q}+q_2)<2a\}$, where $a=\frac{v_{maq}}{2}(t_2-t_1)$.
+	The \emph{reachability ellipsoid $\cE$} is defined as the region  $\mathcal{E}(q_1,q_2,t_{1},t_{2})=\{\tilde{q}\in\mathbb{R}^n: d(q_1,\tilde{q})+d(\tilde{q}+q_2)<2a\}$, where $a=\frac{v_{max}}{2}(t_2-t_1)$.
 \end{definition}
 
  \begin{figure}
@@ -323,7 +327,7 @@ This region can be analytically bounded via an ellipsoid:
     \label{fig:Reachability_full}
   \end{figure}
 
-The region $\cE(q_1,q_2)$ is an ellipsoid with foci at $q_1,q_2$, center $o_{\cE} = \frac{1}{2}(q_1+q_2)$, and the major radius equal to $a$. We denote as $c_\cE=\frac{1}{2}\norm{q_1-q_2}=\norm{o_\cE-q_1}$ the semi-axis distance from the center to a foci. This reachability ellipsoid is an over-approximation of the exact reachability region in \Cref{sec:ellipsoidal definition}.
+The region $\cE(q_1,q_2)$ is an ellipsoid with foci at $q_1,q_2$, center $o_{\cE} = \frac{1}{2}(q_1+q_2)$, and the major radius equal to $a$. We denote as $c_\cE=\frac{1}{2}\norm{q_1-q_2}=\norm{o_\cE-q_1}$ the semi-axis distance from the center to a foci. This reachability ellipsoid is an over-approximation of the exact reachability region in \Cref{sec:ellipsoidal definition} \rtron{because the ellipsoid does not consider obstacles}.
 
 Expanding upon the concept of \emph{co-observation} and \emph{reachability}, \Cref{def:secured-plan} can be written as,
 \begin{remark}\label{rmk:revised-security}
@@ -593,6 +597,7 @@ Our solution demonstrates the potential of planning with reachability and co-obs
 \section{Cross-trajectory co-observation planning}\label{sec:cross-trajectory}
 To address the feasibility and performance trade-offs, we propose to form \emph{sub-teams} on each route, and setup additional co-observations both within the sub-team and across different sub-teams. These \emph{cross-trajectory co-observations} allow sub-teams to obtain trajectories that are closer to the optimal (as shown in Figure \ref{fig:cross-traj-comparison-set}), because they do not require the entire \emph{sub-team} to meet with other teams for co-observations, thus providing more flexibility.
 \subsection{Problem overview}
+\rtron{Move definition of Checkpoint somewhere in this section}
 %To solve the infeasibility problem like the cases shown in \Cref{fig:ReachabilitySimulation} where a secured co-observation schedule cannot be found without external observation approach (Checkpoint at the buttom right of the map),
 We start with an unsecured MRS trajectory with $n_p$ routes $\{q_p\}_{p=1}^{N_p}$ (the ADMM-based planner in \Cref{sec:ADMM-planning} without security constraints is used, but other planners are applicable). Here, the state $q_p(t), p \in\{\cI_0,\ldots,\cI_{p}\}$ represents the reference position of the $i$-th sub-team at time $t\in\{0, \dots, T\}$. Introducing redundant robots into the MRS, we assume a total of $n > n_p$ robots are available and organized into \emph{sub-teams} through a time-varying partition $\cI(t)=\union_p \cI_p(t)$ where robots in each \emph{sub-team} $\cI_p$ share the same nominal trajectory. To ensure the fulfillment of essential tasks, at least one robot is assigned to adhere to the reference trajectory. The remaining redundant $n_p-n$ robots are strategically utilized to enhance security. These robots focus on co-observations either within their respective sub-teams, or when necessary, deviate and join another sub-team to provide necessary co-observations. The objective of this problem is to formulate a strategy for this new co-observation strategy, named \emph{cross-trajectory co-observation} that the resulting MRS plan meet the security in \Cref{rmk:revised-security} while minimizing the number of additional robots required. 
 
@@ -617,7 +622,7 @@ Our objective here is to ascertain the existence of feasible paths instead of op
 In this section, we define and search for security checkpoints and how to use \rrtstar{} to construct the checkpoint graph $G_{q}$.
 
 \subsubsection{Checkpoints}\label{sec:security-checkpoint}
-Let $q_p\in\real{nT}$ represent the trajectory for sub-team $p$ with time horizon $T$, where $q_{p}(t) \in \real{n}$ denotes the reference waypoint at time $t$. We identify checkpoints within $q_p$ that require co-observations for securty, as outlined in \Cref{rmk:revised-security}. Checkpoint $v_{pi}=(q_{pi},t_{i})$ signifies a required co-observation for sub-team $p$, defined by a location $q_{pi}=q_{p}(t_i)$ and time $t_{i}$. For simplicity, let $\cI_{v_{i}}$ denote the sub-team to which $v_{i}$ belongs, and $q_{v_{pi}} =q_{pi}$ and $t_{v_{pi}}$ be the corresponding waypoint and time for checkpoint $v_{pi}$. To ensure the security of the reference trajectory, the reachability region between consecutive checkpoints must avoid intersections with forbidden areas. This requirement can be formally stated as:
+Let $q_p\in\real{nT}$ represent the trajectory for sub-team $p$ with time horizon $T$, where $q_{p}(t) \in \real{n}$ denotes the reference waypoint at time $t$. \rtronhl{We need to put this in a formal definition of checkpoint that appears the first time we mention them}{We identify checkpoints within $q_p$ that require co-observations for securty,} as outlined in \Cref{rmk:revised-security}. Checkpoint $v_{pi}=(q_{pi},t_{i})$ signifies a required co-observation for sub-team $p$, defined by a location $q_{pi}=q_{p}(t_i)$ and time $t_{i}$. For simplicity, let $\cI_{v_{i}}$ denote the sub-team to which $v_{i}$ belongs, and $q_{v_{pi}} =q_{pi}$ and $t_{v_{pi}}$ be the corresponding waypoint and time for checkpoint $v_{pi}$. To ensure the security of the reference trajectory, the reachability region between consecutive checkpoints must avoid intersections with forbidden areas. This requirement can be formally stated as:
 
 %Let $q_p\in\real{nT}$ be the MRS trajectory for sub-team $p$ with time horizon $T$, with $q_{p}(t) \in \real{n}$ be the reference waypoint at time $t$. We locate checkpoints among $q_p$ that requires co-observations in order for the MRS trajectories to be secured as defined in \Cref{rmk:revised-security}. Checkpoint $v_{pi}=(q_{pi},t_{i})$ representing a required co-observation for sub-team $p$ composed of a location $q_{pi}=q_{p}(t_i)$ and a time $t_{i}$. For convenience, let $\cI_{v_{i}}$ represent the sub-team that $v_{i}$ belongs to, and let $q_{v_{pi}} =q_{pi}$ and $t_{v_{pi}}$ be the corresponding waypoint and time for checkpoint $v_{pi}$. To secure the reference trajectory for one sub-team, the reachability region between consecutive checkpoints can not intersect with any of the forbidden areas. This requirement can be formally stated as:
 
@@ -629,7 +634,7 @@ A heuristic approach is provided (\Cref{alg:checkpoint-gen}) to locate the check
 
 
 \begin{algorithm}
-  \caption{Secure Checkpoint Generate for sub-team $p$}\label{alg:checkpoint-gen}
+  \caption{Secure Checkpoint Generation for a Sub-Team $p$}\label{alg:checkpoint-gen}
   \begin{algorithmic}
   \State $v_{p0} \gets (q_{p}(0),0)$; $v_{pT} \gets (q_{p}(T),T)$
   \State $V_{p} = \{v_{p0}, v_{pT}\}$
@@ -650,6 +655,7 @@ A heuristic approach is provided (\Cref{alg:checkpoint-gen}) to locate the check
     \EndIf
   \EndWhile
   \end{algorithmic}
+  \rtron{It is probably better to substitute this with a description in words. If you want to keep the pseudocode, move it to the appendix.}
   \end{algorithm}
 
 % \begin{figure}
