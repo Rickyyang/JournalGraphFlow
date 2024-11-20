@@ -146,6 +146,13 @@ C.~Kwon and I.~Hwang, ``Reachability analysis for safety assurance of
   cyber-physical systems against cyber attacks,'' \emph{IEEE Transactions on
   Automatic Control}, vol.~63, no.~7, pp. 2272--2279, 2017.
 
+\bibitem{gammell2014informed}
+J.~D. Gammell, S.~S. Srinivasa, and T.~D. Barfoot, ``Informed rrt*: Optimal
+  sampling-based path planning focused via direct sampling of an admissible
+  ellipsoidal heuristic,'' in \emph{2014 IEEE/RSJ International Conference on
+  Intelligent Robots and Systems}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE,
+  2014, pp. 2997--3004.
+
 \bibitem{deits2015computing}
 R.~Deits and R.~Tedrake, ``Computing large convex regions of obstacle-free
   space through semidefinite programming,'' in \emph{Algorithmic Foundations of
@@ -170,20 +177,9 @@ D.~Fan, Q.~Liu, C.~Zhao, K.~Guo, Z.~Yang, X.~Yu, and L.~Guo, ``Flying in narrow
   spaces: Prioritizing safety with disturbance-aware control,'' \emph{IEEE
   Robotics and Automation Letters}, 2024.
 
-\bibitem{gammell2014informed}
-J.~D. Gammell, S.~S. Srinivasa, and T.~D. Barfoot, ``Informed rrt*: Optimal
-  sampling-based path planning focused via direct sampling of an admissible
-  ellipsoidal heuristic,'' in \emph{2014 IEEE/RSJ International Conference on
-  Intelligent Robots and Systems}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE,
-  2014, pp. 2997--3004.
-
 \bibitem{anderson2012optimal}
 B.~D. Anderson and J.~B. Moore, \emph{Optimal filtering}.\hskip 1em plus 0.5em
   minus 0.4em\relax Courier Corporation, 2012.
-
-\bibitem{householder1958unitary}
-A.~S. Householder, ``Unitary triangularization of a nonsymmetric matrix,''
-  \emph{Journal of the ACM (JACM)}, vol.~5, no.~4, pp. 339--342, 1958.
 
 \bibitem{Boyd2011}
 S.~Boyd, N.~Parikh, E.~Chu, B.~Peleato, J.~Eckstein \emph{et~al.},
@@ -208,6 +204,10 @@ S.~Karaman and E.~Frazzoli, ``Incremental sampling-based algorithms for optimal
 S.~Ntafos and S.~Hakimi, ``On path cover problems in digraphs and applications
   to program testing,'' \emph{IEEE Transactions on Software Engineering}, vol.
   SE-5, no.~5, pp. 520--529, 1979.
+
+\bibitem{householder1958unitary}
+A.~S. Householder, ``Unitary triangularization of a nonsymmetric matrix,''
+  \emph{Journal of the ACM (JACM)}, vol.~5, no.~4, pp. 339--342, 1958.
 
 \bibitem{Tron:Arxiv14}
 R.~Tron and K.~Daniilidis, ``Technical report on optimization-based
