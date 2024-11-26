@@ -251,26 +251,31 @@ d_{max}\frac{\vz}{\norm{\vz}} &\text{if } \norm{\vz} > d_{max},\\
 \vz	& otherwise,
 \end{cases}
 \end{align}
-where $a,b$ are the indices of the pair of agents required for a mutual inspection, \zyanghl{Any better ways?}{$d_{max}$ is the constant maximum distance between a pair of robots to perform co-observation which depends on the co-observation method.}
+where $a,b$ are the indices of the pair of agents required for a mutual inspection, \zyang{Any better ways?} \new{$d_{max}$ is the constant maximum distance between a pair of robots to perform co-observation which depends on the co-observation method.}
 \end{constraint}
 The locations $q_{aj}$ and $q_{bj}$ where the co-observation is performed are computed as part of the optimization.
 
 \subsection{Definition of ellipsoidal reachability regions}\label{sec:reachability}
-In this section, we define \emph{ellipsoidal reachability regions} based on pairs of co-observation locations on a trajectory, and a transformation of such region in axis-aligned form. Different types of reachability constraints (between an ellipsoid and different geometric entities such as a point, line, line segment, and polygon) alongside their projections, and differentials are introduced in subsequent sections. Together with the co-observation constraint~\ref{constraint:coobservation}, these will be used in the ADMM formulation of \cref{chapter:ADMM review} to provide security for all observed and unobservered periods.
 
+\new{In this section, we define \emph{ellipsoidal reachability regions} with respect to a pair of locations along a trajectory. Subsequently, we introduce various reachability constraints involving an ellipsoid and other geometric entities, such as points, lines, line segments, and polygons. These constraints, combined with the co-observation constraint~\ref{constraint:coobservation}, form the basis of the secured ADMM planning presented in \cref{chapter:ADMM review}.
+}
+% In this section, we define \emph{ellipsoidal reachability regions} based on pairs of co-observation locations on a trajectory, and a transformation of such region in axis-aligned form. Different types of reachability constraints (between an ellipsoid and different geometric entities such as a point, line, line segment, and polygon) alongside their projections, and differentials are introduced in subsequent sections. Together with the co-observation constraint~\ref{constraint:coobservation}, these will be used in the ADMM formulation of \cref{chapter:ADMM review} to provide security for all observed and unobservered periods.
 %The reachability region is defined as the set of locations $q(t)$ that a robot can reach between two given fixed positions:
-
+{\news
 \begin{definition}\label{sec:ellipsoidal definition}
-  \new{ \zyanghl{is this enough? since ellipsoids is defined later}{Let robot $i$ starting from $q_{1}$ at time $t_1$ and reaching $q_{2}$ at time $t_2$. The \emph{reachability region} between $t_1$ and $t_2$ is defined as the set of points $q'$ in the free configuration space such that there exists a trajectory that contains $q'$ while satisfies the dynamic constraints.}}
+Let robot $i$ starting from $q_{1}$ at time $t_1$ and reaching $q_{2}$ at time $t_2$. The \emph{reachability region} between $t_1$ and $t_2$ is defined as the set of points $q'$ in the free configuration space such that there exists a trajectory that contains $q'$ while satisfies the dynamic constraints.
 	% The \emph{reachability region} for two waypoints $q(t_1)=q_1$, $q(t_2)=q_2$ is defined as the sets of points $q'$ in the \new{free configuration space} such that there exist a \rtronhl{this $q$ should be probably $q_{dev}$ or something similar, to distinguish it from the planned $q$}{trajectory $q(t)$ where $q(t')=q'$, $t_1\leq t' \leq t_2$ and $q(t)$ satisfies the velocity constraint $d(q(t),q(t+1))\leq v_{max}$}\rtron{, where $d(\cdot,\cdot)$ represents the distance between two points}. 
 \end{definition}
-\new{If only considering the maximum velocity constraint, this region can be analytically bounded via an ellipsoid:}
-\begin{definition}\label{def:Reachability}
-	The \emph{reachability ellipsoid $\cE$} is defined as the region  $\mathcal{E}(q_1,q_2,t_{1},t_{2})=\{\tilde{q}\in\mathbb{R}^n: d(q_1,\tilde{q})+d(\tilde{q}+q_2)<2a\}$, where $a=\frac{v_{max}}{2}(t_2-t_1)$, where $d(\cdot,\cdot)$ represents the euclidean distance between two points.
-\end{definition}
+When considering only the velocity constraint, the \emph{reachability} set for $q'$ can be simplified as $\mathcal{E}=\{q'\in\mathbb{R}^n: d(q_1,q')+d(q'q_2)<v_{max}(t_2-t_1)\}$, where $d(\cdot,\cdot)$ denotes the Euclidean distance between two points.
 \begin{remark}
-  \zyang{add analysis}
+  The set $\mathcal{E}$ represents a region bounded by the sum of distances from $q'$ to two fixed points $q_1$ and $q_2$. Geometrically, this describes an ellipsoid-like shape where the sum of distances from any point on the boundary $q'\in \{q'\in\mathbb{R}^n: d(q_1,q')+d(q'q_2)=v_{max}(t_2-t_1)\}$ to $q_1,q_2$ is constant.\zyang{is this redundant?}
 \end{remark}
+To make this connection explicit, we defined the \emph{reachability ellipsoid $\cE$} as:}
+\begin{definition}\label{def:Reachability}
+	The reachability ellipsoid $\cE$ is defined as the region $\mathcal{E}(q_1,q_2,t_{1},t_{2})=\{\tilde{q}\in\mathbb{R}^n: d(q_1,\tilde{q})+d(\tilde{q},q_2)<2a\}$, where $a=\frac{v_{max}}{2}(t_2-t_1)$.
+\end{definition}
+\zyanghl{is this part still needed?}{The region $\cE(q_1,q_2)$ is an ellipsoid with foci at $q_1,q_2$, center $o_{\cE} = \frac{1}{2}(q_1+q_2)$, and the major radius equal to $a$. We denote as $c_\cE=\frac{1}{2}\norm{q_1-q_2}=\norm{o_\cE-q_1}$ the semi-axis distance from the center to a foci.}
+
  \begin{figure}
     \centering
     \subfloat[Showcase of a reachability region\label{fig:EllipseConstraintExample}]{\includegraphics[width=0.47\linewidth, trim = 2cm 2.5cm 2cm 5cm]{Reachability}}
@@ -286,9 +291,7 @@ In this section, we define \emph{ellipsoidal reachability regions} based on pair
     \label{fig:Reachability_full}
   \end{figure}
 
-The region $\cE(q_1,q_2)$ is an ellipsoid with foci at $q_1,q_2$, center $o_{\cE} = \frac{1}{2}(q_1+q_2)$, and the major radius equal to $a$. We denote as $c_\cE=\frac{1}{2}\norm{q_1-q_2}=\norm{o_\cE-q_1}$ the semi-axis distance from the center to a foci. This reachability ellipsoid is an over-approximation of the exact reachability region in \Cref{sec:ellipsoidal definition}. \new{Notice that the ellipsoid does not consider obstacles}.\zyang{asked for a proof?}
-
-Expanding upon the concept of \emph{co-observation} and \emph{reachability}, \Cref{def:secured-plan} can be written as,
+{\news For a robot be observed at $p_1$, $t_1$, if the reachability ellipsoid $\cE(q_1,q_2)$ does not intersect with any forbidden region, any deviation to a point $p_o$ outside $\cE(q_1,q_2)$ will cause the robot unable to be observed at $p_2$, $t_2$. Notice that the intersection with obstacles are not considered here.} Expanding upon the concept of \emph{co-observation} and \emph{reachability}, \cref{def:secured-plan} can be written as,
 \begin{remark}\label{rmk:revised-security}
   A multi-robot trajectory is secured against plan-deviation attacks if there exist a co-observation plan such that the reachability region between each consecutive co-observation does not intersect with any forbidden regions.
 \end{remark}
@@ -326,7 +329,7 @@ D(\vq) &=  \begin{cases}
 \end{align}
 \end{constraint}
 
-\zyang{move $q_{avoid}, a$ to somewhere else to avoid confusion?}where $\pi_{p\cE}(q_{avoid};q_1,q_2,a) = q_p$ is a projection function that returns a projected point $q_p$ of $q_{avoid}$ outside the ellipse, i.e., as the solution to
+where $\pi_{p\cE}(q_{avoid};q_1,q_2,a) = q_p$ is a projection function that returns a projected point $q_p$ of $q_{avoid}$ outside the ellipse, i.e., as the solution to
 \begin{equation}\label{eq:ellipse-point-projection}
 \pi_{p\cE}=\argmin_{q_p\in\cE^c} \quad \norm{q_{avoid}-q_p}^2 
 \end{equation}
@@ -531,19 +534,18 @@ To address the feasibility and performance trade-offs, we propose to form \emph{
 \subsection{Problem overview}
 We start with an unsecured MRS trajectory with $n_p$ routes $\{q_p\}_{p=1}^{N_p}$ (the ADMM-based planner in \cref{sec:ADMM-planning} without security constraints is used, but other planners are applicable). Here, the state $q_p(t), p \in\{\cI_0,\ldots,\cI_{p}\}$ represents the reference position of the $i$-th sub-team at time $t\in\{0, \dots, T\}$. Introducing redundant robots into the MRS, we assume a total of $n > n_p$ robots are available and organized into \emph{sub-teams} through a time-varying partition $\cI(t)=\union_p \cI_p(t)$ where robots in each \emph{sub-team} $\cI_p$ share the same nominal trajectory. To ensure the fulfillment of essential tasks, at least one robot is assigned to adhere to the reference trajectory. The remaining redundant $n_p-n$ robots are strategically utilized to enhance security. These robots focus on co-observations either within their respective sub-teams, or when necessary, deviate and join another sub-team to provide necessary co-observations. The objective of this problem is to formulate a strategy for this new co-observation strategy, named \emph{cross-trajectory co-observation} that the resulting MRS plan meet the security in \cref{rmk:revised-security} while minimizing the number of additional robots required. 
 
-{\news First, we introduce the idea of \emph{checkpoint}.
+{\news \zyang{this version right?} To avoid confusion, \zyanghl{Can i do this? since qp is a matrix}{let $q_{p}(t)\in \real{m}$ denotes the reference waypoint for sub-team $p$ at time $t$.} We introduce \emph{checkpoint}s to devide the trajectory into observed and un-observed sections. 
 \begin{definition}
-  Checkpoints are a subset of waypoints along a trajectory for a robot team. At each checkpoint, the robot following the trajectory is observed by at least one other robot. Checkpoints are chosen to ensure that the reachability region between any two consecutive checkpoints does not intersect with any forbidden regions.
+The $i$th checkpoint $v_{pi}=(q_{pi},t_{i})$ for sub-team $p$ is defined by waypoint $q_{pi}=q_{p}(t_i)$ and time $t_{i}$ where robot is observed one (or both) of its adjacent waypoints $q_{p}(t_i-1)$ and $q_{p}(t_i+1)$.
 \end{definition}
+For simplicity, let $\cI_{v_{i}}$ denote the sub-team to which $v_{i}$ belongs, and $q_{v_{pi}} =q_{pi}$ and $t_{v_{pi}}$ be the corresponding waypoint and time for checkpoint $v_{pi}$. To ensure the security of the reference trajectory, the reachability region between consecutive checkpoints must avoid intersections with forbidden regions. This requirement can be formally stated as:
 }
-We model the planned trajectory $\{q_p\}_{p=1}^{N_p}$ as a directed \emph{checkpoint graph} $G{q}=(V_{q}, E_{q})$, where vertices $V_{q}$ represent key locations requiring co-observation (as required by \Cref{rmk:revised-security}), and edges $E_{q} = E_{t} \union E_{c}$ connect pairs of vertices if possible paths exist. Inspired by \cite{yu2013multi}, additional robots in the sub-team are treated as flows in the checkpoint graph. This transforms the co-observation planning problem into a network multi-flow problem, solvable with general Mixed-Integer Linear Programming techniques.
-
-%To solve this problem, we model the planned trajectory $\{q_p\}_{p=1}^{N_p}$ as a directed \emph{checkpoint graph} $G_{q}=(V_{q}, E_{q})$. Vertices $V_{q}$ are a key locations in $\{q_p\}$ that requires co-observation as described in \Cref{rmk:revised-security}. Edges $E_{q} = E_{t} \union E_{c}$ consists of directed edges connecting $V_i$ to $V_j$ if there exist possible paths between the corresponding locations. Inspired by \cite{yu2013multi}, we show that additional robots in the sub-team can be formulated as flows in the checkpoint graph, transforming the co-observation planning problem into a network multi-flow problem that can be solved using general Mixed-Intiger Linear Programming techniques as specialized solver. 
+We model the planned trajectory $\{q_p\}_{p=1}^{N_p}$ as a directed \emph{checkpoint graph} $G{q}=(V_{q}, E_{q})$, where vertices $V_{q}$ are checkpoints and edges $E_{q} = E_{t} \union E_{c}$ connect pairs of vertices if possible paths exist. Inspired by~\cite{yu2013multi}, additional robots in the sub-team are treated as flows in the checkpoint graph. This transforms the co-observation planning problem into a network multi-flow problem, solvable with general Mixed-Integer Linear Programming techniques.
 
 This section presents the two components of our approach: constructing the checkpoint graph based on unsecured multi-robot trajectories, and the formulation and solution of the network multi-flow problem.
 
 \subsection{Rapidly-exploring Random Trees}
-To find edges between different nominal trajectories, we use the \rrtstar{} \cite{karaman2010incremental} algorithm to find paths from a waypoint on one trajectory to multiple destination points (i.e., reference trajectories of other sub-teams, in our method). As a optimal path planning algorithm, \rrtstar{} returns the shortest paths between an initial location and points in the free configuration space, organized as a tree. We assume that the generated paths can be travelled in both directions (this is used later in our analysis). 
+To find edges between different nominal trajectories, we use the \rrtstar{}~\cite{karaman2010incremental} algorithm to find paths from a waypoint on one trajectory to multiple destination points (i.e., reference trajectories of other sub-teams, in our method). As a optimal path planning algorithm, \rrtstar{} returns the shortest paths between an initial location and points in the free configuration space, organized as a tree. We assume that the generated paths can be travelled in both directions (this is used later in our analysis). 
 Key functions from \rrtstar{} that are also used during constructions of the checkpoint graph are
 \begin{description}
 \item[$\texttt{Cost}(v)$] This function assigns a non-negative cost (total travel distance in our application) to the unique path from the initial position to $v$ . 
@@ -557,10 +559,7 @@ Our objective here is to ascertain the existence of feasible paths instead of op
 In this section, we define and search for security checkpoints and how to use \rrtstar{} to construct the checkpoint graph $G_{q}$.
 
 \subsubsection{Checkpoints}\label{sec:security-checkpoint}
-Let $q_p\in\real{mT}$ represent the trajectory for sub-team $p$ with time horizon $T$, where $q_{p}(t) \in \real{m}$ denotes the reference waypoint at time $t$. We identify checkpoints within $q_p$ that require co-observations for securty, as outlined in \Cref{rmk:revised-security}. Checkpoint $v_{pi}=(q_{pi},t_{i})$ signifies a required co-observation for sub-team $p$, defined by a location $q_{pi}=q_{p}(t_i)$ and time $t_{i}$. For simplicity, let $\cI_{v_{i}}$ denote the sub-team to which $v_{i}$ belongs, and $q_{v_{pi}} =q_{pi}$ and $t_{v_{pi}}$ be the corresponding waypoint and time for checkpoint $v_{pi}$. To ensure the security of the reference trajectory, the reachability region between consecutive checkpoints must avoid intersections with forbidden regions. This requirement can be formally stated as:
-
-%Let $q_p\in\real{nT}$ be the MRS trajectory for sub-team $p$ with time horizon $T$, with $q_{p}(t) \in \real{n}$ be the reference waypoint at time $t$. We locate checkpoints among $q_p$ that requires co-observations in order for the MRS trajectories to be secured as defined in \Cref{rmk:revised-security}. Checkpoint $v_{pi}=(q_{pi},t_{i})$ representing a required co-observation for sub-team $p$ composed of a location $q_{pi}=q_{p}(t_i)$ and a time $t_{i}$. For convenience, let $\cI_{v_{i}}$ represent the sub-team that $v_{i}$ belongs to, and let $q_{v_{pi}} =q_{pi}$ and $t_{v_{pi}}$ be the corresponding waypoint and time for checkpoint $v_{pi}$. To secure the reference trajectory for one sub-team, the reachability region between consecutive checkpoints can not intersect with any of the forbidden areas. This requirement can be formally stated as:
-
+{\news To ensure the security of the un-observed part of the trajectory, the reachability region between consecutive checkpoints must avoid intersections with forbidden regions. This requirement can be formally stated as:}
 \begin{remark}
 A set of checkpoints $V_{p}=\{ v_{p0}, \dots ,v_{pT}\}$ (arranged in ascending order of $t_{v_{pi}}$) can secure the reference trajectory for sub-team $p$, if $\mathcal{E}(q_{v_{pi}}, q_{v_{p(i+1)}}, t_{v_{pi}},t_{v_{p(i+1)}}) \intersect F = \emptyset$ for every $i$, where $F$ is the union of all forbidden regions.
 \end{remark}
