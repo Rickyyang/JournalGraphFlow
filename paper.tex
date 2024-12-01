@@ -70,7 +70,7 @@ Multi-robot systems (MRS) have found wide applications in various fields. While 
 
 A preliminary version of the paper was presented in \cite{yang2020multi,yang2021multi}. Extending the grid-world solution from \cite{wardega2019resilience} to continuous configuration spaces, we incorporate the co-observation planning as constraints in \new{the alternating direction method of multipliers (ADMM)}-based trajectory optimization solver to accomodate for more flexible objectives. In this paper, we incorporate additional reachability analysis during the planning phase, incorporating constraints based on sets of locations that agents could potentially reach, referred to as \emph{reachability regions}, as a novel perspective to the existing literature. This approach enforces an empty intersection between forbidden regions and the reachability region during trajectory optimization, preventing undetected attacks if an adversary gains control of the robots. We utilize an ellipsoidal boundary to constrain the search space and formulate the ellipsoid as the reachability region constraint. We present a mathematical formulation of reachability regions compatible with the solver in \cite{yang2020multi} as a spatio-temporal constraint. 
 
-However, such plans are not guaranteed to exist, and the secured trajectory always come at the cost of overall system performance. As an extension of the previous works \cite{yang2020multi,yang2021multi}, we also address the feasibility and optimality challenges. For a MRS with unsecured optimal trajectories (without security constraints), we introduce redundant robots and formed them into \emph{sub-teams} with the original ones. These redundant robots are assigned the task of establishing additional co-observations, termed \emph{cross-trajectory co-observations}, within and across different sub-teams. The proposed algorithm focuses on the movement plans for the additional robots, distinct from those dedicated to task objectives, indicating when they should stay with their current sub-team and when they should deviate to join another. This strategy allows sub-teams to preserve the optimal unsecured trajectories (as illustrated in Figure \ref{fig:cross-traj-comparison-set}) without requiring the entire \emph{sub-team} to maintain close proximity to other teams during co-observation events. The cross-trajectory co-observation problem is transformed as a multi-agent path finding problem on roadmap (represented as directed graph) and solved as a network flow problem \cite{yu2013multi}.
+However, such plans are not guaranteed to exist, and the secured trajectory always come at the cost of overall system performance. As an extension of the previous works \cite{yang2020multi,yang2021multi}, we also address the feasibility and optimality challenges. For a MRS with unsecured optimal trajectories (without security constraints), we introduce redundant robots and formed them into \emph{sub-teams} with the original ones. These redundant robots are assigned the task of establishing additional co-observations, termed \emph{cross-trajectory co-observations}, within and across different sub-teams. The proposed algorithm focuses on the movement plans for the additional robots, distinct from those dedicated to task objectives, indicating when they should stay with their current sub-team and when they should deviate to join another. This strategy allows sub-teams to preserve the optimal unsecured trajectories (as illustrated in \cref{fig:cross-traj-comparison-set}) without requiring the entire \emph{sub-team} to maintain close proximity to other teams during co-observation events. The cross-trajectory co-observation problem is transformed as a multi-agent path finding problem on roadmap (represented as directed graph) and solved as a network flow problem \cite{yu2013multi}.
 
 \begin{figure}
 	\centering
@@ -102,7 +102,7 @@ The rest of this paper is organized as follows. \Cref{sec:ADMM-planning} introdu
 In this paper, we use non-bold symbols like to denote single-agent states (e.g. $q_{ij}$) and scalers, while bold symbols represent aggregated states involving single robot or multiple robots (e.g. $\vq$). 
 
 \section{Secured Multi-robot trajectory planning}\label{sec:ADMM-planning}
-We formulate the planning problem as an optimal trajectory optimization problem to minimize arbitrary smooth objective functions. {\news \zyang{is this right?}We denote the trajectory as $\vq_i = [q_{i0}\dots q_{iT}]\in\real{m\times T}$ where $q_{ij}\in\real{m}$ is the waypoint of agent $i$ in a $m$ dimensional state space. For a total of $n_p$ robots, trajectories can be represented as an aggregated vector $\vq = \stack(\vq_1,\dots,\vq_{n_p})\in \real{m n_p\times T}$, where $\stack(\cdot)$ denotes the vertical stacking operation. }
+We formulate the planning problem as an optimal trajectory optimization problem to minimize arbitrary smooth objective functions. {\news We denote the trajectory as $\vq_i = [q_{i0}\dots q_{iT}]\in\real{m\times T}$ where $q_{ij}\in\real{m}$ is the waypoint of agent $i$ in a $m$ dimensional state space and $T$ is the time horizon. For a total of $n_p$ robots, trajectories can be represented as an aggregated vector $\vq = \stack(\vq_1,\dots,\vq_{n_p})\in \real{m n_p\times T}$, where $\stack(\cdot)$ denotes the vertical stacking operation. }
 \new{The overall goal is to minimize or maximize an objective function $\varPhi(\vq):\real{n m T} \to \real{}$ under a set of nonlinear constraints described by a set $\Omega$, which is given by the intersection of spatio-temporal sets given by traditional path planning constraintsand the security constraints (co-observation schedule, reachability analysis).} Formally:
 \begin{equation}\label{eq:general-problem}
 	\begin{split}
@@ -134,18 +134,16 @@ To incorporate the security against malicious deviations (through co-observation
   A multi-robot trajectory plan is \new{secured against} plan-deviation attacks if it \new{ensures} that any potential deviations to these forbidden regions will cause the corresponding robot to miss their next co-observation with other robots. 
 \end{definition}
 
-% This section is organized as follows. We begin with foundational mathematical concepts needed for the optimal trajectory solver and reachability constraints. Subsequently, we integrate security constraints, including co-observation schedule and reachability constraints. Finally, we present the obtained results alongside limitations that are then addressed in \Cref{sec:cross-trajectory}.
-
 \subsection{Preliminaries}
 \subsubsection{Differentials}
-We define the differential of a map $f(x):\real{m}\to\real{n}$ at a point $x_0$ as the unique matrix $\partial_x f \in\real{n\times m}$ such that
+\new{We define the differential of a map $f(x):\real{d_1}\to\real{d_2}$ at a point $x_0$ as the unique matrix $\partial_x f \in\real{d_1\times d_2}$ such that}
 \begin{equation}\label{equ:dt_to_dx}
   \left.\dert f\bigl(x(t)\bigr)\right|_{t=0}=\partial_x f\bigl(x(0)\bigr) \dot{x}(0)
 \end{equation}
-where $t\mapsto x(t)\in\real{n}$ is a smooth parametric curve such that $x(0)=x$ with any arbitrary tangent $\dot{x}(0)$. For brevity we will use $\dot f$ for $\dert f$ and $\partial_x f$ for $\frac{\partial f}{\partial x}$. 
+where $t\mapsto x(t)\in\real{d_1}$ is a smooth parametric curve such that $x(0)=x$ with any arbitrary tangent $\dot{x}(0)$. For brevity we will use $\dot f$ for $\dert f$ and $\partial_x f$ for $\frac{\partial f}{\partial x}$. 
 %The differentials $\partial_x f$ is derived through \eqref{equ:dt_to_dx} having $\dot f$ divided by $\dot x$.
 
-\new{With a slight abuse of notation, we use the same notation $\partial_xf$ for the differential of a matrix-valued function with scalar arguments\zyang{need double check for dim} $f:\real{m\times n\times T}\to\real{l}$.  Note that in this case \eqref{equ:dt_to_dx} is still formally correct, although the RHS needs to be interpreted as applying $\partial_x f$ as a linear operator to $\dot{x}$.}
+\new{With a slight abuse of notation, we use the same notation $\partial_xf$ for the differential of a matrix-valued function with scalar arguments $f:\real{d_1 \times d_3}\to\real{d_2}$.  Note that in this case \eqref{equ:dt_to_dx} is still formally correct, although the RHS needs to be interpreted as applying $\partial_x f$ as a linear operator to $\dot{x}$.}
 
 \subsubsection{Alternating Directions Method of Multipliers (ADMM)}\label{chapter:ADMM review}
 The basic idea of the ADMM-based solver introduced in \cite{yang2020multi} is to separate the constraints from the objective function using a different set of variables $\vz$, and then solve separately in \eqref{eq:general-problem}.
@@ -251,7 +249,7 @@ d_{max}\frac{\vz}{\norm{\vz}} &\text{if } \norm{\vz} > d_{max},\\
 \vz	& otherwise,
 \end{cases}
 \end{align}
-where $a,b$ are the indices of the pair of agents required for a mutual inspection, \zyang{Any better ways?} \new{$d_{max}$ is the constant maximum distance between a pair of robots to perform co-observation which depends on the co-observation method.}
+where $a,b$ are the indices of the pair of agents required for a mutual inspection, \new{$d_{max}$ is the maximum distance between a pair of robots that the secure can be ensured through co-observation.}
 \end{constraint}
 The locations $q_{aj}$ and $q_{bj}$ where the co-observation is performed are computed as part of the optimization.
 
@@ -271,9 +269,7 @@ For simplicity, in this paper we consider only a maximum velocity constraint $v_
 \begin{definition}\label{def:Reachability}
 	The \emph{reachability ellipsoid $\cE$} is defined as the region $\mathcal{E}(q_1,q_2,t_{1},t_{2})=\{\tilde{q}\in\mathbb{R}^n: d(q_1,\tilde{q})+d(\tilde{q},q_2)<2a\}$, where $a=\frac{v_{max}}{2}(t_2-t_1)$.
 \end{definition}
-This region is an ellipsoid because it represents the set of points $q'$ whose sum of distances two \emph{foci} $q_1$ and $q_2$ is less then $2a$, where a is the major radius of the ellipsoid. \rtronhl{It seems we do not use $c_\cE$ in the main text, move to the appendix where it is used}{We denote as $c_\cE=\frac{1}{2}\norm{q_1-q_2}=\norm{o_\cE-q_1}$ the semi-axis distance from the center to a foci.}}
-
- %Geometrically, this describes an ellipsoid shape where the sum of distances from any point on the boundary $q'\in \{q'\in\mathbb{R}^n: d(q_1,q')+d(q'q_2)=v_{max}(t_2-t_1)\}$ to $q_1,q_2$ is constant.\zyang{is this redundant?}
+This region is an ellipsoid because it represents the set of points $q'$ whose sum of distances two \emph{foci} $q_1$ and $q_2$ is less then $2a$, where a is the major radius of the ellipsoid. }
  \begin{figure}
     \centering
     \subfloat[Showcase of a reachability region\label{fig:EllipseConstraintExample}]{\includegraphics[width=0.47\linewidth, trim = 2cm 2.5cm 2cm 5cm]{Reachability}}
@@ -289,21 +285,22 @@ This region is an ellipsoid because it represents the set of points $q'$ whose s
     \label{fig:Reachability_full}
   \end{figure}
 
-{\news The condition that a reachability ellipsoid $\cE(q_1,q_2)$ does not intersect with any forbidden region is sufficient to secure the trajectory of the robot between $q_1$ and $q_2$ according to \Cref{def:secured-plan}: any deviation to a point $p_o$ outside $\cE(q_1,q_2)$ will cause the robot  to miss a potentia observation at $p_2$, $t_2$.} \Cref{def:secured-plan} can then be restated as follows
+{\news The condition that a reachability ellipsoid $\cE(q_1,q_2)$ does not intersect with any forbidden region is sufficient to secure the trajectory of the robot between $q_1$ and $q_2$ according to \Cref{def:secured-plan}: any deviation to a point $p_o$ outside $\cE(q_1,q_2)$ will cause the robot to miss a potentia observation at $p_2$, $t_2$. \Cref{def:secured-plan} can then be restated as follows:
 \begin{definition}\label{rmk:revised-security}
   A multi-robot trajectory is secured against plan-deviation attacks if there exist a co-observation plan such that the reachability region between each consecutive co-observation does not intersect with any forbidden regions.
 \end{definition}
+}
 
 \subsection{Transformation to canonical coordinates}\label{sec:rotation2Standard}
 \newcommand{\oFE}{o}
-{\news To use the definition of reachability ellipsoid from the section above in a computational constraints for ADMM, we first apply a differentiable rigid body transformation to reposition the ellipse $\cE$ from the global frame $\cF$ to a canonical frame $\cF_\cE$, where the origin of $\cF_\cE$ is at the ellipsoid's center, and the first axis of $\cF_\cE$ is aligned with the foci (see \Cref{fig:EllipseConstraintExample} for an illustration). %For all reachability ellipsoid constraints, we solve the problem in $\cF_\cE$ and transform the solutions back to $\cF$ using \eqref{eq:transformations}. 
+{\news To use the definition of reachability ellipsoid from the section above in a computational constraints for ADMM, we first apply a differentiable rigid body transformation to reposition the ellipse $\cE$ from the global frame $\cF$ to a canonical frame $\cF_\cE$, where the origin of $\cF_\cE$ is at the ellipsoid's center $\oFE = \frac{1}{2}(q_1+q_2)$, and the first axis of $\cF_\cE$ is aligned with the foci (see \Cref{fig:EllipseConstraintExample} for an illustration). 
 From this definition, a unit vector along the first axis of the ellipsoid in the frames $\cF$ and $\cF_\cE$ is given by $\nu_\cF = \frac{q_2-q_1}{\norm{q_2-q_1}}$ and $\nu_\cE =[1,0,0]^T$, respectively.
 The full transformation from coordinates $q^\cE\in\cF$ to $q\in\cF$, and its inverse, are then parametrized by a rotation $R^\cF_\cE$ and a translation $o^\cF_\cE$ as (we drop the subscript and superscript from $R^\cF_\cE$ and $o^\cF_\cE$ to simplify the notation):
 \begin{equation}\label{eq:transformations}
   q=R\Eframe{q}+\oFE,\quad
   \Eframe{q}=R\transpose(q-\oFE).
 \end{equation}
-where the rotation matrix $R=H(\nu_\cF(q_1,q_2),\nu_\cE)$ is a \emph{Householder rotation} $H$ (a differentiable linear transformation describing the minimal rotation between the two vectors, see \cref{sec:householder} for details), and $o =\frac{1}{2}(q_1+q_2)$.  To simplify the notation, in the following, we will consider $H$ to be a function of $q_1,q_2$ directly, i.e. $H(q_1,q_2)$. More details on \eqref{eq:transformations} are given in \cref{apx:transformation}.
+where the rotation matrix $R=H(\nu_\cF(q_1,q_2),\nu_\cE)$ is a \emph{Householder rotation} $H$ (a differentiable linear transformation describing the minimal rotation between the two vectors, see \cref{sec:householder} for details).  To simplify the notation, in the following, we will consider $H$ to be a function of $q_1,q_2$ directly, i.e. $H(q_1,q_2)$. More details on \eqref{eq:transformations} are given in \cref{apx:transformation}.
   % We define $\nu_\cF$ and $\nu_\cE$ to represent the $x$-axis unitary vector of $\cF_\cE$ in the frames $\cF$ and $\cF_\cE$, respectively. Formally:
   % \begin{align}
   %   \nu_\cF &= \frac{q_2-q_1}{\norm{q_2-q_1}}, & \nu_\cE&=[1,0,0]^T;
@@ -369,7 +366,7 @@ The point-to-ellipse projection function in $\cF$ is then:
     = R^{-1}S R ( q_{avoid}- o)+o
   \end{multline}
   
-\zyang{dim of I is 2 how to indicate?}  In our derivations, we consider only the 3-D case ($m=3$); for the 2-D case, let $P=\bmat{I & 0}\in\real{2\times 3}$: then $\pi_{p\cE}^{\textrm{2D}}=P\pi_{p\cE}^{\textrm{3D}}(P\transpose q_{avoid}; P\transpose q_1, P\transpose q_2,a)$.
+In our derivations, we consider only the 3-D case ($m=3$); for the 2-D case, let $P=\bmat{I & 0}\in\real{2\times 3}$: then $\pi_{p\cE}^{\textrm{2D}}=P\pi_{p\cE}^{\textrm{3D}}(P\transpose q_{avoid}; P\transpose q_1, P\transpose q_2,a)$.
 
   \begin{proposition}\label{prop:Ellipse2PointDiff}
     The differential of the projection operator $\pi_{p\cE}(q_{avoid}; q_1,q_2,a)$ with respect to the foci $q_1,q_2$ is given by the following (using $q$ as a shorthand notation for $q^\cE_{avoid}$)
@@ -387,7 +384,7 @@ The point-to-ellipse projection function in $\cF$ is then:
 
 \subsection{Plane-ellipsoid reachability constraint}\label{sec:ellipsoide-plane}
 
-For forbidden region in the shape of a hyperplane $\mathcal{L}(\Fframe{q}) = \{\Fframe{q}\in\mathbb{R}^m: \vn\transpose \Fframe{q} = d\}$ (as shown in~\cref{fig:Ellipse-to-plane}), the reachability constraint can be defined as $\mathcal{L} \cap \mathcal{E}(q_1,q_2,a) = \emptyset$. When transformed into the canonical frame, the hyperplane can be written as $\Eframe \cL(\Eframe{q}) = \{  \Eframe{q}\in\mathbb{R}^m:  \vn_\cE\transpose \Eframe{q} = d_{\cE}\}$, \new{with $\vn_\cE = H(q_1,q_2)\vn, \quad d_\cE =-\vn\transpose o + d$.}
+\new{For a hyperplane shaped forbidden region $\mathcal{L}(q) = \{q\in\mathbb{R}^m: \vn\transpose q = d\}$ (\cref{fig:Ellipse-to-plane}), the reachability constraint is $\mathcal{L} \cap \mathcal{E}(q_1,q_2,a) = \emptyset$. When transformed into the canonical frame, the hyperplane can be written as $\Eframe \cL(\Eframe{q}) = \{  \Eframe{q}\in\mathbb{R}^m:  \vn_\cE\transpose \Eframe{q} = d_{\cE}\}$, with $\vn_\cE = H(q_1,q_2)\vn, \quad d_\cE =-\vn\transpose o + d$.}
 % Intuitively, $d_\cE$ can be thought as a distance between the the plane $\cL$ and the origin (i.e., the center of $\cE$).
 
 For every $\Eframe \cL(\Eframe{q})$, there exist two planes that are both parallel to $\cL$ and tangential to the ellipse (i.e. resulting in a unique intersection point \cref{fig:Ellipse-to-plane}), $\cL_1^{\cE} = \{\Eframe{q}\in\mathbb{R}^m: \vn_\cE \transpose \Eframe{q} =  d_{\cE t} \}$ and $\cL_2^{\cE} = \{\Eframe{q}\in\mathbb{R}^m: \vn_\cE \transpose \Eframe{q} = - d_{\cE t} \}$. The intersection point can be written as:
@@ -397,7 +394,7 @@ For every $\Eframe \cL(\Eframe{q})$, there exist two planes that are both parall
 where $d_{\cE t} = \sqrt{ n_\cE\transpose Q^{-1} n_\cE}$; intuitively, $d_{\cE t}$ can be thought as a distance between the tangent plane $\cL_1^\cE$ (or $\cL_2^\cE$) and the origin (i.e., the center of the ellipse $\cE$). The concept of \emph{tangent interpolation point}s is introduced to characterize the relationship between the plane and the ellipsoid.
 
 \begin{definition}
-The \emph{tangent interpolation point} {\news between the plane $\cL$ and the ellipsoid $\cE$} $p^\cE_{\cL} \in \mathcal{L}$ is defined on the plane by 
+ {\news The \emph{tangent interpolation point} $p^\cE_{\cL} \in \mathcal{L}$ between the plane $\cL$ and the ellipsoid $\cE$ is defined on the plane by } 
     \begin{equation}\label{equ:ProjectPoint}
       p^\cE_{\cL} = \frac{ d_\cE Q^{-1} n_\cE}{ n_\cE\transpose Q^{-1} n_\cE}.
     \end{equation}
@@ -444,20 +441,17 @@ where $\pi^\cE_{\vn_\cE}(q)$ is the projection operator defined as:
   \begin{proof}
   See \Cref{proof:dpi_ne_dt}.
   \end{proof}
-  Based on the \Cref{prop:dpi_ne_dt}, the differential of (\ref{eq:plane_ellipsoid_constraint}) can be written as:
+ The differential of (\ref{eq:plane_ellipsoid_constraint}) can be written as:
   \begin{equation}
-    \partial_q {D_{\vn\cE}} = -2 H \cross{\Eframe \Pi_{\vn \cE}}  M + H^{-1}\partial_q \Eframe \Pi_{\vn \cE}
+    \partial_q {D_{\vn\cE}} = -2 H \cross{\Eframe \Pi_{\vn \cE}}  M + H^{-1}\partial_q \Eframe \Pi_{\vn \cE}.
   \end{equation}
-
 \subsection{Line-segment-ellipse reachability constraint}\label{chapter:ellipse to segment}
-
-% For a intermediate step to get the relationship between a polygon shaped forbidden region, the relative position between the ellipse and segment of the hyperplane that defines the region is studied. 
 {\news As an intermediate step to consider polygon shaped forbidden regions, the reachability constraint for hyperplane segments is studied.
 For hyperplane $\Eframe \cL(\Eframe q) = \{ \Eframe q\in\mathbb{R}^m:  \vn_\cE\transpose \Eframe q = d_{\cE}\}$ with endpoints $\Eframe {p_1}$ and $\Eframe{p_2}$; this segment is defined as:}
 \begin{equation}
 \bmat{(\Eframe {p_1}- \Eframe{p_2})\transpose\\( \Eframe{p_2} - \Eframe{p_1})\transpose}  \Eframe p \leq \bmat{ \Eframe{p_2}\transpose\\- \Eframe{p_1}\transpose}( \Eframe{p_1}- \Eframe{p_2}), \quad \vn_\cE\transpose \Eframe q = d_{\cE}.
 \end{equation}
-For cases that the \emph{tangent interpolation point} $\Eframe{p_{\cL}}$ stays within the segment (i.e. red region in \cref{fig:Ellipse-to-safezone}, where $\Eframe{p_{\cL}}$ lies between $\Eframe{p_{1}}$ and $\Eframe{p_{2r}}$), the constraint is a plane-ellipse constraint in \cref{sec:ellipsoide-plane}. Otherwise (i.e. brown region in \cref{fig:Ellipse-to-safezone}, where $\Eframe{p_{\cL}}$ lies outside $\Eframe{p_{1}}$ and $\Eframe{p_{2b}}$), the constraint is a point-ellipse constraint in \cref{sec:ellipsoid-point}.
+When the \emph{tangent interpolation point} $\Eframe{p_{\cL}}$ stays within the segment (i.e. red region in \cref{fig:Ellipse-to-safezone}), the constraint is a plane-ellipse constraint in \cref{sec:ellipsoide-plane}. Otherwise (i.e. brown region in \cref{fig:Ellipse-to-safezone}), the constraint is a point-ellipse constraint in \cref{sec:ellipsoid-point}.
 
 \begin{constraint}[Line-segment-ellipsoid reachability constraint]
 \begin{align}
@@ -531,7 +525,7 @@ Our solution demonstrates the potential of planning with reachability and co-obs
 %Our solution shows that planning with reachability and co-observation is a promising approach to enhance the security of multi-agent systems. However, two main challenges have been identified in \cite{wardega2023hola}. Firstly, finding a co-observation and reachability secured plan may not always be feasible when robots are separated from others by obstacles or forbidden regions, or are located far away from each other. In such case, it is impossible for other robots to get close enough to establish co-observation schedules or find a reachability-secured path. Agent 3 in the Figure \ref{fig:ReachabilitySimulation} is a good example, as it required additional security checkpoint to create secured reachability areas. Secondly, security requirements may come at the cost of overall system performance, as illustrated by the comparison of Figure \ref{fig:SecurityBreak} and \ref{fig:ReachabilitySimulation} where, after the introduction of security constraints, the top left corner is never explored by any robots. This is particularly concerning given that system performance is a key factor in the decision to use multi-agent systems. These challenges are addressed in Chapter \ref{sec:cross-trajectory}, in order to ensure the effectiveness of planning with reachability and co-observation in securing multi-agent systems.
 
 \section{Cross-trajectory co-observation planning}\label{sec:cross-trajectory}
-To address the feasibility and performance trade-offs, we propose to form \emph{sub-teams} on each route, and setup additional co-observations both within the sub-team and across different sub-teams. These \emph{cross-trajectory co-observations} allow sub-teams to obtain trajectories that are closer to the optimal (as shown in Figure \ref{fig:cross-traj-comparison-set}), because they do not require the entire \emph{sub-team} to meet with other teams for co-observations, thus providing more flexibility.
+To address the feasibility and performance trade-offs, we propose to form \emph{sub-teams} on each route, and setup additional co-observations both within the sub-team and across different sub-teams. These \emph{cross-trajectory co-observations} allow sub-teams to obtain trajectories that are closer to the optimal (as shown in \cref{fig:cross-traj-comparison-set}), because they do not require the entire \emph{sub-team} to meet with other teams for co-observations, thus providing more flexibility.
 \subsection{Problem overview}
 We start with an unsecured MRS trajectory with $n_p$ routes $\{q_p\}_{p=1}^{N_p}$ (the ADMM-based planner in \cref{sec:ADMM-planning} without security constraints is used, but other planners are applicable). Here, the state $q_p(t), p \in\{\cI_0,\ldots,\cI_{p}\}$ represents the reference position of the $p$-th sub-team at time $t\in\{0, \dots, T\}$. Introducing redundant robots into the MRS, we assume a total of $n > n_p$ robots are available and organized into \emph{sub-teams} through a time-varying partition $\cI(t)=\union_p \cI_p(t)$ where robots in each \emph{sub-team} $\cI_p$ share the same nominal trajectory. To ensure the fulfillment of essential tasks, at least one robot is assigned to adhere to the reference trajectory. The remaining redundant $n_p-n$ robots are strategically utilized to enhance security. These robots focus on co-observations either within their respective sub-teams, or when necessary, deviate and join another sub-team to provide necessary co-observations. The objective of this problem is to formulate a strategy for this new co-observation strategy, named \emph{cross-trajectory co-observation} that the resulting MRS plan meet the security in \cref{rmk:revised-security} while minimizing the number of additional robots required. 
 
@@ -542,8 +536,21 @@ The $i$-th \emph{checkpoint} $v_{pi}=(q_{p},t_{i})$ for sub-team $p$ is defined 
 \end{definition}
 For simplicity, let $\cI_{v_{i}}$ denote the sub-team to which $v_{i}$ belongs. %, and $q_{v_{pi}} =q_{pi}$ and $t_{v_{pi}}$ be the corresponding location and time for checkpoint $v_{pi}$.
 To ensure the security of the reference trajectory, the reachability region between consecutive checkpoints must avoid intersections with forbidden regions. This requirement can be formally stated as:
+\begin{remark}
+  A set of checkpoints $V_{p}=\{ v_{p0}, \dots ,v_{pT}\}$ (arranged in ascending order of $t_{v_{pi}}$) can secure the reference trajectory for sub-team $p$, if $\mathcal{E}(q_{v_{pi}}, q_{v_{p(i+1)}}, t_{v_{pi}},t_{v_{p(i+1)}}) \intersect F = \emptyset$ for every $i$, where $F$ is the union of all forbidden regions.
+  \end{remark}
 }
-We model the planned trajectory $\{q_p\}_{p=1}^{N_p}$ as a directed \emph{checkpoint graph} $G{q}=(V_{q}, E_{q})$, where vertices $V_{q}$ are checkpoints and edges $E_{q} = E_{t} \union E_{c}$ connect pairs of vertices if possible paths exist. Inspired by~\cite{yu2013multi}, additional robots in the sub-team are treated as flows in the checkpoint graph. This transforms the co-observation planning problem into a network multi-flow problem, solvable with general Mixed-Integer Linear Programming techniques.
+{\news \zyang{Any better ways since $V_c, E$ are all introduced later?} 
+% The planned trajectory $\{q_p\}_{p=1}^{N_p}$ is illustrated as a directed \emph{checkpoint graph} $G{q}=(V_{q}, E_{q})$, where $V_{q} = V_p \union V_c$ are union of checkpoints $V_p$ and connection verticies $V_c$, $E_{q} = E_{t} \union E_{c}$ are union of trajectory edges $E_t$ and connection edges $E_c$ (introduced later in \cref{sec:cross-trajectory}). Inspired by~\cite{yu2013multi}, additional robots in the sub-team are treated as flows in the checkpoint graph. This transforms the co-observation planning problem into a network multi-flow problem, solvable with general Mixed-Integer Linear Programming techniques.
+The planned trajectory $\{q_p\}_{p=1}^{N_p}$ is represented as a directed \emph{checkpoint graph} $G_{q}=(V_{q}, E_{q})$, where $V_{q} = V_p \union V_c$ is a subset of waypoints on the planned trajectory, and $E_{q} = E_{t} \union E_{c}$ represents feasible paths connecting $V_q$. Specifically,
+\begin{itemize}
+  \item $V_p$ Checkpoints where additional robots are required for security through co-observation.
+  \item $E_t$ Trajectory edges representing the original planned path of the primary robot.
+  \item $E_c$ Connection edges with at least one endpoint as a checkpoint, representing feasible paths where robots deviate from the original trajectory to join other teams or provide co-observation support.
+  \item $V_c$ Connection vertices representing non-checkpoint locations linked via $E_c$.
+\end{itemize}
+The co-observation planning problem is transformed into a network multi-flow problem where the additional robots treated as flows traveling through $G_q$. To satisfy security requirements, every checkpoint $V_p$ must be visited by at least one flow.This formulation reduces the co-observation problem to finding valid flow patterns in $G_q$, enabling the use of Mixed-Integer Linear Programming (MILP) techniques to efficiently compute feasible solutions.
+}
 
 This section presents the two components of our approach: constructing the checkpoint graph based on unsecured multi-robot trajectories, and the formulation and solution of the network multi-flow problem.
 
@@ -560,39 +567,40 @@ Our objective here is to ascertain the existence of feasible paths instead of op
 \subsection{Checkpoint graph construction}\label{sec:security-checkpoint}
 
 In this section, we define and search for security checkpoints and how to use \rrtstar{} to construct the checkpoint graph $G_{q}$.
+A heuristic approach is provided to locate the checkpoints on given trajectories (an optimal solution would likely be NP-hard, while the approach below works well enough for our purpose). %with a toy example shown in Figure \ref{fig:checkpoint-generate}. 
+{\news We begin by adding the start and end locations $(q_{p}(t_0),t_0)$, $(q_{p}(t_2),t_2)$ to $V_{q}$, with $t_{0}=0$, $t_2=T$. Then, we search for the largest $t_{1} \in \{t_{0}+1, \dots ,t_{2}\}$ such that the reachability ellipsoid between $q_{p}(t_{0})$ and $q_{p}(t_{1})$ has no overlap with any of the forbidden areas, i.e. $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{1}), t_{0},t_{1})\intersect F = \emptyset$. Then $(q_{p}(t_{1}),t_1)$ is added to $V_{q}$. Simultaneously, we search backward to find $q_{p}(t_{3})$ with the smallest $t_{3}\in \{t_{1},\dots,t_{2}-1\} $ that meets the reachability requirement $\mathcal{E}(q_{p}(t_{2}),q_{p}(t_{3}),t_{2},t_{3}) \intersect F = \emptyset$. Then $(q_{p}(t_{3}),t_3)$ is added to $V_{q}$. Afterwards, we set $t_{0}\leftarrow t_{1}$, $t_{2}\leftarrow t_{3}$ and repeat the same process. The search is stopped when $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{2}),t_{0},t_{2}) \intersect F = \emptyset$ or $t_{0}>t_{2}$. A toy example is shown in \cref{fig:checkpoint-generate}. }
 
-{\news To ensure the security of the un-observed part of the trajectory, the reachability region between consecutive checkpoints must avoid intersections with forbidden regions. This requirement can be formally stated as:}
-\begin{remark}
-A set of checkpoints $V_{p}=\{ v_{p0}, \dots ,v_{pT}\}$ (arranged in ascending order of $t_{v_{pi}}$) can secure the reference trajectory for sub-team $p$, if $\mathcal{E}(q_{v_{pi}}, q_{v_{p(i+1)}}, t_{v_{pi}},t_{v_{p(i+1)}}) \intersect F = \emptyset$ for every $i$, where $F$ is the union of all forbidden regions.
-\end{remark}
+\begin{figure}
+	\centering
+    \subfloat[]{\includegraphics[width=0.45\linewidth,trim = 1.7cm 2cm 1cm 2.7cm, clip,valign=c]{SC_gen_1}}
+    \subfloat[]{\includegraphics[width=0.45\linewidth,trim = 1.7cm 2cm 1cm 2.7cm, clip,valign=c]{SC_gen_2}}
+    \caption{\news{Checkpoint generation example}}\label{fig:checkpoint-generate}
+\end{figure}
 
-A heuristic approach is provided (\Cref{alg:checkpoint-gen}) to locate the checkpoints on given trajectories (an optimal solution would likely be NP-hard, while the approach below works well enough for our purpose). %with a toy example shown in Figure \ref{fig:checkpoint-generate}. 
-
-
-\begin{algorithm}
-  \caption{Secure Checkpoint Generation for a Sub-Team $p$}\label{alg:checkpoint-gen}
-  \begin{algorithmic}
-  \State $v_{p0} \gets (q_{p}(0),0)$; $v_{pT} \gets (q_{p}(T),T)$
-  \State $V_{p} = \{v_{p0}, v_{pT}\}$
-  \State $t_0 \gets 0$; $t_1 \gets T$
-  \While {$\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{1}),t_{0},t_{1}) \intersect F \neq \emptyset$ or $t_1 - t_0 > 1$}
-    \State $i \gets 1$; $j\gets 1$
-    \While{$\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{0}+i),t_{0},t_0+i) \intersect F = \emptyset$ and $t_0+i > t_1$}
-      \State $v_{pf} \gets (q_{p}(t_0+i),t_0+i)$
-      \State $i \gets i+1$
-    \EndWhile
-    \State $V_{p}\gets V_{p}\union v_{pf}$
-    \While{$\mathcal{E}(q_{p}(t_{1}-j),q_{p}(t_{1}),t_{1}-j,t_{1}) \intersect F = \emptyset$ and $t_0+i \geq t_1-j$}
-    \State $v_{pb} \gets (q_{p}(t_1-j),t_1-j)$
-    \State $j \gets j+1$
-    \EndWhile
-    \If {$t_0+i \neq t_1-j$}
-    \State $V_{p}\gets V_{p}\union v_{pb}$
-    \EndIf
-  \EndWhile
-  \end{algorithmic}
-  \rtron{It is probably better to substitute this with a description in words. If you want to keep the pseudocode, move it to the appendix.}
-  \end{algorithm}
+% \begin{algorithm}
+%   \caption{Secure Checkpoint Generation for a Sub-Team $p$}\label{alg:checkpoint-gen}
+%   \begin{algorithmic}
+%   \State $v_{p0} \gets (q_{p}(0),0)$; $v_{pT} \gets (q_{p}(T),T)$
+%   \State $V_{p} = \{v_{p0}, v_{pT}\}$
+%   \State $t_0 \gets 0$; $t_1 \gets T$
+%   \While {$\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{1}),t_{0},t_{1}) \intersect F \neq \emptyset$ or $t_1 - t_0 > 1$}
+%     \State $i \gets 1$; $j\gets 1$
+%     \While{$\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{0}+i),t_{0},t_0+i) \intersect F = \emptyset$ and $t_0+i > t_1$}
+%       \State $v_{pf} \gets (q_{p}(t_0+i),t_0+i)$
+%       \State $i \gets i+1$
+%     \EndWhile
+%     \State $V_{p}\gets V_{p}\union v_{pf}$
+%     \While{$\mathcal{E}(q_{p}(t_{1}-j),q_{p}(t_{1}),t_{1}-j,t_{1}) \intersect F = \emptyset$ and $t_0+i \geq t_1-j$}
+%     \State $v_{pb} \gets (q_{p}(t_1-j),t_1-j)$
+%     \State $j \gets j+1$
+%     \EndWhile
+%     \If {$t_0+i \neq t_1-j$}
+%     \State $V_{p}\gets V_{p}\union v_{pb}$
+%     \EndIf
+%   \EndWhile
+%   \end{algorithmic}
+%   \rtron{It is probably better to substitute this with a description in words. If you want to keep the pseudocode, move it to the appendix.}
+%   \end{algorithm}
 
 % \begin{figure}
 % 	\centering
@@ -612,7 +620,7 @@ Cross-trajectory edges $E_c = (v_1, v_2)$ define viable paths between two refere
     \centering
   \subfloat[Cross-trajectory edge generation\label{fig:two-edges}]{\includegraphics[width=0.45\linewidth]{two_edges}}
   \subfloat[Full checkpoint graph\label{fig:security-graph-generate}]{\includegraphics[width=0.45\linewidth]{security_graph}}
-  \caption{\Cref{fig:two-edges}, Latest departure node $q^{d}_{b}$ found for $v_{r1}$ and earliest arrival node $q^{a}_{b}$ found for $v_{r3}$. \Cref{fig:security-graph-generate}, example of a full checkpoint graph where round vertices are checkpoint generated through the heuristic search and triangle vertices are added with the cross-trajectory edges. Virtual source $v^{+}$ and sink $v^{-}$ are added to be used later in planning problem.}  
+  \caption{{\news (\ref{fig:two-edges}) Latest departure node $q^{d}_{b}$ found for $v_{r1}$ and earliest arrival node $q^{a}_{b}$ found for $v_{r3}$. (\ref{fig:security-graph-generate}) Eexample of a full checkpoint graph where round vertices are checkpoint generated through the heuristic search and triangle vertices are arrival and departure nodes added with the cross-trajectory edges. Virtual source $v^{+}$ and sink $v^{-}$ are added to be used later in planning problem.}}  
 \end{figure}
 
 %We first find trees of feasible paths between each security checkpoint and all other trajectories using position information alone through \rrtstar{} (ignoring, for the moment, any timing constraint). Then, we prune these trees by considering time constraints (that consider the time needed to physically travel from one trajectory to the other while meeting other robots at the two endpoints) and ellipsoidal reachability constraints.
@@ -624,7 +632,7 @@ Then, to prune these trees, we consider the time needed to physically travel fro
 \begin{description}
 \item[Arrival nodes] are waypoints on $\{q_r\}$ where robots from sub-team $\cI_p$, deviating at $v_p$, can meet with sub-team $\cI_r$ at $(q_r(t_{r_i}),t_{r_i})$. For these, \rrtstar{} must have found a path from $v_p$ to $q_{r}(t^{a}_r)$ with $t_{p}+t_{\textrm{path}}<t_{{r}_{i}}$, and $\mathcal{E}(q_{r}(t_{{r}_{i}}),q_{p},t_{{r}_{i}},t_{p}) \intersect F = \emptyset$.
 
-For each trajectory $r\neq p$, we define the \emph{earliest arrival node} from $v_p$ to $v_{ea} = (q_{r}(t^{a}_r),t^{a}_r)$ as the arrival node characterized by the minimum $t^{a}_r$ discovered. 
+For each trajectory $r\neq p$, we define the \emph{earliest arrival node} from $v_p$ to $v_{ea} = (\q_{r}(t^{a}_r),t^{a}_r)$ as the arrival node characterized by the minimum $t^{a}_r$ discovered. 
 %$t^{a}_r$ is designated as the \emph{earliest arrival time}.
 
 \item[Departure nodes] are the waypoints on $\{q_r\}$ such that a robot from sub-team $\cI_r$, deviating from $(q_{r}(t_{{r}_{i}}),t_{{r}_{i}})$, can meet with robots in sub-team $\cI_p$ at $v_{p}$. For these nodes, \rrtstar{} must find a path from $v_p$ to $q_{r}(t_{{r}_{i}})$ for $v_p$ if  $t_{p}>t_{{r}_{i}}+t_{\textrm{path}}$ and $\mathcal{E}(q_{p}, q_{r}(t_{{r}_{i}}),t_{p}, t_{{r}_{i}}) \intersect F = \emptyset$. 
@@ -633,12 +641,12 @@ For each trajectory $r\neq p$, we define the \emph{latest departure node} $v_{ld
 % $t^{d}_r$ is designated as the \emph{latest departure time}.
 \end{description}
 
-For each $v_{p} \in V_{p}$ found through \Cref{alg:checkpoint-gen}, all the latest departure and earliest arrival nodes are added as vertices $V_q = V_{p} \union \{v_{ea}, v_{ld}\}$, and the corresponding paths are added as cross-trajectory edges to $E_{q}$. Examples are shown in Figure \ref{fig:two-edges}.
+For each $v_{p} \in V_{p}$, all the latest departure and earliest arrival nodes are added as vertices $V_q = V_{p} \union \{v_{ea}, v_{ld}\}$, and the corresponding paths are added as cross-trajectory edges to $E_{q}$. Examples are shown in \cref{fig:two-edges}.
 
 \subsubsection{In-trajectory edges}\label{sec:Graph-intro}
 
 %With vertices $V_{q}$ and cross-trajectory edges $E_{q}$ found in Algorithm \ref{alg:cross-trajectory-edges}, we can construct a security graph $G_{q}$. 
-We arrange all $V_q =\union_p \{v^0_{p}, \dots ,v^T_{p}\}$ found in \Cref{sec:security-checkpoint,sec:cross-traj-edges} in ascending order of $t_{v^i_{p}}$. We then add to $E_q$ the \emph{in-trajectory edges} $\{(v^i_{p}\rightarrow v^{i+1}_{p})\}$ obtained by connecting all consecutive checkpoints $v^i_{p}\in V_q$ with the checkpoints $v^{i+1}_{p}$ that follow them in their original trajectories. Examples are shown in Figure \ref{fig:security-graph-generate}. %\zyang{any better explaination?}
+We arrange all $V_q =\union_p \{v^0_{p}, \dots ,v^T_{p}\}$ found in \Cref{sec:security-checkpoint,sec:cross-traj-edges} in ascending order of $t_{v^i_{p}}$. We then add to $E_q$ the \emph{in-trajectory edges} $\{(v^i_{p}\rightarrow v^{i+1}_{p})\}$ obtained by connecting all consecutive checkpoints $v^i_{p}\in V_q$ with the checkpoints $v^{i+1}_{p}$ that follow them in their original trajectories. Examples are shown in \cref{fig:security-graph-generate}. %\zyang{any better explaination?}
 
 %For convenience, we use $|V_{q}|$ and $|E_{q}|$ to denote the cardinality of the sets $V_{q}$ and $E_{q}$ 
 
@@ -705,7 +713,7 @@ The flows derived from the solution of the optimization problem \eqref{eq:flow-c
 
 The problem shows no solution for $\cK\leq 2$. For cases $\cK=3$, problem return the optimal result as shown in \Cref{fig:Cross-trajectory-result}. If we further increase $\cK>3$, we do not get a better result; instead, the planner will return four flows with the rest $\cK-3$ flows empty. 
 
-We then test the proposed method for a 4-team and 7-team case with result shown in Figure \ref{fig:Cross-trajectory-result}, where four trajectories are provided for a map exploration task with no security related constraints (co-observation schedule and reachability). We have a $10m\times10m$ task space, three forbidden regions (rectangle regions in \Cref{fig:Result-plan}) and robots with a max velocity of $0.5m/dt$. 
+We then test the proposed method for a 4-team and 7-team case with result shown in \cref{fig:Cross-trajectory-result}, where four trajectories are provided for a map exploration task with no security related constraints (co-observation schedule and reachability). We have a $10m\times10m$ task space, three forbidden regions (rectangle regions in \Cref{fig:Result-plan}) and robots with a max velocity of $0.5m/dt$. 
 
 \begin{figure}
   \centering
@@ -754,7 +762,7 @@ $q^\cE_1=\bmat{c & 0 & 0}\transpose, q^\cE_2=\bmat{-c & 0 & 0}\transpose$, and s
 \begin{lemma}
 The original ellipse $\cE$ in $\cF$ can be expressed as the zero level set of the quadratic function
    \begin{equation}\label{eq:ellpsoid from canonical}
-     \Fframe{E}(\Fframe{q}) = (\Fframe{q}-o_\cE)\transpose H\transpose Q H (\Fframe{q}-o_\cE) - 1
+     \Fframe{E}(q) = (q-o_\cE)\transpose H\transpose Q H (q-o_\cE) - 1
      \end{equation}
 \end{lemma}
 \begin{proof}

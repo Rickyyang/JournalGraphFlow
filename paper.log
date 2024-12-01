@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.23)  26 NOV 2024 21:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.8.23)  29 NOV 2024 11:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1224,17 +1224,17 @@ Package hyperref Info: Link coloring OFF on input line 47.
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 )
 
-<Figs/plan-deviation.png, id=141, 398.54779pt x 367.59392pt>
+<Figs/plan-deviation.png, id=137, 398.54779pt x 367.59392pt>
 File: Figs/plan-deviation.png Graphic file (type png)
 <use Figs/plan-deviation.png>
 Package pdftex.def Info: Figs/plan-deviation.png  used on input line 77.
 (pdftex.def)             Requested size: 80.64185pt x 74.37566pt.
-<Figs/co-observ.png, id=143, 398.54779pt x 367.59392pt>
+<Figs/co-observ.png, id=139, 398.54779pt x 367.59392pt>
 File: Figs/co-observ.png Graphic file (type png)
 <use Figs/co-observ.png>
 Package pdftex.def Info: Figs/co-observ.png  used on input line 78.
 (pdftex.def)             Requested size: 80.64185pt x 74.37566pt.
-<Figs/cross-traj.png, id=144, 398.54779pt x 367.59392pt>
+<Figs/cross-traj.png, id=140, 398.54779pt x 367.59392pt>
 File: Figs/cross-traj.png Graphic file (type png)
 <use Figs/cross-traj.png>
 Package pdftex.def Info: Figs/cross-traj.png  used on input line 79.
@@ -1267,20 +1267,12 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 
 
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 105.
-(C:\Users\zy259\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1phv.fd
-File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `phv' (encoding: OT1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-<Figs/illustration figure_1.png, id=198, 906.38625pt x 864.22874pt>
+<Figs/illustration figure_1.png, id=194, 906.38625pt x 864.22874pt>
 File: Figs/illustration figure_1.png Graphic file (type png)
 <use Figs/illustration figure_1.png>
 Package pdftex.def Info: Figs/illustration figure_1.png  used on input line 123.
 (pdftex.def)             Requested size: 113.39923pt x 108.12064pt.
-<Figs/Grid_world.pdf, id=199, 228.02188pt x 228.02188pt>
+<Figs/Grid_world.pdf, id=195, 228.02188pt x 228.02188pt>
 File: Figs/Grid_world.pdf Graphic file (type pdf)
 <use Figs/Grid_world.pdf>
 Package pdftex.def Info: Figs/Grid_world.pdf  used on input line 124.
@@ -1289,32 +1281,28 @@ Package pdftex.def Info: Figs/Grid_world.pdf  used on input line 124.
 
 [2 <./Figs/plan-deviation.png> <./Figs/co-observ.png> <./Figs/cross-traj.png>]
 
-LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 254.
-LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <10> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 254.
 
 
 [3 <./Figs/illustration figure_1.png> <./Figs/Grid_world.pdf>]
-<Figs/Reachability.png, id=292, 551.67938pt x 467.27245pt>
+<Figs/Reachability.png, id=288, 551.67938pt x 467.27245pt>
 File: Figs/Reachability.png Graphic file (type png)
 <use Figs/Reachability.png>
-Package pdftex.def Info: Figs/Reachability.png  used on input line 281.
+Package pdftex.def Info: Figs/Reachability.png  used on input line 275.
 (pdftex.def)             Requested size: 118.4403pt x 68.6716pt.
-<Figs/Ellipse2point.png, id=293, 170.71654pt x 185.28435pt>
+<Figs/Ellipse2point.png, id=289, 170.71654pt x 185.28435pt>
 File: Figs/Ellipse2point.png Graphic file (type png)
 <use Figs/Ellipse2point.png>
-Package pdftex.def Info: Figs/Ellipse2point.png  used on input line 282.
+Package pdftex.def Info: Figs/Ellipse2point.png  used on input line 276.
 (pdftex.def)             Requested size: 118.4403pt x 85.80518pt.
-<Figs/Ellipse2line_V2.png, id=295, 170.71654pt x 185.28435pt>
+<Figs/Ellipse2line_V2.png, id=291, 170.71654pt x 185.28435pt>
 File: Figs/Ellipse2line_V2.png Graphic file (type png)
 <use Figs/Ellipse2line_V2.png>
-Package pdftex.def Info: Figs/Ellipse2line_V2.png  used on input line 284.
+Package pdftex.def Info: Figs/Ellipse2line_V2.png  used on input line 278.
 (pdftex.def)             Requested size: 118.4403pt x 98.96564pt.
-<Figs/Ellipse2safezone_V2.png, id=297, 170.71654pt x 185.28435pt>
+<Figs/Ellipse2safezone_V2.png, id=293, 170.71654pt x 185.28435pt>
 File: Figs/Ellipse2safezone_V2.png Graphic file (type png)
 <use Figs/Ellipse2safezone_V2.png>
-Package pdftex.def Info: Figs/Ellipse2safezone_V2.png  used on input line 285.
+Package pdftex.def Info: Figs/Ellipse2safezone_V2.png  used on input line 279.
 (pdftex.def)             Requested size: 118.4403pt x 104.14449pt.
 
 
@@ -1326,10 +1314,10 @@ Package pdftex.def Info: Figs/Ellipse2safezone_V2.png  used on input line 285.
 
 [5]
 
-<Figs/SecurityBreak.png, id=387, 1606.0pt x 1405.25pt>
+<Figs/SecurityBreak.png, id=384, 1606.0pt x 1405.25pt>
 File: Figs/SecurityBreak.png Graphic file (type png)
 <use Figs/SecurityBreak.png>
-Package pdftex.def Info: Figs/SecurityBreak.png  used on input line 504.
+Package pdftex.def Info: Figs/SecurityBreak.png  used on input line 499.
 (pdftex.def)             Requested size: 113.39923pt x 98.13461pt.
 Package epstopdf Info: Source file: <Figs/FinalResult.eps>
 (epstopdf)                    date: 2024-02-16 22:20:20
@@ -1338,22 +1326,18 @@ Package epstopdf Info: Source file: <Figs/FinalResult.eps>
 (epstopdf)                    date: 2024-02-16 22:20:20
 (epstopdf)                    size: 105831 bytes
 (epstopdf)             Command: <miktex-epstopdf --outfile=Figs/FinalResult-eps-converted-to.pdf Figs/FinalResult.eps>
-(epstopdf)             \includegraphics on input line 505.
+(epstopdf)             \includegraphics on input line 500.
 Package epstopdf Info: Output file is already uptodate.
-<Figs/FinalResult-eps-converted-to.pdf, id=388, 677.53125pt x 602.25pt>
+<Figs/FinalResult-eps-converted-to.pdf, id=385, 677.53125pt x 602.25pt>
 File: Figs/FinalResult-eps-converted-to.pdf Graphic file (type pdf)
 <use Figs/FinalResult-eps-converted-to.pdf>
-Package pdftex.def Info: Figs/FinalResult-eps-converted-to.pdf  used on input line 505.
+Package pdftex.def Info: Figs/FinalResult-eps-converted-to.pdf  used on input line 500.
 (pdftex.def)             Requested size: 113.39923pt x 94.44041pt.
 
-Underfull \vbox (badness 3612) has occurred while \output is active []
 
-
-
-[6]
-
+[6 <./Figs/SecurityBreak.png (PNG copy)> <./Figs/FinalResult-eps-converted-to.pdf>]
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 548.
-(C:\Users\zy259\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
+ (C:\Users\zy259\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 Package microtype Info: Loading generic protrusion settings for font family
@@ -1362,71 +1346,94 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 
 
-[7 <./Figs/SecurityBreak.png (PNG copy)> <./Figs/FinalResult-eps-converted-to.pdf>]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 571.
-<Figs/two_edges.png, id=440, 389.10457pt x 156.43481pt>
+<Figs/SC_gen_1.png, id=424, 512.55319pt x 410.04256pt>
+File: Figs/SC_gen_1.png Graphic file (type png)
+<use Figs/SC_gen_1.png>
+Package pdftex.def Info: Figs/SC_gen_1.png  used on input line 565.
+(pdftex.def)             Requested size: 113.39923pt x 71.9076pt.
+<Figs/SC_gen_2.png, id=426, 512.55319pt x 410.04256pt>
+File: Figs/SC_gen_2.png Graphic file (type png)
+<use Figs/SC_gen_2.png>
+Package pdftex.def Info: Figs/SC_gen_2.png  used on input line 566.
+(pdftex.def)             Requested size: 113.39923pt x 71.9076pt.
+
+
+[7 <./Figs/SC_gen_1.png> <./Figs/SC_gen_2.png>]
+<Figs/two_edges.png, id=445, 389.10457pt x 156.43481pt>
 File: Figs/two_edges.png Graphic file (type png)
 <use Figs/two_edges.png>
 Package pdftex.def Info: Figs/two_edges.png  used on input line 611.
 (pdftex.def)             Requested size: 113.39923pt x 45.5893pt.
-<Figs/security_graph.png, id=441, 500.12282pt x 185.45094pt>
+<Figs/security_graph.png, id=446, 500.12282pt x 185.45094pt>
 File: Figs/security_graph.png Graphic file (type png)
 <use Figs/security_graph.png>
 Package pdftex.def Info: Figs/security_graph.png  used on input line 612.
 (pdftex.def)             Requested size: 113.39923pt x 42.04724pt.
+
+paper.tex:625: Undefined control sequence.
+l.625 ...arrival node} from $v_p$ to $v_{ea} = (\q
+                                                  _{r}(t^{a}_r),t^{a}_r)$ as...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
 
 
 
 
 [8 <./Figs/two_edges.png> <./Figs/security_graph.png>]
 
-<Figs/old_result.png, id=489, 1606.0pt x 1405.25pt>
+<Figs/old_result.png, id=475, 1606.0pt x 1405.25pt>
 File: Figs/old_result.png Graphic file (type png)
 <use Figs/old_result.png>
 Package pdftex.def Info: Figs/old_result.png  used on input line 695.
 (pdftex.def)             Requested size: 118.4403pt x 110.96306pt.
-<Figs/old_result_graph.png, id=490, 1806.75pt x 1204.5pt>
+<Figs/old_result_graph.png, id=476, 1806.75pt x 1204.5pt>
 File: Figs/old_result_graph.png Graphic file (type png)
 <use Figs/old_result_graph.png>
 Package pdftex.def Info: Figs/old_result_graph.png  used on input line 696.
 (pdftex.def)             Requested size: 118.4403pt x 86.06587pt.
-
-
-[9]
-<Figs/Traj_result.png, id=526, 1606.0pt x 1405.25pt>
+<Figs/Traj_result.png, id=496, 1606.0pt x 1405.25pt>
 File: Figs/Traj_result.png Graphic file (type png)
 <use Figs/Traj_result.png>
 Package pdftex.def Info: Figs/Traj_result.png  used on input line 711.
 (pdftex.def)             Requested size: 118.4403pt x 110.96306pt.
-<Figs/7-team-plan.png, id=528, 1606.0pt x 1405.25pt>
+<Figs/7-team-plan.png, id=498, 1606.0pt x 1405.25pt>
 File: Figs/7-team-plan.png Graphic file (type png)
 <use Figs/7-team-plan.png>
 Package pdftex.def Info: Figs/7-team-plan.png  used on input line 713.
 (pdftex.def)             Requested size: 118.4403pt x 110.96306pt.
 
 
+[9 <./Figs/old_result.png (PNG copy)> <./Figs/old_result_graph.png (PNG copy)>]
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 765.
+ (C:\Users\zy259\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1phv.fd
+File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `phv' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
 
 
-[10 <./Figs/old_result.png (PNG copy)> <./Figs/old_result_graph.png (PNG copy)> <./Figs/Traj_result.png (PNG copy)> <./Figs/7-team-plan.png (PNG copy)>]
 
 
+[10 <./Figs/Traj_result.png (PNG copy)> <./Figs/7-team-plan.png (PNG copy)>]
 
-[11] (paper.bbl
+(paper.bbl
+
+[11]
 
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 188.
 (C:\Users\zy259\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
-
-[12]) 
+)) 
 AED: pageslts setting LastPage 
 
 
-
-
-[13
-
-]
+[12]
 No complaints by nag.
 \c@pagesLTS.arabic.1.local.count=\count416
 
@@ -1435,7 +1442,7 @@ AED: pageslts setting VeryLastPage via AfterLastShipout
 AED: pageslts setting LastPages via AfterLastShipout 
 
 
-Package pageslts Info: Total number of pages is odd.
+Package pageslts Info: Total number of pages is even.
 
 
 (paper.aux)
@@ -1444,20 +1451,20 @@ LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-07-20>
  ***********
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: BF06AF107A2615FC81C8ABE1B0B9E0E0;2588.
+(rerunfilecheck)             Checksum: AF90E07B9A3659800A45CEE07E023347;2518.
  ) 
 Here is how much of TeX's memory you used:
- 40864 strings out of 473898
- 802604 string characters out of 5726479
- 1970960 words of memory out of 5000000
- 62232 multiletter control sequences out of 15000+600000
- 631985 words of font info for 464 fonts, out of 8000000 for 9000
+ 40751 strings out of 473898
+ 800714 string characters out of 5726479
+ 1969960 words of memory out of 5000000
+ 62162 multiletter control sequences out of 15000+600000
+ 628215 words of font info for 449 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 119i,20n,118p,1549b,727s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx5.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx7.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrb8a.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvbo8a.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (13 pages, 2671003 bytes).
+ 119i,20n,118p,1549b,723s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx5.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx7.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrb8a.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/zy259/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on paper.pdf (12 pages, 2885219 bytes).
 PDF statistics:
- 766 PDF objects out of 1000 (max. 8388607)
- 226 named destinations out of 1000 (max. 500000)
- 93054 words of extra memory for PDF output out of 106986 (max. 10000000)
+ 737 PDF objects out of 1000 (max. 8388607)
+ 207 named destinations out of 1000 (max. 500000)
+ 86924 words of extra memory for PDF output out of 89155 (max. 10000000)
 
