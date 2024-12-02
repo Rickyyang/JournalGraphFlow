@@ -540,23 +540,24 @@ To ensure the security of the reference trajectory, the reachability region betw
   A set of checkpoints $V_{p}=\{ v_{p0}, \dots ,v_{pT}\}$ (arranged in ascending order of $t_{v_{pi}}$) can secure the reference trajectory for sub-team $p$, if $\mathcal{E}(q_{v_{pi}}, q_{v_{p(i+1)}}, t_{v_{pi}},t_{v_{p(i+1)}}) \intersect F = \emptyset$ for every $i$, where $F$ is the union of all forbidden regions.
   \end{remark}
 }
-{\news \zyang{Any better ways since $V_c, E$ are all introduced later?} 
+{\news \zyang{Any better ways since $V_c, E$ are all introduced later?, also will $V_p$ and $V_q$ cause confusion?} 
 % The planned trajectory $\{q_p\}_{p=1}^{N_p}$ is illustrated as a directed \emph{checkpoint graph} $G{q}=(V_{q}, E_{q})$, where $V_{q} = V_p \union V_c$ are union of checkpoints $V_p$ and connection verticies $V_c$, $E_{q} = E_{t} \union E_{c}$ are union of trajectory edges $E_t$ and connection edges $E_c$ (introduced later in \cref{sec:cross-trajectory}). Inspired by~\cite{yu2013multi}, additional robots in the sub-team are treated as flows in the checkpoint graph. This transforms the co-observation planning problem into a network multi-flow problem, solvable with general Mixed-Integer Linear Programming techniques.
-The planned trajectory $\{q_p\}_{p=1}^{N_p}$ is represented as a directed \emph{checkpoint graph} $G_{q}=(V_{q}, E_{q})$, where $V_{q} = V_p \union V_c$ is a subset of waypoints on the planned trajectory, and $E_{q} = E_{t} \union E_{c}$ represents feasible paths connecting $V_q$. Specifically,
-\begin{itemize}
-  \item $V_p$ Checkpoints where additional robots are required for security through co-observation.
-  \item $E_t$ Trajectory edges representing the original planned path of the primary robot.
-  \item $E_c$ Connection edges with at least one endpoint as a checkpoint, representing feasible paths where robots deviate from the original trajectory to join other teams or provide co-observation support.
-  \item $V_c$ Connection vertices representing non-checkpoint locations linked via $E_c$.
-\end{itemize}
-The co-observation planning problem is transformed into a network multi-flow problem where the additional robots treated as flows traveling through $G_q$. To satisfy security requirements, every checkpoint $V_p$ must be visited by at least one flow.This formulation reduces the co-observation problem to finding valid flow patterns in $G_q$, enabling the use of Mixed-Integer Linear Programming (MILP) techniques to efficiently compute feasible solutions.
+The planned trajectory $\{q_p\}_{p=1}^{N_p}$ is represented as a directed \emph{checkpoint graph} $G=(V, E)$, where verticies $V = (\union_p V_p) \union V_c$ are a subset of waypoints on the planned trajectory, and edges $E_{q} = E_{t} \union E_{c}$ represents feasible paths connecting $V_q$. Specifically,
+\begin{description}
+  \item[$V_p$]: Checkpoints where additional robots are required for security through co-observation.
+  \item[$E_t$]: Trajectory edges representing the original planned path of the primary robot.
+  \item[$E_c$]: Cross-trajectory edges with at least one endpoint as a checkpoint, representing feasible paths where robots deviate from the original trajectory to join other teams or provide co-observation support.
+  \item[$V_c$]: Connection vertices representing non-checkpoint locations linked via $E_c$.
+\end{description}
+
+The co-observation planning problem is transformed into a network multi-flow problem where the additional robots treated as flows traveling through $G$. To satisfy security requirements, every checkpoint $V$ must be visited by at least one flow.This formulation reduces the co-observation problem to finding valid flow patterns in $G$, enabling the use of Mixed-Integer Linear Programming (MILP) techniques to efficiently compute feasible solutions.
 }
 
 This section presents the two components of our approach: constructing the checkpoint graph based on unsecured multi-robot trajectories, and the formulation and solution of the network multi-flow problem.
 
 \subsection{Rapidly-exploring Random Trees}
 To find edges between different nominal trajectories, we use the \rrtstar{}~\cite{karaman2010incremental} algorithm to find paths from a waypoint on one trajectory to multiple destination points (i.e., reference trajectories of other sub-teams, in our method). As a optimal path planning algorithm, \rrtstar{} returns the shortest paths between an initial location and points in the free configuration space, organized as a tree. We assume that the generated paths can be travelled in both directions (this is used later in our analysis). 
-Key functions from \rrtstar{} that are also used during constructions of the checkpoint graph are
+Key functions from \rrtstar{} that are also used during constructions of the checkpoint graph are \zyang{get back to check which is used}
 \begin{description}
 \item[$\texttt{Cost}(v)$] This function assigns a non-negative cost (total travel distance in our application) to the unique path from the initial position to $v$ . 
 \item[$\texttt{Parent}(v)$] This is a function that maps the vertex $v$ to $v'\in V$ such that $(v',v)\in E$.
@@ -568,7 +569,8 @@ Our objective here is to ascertain the existence of feasible paths instead of op
 
 In this section, we define and search for security checkpoints and how to use \rrtstar{} to construct the checkpoint graph $G_{q}$.
 A heuristic approach is provided to locate the checkpoints on given trajectories (an optimal solution would likely be NP-hard, while the approach below works well enough for our purpose). %with a toy example shown in Figure \ref{fig:checkpoint-generate}. 
-{\news We begin by adding the start and end locations $(q_{p}(t_0),t_0)$, $(q_{p}(t_2),t_2)$ to $V_{q}$, with $t_{0}=0$, $t_2=T$. Then, we search for the largest $t_{1} \in \{t_{0}+1, \dots ,t_{2}\}$ such that the reachability ellipsoid between $q_{p}(t_{0})$ and $q_{p}(t_{1})$ has no overlap with any of the forbidden areas, i.e. $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{1}), t_{0},t_{1})\intersect F = \emptyset$. Then $(q_{p}(t_{1}),t_1)$ is added to $V_{q}$. Simultaneously, we search backward to find $q_{p}(t_{3})$ with the smallest $t_{3}\in \{t_{1},\dots,t_{2}-1\} $ that meets the reachability requirement $\mathcal{E}(q_{p}(t_{2}),q_{p}(t_{3}),t_{2},t_{3}) \intersect F = \emptyset$. Then $(q_{p}(t_{3}),t_3)$ is added to $V_{q}$. Afterwards, we set $t_{0}\leftarrow t_{1}$, $t_{2}\leftarrow t_{3}$ and repeat the same process. The search is stopped when $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{2}),t_{0},t_{2}) \intersect F = \emptyset$ or $t_{0}>t_{2}$. A toy example is shown in \cref{fig:checkpoint-generate}. }
+
+{\news We begin by adding the start and end locations $(q_{p}(t_0),t_0)$, $(q_{p}(t_2),t_2)$ to $V_{p}$, with $t_{0}=0$, $t_2=T$ as \emph{start} and \emph{end verticies}. Then, we search for the largest $t_{1} \in \{t_{0}+1, \dots ,t_{2}\}$ such that the reachability ellipsoid between $q_{p}(t_{0})$ and $q_{p}(t_{1})$ has no overlap with any of the forbidden areas, i.e. $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{1}), t_{0},t_{1})\intersect F = \emptyset$. Then $(q_{p}(t_{1}),t_1)$ is added to $V_{p}$. Simultaneously, we search backward to find $q_{p}(t_{3})$ with the smallest $t_{3}\in \{t_{1},\dots,t_{2}-1\} $ that meets the reachability requirement $\mathcal{E}(q_{p}(t_{2}),q_{p}(t_{3}),t_{2},t_{3}) \intersect F = \emptyset$. Then $(q_{p}(t_{3}),t_3)$ is added to $V_{p}$. Finally, we set $t_{0}\leftarrow t_{1}$, $t_{2}\leftarrow t_{3}$ and repeat the same process. The search is stopped when $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{2}),t_{0},t_{2}) \intersect F = \emptyset$ or $t_{0}>t_{2}$. A toy example is shown in \cref{fig:checkpoint-generate}. }
 
 \begin{figure}
 	\centering
@@ -618,21 +620,21 @@ Cross-trajectory edges $E_c = (v_1, v_2)$ define viable paths between two refere
 
 \begin{figure}[htbp]
     \centering
-  \subfloat[Cross-trajectory edge generation\label{fig:two-edges}]{\includegraphics[width=0.45\linewidth]{two_edges}}
-  \subfloat[Full checkpoint graph\label{fig:security-graph-generate}]{\includegraphics[width=0.45\linewidth]{security_graph}}
-  \caption{{\news (\ref{fig:two-edges}) Latest departure node $q^{d}_{b}$ found for $v_{r1}$ and earliest arrival node $q^{a}_{b}$ found for $v_{r3}$. (\ref{fig:security-graph-generate}) Eexample of a full checkpoint graph where round vertices are checkpoint generated through the heuristic search and triangle vertices are arrival and departure nodes added with the cross-trajectory edges. Virtual source $v^{+}$ and sink $v^{-}$ are added to be used later in planning problem.}}  
+  \subfloat[Cross-trajectory edge generation\label{fig:two-edges}]{\includegraphics[width=0.45\linewidth,trim = 0cm 0cm 0cm 0cm, clip, valign=c]{two_edges}}
+  \subfloat[Full checkpoint graph\label{fig:security-graph-generate}]{\includegraphics[width=0.45\linewidth,trim = 0cm 0cm 0cm 0.2cm, clip, valign=c]{security_graph}}
+  \caption{{\news (\ref{fig:two-edges}) Latest departure node $q^{d}_{b}$ found for $v_{r1}$ and earliest arrival node $q^{a}_{b}$ found for $v_{r3}$. (\ref{fig:security-graph-generate}) A full checkpoint graph, where circles are checkpoints $V_p$, triangles are connection nodes $V_c$, colored arrows (red and blue) are trajectory edges $E_t$ and black arrows are cross-trajectory edges $E_c$. Virtual source $v^{+}$ and sink $v^{-}$ are added to be used later in planning problem.}}  
 \end{figure}
 
 %We first find trees of feasible paths between each security checkpoint and all other trajectories using position information alone through \rrtstar{} (ignoring, for the moment, any timing constraint). Then, we prune these trees by considering time constraints (that consider the time needed to physically travel from one trajectory to the other while meeting other robots at the two endpoints) and ellipsoidal reachability constraints.
 
 We first find trees of feasible paths between each security checkpoint and all other trajectories using position information alone (ignoring, for the moment, any timing constraint). 
-More precisely, through \rrtstar{}, we find all feasible, quasi-optimal paths between one security checkpoint location $q_{v_p}(t_{v_p})$ where $v_{p} \in V_{p}$ for sub-team $\cI_p$, and all the waypoints $\{q_{r}(t_{{r}_{i}}) \}$ on any reference trajectory for a different sub-team $\cI_{r}$.
+More precisely, \new{for each checkpoint $v_p \in \union_p V_p$, we use \rrtstar~ to find all feasible, quasi-optimal paths from $q_{v_p}(t_{v_p})$ to all the waypoints $\{q_{r}(t_{{r}_{i}})\}$ on reference trajectories of all other sub-teams $\cI_{r} = \cI \setminus \cI_{p}$.}
 Then, to prune these trees, we consider the time needed to physically travel from one trajectory to the other while meeting other robots at the two endpoints. This is done by calculating the minimal travel time $t_{\textrm{path}}=\texttt{Cost}(q)/v_{max}$ for a robot to traverse each path. Two types of connecting nodes can be found.
 
 \begin{description}
 \item[Arrival nodes] are waypoints on $\{q_r\}$ where robots from sub-team $\cI_p$, deviating at $v_p$, can meet with sub-team $\cI_r$ at $(q_r(t_{r_i}),t_{r_i})$. For these, \rrtstar{} must have found a path from $v_p$ to $q_{r}(t^{a}_r)$ with $t_{p}+t_{\textrm{path}}<t_{{r}_{i}}$, and $\mathcal{E}(q_{r}(t_{{r}_{i}}),q_{p},t_{{r}_{i}},t_{p}) \intersect F = \emptyset$.
 
-For each trajectory $r\neq p$, we define the \emph{earliest arrival node} from $v_p$ to $v_{ea} = (\q_{r}(t^{a}_r),t^{a}_r)$ as the arrival node characterized by the minimum $t^{a}_r$ discovered. 
+For each trajectory $r\neq p$, we define the \emph{earliest arrival node} from $v_p$ to $v_{ea} = (q_{r}(t^{a}_r),t^{a}_r)$ as the arrival node characterized by the minimum $t^{a}_r$ discovered. 
 %$t^{a}_r$ is designated as the \emph{earliest arrival time}.
 
 \item[Departure nodes] are the waypoints on $\{q_r\}$ such that a robot from sub-team $\cI_r$, deviating from $(q_{r}(t_{{r}_{i}}),t_{{r}_{i}})$, can meet with robots in sub-team $\cI_p$ at $v_{p}$. For these nodes, \rrtstar{} must find a path from $v_p$ to $q_{r}(t_{{r}_{i}})$ for $v_p$ if  $t_{p}>t_{{r}_{i}}+t_{\textrm{path}}$ and $\mathcal{E}(q_{p}, q_{r}(t_{{r}_{i}}),t_{p}, t_{{r}_{i}}) \intersect F = \emptyset$. 
@@ -640,13 +642,13 @@ For each trajectory $r\neq p$, we define the \emph{earliest arrival node} from $
 For each trajectory $r\neq p$, we define the \emph{latest departure node} $v_{ld}=(q_{r}(t^{d}_r),t^{d}_r)$ as the departure node characterized by the maximum $t^{d}_r$ discovered.
 % $t^{d}_r$ is designated as the \emph{latest departure time}.
 \end{description}
-
-For each $v_{p} \in V_{p}$, all the latest departure and earliest arrival nodes are added as vertices $V_q = V_{p} \union \{v_{ea}, v_{ld}\}$, and the corresponding paths are added as cross-trajectory edges to $E_{q}$. Examples are shown in \cref{fig:two-edges}.
+% For each $v_{p} \in V_{p}$, all the latest departure and earliest arrival nodes are added as vertices $V_q = V_{p} \union \{v_{ea}, v_{ld}\}$, and the corresponding paths are added as cross-trajectory edges to $E_{q}$. Examples are shown in \cref{fig:two-edges}.
+{\news $V_c$ is the collection of all the latest departure and earliest arrival nodes (if they are not identified as checkpoints already), and the corresponding paths are added as cross-trajectory edges $E_q$. A toy example is shown in \cref{fig:two-edges}.}
 
 \subsubsection{In-trajectory edges}\label{sec:Graph-intro}
 
 %With vertices $V_{q}$ and cross-trajectory edges $E_{q}$ found in Algorithm \ref{alg:cross-trajectory-edges}, we can construct a security graph $G_{q}$. 
-We arrange all $V_q =\union_p \{v^0_{p}, \dots ,v^T_{p}\}$ found in \Cref{sec:security-checkpoint,sec:cross-traj-edges} in ascending order of $t_{v^i_{p}}$. We then add to $E_q$ the \emph{in-trajectory edges} $\{(v^i_{p}\rightarrow v^{i+1}_{p})\}$ obtained by connecting all consecutive checkpoints $v^i_{p}\in V_q$ with the checkpoints $v^{i+1}_{p}$ that follow them in their original trajectories. Examples are shown in \cref{fig:security-graph-generate}. %\zyang{any better explaination?}
+\new{Let $V =\{ v^i_p,\dots\}_{p=1}^{N_p}$ represent the set of all vertices found in~\cref{sec:security-checkpoint,sec:cross-traj-edges}. We group these verticies by sub-teams and arrange them in ascending order of their timestamps $t_{v^i_{p}}$. For each sub-team, consecutive vertices $v^i_{p}$ and $v^{i+1}_{p}$ are connected by adding \emph{in-trajectory edges} $\{(v^i_{p}\rightarrow v^{i+1}_{p})\}$ to $E_q$, representing corresponding segment of the planned trajectory. Examples are shown in \cref{fig:security-graph-generate}. }
 
 %For convenience, we use $|V_{q}|$ and $|E_{q}|$ to denote the cardinality of the sets $V_{q}$ and $E_{q}$ 
 
@@ -657,7 +659,7 @@ In this section, we formulate the cross-trajectory planning problem as a network
 Note that we assign fixed roles to robots for convenience in explaining the multi-flow formulation. In practice, after a cross-trajectory robot joins a team, it is considered interchangable, and could switch roles with the reference robot of that trajectory. % (i.e., the original reference robot might serve as a cross-trajectory robot in a later cross-trajectory co-observation).
 \end{remark}
 
-To formulate the problem as a network multi-flow problem, we augment the checkpoint graph $G_{q}$ to a flow graph $G=(V, E)$. The vertices of the new graph $G$ are defined as $V= V_{q} \union \{v^{+},v^{-}\}$, where $v^{+}$ is a \emph{virtual source} node, and $v^{-}$ is a \emph{virtual sink} node. We add directed edges from $v^{+}$ to all the start vertices, and from all end vertices to $v^{-}$, with $v^0_p$ and $v^T_p$ representing the start and end vertices of sub-team $\cI_p$. The edges of the new graph are defined as $E = E_{q} \union \{(v_{+},v^{0}_{p})\}_{p} \union \{( v^{T}_{p},v_{-})\}_{p}$.
+{\news To formulate the problem as a network multi-flow problem, we augment the checkpoint graph to a flow graph. A \emph{virtual source} node $v^{+}$ and a \emph{virtual source} node is added to the vertices $V= (\union_p V_p) \union V_c \union \{v^{+},v^{-}\}$. Additional directed edges from $v^{+}$ to all the start vertices, and from all end vertices to $v^{-}$ are added $E = E_{q} \union \{(v_{+},v^{0}_{p})\}_{p} \union \{( v^{T}_{p},v_{-})\}_{p}$ with $v^0_p$ and $v^T_p$ representing the start and end vertices of sub-team $\cI_p$ (dashed arrows in~\cref{fig:example-cross-traj}).}
 
 %The goal is to find paths in $G$ for all the cross-trajectory robots that starts from the virtual source $v^{+}$ and ends in the virtual sink $v^{-}$.
 The path of a robot $k$ all starts from $v^{+}$ and ends at $v^{-}$, and are represented as a flow vector $\vf^{k} = \{ f^{k}_{ij} \}$, where $f^{k}_{ij} \in \{1,0\}$ is an indicator variable representing whether robot $k$'s path contains the edge $v_{i}\to v_{j}$. The planning problem can be formulated as a path cover problem on $G_{q}$, i.e., as finding a set of paths $F=[\vf_{1},\dots, \vf_{\cK}]$ for cross-trajectory robots such that every checkpoint in $\union_p V_{p}$ is included in at least one path in $F$ (to ensure co-observation at every checkpoint as required by \Cref{rmk:revised-security}). %Additionally, to encourage the robots' exchange between different sub-teams, cross-trajectory co-observations should be preferred compared to co-observation within the same team. 
@@ -772,7 +774,6 @@ The original ellipse $\cE$ in $\cF$ can be expressed as the zero level set of th
 \new{We define a differentiable transformation to a canonical ellipse that is used in the derivation of the reachability constraints in \Cref{sec:reachability,sec:ellipse-region-constraint}. This transformation includes a rotation derived from a modified version of Householder transformations \cite{householder1958unitary}. 
 % With respect to the standard definition, our modification ensures that the final operator is a proper rotation (i.e., not a reflection). 
 We call our version of the operator a \emph{Householder rotation}. In this section we derive Householder rotations and their differentials for the 3-D case; the 2-D case can be easily obtained by embedding it in the $z=0$ plane.}
-\zyang{$\nu_\cF$ is defined in main content, i changed it to $\nu_1$ and $\nu_2$}
 \begin{definition} Let $\nu_1$ and $\nu_2$ be two unitary vectors ($\norm{\nu_1}=\norm{\nu_2}=1$). Define the normalized vector $u = \frac{\nu_1+\nu_2}{\norm{\nu_1+\nu_2}}$,
   % \begin{equation}
   %   u=\nu_1+\nu_2,\quad u =\frac{u'}{\norm{u'}}.
