@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  2 DEC 2024 18:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  3 DEC 2024 20:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1290,64 +1290,60 @@ File: Figs//FinalResult-eps-converted-to.pdf Graphic file (type pdf)
 Package pdftex.def Info: Figs//FinalResult-eps-converted-to.pdf  used on input line 500.
 (pdftex.def)             Requested size: 113.39923pt x 94.44041pt.
  [6 <./Figs//FinalResult-eps-converted-to.pdf> <./Figs//SecurityBreak.png (PNG copy)>]
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 543.
- (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1phv.fd
-File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `phv' (encoding: OT1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 559.
- (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+Underfull \hbox (badness 2181) in paragraph at lines 550--551
+[]\OT1/ptm/m/it/10 (+20) representing non-checkpoint lo-ca-
+ []
+
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 561.
+(/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `pcr' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<Figs//SC_gen_1.png, id=425, 512.55319pt x 410.04256pt>
+ [7]
+<Figs//SC_gen_1.png, id=437, 512.55319pt x 410.04256pt>
 File: Figs//SC_gen_1.png Graphic file (type png)
 <use Figs//SC_gen_1.png>
-Package pdftex.def Info: Figs//SC_gen_1.png  used on input line 577.
+Package pdftex.def Info: Figs//SC_gen_1.png  used on input line 578.
 (pdftex.def)             Requested size: 113.39923pt x 71.9076pt.
-<Figs//SC_gen_2.png, id=427, 512.55319pt x 410.04256pt>
+<Figs//SC_gen_2.png, id=439, 512.55319pt x 410.04256pt>
 File: Figs//SC_gen_2.png Graphic file (type png)
 <use Figs//SC_gen_2.png>
-Package pdftex.def Info: Figs//SC_gen_2.png  used on input line 578.
+Package pdftex.def Info: Figs//SC_gen_2.png  used on input line 579.
 (pdftex.def)             Requested size: 113.39923pt x 71.9076pt.
- [7]
-<Figs//two_edges.png, id=440, 389.10457pt x 156.43481pt>
+<Figs//two_edges.png, id=441, 389.10457pt x 156.43481pt>
 File: Figs//two_edges.png Graphic file (type png)
 <use Figs//two_edges.png>
-Package pdftex.def Info: Figs//two_edges.png  used on input line 623.
+Package pdftex.def Info: Figs//two_edges.png  used on input line 624.
 (pdftex.def)             Requested size: 113.39923pt x 45.5893pt.
-<Figs//security_graph.png, id=442, 500.12282pt x 185.45094pt>
+<Figs//security_graph.png, id=443, 500.12282pt x 185.45094pt>
 File: Figs//security_graph.png Graphic file (type png)
 <use Figs//security_graph.png>
-Package pdftex.def Info: Figs//security_graph.png  used on input line 624.
+Package pdftex.def Info: Figs//security_graph.png  used on input line 625.
 (pdftex.def)             Requested size: 113.39923pt x 40.75705pt.
  [8 <./Figs//SC_gen_1.png> <./Figs//SC_gen_2.png> <./Figs//two_edges.png> <./Figs//security_graph.png>]
-<Figs//old_result.png, id=482, 1606.0pt x 1405.25pt>
+<Figs//old_result.png, id=481, 1606.0pt x 1405.25pt>
 File: Figs//old_result.png Graphic file (type png)
 <use Figs//old_result.png>
-Package pdftex.def Info: Figs//old_result.png  used on input line 707.
+Package pdftex.def Info: Figs//old_result.png  used on input line 708.
 (pdftex.def)             Requested size: 118.4403pt x 110.96306pt.
-<Figs//old_result_graph.png, id=483, 1806.75pt x 1204.5pt>
+<Figs//old_result_graph.png, id=482, 1806.75pt x 1204.5pt>
 File: Figs//old_result_graph.png Graphic file (type png)
 <use Figs//old_result_graph.png>
-Package pdftex.def Info: Figs//old_result_graph.png  used on input line 708.
+Package pdftex.def Info: Figs//old_result_graph.png  used on input line 709.
 (pdftex.def)             Requested size: 118.4403pt x 86.06587pt.
  [9 <./Figs//old_result.png (PNG copy)> <./Figs//old_result_graph.png (PNG copy)>]
-<Figs//Traj_result.png, id=520, 1606.0pt x 1405.25pt>
+<Figs//Traj_result.png, id=519, 1606.0pt x 1405.25pt>
 File: Figs//Traj_result.png Graphic file (type png)
 <use Figs//Traj_result.png>
-Package pdftex.def Info: Figs//Traj_result.png  used on input line 723.
+Package pdftex.def Info: Figs//Traj_result.png  used on input line 724.
 (pdftex.def)             Requested size: 118.4403pt x 110.96306pt.
-<Figs//7-team-plan.png, id=522, 1606.0pt x 1405.25pt>
+<Figs//7-team-plan.png, id=521, 1606.0pt x 1405.25pt>
 File: Figs//7-team-plan.png Graphic file (type png)
 <use Figs//7-team-plan.png>
-Package pdftex.def Info: Figs//7-team-plan.png  used on input line 725.
+Package pdftex.def Info: Figs//7-team-plan.png  used on input line 726.
 (pdftex.def)             Requested size: 118.4403pt x 110.96306pt.
  [10 <./Figs//Traj_result.png (PNG copy)> <./Figs//7-team-plan.png (PNG copy)>] [11] (./paper.bbl
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 188.
@@ -1369,21 +1365,21 @@ Package pageslts Info: Total number of pages is even.
 
 (./paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: AF90E07B9A3659800A45CEE07E023347;2518.
+(rerunfilecheck)             Checksum: 4B3205931AE24A0B22A16A2A380BBC85;2523.
  ) 
 Here is how much of TeX's memory you used:
- 40554 strings out of 478268
- 796827 string characters out of 5846348
+ 40479 strings out of 478268
+ 795872 string characters out of 5846348
  1184936 words of memory out of 5000000
- 57279 multiletter control sequences out of 15000+600000
- 539405 words of font info for 441 fonts, out of 8000000 for 9000
+ 57225 multiletter control sequences out of 15000+600000
+ 536714 words of font info for 430 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  119i,20n,111p,1543b,557s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (12 pages, 2812555 bytes).
+{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on paper.pdf (12 pages, 2806780 bytes).
 PDF statistics:
- 748 PDF objects out of 1000 (max. 8388607)
- 619 compressed objects within 7 object streams
- 207 named destinations out of 1000 (max. 500000)
- 86936 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 743 PDF objects out of 1000 (max. 8388607)
+ 616 compressed objects within 7 object streams
+ 208 named destinations out of 1000 (max. 500000)
+ 80792 words of extra memory for PDF output out of 89155 (max. 10000000)
 
