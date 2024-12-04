@@ -1,0 +1,42 @@
+\documentclass[10pt]{article}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\pagestyle{empty}
+\begin{document}
+\definecolor{xdxdff}{rgb}{0.49019607843137253,0.49019607843137253,1}
+\definecolor{qqqqff}{rgb}{0,0,1}
+\definecolor{ffqqqq}{rgb}{1,0,0}
+\definecolor{ududff}{rgb}{0.30196078431372547,0.30196078431372547,1}
+\definecolor{zzttqq}{rgb}{0.6,0.2,0}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm]
+\clip(2,2.576821192052975) rectangle (16,15.4046357615894);
+\fill[line width=2pt,color=zzttqq,fill=zzttqq,fill opacity=0.10000000149011612] (6,14) -- (9,14) -- (9,12) -- (6,12) -- cycle;
+\draw [line width=2pt,color=zzttqq] (6,14)-- (9,14);
+\draw [line width=2pt,color=zzttqq] (9,14)-- (9,12);
+\draw [line width=2pt,color=zzttqq] (9,12)-- (6,12);
+\draw [line width=2pt,color=zzttqq] (6,12)-- (6,14);
+\draw [line width=2pt,color=ffqqqq] (6.551724137931035,12.39139072847682) circle (0.3cm);
+\draw [line width=2pt] (6.551724137931035,12.39139072847682)-- (6.8516128424953155,12.399561706065679);
+\draw [line width=2pt,color=qqqqff] (6.06896551724138,5.002649006622516) circle (0.3cm);
+\draw [line width=2pt] (6.06896551724138,5.002649006622516)-- (6.368960201489201,5.000863111034774);
+\draw [line width=2pt,dash pattern=on 1pt off 1pt,color=ffqqqq] (3,10)-- (15.135403592795644,9.976327208283946);
+\draw [line width=2pt,dash pattern=on 1pt off 1pt,color=qqqqff] (3,5)-- (15,5);
+\draw [line width=2pt,color=ffqqqq] (3,10)-- (5.3965517241379315,12.40794701986755);
+\draw [line width=2pt,color=ffqqqq] (5.3965517241379315,12.40794701986755)-- (15.396551724137929,12.40794701986755);
+\begin{scriptsize}
+\draw[color=zzttqq] (7.568965517241379,13.545033112582779) node {Forbidden area};
+\draw [fill=ududff] (3,10) circle (2.5pt);
+\draw [fill=ududff] (3,5) circle (2.5pt);
+\draw [fill=ffqqqq] (6.551724137931035,12.39139072847682) circle (1.5pt);
+\draw [fill=ffqqqq] (6.8516128424953155,12.399561706065679) circle (1.5pt);
+\draw [fill=ududff] (6.06896551724138,5.002649006622516) circle (1.5pt);
+\draw [fill=xdxdff] (6.368960201489201,5.000863111034774) circle (1.5pt);
+\draw [fill=xdxdff] (3,5) circle (2.5pt);
+\draw[color=xdxdff] (4.224137931034482,5.521192052980128) node {Start};
+\draw [fill=ffqqqq] (3,10) circle (2.5pt);
+\draw[color=ffqqqq] (4.206896551724138,10.514569536423837) node {Start};
+\end{scriptsize}
+\end{tikzpicture}
+\end{document}
