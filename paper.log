@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  3 DEC 2024 20:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  5 DEC 2024 19:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1270,11 +1270,11 @@ File: Figs//Ellipse2safezone_V2.png Graphic file (type png)
 Package pdftex.def Info: Figs//Ellipse2safezone_V2.png  used on input line 279.
 (pdftex.def)             Requested size: 118.4403pt x 104.14449pt.
  [4 <./Figs//Ellipse2point.png> <./Figs//Ellipse2line_V2.png> <./Figs//Ellipse2safezone_V2.png> <./Figs//Reachability.png>] [5]
-<Figs//SecurityBreak.png, id=387, 1606.0pt x 1405.25pt>
-File: Figs//SecurityBreak.png Graphic file (type png)
-<use Figs//SecurityBreak.png>
-Package pdftex.def Info: Figs//SecurityBreak.png  used on input line 499.
-(pdftex.def)             Requested size: 113.39923pt x 98.13461pt.
+<Figs//SecurityBreak_v2.png, id=387, 1003.75pt x 1003.75pt>
+File: Figs//SecurityBreak_v2.png Graphic file (type png)
+<use Figs//SecurityBreak_v2.png>
+Package pdftex.def Info: Figs//SecurityBreak_v2.png  used on input line 499.
+(pdftex.def)             Requested size: 113.39923pt x 113.39944pt.
 Package epstopdf Info: Source file: <Figs//FinalResult.eps>
 (epstopdf)                    date: 2024-01-19 15:31:18
 (epstopdf)                    size: 103803 bytes
@@ -1288,8 +1288,11 @@ Package epstopdf Info: Output file is already uptodate.
 File: Figs//FinalResult-eps-converted-to.pdf Graphic file (type pdf)
 <use Figs//FinalResult-eps-converted-to.pdf>
 Package pdftex.def Info: Figs//FinalResult-eps-converted-to.pdf  used on input line 500.
-(pdftex.def)             Requested size: 113.39923pt x 94.44041pt.
- [6 <./Figs//FinalResult-eps-converted-to.pdf> <./Figs//SecurityBreak.png (PNG copy)>]
+(pdftex.def)             Requested size: 113.39923pt x 106.83766pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6 <./Figs//FinalResult-eps-converted-to.pdf> <./Figs//SecurityBreak_v2.png (PNG copy)>]
 Underfull \hbox (badness 2181) in paragraph at lines 550--551
 []\OT1/ptm/m/it/10 (+20) representing non-checkpoint lo-ca-
  []
@@ -1364,19 +1367,22 @@ Package pageslts Info: Total number of pages is even.
 
 
 (./paper.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 4B3205931AE24A0B22A16A2A380BBC85;2523.
  ) 
 Here is how much of TeX's memory you used:
- 40479 strings out of 478268
- 795872 string characters out of 5846348
+ 40476 strings out of 478268
+ 795878 string characters out of 5846348
  1184936 words of memory out of 5000000
  57225 multiletter control sequences out of 15000+600000
- 536714 words of font info for 430 fonts, out of 8000000 for 9000
+ 536595 words of font info for 428 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  119i,20n,111p,1543b,557s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (12 pages, 2806780 bytes).
+Output written on paper.pdf (12 pages, 2801878 bytes).
 PDF statistics:
  743 PDF objects out of 1000 (max. 8388607)
  616 compressed objects within 7 object streams
