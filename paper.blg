@@ -1,0 +1,64 @@
+This is BibTeX, Version 0.99d (TeX Live 2022)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: paper.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: ADMM_planning.bib
+Database file #2: ACC.bib
+Database file #3: tron.bib
+Warning--string name "arxiv" is undefined
+--line 207 of file tron.bib
+Database file #4: ziqi.bib
+Database file #5: reachability.bib
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty note in Tron:Arxiv14
+
+Done.
+You've used 34 entries,
+            4087 wiz_defined-function locations,
+            1023 strings with 14698 characters,
+and the built_in function-call counts, 29884 in all, are:
+= -- 2384
+> -- 761
+< -- 296
++ -- 430
+- -- 123
+* -- 1438
+:= -- 4229
+add.period$ -- 78
+call.type$ -- 34
+change.case$ -- 33
+chr.to.int$ -- 717
+cite$ -- 35
+duplicate$ -- 2049
+empty$ -- 2345
+format.name$ -- 155
+if$ -- 7042
+int.to.chr$ -- 0
+int.to.str$ -- 34
+missing$ -- 343
+newline$ -- 127
+num.names$ -- 34
+pop$ -- 794
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 2296
+stack$ -- 0
+substring$ -- 1704
+swap$ -- 1771
+text.length$ -- 57
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 34
+warning$ -- 1
+while$ -- 145
+width$ -- 36
+write$ -- 351
+(There were 2 warnings)
