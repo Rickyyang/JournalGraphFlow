@@ -18,6 +18,7 @@
 
 \documentclass{article}
 %% Language and font encodings
+\input{preamble/common}
 \usepackage[english]{babel}
 \usepackage{times} % make the section title in Times New Roman
 
@@ -32,10 +33,10 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
-\usepackage[colorlinks=true, allcolors=blue]{hyperref}
-\usepackage{indentfirst}
-\usepackage{graphicx}
-\usepackage{subfigure}
+% \usepackage[colorlinks=true, allcolors=blue]{hyperref}
+% \usepackage{indentfirst}
+% \usepackage{graphicx}
+% \usepackage{subfigure}
 \usepackage{float}
 \usepackage{threeparttable} 
 \usepackage{multirow}
@@ -86,69 +87,75 @@ Yours sincerely,
 Ziqi Yang, Roberto Tron
 
 
-\section*{Response to the Editor} 
-\begin{cmt*}{}{}
-Editor Comments.
-\end{cmt*}
-
-\vspace{0.1cm}
-\noindent
-\underline{\textbf{Response:}}
-\vspace{0.2cm}
-
-Your response. 
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Rewiewer 1
 \newpage
 \section{Response to reviewer 1} 
 
 %%%%%%%%%%%%% Comment 1.1
-\begin{cmt}{}{}
+\begin{cmt*}{}{}
 
-Comments 1.1
-
-\end{cmt}
-\vspace{0.1cm}
-\noindent
-\underline{\textbf{Response:}}
-\vspace{0.2cm}
-
-Your Response 1.1
-
-\vspace{0.3cm}
-
-
-%%%%%%%%%%%%% Comment 1.0
-\begin{cmt*}{}{}        %% use * when do not need enumerate
-
-Comments
+	This paper proposes a multi-agent mobile robot planning algorithm that
+	is robust agains attackers that would compromise the agents by
+	directing them to unsafe regions. This is achieved by incorporating 1)
+	co-observation constraints so that the agents could watch over each
+	other, 2) reachability constraints so that the region the agents could
+	potentially enter does no overlap with unsafe regions, and 3) sub-team
+	planning algorithm to improve robustness by adding more number of
+	agents.
+	
+	The proposed method is interesting, but I think the writing must be
+	improved significantly to secure the clarity, and there are a lot of
+	grammar mistakes that need to be fixed. To me, it appears that the
+	draft may have been prepared somewhat hastily, which is not considerate
+	of the reviewers' time.
 
 \end{cmt*}
 \vspace{0.1cm}
 \noindent
 \underline{\textbf{Response:}}
 \vspace{0.2cm}
-
-Your Response 
+We are grateful for your thoughtful comments and for expressing interest in our proposed method. We sincerely apologize for the grammatical mistakes in the initial submission and acknowledge the importance of presenting our work with clarity and professionalism. In the revised version, we have been extra careful to address all grammar issues and have implemented thorough proofreading to minimize similar mistakes in future submissions. We greatly appreciate your patience and constructive feedback, which have been invaluable in improving the quality of our manuscript.
 
 \vspace{0.3cm}
 
 
-%%%%%%%%%%%%% Comment 1.2
-\begin{cmt}{}{}
-
-Comments 1.2
-
+%%%%%%%%%%%%% Comment 1.0
+\begin{cmt}{}{}        %% use * when do not need enumerate
+	It seems like Example 1 is introduced as an example to help
+	readers understand the formulation (1) in details. However, it is still
+	vague, and it doesn't easily connect to Figure 3b.
 \end{cmt}
 \vspace{0.1cm}
 \noindent
 \underline{\textbf{Response:}}
 \vspace{0.2cm}
 
-Your Response 1.2
+\begin{example}\label{example:map_exploration}
+	\new{Robots are tasked to navigate an unknown task space, collecting sensory data to reconstruct a field (see Fig. 2a). The space is modeled as grid points, each with an associated value. The goal is to find paths that minimize uncertainty in reconstructing the field. Each grid point $j$ is associated with a Kalman Filter (KF) [28] to track uncertainty through its covariance $P_j$, updated based on the measurements taken by robots along the trajectory $\vq$, where measurement quality, modeled by a Gaussian radial basis function, is higher near the robot. The optimization objective $\varPhi(\vq)=\max_j P_j(\vq)$ is to minimize the maximum uncertainty (detailed in [6]).}
+\end{example}
+\begin{figure}[h]
+	\centering
+	\subfloat[\new{Map exploration task.}\label{fig:illustration}]{\includegraphics[width = 0.45\linewidth]{illustration figure_1}} 
+	\subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.45\linewidth]{Grid_world}}
+	\caption{\new{(a) Grid world example of a task planned in an $8 \times 8$ grid world. Blue grids are obstacles, orange and green grids are forbidden regions.}}
+  \end{figure}
+\vspace{0.3cm}
+
+
+%%%%%%%%%%%%% Comment 1.2
+\begin{cmt}{}{}
+	Personally, I think to much space is dedicated to the details of how
+	reachability constraints are implemented in the ADMM formulation (Sec.
+	D, E, F, G, H). Although they are important details, I think this part
+	can be condensed more, and some of the details can be deferred to the
+	Appendix, so that some space can be dedicated more to improve the
+	clarity of the other sections.
+\end{cmt}
+\vspace{0.1cm}
+\noindent
+\underline{\textbf{Response:}}
+\vspace{0.2cm}
+
 
 \vspace{0.3cm}
 
