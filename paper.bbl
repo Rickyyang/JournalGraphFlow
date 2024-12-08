@@ -81,17 +81,17 @@ J.~Schulman, Y.~Duan, J.~Ho, A.~Lee, I.~Awwal, H.~Bradlow, J.~Pan, S.~Patil,
 \bibitem{mellinger2012mixed}
 D.~Mellinger, A.~Kushleyev, and V.~Kumar, ``Mixed-integer quadratic program
   trajectory generation for heterogeneous quadrotor teams,'' in \emph{2012 IEEE
-  international conference on robotics and automation}.\hskip 1em plus 0.5em
+  International Conference on Robotics and Automation}.\hskip 1em plus 0.5em
   minus 0.4em\relax IEEE, 2012, pp. 477--483.
 
 \bibitem{bento2013message}
 J.~Bento, N.~Derbinsky, J.~Alonso-Mora, and J.~S. Yedidia, ``A message-passing
-  algorithm for multi-agent trajectory planning,'' in \emph{Advances in neural
-  information processing systems}, 2013, pp. 521--529.
+  algorithm for multi-agent trajectory planning,'' in \emph{Advances in Neural
+  Information Processing Systems}, 2013, pp. 521--529.
 
 \bibitem{tanner2004leader}
 H.~G. Tanner, G.~J. Pappas, and V.~Kumar, ``Leader-to-formation stability,''
-  \emph{IEEE Transactions on robotics and automation}, vol.~20, no.~3, pp.
+  \emph{IEEE Transactions on Robotics and Automation}, vol.~20, no.~3, pp.
   443--455, 2004.
 
 \bibitem{hu2019distributed}
@@ -211,6 +211,7 @@ A.~S. Householder, ``Unitary triangularization of a nonsymmetric matrix,''
 
 \bibitem{Tron:Arxiv14}
 R.~Tron and K.~Daniilidis, ``Technical report on optimization-based
-  bearing-only visual homing with applications to a 2-d unicycle model,'' 2014.
+  bearing-only visual homing with applications to a 2-d unicycle model,''
+  \emph{arXiv preprint arXiv:1402.3584}, 2014.
 
 \end{thebibliography}
