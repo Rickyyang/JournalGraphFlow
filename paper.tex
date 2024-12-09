@@ -189,7 +189,7 @@ Checking the primal residuals alongside the dual residuals
 after each iteration, the steps are reiterated until convergence when the primal and dual residuals are small, or divergence when primal and dual residuals remain large after a fixed number of iterations.
 {\news
 \begin{remark}
-In practical application, \eqref{eq:admm-mod-update-q} is solved iteratively via a nonlinear optimization solver like \emph{fmincon}, while \eqref{eq:z-update} and~\eqref{eq:u-update} have closed form solutions.
+In practical application, \eqref{eq:admm-mod-update-q} is solved iteratively via a nonlinear optimization solver like \emph{fmincon}. The gradients of the constraint functions, derived later, is used to enhance solver efficiency and accuracy. Meanwhile, \eqref{eq:z-update} and~\eqref{eq:u-update} have closed form solutions.
 \end{remark}
 }
 % \rtron{Maybe state here that (9a) is solved iteratively, while (9b) and (9c) are closed-form.}
@@ -277,7 +277,7 @@ Consider a robot $i$ starting from $q_{1}$ at time $t_1$ and reaching $q_{2}$ at
 
 For simplicity, in this paper we consider only a maximum velocity constraint $v_{max}$; the reachability region for $q'$ can then be over-approximated by the following (the over-approximation is obtained by neglecting physical obstacles):%$\mathcal{E}=\{q'\in\mathbb{R}^n: d(q_1,q')+d(q'q_2)<v_{max}(t_2-t_1)\}$, where $d(\cdot,\cdot)$ denotes the Euclidean distance between two points.
 \begin{definition}\label{def:Reachability}
-	The \emph{reachability ellipsoid $\cE$} is defined as the region $\mathcal{E}(q_1,q_2,t_{1},t_{2})=\{\tilde{q}\in\mathbb{R}^n: d(q_1,\tilde{q})+d(\tilde{q},q_2)<2a\}$, where $a=\frac{v_{max}}{2}(t_2-t_1)$.
+	The \emph{reachability ellipsoid $\cE$} is defined as the region $\mathcal{E}(q_1,q_2,t_{1},t_{2})=\{\tilde{q}\in\mathbb{R}^n: d(q_1,\tilde{q})+d(\tilde{q},q_2)<2a\}$, where $a=\frac{v_{max}}{2}(t_2-t_1)$, and $d(\cdot,\cdot)$ denotes the Euclidean distance between two points.
 \end{definition}
 This region is an ellipsoid because it represents the set of points $q'$ whose sum of distances two \emph{foci} $q_1$ and $q_2$ is less than $2a$, where a is the major radius of the ellipsoid. }
  \begin{figure}
@@ -300,7 +300,6 @@ This region is an ellipsoid because it represents the set of points $q'$ whose s
   A multi-robot trajectory is secured against plan-deviation attacks if there exists a co-observation plan such that the reachability region between each consecutive co-observation does not intersect with any forbidden regions.
 \end{definition}
 }
-
 \subsection{Transformation to canonical coordinates}\label{sec:rotation2Standard}
 \newcommand{\oFE}{o}
 {\news To use the definition of reachability ellipsoid from the section above as computational constraints for ADMM, we first apply a differentiable rigid body transformation to reposition the ellipse $\cE$ from the global frame $\cF$ to a canonical frame $\cF_\cE$, where the origin of $\cF_\cE$ is at the ellipsoid's center $\oFE = \frac{1}{2}(q_1+q_2)$, and the first axis of $\cF_\cE$ is aligned with the foci (see \cref{fig:EllipseConstraintExample} for an illustration). 

@@ -53,7 +53,7 @@
 \newtheorem{constraint}{ADMM constraint}
 \newtheorem{example}{Example}
 \newcommand{\re}{\tcblower \underline{\textbf{Response:}}}
-\newcommand{\rv}{{\Large{\underline{\textbf{Revision:}}}}\quad}
+\newcommand{\rv}{{\large{\underline{\textbf{Revision:}}}}\quad}
 \usepackage[export]{adjustbox} 
 \usepackage[capitalise]{cleveref}
 \usepackage{xcolor}
@@ -393,67 +393,89 @@ This region is an ellipsoid because it represents the set of points $q'$ whose s
 \section{Response to reviewer 2}
 
 %%%%%%%%%%%%% Comment 2.1
+\begin{cmt*}{}{}
+	This paper proposed a novel multi-robot optimal planning algorithm that
+	integrated mutual observations and introduced reachability constraints
+	for enhanced security, which ensures that, even with adversarial
+	movements, compromised robots cannot breach forbidden regions without
+	missing scheduled co-observations. The contribution of this paper is
+	hard evaluate due to the organization. 
+	\re We sincerely thank the reviewer for their valuable comments and feedback. We acknowledge the concern regarding the organization of the manuscript, which may have made it challenging to fully evaluate the contributions. In the revised version, we have carefully restructured the manuscript to improve its organization and readability, ensuring that the key contributions are presented more clearly and effectively. We greatly appreciate your valuable feedback, which has been instrumental in enhancing the quality of our work.
+\end{cmt*}
+%%%%%%%%%%%%% Comment 2.1
 \begin{cmt}{}{}
-
-Comments 2.1
-
+The dimension of p is erroneously defined;
+\re After carefully reviewing the manuscript, we believe the reviewer might have meant the dimension of $q$ rather than $p$. In the revised version, we have corrected the definition of $q$ to ensure clarity and accuracy. Thank you for bringing this to our attention.
 \end{cmt}
-\vspace{0.1cm}
-\noindent
-\underline{\textbf{Response:}}
-\vspace{0.2cm}
-
-Your Response 2.1
-
-\vspace{0.3cm}
-
-
-%%%%%%%%%%%%% Comment 2.2
-\begin{cmt}{}{}
-
-Comments 2.2
-
-\end{cmt}
-\vspace{0.1cm}
-\noindent
-\underline{\textbf{Response:}}
-\vspace{0.2cm}
-
-Your Response 2.2
-
-\vspace{0.3cm}
-
+\rv {\news We denote the trajectory as $\vq_i = [q_{i0}\dots q_{iT}]\in\real{m\times T}$, where $q_{ij}\in\real{m}$ is the waypoint of agent $i$ in a $m$ dimensional state space, $T$ is the time horizon. For a total of $n_p$ robots, trajectories can be represented as an aggregated vector $\vq = \stack(\vq_1,\dots,\vq_{n_p})\in \real{m n_p\times T}$, where $\stack(\cdot)$ denotes the vertical stacking operation. }
 
 %%%%%%%%%%%%% Comment 2.3
 \begin{cmt}{}{}
-
-Comments 2.3
+There are many grammar errors, please check it carefully
+\re We have carefully reviewed and corrected all identified grammar issues, as well as others not explicitly mentioned. The revised manuscript has undergone thorough proofreading to ensure clarity and grammatical accuracy.
 
 \end{cmt}
-\vspace{0.1cm}
-\noindent
-\underline{\textbf{Response:}}
-\vspace{0.2cm}
-
-Your Response 2.3
-
-\vspace{0.3cm}
-
 
 %%%%%%%%%%%%% Comment 2.4
 \begin{cmt}{}{}
-
-Comments 2.4
-
+In Definition 1, is reasonable to say ``any potential deviations''?
+\re We believe that this phrase is resonable and essential to the definition and intention of security against plan-deviation attacks. The definition is designed to ensure that the trajectory plan accounts for all possible paths a compromised robot might take toward forbidden regions. By explicitly requiring that any such deviation results in the robot missing its next co-observation, the definition provides a rigorous and comprehensive security guarantee. As such, the phrase "any potential deviations" accurately reflects the intended scope of the definition.
 \end{cmt}
-\vspace{0.1cm}
-\noindent
-\underline{\textbf{Response:}}
-\vspace{0.2cm}
 
-Your Response 2.4
+\begin{cmt}{}{}
+	In the definition of $U$, what does ``,'' mean?
+	\re  We are not entirely sure what the specific concern or issue is in this context. However, if the reviewer is referring to $u'$ , it was intended to denote the vector $u$ before normalization. To avoid any potential confusion, we have revised the notation in the updated manuscript. We appreciate your feedback and have taken steps to ensure clarity in this definition.
+\end{cmt}
+\setcounter{definition}{8}
+\setcounter{equation}{41}
+\rv {\news \begin{definition} Let $\nu_1$ and $\nu_2$ be two unitary vectors ($\norm{\nu_1}=\norm{\nu_2}=1$). Define the normalized vector $u = \frac{\nu_1+\nu_2}{\norm{\nu_1+\nu_2}}$,
+	% \begin{equation}
+	%   u=\nu_1+\nu_2,\quad u =\frac{u'}{\norm{u'}}.
+	% \end{equation}
+  the \emph{Householder rotation} $H(\nu_1,\nu_2)$ is defined as
+	\begin{equation}\label{eq:H definition}
+	  H(\nu_1,\nu_2) = 2 u u\transpose-I.
+	\end{equation}
+  \end{definition}}
+\begin{cmt}{}{}
+	How to solve (9a)?
+	\re  In practical applications, Eq.4a (originally 9a) is solved iteratively using a nonlinear optimization solver, such as \emph{fmincon}. Additionally, the derivatives of the constraint projection functions, as derived later in the manuscript, are specifically utilized to solve the optimization problem more efficiently and quickly. These derivatives enhance the solver's performance by providing necessary gradient information, improving convergence speed. We have clarified these points in the revised manuscript to provide further insight into the solution process.
+\end{cmt}
+\rv {\news
+\setcounter{remark}{0}
+\begin{remark}
+In practical application, (4a) is solved iteratively via a nonlinear optimization solver like \emph{fmincon}. The gradients of the constraint functions, derived later, is used to enhance solver efficiency and accuracy. Meanwhile, (4b) and (4c) have closed form solutions.
+\end{remark}
+}
+\begin{cmt}{}{}
+	How to define $d_{\max}$ in (14)?
+	\re $d_{max}$ is the maximum distance between a pair of robots that the secure can be ensured through co-observation.
+\end{cmt}
+\setcounter{constraint}{0}
+\rv \begin{constraint}[Co-observation constraint]\label{constraint:coobservation}
+	\begin{align}
+	D(\vq) &= \overrightarrow{q_{aj}q_{bj}}, \label{eq:coobservation_constraint}\\
+	  \sZ &= \{\vz \mid \norm{\vz} \leq d_{max} \},\\
+	   \Pi_\sZ(z) & = \begin{cases}
+	d_{max}\frac{\vz}{\norm{\vz}} &\text{if } \norm{\vz} > d_{max},\\
+	\vz	& otherwise,
+	\end{cases}
+	\end{align}
+	where $a,b$ are the indices of the pair of agents required for a mutual inspection, \new{$d_{max}$ is the maximum distance between a pair of robots that the secure can be ensured through co-observation.}
+	\end{constraint}
 
-\vspace{0.3cm}
+\begin{cmt}{}{}
+	In Definition 4, it is unclear that $\mathcal E$ is an ellipsoid. There is no definition of the function $d(\cdot,\cdot)$;
+	\re In the revised manuscript, we have added additional explanations to clarify that $\cE$ is an ellipsoid and to explicitly define the function $d(\cdot,\cdot)$ to avoid confusion and ensure clarity.
+\end{cmt}
+\rv {\news \setcounter{definition}{1}
+\begin{definition}\label{sec:ellipsoidal definition}
+Consider a robot $i$ starting from $q_{1}$ at time $t_1$ and reaching $q_{2}$ at time $t_2$. The \emph{reachability region} between $t_1$ and $t_2$ is defined as the set of points $q'$ in the free configuration space for which there exists a kinematically feasible trajectory containing $q'$.
+\end{definition}
 
-
+For simplicity, in this paper we consider only a maximum velocity constraint $v_{max}$; the reachability region for $q'$ can then be over-approximated by the following (the over-approximation is obtained by neglecting physical obstacles):
+\begin{definition}\label{def:Reachability}
+	The \emph{reachability ellipsoid $\cE$} is defined as the region $\mathcal{E}(q_1,q_2,t_{1},t_{2})=\{\tilde{q}\in\mathbb{R}^n: d(q_1,\tilde{q})+d(\tilde{q},q_2)<2a\}$, where $a=\frac{v_{max}}{2}(t_2-t_1)$, and $d(\cdot,\cdot)$ denotes the Euclidean distance between two points.
+\end{definition}
+This region is an ellipsoid because it represents the set of points $q'$ whose sum of distances two \emph{foci} $q_1$ and $q_2$ is less than $2a$, where a is the major radius of the ellipsoid. }
 \end{document}
