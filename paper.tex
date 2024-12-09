@@ -110,26 +110,36 @@ We formulate the planning problem as an optimal trajectory optimization problem 
 		\textrm{subject to} &\quad \vq \in \Omega.
 	\end{split}
 \end{equation}
-
 To give a concrete example of the cost $\varPhi$ and the set $\Omega$, we introduce a representative application that will be used for all the simulations throughout the paper.
 
 \begin{example}\label{example:map_exploration}
-\new{Robots are tasked to navigate an unknown task space, collecting sensory data to reconstruct a field (see~\cref{fig:illustration}). The space is modeled as grid points, each with an associated value. The goal is to find paths that minimize uncertainty in reconstructing the field. Each grid point $j$ is associated with a Kalman Filter (KF) \cite{anderson2012optimal} to track uncertainty through its covariance $P_j$, updated based on the measurements taken by robots along the trajectory $\vq$, where measurement quality, modeled by a Gaussian radial basis function, is higher near the robot. The optimization objective $\varPhi(\vq)=\max_j P_j(\vq)$ is to minimize the maximum uncertainty (detailed in \cite{yang2020multi}).}
-
-% Robots are tasked to navigate, collecting sensory data of an unknown task space to map a slowly-varying field, denoted as $\vx$, (see Figure~\ref{fig:SecurityBreak}). The map comprises points of interest arranged on a grid, each associated with a slowly-changing value. Our goal is to find paths that minimize uncertainty and effectively reconstruct the field. We associate a Kalman Filter (KF)~(cf. \cite{anderson2012optimal}) to each point $j$, and use it to track the uncertainty through its estimated covariance $P_j$. The updates of the filters are based on measurements from the robot centered at $q$, and we use a Gaussian radial basis function  modeling spatially-varying measurement quality. The optimization objective $\varPhi(\vq)$ is written as the maximum uncertainty $\max_j P_{j}$ (detailed formulation can be found in \cite{yang2020multi}).
+\new{Robots are tasked with navigating an unknown task space to collecte sensory data to reconstruct a field (as illustrated in~\cref{fig:illustration}). The task space is modeled as a grid, where each grid point has an associated value tracked by a Kalman Filter (KF) \cite{anderson2012optimal}. The KF estimates uncertainty at each point through its covariance $P_j$ updated based on the measurements taken by robots along the trajectory $\vq$. Measurement quality, modeled by a Gaussian radial basis function, decreases with distance from the robot. The optimization objective $\varPhi(\vq)=\max_j P_j(\vq)$ is to minimize the maximum uncertainty in reconstructing the field (detailed in \cite{yang2020multi}). }
 \end{example}
 \begin{figure}
   \centering
-  \subfloat[\new{Map exploration task.}\label{fig:illustration}]{\includegraphics[width = 0.45\linewidth]{illustration figure_1}} 
-  \subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.45\linewidth]{Grid_world}}
-  \caption{\new{(a) Grid world example of a task planned in an $8 \times 8$ grid world. Blue grids are obstacles, orange and green grids are forbidden regions.}}
+  \subfloat[\new{Map exploration task.}\label{fig:illustration}]{\includegraphics[width = 0.45\linewidth,valign=c]{illustration figure_1}} 
+  \subfloat[Continuous world trajectory \label{fig:SecurityBreak}]{\includegraphics[width=0.45\linewidth,valign=c]{SecurityBreak_v2}}
+  % \subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.45\linewidth]{Grid_world}}
+  \caption{\new{(\ref{fig:illustration}) Illustration of a 3 robot map exploration task case. (\ref{fig:SecurityBreak}) The unsecured trajectory design optimized for a map exploration task. Potential security breaches, indicated by red dashed lines, highlight paths that could allow unauthorized access to forbidden regions.}}
 \end{figure}
+
+% To give a concrete example of the cost $\varPhi$ and the set $\Omega$, we introduce a representative application that will be used for all the simulations throughout the paper.
+
+% \begin{example}\label{example:map_exploration}
+% \new{Robots are tasked to navigate an unknown task space, collecting sensory data to reconstruct a field (see~\cref{fig:illustration}). The space is modeled as grid points, each with an associated value. The goal is to find paths that minimize uncertainty in reconstructing the field. Each grid point $j$ is associated with a Kalman Filter (KF) \cite{anderson2012optimal} to track uncertainty through its covariance $P_j$, updated based on the measurements taken by robots along the trajectory $\vq$, where measurement quality, modeled by a Gaussian radial basis function, is higher near the robot. The optimization objective $\varPhi(\vq)=\max_j P_j(\vq)$ is to minimize the maximum uncertainty (detailed in \cite{yang2020multi}).}
+% \end{example}
+% \begin{figure}
+%   \centering
+%   \subfloat[\new{Map exploration task.}\label{fig:illustration}]{\includegraphics[width = 0.45\linewidth]{illustration figure_1}} 
+%   \subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.45\linewidth]{Grid_world}}
+%   \caption{\new{(a) Grid world example of a task planned in an $8 \times 8$ grid world. Blue grids are obstacles, orange and green grids are forbidden regions.}}
+% \end{figure}
 
 % \begin{definition}\label{def:secured-plan}
 %   A multi-robot trajectory plan is secure again plan-deviation attacks if it ensures that any potential deviations to these forbidden regions will cause the corresponding robot to miss their next co-observation with other robots. 
 % \end{definition}
 
-To incorporate the security against malicious deviations (through co-observation and reachability analysis) as constraints in the optimal trajectory planning problem, we define the security as:
+{\news In the absence of further security requirements, the robots are expected to spread out and follow a boustrophedon pattern, efficiently exploring as much of the task space as possible (as illustrated in~\cref{fig:SecurityBreak}). This exploration strategy optimizes coverage and minimizes reconstruction uncertainty across the field. }To incorporate the security against malicious deviations (through co-observation and reachability analysis) as constraints in the optimal trajectory planning problem, we define the security as:
 \begin{definition}\label{def:secured-plan}
   A multi-robot trajectory plan is \new{secured against} plan-deviation attacks if it \new{ensures} that any potential deviations to these forbidden regions will cause the corresponding robot to miss their next co-observation with other robots. 
 \end{definition}
@@ -445,29 +455,29 @@ where $\pi^\cE_{\vn_\cE}(q)$ is the projection operator defined as:
   \begin{equation}
     \partial_q {D_{\vn\cE}} = -2 H \cross{\Eframe \Pi_{\vn \cE}}  M + H^{-1}\partial_q \Eframe \Pi_{\vn \cE}.
   \end{equation}
-\subsection{Line-segment-ellipse reachability constraint}\label{chapter:ellipse to segment}
-{\news As an intermediate step to consider polygon-shaped forbidden regions, the reachability constraint for hyperplane segments is studied.
-For hyperplane $\Eframe \cL(\Eframe q) = \{ \Eframe q\in\mathbb{R}^m:  \vn_\cE\transpose \Eframe q = d_{\cE}\}$ with endpoints $\Eframe {p_1}$ and $\Eframe{p_2}$; this segment is defined as:}
-\begin{equation}
-\bmat{(\Eframe {p_1}- \Eframe{p_2})\transpose\\( \Eframe{p_2} - \Eframe{p_1})\transpose}  \Eframe p \leq \bmat{ \Eframe{p_2}\transpose\\- \Eframe{p_1}\transpose}( \Eframe{p_1}- \Eframe{p_2}), \quad \vn_\cE\transpose \Eframe q = d_{\cE}.
-\end{equation}
-When the \emph{tangent interpolation point} $\Eframe{p_{\cL}}$ stays within the segment (i.e. red region in \cref{fig:Ellipse-to-safezone}), the constraint is a plane-ellipse constraint in \cref{sec:ellipsoide-plane}. Otherwise (i.e. brown region in \cref{fig:Ellipse-to-safezone}), the constraint is a point-ellipse constraint in \cref{sec:ellipsoid-point}.
+% \subsection{Line-segment-ellipse reachability constraint}\label{chapter:ellipse to segment}
+% {\news As an intermediate step to consider polygon-shaped forbidden regions, the reachability constraint for hyperplane segments is studied.
+% For hyperplane $\Eframe \cL(\Eframe q) = \{ \Eframe q\in\mathbb{R}^m:  \vn_\cE\transpose \Eframe q = d_{\cE}\}$ with endpoints $\Eframe {p_1}$ and $\Eframe{p_2}$; this segment is defined as:}
+% \begin{equation}
+% \bmat{(\Eframe {p_1}- \Eframe{p_2})\transpose\\( \Eframe{p_2} - \Eframe{p_1})\transpose}  \Eframe p \leq \bmat{ \Eframe{p_2}\transpose\\- \Eframe{p_1}\transpose}( \Eframe{p_1}- \Eframe{p_2}), \quad \vn_\cE\transpose \Eframe q = d_{\cE}.
+% \end{equation}
+% When the \emph{tangent interpolation point} $\Eframe{p_{\cL}}$ stays within the segment (i.e. red region in \cref{fig:Ellipse-to-safezone}), the constraint is a plane-ellipse constraint in \cref{sec:ellipsoide-plane}. Otherwise (i.e. brown region in \cref{fig:Ellipse-to-safezone}), the constraint is a point-ellipse constraint in \cref{sec:ellipsoid-point}.
 
-\begin{constraint}[Line-segment-ellipsoid reachability constraint]
-\begin{align}
-D(\vq) &=  \begin{cases}
-D_{p_{1}}(\vq) & (\Eframe{p_1}-\Eframe{p_2})\transpose (\Eframe{p_{\cL}}-\Eframe{p_2})<0\\
-D_{p_{2}}(\vq) & (\Eframe{p_2}-\Eframe{p_1})\transpose (\Eframe{p_{\cL}} -\Eframe{p_1})<0\\
-D_\Eframe{p_{\cL}}(\vq) & \textrm{otherwise}
-\end{cases} \label{eq:segment_ellipsoid_constraint}\\
-  \sZ &= \{\vq\in\mathbb{R}^{nm}:\norm{D(\vq)} = 0 \},\\
-   \Pi_\sZ(\vz) & = 0, 
-\end{align}
-\end{constraint}
-where $D_{p_{1}}$ and $D_{p_{2}}$ are the point-ellipsoid constraint projection function~\eqref{eq:point_ellipsoid_constraint} with respect to $\Eframe{p_{1}}$ and $\Eframe{p_{2}}$, and $D_\Eframe{p_{\cL}}$ is the plane-ellipsoid constraint~\eqref{eq:plane_ellipsoid_constraint}. with respect to frame $\Eframe {\cL}$.
-
-\subsection{Convex-polygon-ellipse reachability constraint}\label{sec:ellipse-region-constraint} 
-For reachability constraints with respect to a convex polygon, the first step is to keep all segments that define the hyperplane outside the reachability ellipsoid. Similar to \eqref{equ:ProjectPoint}, we define
+% \begin{constraint}[Line-segment-ellipsoid reachability constraint]
+% \begin{align}
+% D(\vq) &=  \begin{cases}
+% D_{p_{1}}(\vq) & (\Eframe{p_1}-\Eframe{p_2})\transpose (\Eframe{p_{\cL}}-\Eframe{p_2})<0\\
+% D_{p_{2}}(\vq) & (\Eframe{p_2}-\Eframe{p_1})\transpose (\Eframe{p_{\cL}} -\Eframe{p_1})<0\\
+% D_\Eframe{p_{\cL}}(\vq) & \textrm{otherwise}
+% \end{cases} \label{eq:segment_ellipsoid_constraint}\\
+%   \sZ &= \{\vq\in\mathbb{R}^{nm}:\norm{D(\vq)} = 0 \},\\
+%    \Pi_\sZ(\vz) & = 0, 
+% \end{align}
+% \end{constraint}
+% where $D_{p_{1}}$ and $D_{p_{2}}$ are the point-ellipsoid constraint projection function~\eqref{eq:point_ellipsoid_constraint} with respect to $\Eframe{p_{1}}$ and $\Eframe{p_{2}}$, and $D_\Eframe{p_{\cL}}$ is the plane-ellipsoid constraint~\eqref{eq:plane_ellipsoid_constraint}. with respect to frame $\Eframe {\cL}$.
+\subsection{Convex-polygon-ellipse reachability constraint}\label{sec:ellipse-region-constraint}
+{\news  
+The reachability constraints for a convex polygon is treated as a union of reachability constraints for aeach indivisual segments that define the hyperplane. We define
 \begin{constraint}[Convex-polygon-ellipsoid reachability constraint]\label{constraint:polygon-ellipsoid}
 \begin{align}
 D(\vq) &= \bmat{D_{seg1}(\vq)\\D_{seg2}(\vq)\\ \vdots} \label{eq:region_ellipsoid_constraint}\\
@@ -475,11 +485,29 @@ D(\vq) &= \bmat{D_{seg1}(\vq)\\D_{seg2}(\vq)\\ \vdots} \label{eq:region_ellipsoi
    \Pi_\sZ(\vz) & = 0, 
 \end{align}
 \end{constraint}
-where $D_{seg}$ are the constraint functions for all line segments used to define the convex polygon region. This constraint needs to be supplemented with a convex obstacle constraint for the polygon (i.e. keep foci waypoints outside the region, introduced in \cite{yang2020multi}) to prevent cases where the ellipse is a subset of the region.
+where $D_{seg}$ are the constraint functions for all line segments used to define the convex polygon region. 
+For hyperplane $\Eframe \cL(\Eframe q) = \{ \Eframe q\in\mathbb{R}^m:  \vn_\cE\transpose \Eframe q = d_{\cE}\}$ with endpoints $\Eframe {p_1}$ and $\Eframe{p_2}$; this segment is defined as:
+\begin{equation}
+\bmat{(\Eframe {p_1}- \Eframe{p_2})\transpose\\( \Eframe{p_2} - \Eframe{p_1})\transpose}  \Eframe p \leq \bmat{ \Eframe{p_2}\transpose\\- \Eframe{p_1}\transpose}( \Eframe{p_1}- \Eframe{p_2}), \quad \vn_\cE\transpose \Eframe q = d_{\cE}.
+\end{equation}
+When the \emph{tangent interpolation point} $\Eframe{p_{\cL}}$ stays within the segment (i.e. red region in \cref{fig:Ellipse-to-safezone}), the constraint is a plane-ellipse constraint in \cref{sec:ellipsoide-plane}. Otherwise (i.e. brown region in \cref{fig:Ellipse-to-safezone}), the constraint is a point-ellipse constraint in \cref{sec:ellipsoid-point}.
 
+\begin{constraint}[Line-segment-ellipsoid reachability constraint]
+\begin{align}
+D_{seg}(\vq) &=  \begin{cases}
+D_{p_{1}}(\vq) & (\Eframe{p_1}-\Eframe{p_2})\transpose (\Eframe{p_{\cL}}-\Eframe{p_2})<0\\
+D_{p_{2}}(\vq) & (\Eframe{p_2}-\Eframe{p_1})\transpose (\Eframe{p_{\cL}} -\Eframe{p_1})<0\\
+D_\Eframe{p_{\cL}}(\vq) & \textrm{otherwise}
+\end{cases} \label{eq:segment_ellipsoid_constraint}\\
+  \sZ &= \{\vq\in\mathbb{R}^{nm}:\norm{D_{seg}(\vq)} = 0 \},\\
+   \Pi_\sZ(\vz) & = 0, 
+\end{align}
+\end{constraint}
+where $D_{p_{1}}$ and $D_{p_{2}}$ are the point-ellipsoid constraint projection function~\eqref{eq:point_ellipsoid_constraint} with respect to $\Eframe{p_{1}}$ and $\Eframe{p_{2}}$, and $D_\Eframe{p_{\cL}}$ is the plane-ellipsoid constraint~\eqref{eq:plane_ellipsoid_constraint}. with respect to frame $\Eframe {\cL}$.
+This constraint needs to be supplemented with a convex obstacle constraint for the polygon (i.e. keep foci waypoints outside the region, introduced in \cite{yang2020multi}) to prevent cases where the ellipse is a subset of the region.
+}
 \subsection{Secured planning results and limitation}\label{sec:ADMM-simulation}
-
-We test the newly introduced security constraints with~\cref{example:map_exploration}, illustrated in~\cref{fig:example-application} in both simulations and on an experimental testbed, involving a 3-robot system assigned to explore a $10m\times10m$ region with one obstacle, \emph{Zone 1}, and two forbidden zones, \emph{Zone 2} and \emph{Zone 3}. The maximum velocity constraint $v_{max}=0.5m/dt$, time horizon $T=20$. %All robots are tasked with collecting sensor information on the vector field, with higher accuracy of sensor data for locations closer to the agent. %robots are expected to follow a boustrophedon pattern (similar to the unconstrained result in Figure~\ref{fig:SecurityBreak}). %We apply the new security constraints on the map exploration problem shown in \cref{fig:example-application}, test the algorithm in both simulations and an experimental testbed. The 3-robot system is tasked to explore a $10m\times10m$ region with two forbidden regions \emph{Zone 2, 3}. The maximum velocity constraint $v_{max}$ is set to~$0.5m/dt$ a time limit of 20. 
+%All robots are tasked with collecting sensor information on the vector field, with higher accuracy of sensor data for locations closer to the agent. %robots are expected to follow a boustrophedon pattern (similar to the unconstrained result in Figure~\ref{fig:SecurityBreak}). %We apply the new security constraints on the map exploration problem shown in \cref{fig:example-application}, test the algorithm in both simulations and an experimental testbed. The 3-robot system is tasked to explore a $10m\times10m$ region with two forbidden regions \emph{Zone 2, 3}. The maximum velocity constraint $v_{max}$ is set to~$0.5m/dt$ a time limit of 20. 
 
 We employ the \new{attack-proof MAPF(APMAPF)} solver \cite{wardega2019resilience} on an 8 by 8 grid world with a similar setup to generate a MAPF plan with a co-observation schedule in a grid-world application (Fig.\ref{fig:Grid-example-application}). This result is transformed to a continuous configuration space and serves as the initial trajectory input for the ADMM solver with an additional task function targeting the map exploration task. Co-observation schedules are set up using the APMAPF algorithm for two forbidden regions. Reachability constraints are added to ensure an empty intersection between all robots' reachability regions during co-observations and the forbidden regions. {\news It is important to emphasize that an APMAPF solution does not guarantee existence, nor does it ensure a successful transition to the continuous configuration space. In this case, while an APMAPF solution may be found, the secured, attack-proof solution becomes infeasible in the continuous setting because the robots' mobility is no longer restricted to adjacent grids. Additional security measures, such as stationary security cameras or surveillance robots, need to be incorporated. For instance, in this scenario, we deploy a security camera as additional security measure to observe agent 3 at time $8$ to ensure security.}
 
@@ -496,9 +524,10 @@ The simulation result, shown in Fig.~\ref{fig:ReachabilitySimulation}, displays 
 \begin{figure}
   \centering
   % \subfloat[Grid-world trajectory. \label{fig:Grid-example-application}]{\includegraphics[width=0.45\linewidth, trim = 2cm 0.5cm 0cm 2cm]{Kacper_result}}
-  \subfloat[Continuous world trajectory \label{fig:SecurityBreak}]{\includegraphics[width=0.45\linewidth,valign=c]{SecurityBreak_v2}}
-  \subfloat[Securd result \label{fig:ReachabilitySimulation}]{\includegraphics[width=0.45\linewidth,trim =2cm 1.5cm 2cm 1cm, clip,valign=c]{FinalResult}}
-  \caption{{\news Trajectory design of a map exploration task for a three-robot system based on the grid world result~\cref{fig:Grid-example-application}. Zone 1 is an obstacle, Zone 2 and Zone 3 are forbidden regions. (\ref{fig:SecurityBreak}) The unsecured trajectory design in continuous world, optimized with respect to a map exploration task with Zone 1 and 2 considered together as one obstacle. A potential path that could break the security by entering region 1 is highlighted as the red dashline. (\ref{fig:ReachabilitySimulation}) The secured trajectory with the incorporation of co-observation and reachability constraints.}}
+  \subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.45\linewidth,valign=c]{Grid_world}}
+  % \subfloat[Continuous world trajectory \label{fig:SecurityBreak}]{\includegraphics[width=0.45\linewidth,valign=c]{SecurityBreak_v2}}
+  \subfloat[Securd result \label{fig:ReachabilitySimulation}]{\includegraphics[width=0.52\linewidth,trim =2cm 1.5cm 2cm 1cm, clip,valign=c]{FinalResult}}
+  \caption{{\news Trajectory design a three-robot system based on the grid world result. Zone 1 is an obstacle, Zone 2 and Zone 3 are forbidden regions. (\ref{fig:Grid-example-application}) Result of the APMAPF algorithm in 8$\times$8 grid-world without map exploring objective. (\ref{fig:ReachabilitySimulation}) The secured trajectory with the incorporation of co-observation generated by APMAPF and additional reachability constraints.}}
   \label{fig:example-application}
 \end{figure}
 
@@ -721,7 +750,7 @@ We then test the proposed method for 4-team and 7-team cases with results shown 
 \begin{figure}
   \centering
   %\subfloat[Unsecured plan\label{fig:unsecured-plan}]{\includegraphics[width=0.31\linewidth, trim = 3cm 2cm 3cm 2cm, clip,valign=c]{SecurityBreak}}
-  \subfloat[4-agent case\label{fig:Result-plan}]{\includegraphics[width=0.47\linewidth,trim = 3.5cm 2cm 1.5cm 0cm, clip,valign=c]{Traj_result_v2}}
+  \subfloat[4-agent case\label{fig:Result-plan}]{\includegraphics[width=0.47\linewidth,trim = 1cm 1cm 1.5cm 0cm, clip,valign=c]{Traj_result_v3.png}}
   %\subfloat[Graph flow result\label{fig:result-graph}]{\includegraphics[width=0.47\linewidth,trim = 4cm 0cm 4cm 0cm, clip,valign=c]{Graph_result}}
   \subfloat[7-agent case\label{fig:Result-plan-7-team}]{\includegraphics[width=0.47\linewidth,trim = 3.5cm 2cm 1.5cm 0cm, clip,valign=c]{7-team-plan_v2.png}}
   %\subfloat[Graph flow result\label{fig:result-graph-7-team}]{\includegraphics[width=0.47\linewidth,trim = 4cm 0cm 4cm 0cm, clip,valign=c]{7-team-graph.png}}

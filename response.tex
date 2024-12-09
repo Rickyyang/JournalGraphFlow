@@ -34,14 +34,15 @@
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
 % \usepackage[colorlinks=true, allcolors=blue]{hyperref}
-% \usepackage{indentfirst}
-% \usepackage{graphicx}
+\usepackage{indentfirst}
+\usepackage{graphicx}
 % \usepackage{subfigure}
 \usepackage{float}
 \usepackage{threeparttable} 
 \usepackage{multirow}
 \usepackage{url}
-
+\usepackage{xcolor}
+\pagenumbering{arabic}
 
 \usepackage[most]{tcolorbox}
 \newcommand{\rrtstar}{$\texttt{RRT}^\texttt{*}$}
@@ -51,7 +52,8 @@
 
 \newtheorem{constraint}{ADMM constraint}
 \newtheorem{example}{Example}
-
+\newcommand{\re}{\tcblower \underline{\textbf{Response:}}}
+\newcommand{\rv}{{\Large{\underline{\textbf{Revision:}}}}\quad}
 \usepackage[export]{adjustbox} 
 \usepackage[capitalise]{cleveref}
 \usepackage{xcolor}
@@ -108,38 +110,32 @@ Ziqi Yang, Roberto Tron
 	grammar mistakes that need to be fixed. To me, it appears that the
 	draft may have been prepared somewhat hastily, which is not considerate
 	of the reviewers' time.
+	\tcblower
+	\underline{\textbf{Response:}} We are grateful for your thoughtful comments and for expressing interest in our proposed method. We sincerely apologize for the grammatical mistakes in the initial submission and acknowledge the importance of presenting our work with clarity and professionalism. In the revised version, we have been extra careful to address all grammar issues and have implemented thorough proofreading to minimize similar mistakes in future submissions. We greatly appreciate your patience and constructive feedback, which have been invaluable in improving the quality of our manuscript.
 
 \end{cmt*}
 \vspace{0.1cm}
-\noindent
-\underline{\textbf{Response:}}
-\vspace{0.2cm}
-We are grateful for your thoughtful comments and for expressing interest in our proposed method. We sincerely apologize for the grammatical mistakes in the initial submission and acknowledge the importance of presenting our work with clarity and professionalism. In the revised version, we have been extra careful to address all grammar issues and have implemented thorough proofreading to minimize similar mistakes in future submissions. We greatly appreciate your patience and constructive feedback, which have been invaluable in improving the quality of our manuscript.
-
-\vspace{0.3cm}
-
-
 %%%%%%%%%%%%% Comment 1.0
 \begin{cmt}{}{}        %% use * when do not need enumerate
 	It seems like Example 1 is introduced as an example to help
 	readers understand the formulation (1) in details. However, it is still
 	vague, and it doesn't easily connect to Figure 3b.
+	\tcblower
+	\underline{\textbf{Response:}} Example 1 has been revised to improve clarity, with additional illustrative content and an updated figure added to better showcase the example application and its relevance to the proposed approach.
 \end{cmt}
-\vspace{0.1cm}
-\noindent
-\underline{\textbf{Response:}}
-\vspace{0.2cm}
-
+\rv
 \begin{example}\label{example:map_exploration}
-	\new{Robots are tasked to navigate an unknown task space, collecting sensory data to reconstruct a field (see Fig. 2a). The space is modeled as grid points, each with an associated value. The goal is to find paths that minimize uncertainty in reconstructing the field. Each grid point $j$ is associated with a Kalman Filter (KF) [28] to track uncertainty through its covariance $P_j$, updated based on the measurements taken by robots along the trajectory $\vq$, where measurement quality, modeled by a Gaussian radial basis function, is higher near the robot. The optimization objective $\varPhi(\vq)=\max_j P_j(\vq)$ is to minimize the maximum uncertainty (detailed in [6]).}
+\new{Robots are tasked with navigating an unknown task space to collecte sensory data to reconstruct a field (as illustrated in~\cref{fig:illustration}). The task space is modeled as a grid, where each grid point has an associated value tracked by a Kalman Filter (KF) [28]. The KF estimates uncertainty at each point through its covariance $P_j$ updated based on the measurements taken by robots along the trajectory $\vq$. Measurement quality, modeled by a Gaussian radial basis function, decreases with distance from the robot. The optimization objective $\varPhi(\vq)=\max_j P_j(\vq)$ is to minimize the maximum uncertainty in reconstructing the field (detailed in [6]). }
 \end{example}
-\begin{figure}[h]
+\setcounter{figure}{1}
+\begin{figure}[H]
 	\centering
-	\subfloat[\new{Map exploration task.}\label{fig:illustration}]{\includegraphics[width = 0.45\linewidth]{illustration figure_1}} 
-	\subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.45\linewidth]{Grid_world}}
-	\caption{\new{(a) Grid world example of a task planned in an $8 \times 8$ grid world. Blue grids are obstacles, orange and green grids are forbidden regions.}}
-  \end{figure}
-\vspace{0.3cm}
+	\subfloat[\new{Map exploration task.}\label{fig:illustration}]{\includegraphics[width = 0.4\linewidth,valign=c]{illustration figure_1}} 
+	\subfloat[Continuous world trajectory \label{fig:SecurityBreak}]{\includegraphics[width=0.4\linewidth,valign=c]{SecurityBreak_v2}}
+	% \subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.4	\linewidth]{Grid_world}}
+	\caption{\new{(2a) Illustration of a 3 robot map exploration task case. (2b) The unsecured trajectory design optimized for a map exploration task. Potential security breaches, indicated by red dashed lines, highlight paths that could allow unauthorized access to forbidden regions.}}
+\end{figure}
+{\news In the absence of further security requirements, the robots are expected to spread out and follow a boustrophedon pattern, efficiently exploring as much of the task space as possible (as illustrated in Fig.2b). This exploration strategy optimizes coverage and minimizes reconstruction uncertainty across the field. }
 
 
 %%%%%%%%%%%%% Comment 1.2
@@ -150,33 +146,248 @@ We are grateful for your thoughtful comments and for expressing interest in our 
 	can be condensed more, and some of the details can be deferred to the
 	Appendix, so that some space can be dedicated more to improve the
 	clarity of the other sections.
+	\tcblower
+	\underline{\textbf{Response:}} As suggested, we have condensed this section and moved the “Transformation to Canonical Frame” part into the appendix to streamline the main text and improve readability. We believe that the remaining details on the implementation of the reachability constraints are essential and provide critical context for understanding the proposed method. We appreciate your suggestion, which has helped us enhance the balance and clarity of the manuscript. 
 \end{cmt}
-\vspace{0.1cm}
-\noindent
-\underline{\textbf{Response:}}
+\rv
+\renewcommand\thesubsection{D}
+ \subsection{Transformation to canonical coordinates}\label{sec:rotation2Standard}
+{\news	\newcommand{\oFE}{o}
+ To use the definition of reachability ellipsoid from the section above as computational constraints for ADMM, we first apply a differentiable rigid body transformation to reposition the ellipse $\cE$ from the global frame $\cF$ to a canonical frame $\cF_\cE$, where the origin of $\cF_\cE$ is at the ellipsoid's center $\oFE = \frac{1}{2}(q_1+q_2)$, and the first axis of $\cF_\cE$ is aligned with the foci (see Fig.3a for an illustration). 
+From this definition, a unit vector along the first axis of the ellipsoid in the frames $\cF$ and $\cF_\cE$ is given by $\nu_\cF = \frac{q_2-q_1}{\norm{q_2-q_1}}$ and $\nu_\cE =[1,0,0]^T$, respectively.
+The full transformation from coordinates $q^\cE\in\cF$ to $q\in\cF$, and its inverse, are then parametrized by a rotation $R^\cF_\cE$ and a translation $o^\cF_\cE$ as (we drop the subscript and superscript from $R^\cF_\cE$ and $o^\cF_\cE$ to simplify the notation):
+\setcounter{equation}{9}
+\begin{equation}\label{eq:transformations}
+  q=R\Eframe{q}+\oFE,\quad
+  \Eframe{q}=R\transpose(q-\oFE).
+\end{equation}
+where the rotation matrix $R=H(\nu_\cF(q_1,q_2),\nu_\cE)$ is a \emph{Householder rotation} $H$ (a differentiable linear transformation describing the minimal rotation between the two vectors, see Appendix B for details).  To simplify the notation, in the following, we will consider $H$ to be a function of $q_1,q_2$ directly, i.e. $H(q_1,q_2)$. More details on (10) are given in Appendix A.
+  Reachability constraints are formulated with respect to different types of forbidden regions a point, a plane, a segment, and a convex polygon.}
+\renewcommand\thesubsection{F}
+\subsection{Plane-ellipsoid reachability constraint}\label{sec:ellipsoide-plane}
+\new{For a hyperplane shaped forbidden region $\mathcal{L}(q) = \{q\in\mathbb{R}^m: \vn\transpose q = d\}$ (Fig.3c), the reachability constraint is $\mathcal{L} \cap \mathcal{E}(q_1,q_2,a) = \emptyset$. When transformed into the canonical frame, the hyperplane can be written as $\Eframe \cL(\Eframe{q}) = \{  \Eframe{q}\in\mathbb{R}^m:  \vn_\cE\transpose \Eframe{q} = d_{\cE}\}$, with $\vn_\cE = H(q_1,q_2)\vn, \quad d_\cE =-\vn\transpose o + d$.}
+%%
+\renewcommand\thesubsection{G}
+\def\sZ{\mathcal{Z}}
+\subsection{Convex-polygon-ellipse reachability constraint}\label{sec:ellipse-region-constraint}
+{\news  
+The reachability constraints for a convex polygon is treated as a union of reachability constraints for aeach indivisual segments that define the hyperplane. We define
+\setcounter{constraint}{3}
+\setcounter{equation}{29}
+\begin{constraint}[Convex-polygon-ellipsoid reachability constraint]\label{constraint:polygon-ellipsoid}
+\begin{align}
+D(\vq) &= \bmat{D_{seg1}(\vq)\\D_{seg2}(\vq)\\ \vdots} \label{eq:region_ellipsoid_constraint}\\
+  \sZ &= \{\vq\in\mathbb{R}^{nm}:\norm{D(\vq)} = 0 \},\\
+   \Pi_\sZ(\vz) & = 0, 
+\end{align}
+\end{constraint}
+where $D_{seg}$ are the constraint functions for all line segments used to define the convex polygon region. 
+For hyperplane $\Eframe \cL(\Eframe q) = \{ \Eframe q\in\mathbb{R}^m:  \vn_\cE\transpose \Eframe q = d_{\cE}\}$ with endpoints $\Eframe {p_1}$ and $\Eframe{p_2}$; this segment is defined as:
+\begin{equation}
+\bmat{(\Eframe {p_1}- \Eframe{p_2})\transpose\\( \Eframe{p_2} - \Eframe{p_1})\transpose}  \Eframe p \leq \bmat{ \Eframe{p_2}\transpose\\- \Eframe{p_1}\transpose}( \Eframe{p_1}- \Eframe{p_2}), \quad \vn_\cE\transpose \Eframe q = d_{\cE}.
+\end{equation}
+When the \emph{tangent interpolation point} $\Eframe{p_{\cL}}$ stays within the segment (i.e. red region in Fig. 3d), the constraint is a plane-ellipse constraint in Section II-F. Otherwise (i.e. brown region in Fig. 3d), the constraint is a point-ellipse constraint in Section II-F.
+
+\begin{constraint}[Line-segment-ellipsoid reachability constraint]
+\begin{align}
+D_{seg}(\vq) &=  \begin{cases}
+D_{p_{1}}(\vq) & (\Eframe{p_1}-\Eframe{p_2})\transpose (\Eframe{p_{\cL}}-\Eframe{p_2})<0\\
+D_{p_{2}}(\vq) & (\Eframe{p_2}-\Eframe{p_1})\transpose (\Eframe{p_{\cL}} -\Eframe{p_1})<0\\
+D_\Eframe{p_{\cL}}(\vq) & \textrm{otherwise}
+\end{cases} \label{eq:segment_ellipsoid_constraint}\\
+  \sZ &= \{\vq\in\mathbb{R}^{nm}:\norm{D_{seg}(\vq)} = 0 \},\\
+   \Pi_\sZ(\vz) & = 0, 
+\end{align}
+\end{constraint}
+where $D_{p_{1}}$ and $D_{p_{2}}$ are the point-ellipsoid constraint projection function (11) respect to $\Eframe{p_{1}}$ and $\Eframe{p_{2}}$, and $D_\Eframe{p_{\cL}}$ is the plane-ellipsoid constraint (22). with respect to frame $\Eframe {\cL}$.
+This constraint needs to be supplemented with a convex obstacle constraint for the polygon (i.e. keep foci waypoints outside the region, introduced in [6]) to prevent cases where the ellipse is a subset of the region.
+}
+
 \vspace{0.2cm}
-
-
-\vspace{0.3cm}
-
-
 %%%%%%%%%%%%% Comment 1.3
 \begin{cmt}{}{}
-
-Comments 1.3
-
+	The word “checkpoint” appears abruptly in page 6 without concrete
+	definition, although it seems like it is an important component of the
+	formulation, and an important design choice for the results. For
+	example, in the way Figure 3 is presented, I don't get a good idea why
+	the checkpoint location is there in (c). 
+	\re 
+	\noindent
+ For the feedback reguarding the term "checkpoint", the original intent of “checkpoint” in Section 2 was to illustrate the limitations of the method proposed, specifically to show that even if APMAPF yields a valid solution, transforming this solution to a continuous domain may still need additional security measure to guarantee security. To address the concern, we have replaced the term “checkpoints” with “key locations” in Section 2 to avoid confusion. Additionally, we have added a formal definition of “checkpoints” and the “checkpoint graph” later in Section 3 to provide a clear and precise explanation of these concepts. These updates ensure that the term is used consistently and that its role in the methodology is explicitly defined. 
 \end{cmt}
-\vspace{0.1cm}
-\noindent
-\underline{\textbf{Response:}}
-\vspace{0.2cm}
+\rv
+\renewcommand\thesubsection{H}
+\subsection{Secured planning results and limitation}\label{sec:ADMM-simulation}
+We employ the \new{attack-proof MAPF(APMAPF)} solver [2] on an 8 by 8 grid world with a similar setup to generate a MAPF plan with a co-observation schedule in a grid-world application (Fig.4a). This result is transformed to a continuous configuration space and serves as the initial trajectory input for the ADMM solver with an additional task function targeting the map exploration task. Co-observation schedules are set up using the APMAPF algorithm for two forbidden regions. Reachability constraints are added to ensure an empty intersection between all robots' reachability regions during co-observations and the forbidden regions. {\news It is important to emphasize that an APMAPF solution does not guarantee existence, nor does it ensure a successful transition to the continuous configuration space. In this case, while an APMAPF solution may be found, the secured, attack-proof solution becomes infeasible in the continuous setting because the robots' mobility is no longer restricted to adjacent grids. Additional security measures, such as stationary security cameras or surveillance robots, need to be incorporated. For instance, in this scenario, we deploy a security camera as additional security measure to observe agent 3 at time $8$ to ensure security.}
 
-Your Response 1.3
+The simulation result, shown in Fig.4b, displays reachability regions as black ellipsoids, demonstrating empty intersections with Zones 2 and 3. Explicit constraints between reachability regions and obstacles are not activated, assuming basic obstacle avoidance capabilities in robots. The intersections between obstacles and ellipsoids, as observed between agent 3 and Zone 1, are deemed tolerable. All constraints are satisfied, and agents have effectively spread across the map for optimal exploration tasks.
+
+1) Limitations:
+Our solution demonstrates the potential of planning with reachability and co-observation to enhance the security of multi-agent systems. {\news However, two primary challenges need to be addressed. Firstly, achieving a co-observation and reachability-secured plan is not always feasible, particularly when obstacles or restricted regions separate the robots, preventing them from establishing co-observation schedules or finding reachability-secured paths. For example, agent 3 in~Fig.4b requires additional security measures to create secured reachability areas. Secondly, security requirements can impact overall system performance, as illustrated by the comparison between~Fig.2b and Fig.4b. The introduction of security constraints resulted in the top left corner remaining unexplored by any robots. This trade-off between security and system performance is particularly significant as system performance is a key factor in the decision of multi-agent system deployments. These challenges are further addressed in Section III, ensuring the effective integration of reachability and co-observation in securing multi-agent systems.}
 
 \vspace{0.3cm}
 
+\begin{cmt}{}{}
+	Similarly, how the
+	trajectories are broken down to multiple ellipsoid components are not
+	clear, is it a design choice to make the constraints less conservative
+	than setting a single ellipsoid with the start and goal point?
+	\re 
+	The reachability ellipsoids are designed to work in conjunction with the co-observation technique. Instead of using a single ellipsoid defined by the start and goal points, the trajectory is divided into smaller ellipsoids based on co-observation times. This approach ensures that the constraints are aligned with the co-observation schedule, reducing conservativeness while maintaining security guarantees. We also make modification to Definition 4 (Remark 1 in the original manuscript) to make this more clear.
+\end{cmt}
+\rv
+{\news \setcounter{definition}{3}
+ \begin{definition}\label{rmk:revised-security}
+	A multi-robot trajectory is secured against plan-deviation attacks if there exists a co-observation plan such that the reachability region between each consecutive co-observation does not intersect with any forbidden regions.
+\end{definition}}
 
+\vspace{0.3cm}
+\begin{cmt}{}{}
+	Similarly, in page 7, “key locations” and “checkpoint graph” are
+	mentioned without clear explanations what they are.
+	\re  
+	In Section III, we add additional definition to 'checkpoint' and 'checkpoint graph'
+\end{cmt}
+\rv
 
+{\news
+Our strategy is based on the following concept:
+\setcounter{definition}{5}
+\setcounter{remark}{1}
+\begin{definition}
+The $i$-th \emph{checkpoint} $v_{pi}=(q_{p},t_{i})$ for sub-team $p$ is defined as a location $q_{pi}=q_{p}(t_i)$ and time $t_{i}$. It represents either the first or last instance where a robot is co-observed by a teammate, and serves as a point where the robot can leave or join a new team.
+% at which a robot is co-observed by its teammates, and where it can leave or join a new team. 
+\end{definition}
+For simplicity, let $\cI_{v_{i}}$ denote the sub-team to which $v_{i}$ belongs. %, and $q_{v_{pi}} =q_{pi}$ and $t_{v_{pi}}$ be the corresponding location and time for checkpoint $v_{pi}$.
+To ensure the security of the reference trajectory, the reachability region between consecutive checkpoints must avoid intersections with forbidden regions. This requirement can be formally stated as:
+\begin{remark}\label{rmk:checkpoints}
+  A set of checkpoints $V_{p}=\{ v_{p0}, \dots ,v_{pT}\}$ (arranged in ascending order of $t_{v_{pi}}$) can secure the reference trajectory for sub-team $p$, if $\mathcal{E}(q_{v_{pi}}, q_{v_{p(i+1)}}, t_{v_{pi}},t_{v_{p(i+1)}}) \intersect F = \emptyset$ for every $i$, where $F$ is the union of all forbidden regions.
+  \end{remark}
+}
+{\news 
+\begin{definition}
+  The planned trajectory $\{q_p\}_{p=1}^{N_p}$ is represented as a directed \emph{checkpoint graph} $G=(V, E)$, where $V = (\union_p V_p) \union V_c$ is the set of verticies representing waypoints on the planned trajectory and $E = E_{t} \union E_{c}$ is the set of edges representing feasible paths connecting $V$. The components of the checkpoint graph are defined as follows:
+  \begin{description}
+    \item[Checkpoints $V_p$] where additional robots are required for security through co-observation.
+    \item[Trajectory edges $E_t$] represent the original planned path of the primary robot.
+    \item[Connection vertices $V_c$] represent non-checkpoint locations linked via $E_c$.
+    \item[Cross-trajectory edges $E_c$] represent feasible paths where robots deviate from the original trajectory to join other teams or provide co-observation support, at least one endpoint be a checkpoint. 
+  \end{description}
+\end{definition}}
+\vspace{0.3cm}
+\begin{cmt}{}{}
+	The plots are not reader-friendly at all. In all figures, trajectory
+	lines are too thin. The legend text is too small. In figure 2, there is
+	no number scale for (b) and I am even not sure if this corresponds to
+	the same scenario as (a) and (c). In Figure 5, the color of the
+	sub-team robots seem like not matching with the main robots.
+	\re We have re-plotted the figures to make them more reader-friendly by thickening trajectory lines, enlarging legend text, and ensuring consistent coloring between sub-team robots and main robots in Figure 7 and Figure 8  (Figure 5 and 6 in original manuscript).
+
+	For Figure 2, we appreciate the comment regarding the lack of a number scale especially on (b,c,d). The intention of these figures are to illustrate the geometric relationships between ellipsoids and different shapes, as well as the transformation of coordinates. To maintain focus on these aspects, we chose to omit the number scale and believe that it is not essential for conveying the intended concept.
+\end{cmt}
+\rv
+\setcounter{figure}{1}
+\begin{figure}[H]
+	\centering
+	\subfloat[\new{Map exploration task.}\label{fig:illustration}]{\includegraphics[width = 0.4	\linewidth,valign=c]{illustration figure_1}} 
+	\subfloat[Continuous world trajectory \label{fig:SecurityBreak}]{\includegraphics[width=0.4	\linewidth,valign=c]{SecurityBreak_v2}}
+	% \subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.4	\linewidth]{Grid_world}}
+	\caption{\new{(2a) Illustration of a 3 robot map exploration task case. (2b) The unsecured trajectory design optimized for a map exploration task. Potential security breaches, indicated by red dashed lines, highlight paths that could allow unauthorized access to forbidden regions.}}
+  \end{figure}
+\setcounter{figure}{3}
+  \begin{figure}[H]
+	\centering
+	% \subfloat[Grid-world trajectory. \label{fig:Grid-example-application}]{\includegraphics[width=0.4	\linewidth, trim = 2cm 0.5cm 0cm 2cm]{Kacper_result}}
+	\subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.4	\linewidth,valign=c]{Grid_world}}
+	% \subfloat[Continuous world trajectory \label{fig:SecurityBreak}]{\includegraphics[width=0.4	\linewidth,valign=c]{SecurityBreak_v2}}
+	\subfloat[Securd result \label{fig:ReachabilitySimulation}]{\includegraphics[width=0.52\linewidth,trim =2cm 1.5cm 2cm 1cm, clip,valign=c]{FinalResult}}
+	\caption{{\news Trajectory design a three-robot system based on the grid world result. Zone 1 is an obstacle, Zone 2 and Zone 3 are forbidden regions. (\ref{fig:Grid-example-application}) Result of the APMAPF algorithm in 8$\times$8 grid-world without map exploring objective. (\ref{fig:ReachabilitySimulation}) The secured trajectory with the incorporation of co-observation generated by APMAPF and additional reachability constraints.}}
+	\label{fig:example-application}
+  \end{figure}
+  \setcounter{figure}{6}
+  \begin{figure}[H]
+	\centering
+	\subfloat[Cross-trajectory co-observation plan \label{fig:previous_result_plan}]{\includegraphics[width=0.4\linewidth, trim = 2cm 1cm 1cm 1cm,clip,valign=b]{old_result_v2}}
+	\subfloat[Checkpoint graph and result flows \label{fig:previous_result_graph}]{\includegraphics[width=0.4\linewidth, trim = 10cm 3cm 7cm 3cm,clip,valign=b]{old_result_graph_v2}}
+	\caption{\new{(\ref{fig:previous_result_plan}) The cross-trajectory co-observation plan is shown as arrows on top of the original plan in \cref{fig:previous_result_plan}. (\ref{fig:previous_result_graph}) The checkpoint graph and resulting flows highlighted.}}
+	\label{fig:3-team-ctco}
+  \end{figure}
+
+  \begin{figure}[H]
+	\centering
+	%\subfloat[Unsecured plan\label{fig:unsecured-plan}]{\includegraphics[width=0.31\linewidth, trim = 3cm 2cm 3cm 2cm, clip,valign=c]{SecurityBreak}}
+	\subfloat[4-agent case\label{fig:Result-plan}]{\includegraphics[width=0.4\linewidth,trim = 1cm 1cm 1.5cm 0cm, clip,valign=c]{Traj_result_v3.png}}
+	%\subfloat[Graph flow result\label{fig:result-graph}]{\includegraphics[width=0.47\linewidth,trim = 4cm 0cm 4cm 0cm, clip,valign=c]{Graph_result}}
+	\subfloat[7-agent case\label{fig:Result-plan-7-team}]{\includegraphics[width=0.4\linewidth,trim = 3.5cm 2cm 1.5cm 0cm, clip,valign=c]{7-team-plan_v2.png}}
+	%\subfloat[Graph flow result\label{fig:result-graph-7-team}]{\includegraphics[width=0.47\linewidth,trim = 4cm 0cm 4cm 0cm, clip,valign=c]{7-team-graph.png}}
+	\caption{\new{(\ref{fig:Result-plan}) Cross-trajectory co-observation result of a 4 sub-teams task. (\ref{fig:Result-plan-7-team}) Cross-trajectory co-observation result of a 7 sub-teams task.}}\label{fig:Cross-trajectory-result}
+  \end{figure}
+\vspace{0.2cm}
+
+\begin{cmt}{}{}
+	The author assumes “Zone 1” is tolerable and Zone 2 and 3 are hard
+constraints, but what if the environment is the opposite? Do you get
+infeasible solution? It is very skeptical that the author is making
+deliberate assumptions to make the example work in a special case.
+\re We acknowledge the limitation of the method proposed in Section II, as it relies on the specific setup, and a safe solution is not always guaranteed to exist. This limitation is explicitly discussed in the manuscript. The chosen result is deliberate, not to make the example work in a special case, but to illustrate that even when APMAPF finds a solution in the grid world, such a plan may fail to guarantee security when transformed into the continuous domain, requiring further manual adjustments. In the revised version, we have further emphasized these limitations and the challenges they aim to address in the simulation results.
+Corre
+\end{cmt}
+\vspace{0.1cm}
+\rv
+\renewcommand\thesubsection{H}
+\subsection{Secured planning results and limitation}\label{sec:ADMM-simulation}
+We employ the \new{attack-proof MAPF(APMAPF)} solver [2] on an 8 by 8 grid world with a similar setup to generate a MAPF plan with a co-observation schedule in a grid-world application (Fig.4a). This result is transformed to a continuous configuration space and serves as the initial trajectory input for the ADMM solver with an additional task function targeting the map exploration task. Co-observation schedules are set up using the APMAPF algorithm for two forbidden regions. Reachability constraints are added to ensure an empty intersection between all robots' reachability regions during co-observations and the forbidden regions. {\news It is important to emphasize that an APMAPF solution does not guarantee existence, nor does it ensure a successful transition to the continuous configuration space. In this case, while an APMAPF solution may be found, the secured, attack-proof solution becomes infeasible in the continuous setting because the robots' mobility is no longer restricted to adjacent grids. Additional security measures, such as stationary security cameras or surveillance robots, need to be incorporated. For instance, in this scenario, we deploy a security camera as additional security measure to observe agent 3 at time $8$ to ensure security.}
+
+The simulation result, shown in Fig.4b, displays reachability regions as black ellipsoids, demonstrating empty intersections with Zones 2 and 3. Explicit constraints between reachability regions and obstacles are not activated, assuming basic obstacle avoidance capabilities in robots. The intersections between obstacles and ellipsoids, as observed between agent 3 and Zone 1, are deemed tolerable. All constraints are satisfied, and agents have effectively spread across the map for optimal exploration tasks.
+
+1) Limitations:
+Our solution demonstrates the potential of planning with reachability and co-observation to enhance the security of multi-agent systems. {\news However, two primary challenges need to be addressed. Firstly, achieving a co-observation and reachability-secured plan is not always feasible, particularly when obstacles or restricted regions separate the robots, preventing them from establishing co-observation schedules or finding reachability-secured paths. For example, agent 3 in~Fig.4b requires additional security measures to create secured reachability areas. Secondly, security requirements can impact overall system performance, as illustrated by the comparison between~Fig.2b and Fig.4b. The introduction of security constraints resulted in the top left corner remaining unexplored by any robots. This trade-off between security and system performance is particularly significant as system performance is a key factor in the decision of multi-agent system deployments. These challenges are further addressed in Section III, ensuring the effective integration of reachability and co-observation in securing multi-agent systems.}
+
+\begin{cmt}{}{}
+	p 8 - A heuristic approach is provided (Algorithm 1); Is it
+	almost impossible for the reader to decipher this algorithm without any
+	explanations in words.
+\re	We have replaced the algorithm with a more detailed and understandable word-based explanation to improve readability and make the approach easier to follow.
+\end{cmt}
+\rv {\news We begin by adding the start and end locations $(q_{p}(t_0),t_0)$, $(q_{p}(t_2),t_2)$ to $V_{p}$, with $t_{0}=0$, $t_2=T$ as \emph{start} and \emph{end verticies}. Then, we search for the largest $t_{1} \in \{t_{0}+1, \dots ,t_{2}\}$ such that the reachability ellipsoid between $q_{p}(t_{0})$ and $q_{p}(t_{1})$ has no overlap with any of the forbidden areas, i.e. $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{1}), t_{0},t_{1})\intersect F = \emptyset$. Then $(q_{p}(t_{1}),t_1)$ is added to $V_{p}$. Simultaneously, we search backward to find $q_{p}(t_{3})$ with the smallest $t_{3}\in \{t_{1},\dots,t_{2}-1\} $ that meets the reachability requirement $\mathcal{E}(q_{p}(t_{2}),q_{p}(t_{3}),t_{2},t_{3}) \intersect F = \emptyset$. Then $(q_{p}(t_{3}),t_3)$ is added to $V_{p}$. Finally, we set $t_{0}\leftarrow t_{1}$, $t_{2}\leftarrow t_{3}$ and repeat the same process. The search is stopped when $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{2}),t_{0},t_{2}) \intersect F = \emptyset$ or $t_{0}>t_{2}$. A toy example is shown in \cref{fig:checkpoint-generate}. }
+
+\begin{cmt}{}{}
+	Similar to the comment above, it will be good to introduce what the
+“network multi-flow problem” is.
+\re 
+We have add additional content to introduce the what the "network multi-flow problem" in our setup.
+\end{cmt}
+\rv \new{We assume that the planned trajectory for each sub-team has a robot operating on it. The co-observation planning problem is then transformed into a network multi-flow problem by modeling the additional robots as flows traveling through $G$. These flows either follow the planned trajectory via trajectory edges $E_t$ or switch teams via cross-trajectory edges $E_c$ to ensure valid and secured paths. Additionally, they are required to visit every checkpoint $V_p$ to meet the security requirements introduced in~\ref{rmk:checkpoints}. This formulation reduces the co-observation problem to finding valid flow patterns in $G$. The problem is then formulated into linear objectives and constraints, enabling the use of Mixed-Integer Linear Programming (MILP) techniques to efficiently compute feasible solutions. }
+
+\begin{cmt}{}{}
+	p3 - “rotation derived from a modifie version of Householder
+transformations [25].” ; At least a brief introduction of
+Householder transformations (in words) must be included for readers who
+are not familiar with it.
+\re A brief introduction of Householder transformation is added.
+\end{cmt}
+\rv \new{the rotation matrix $R=H(\nu_\cF(q_1,q_2),\nu_\cE)$ is a \emph{Householder rotation} $H$ (a differentiable linear transformation describing the minimal rotation between the two vectors, see Appendix B for details).}
+
+\begin{cmt}{}{}
+This reachability ellipsoid is an over approximation of the exact
+reachability region in Definition 3.”; A proof or at least a
+reference to the proof should be provided.
+\re While we believe that a formal proof is not necessary for this context, we have added additional content to make the approximation more intuitive. This includes a clearer explanation of how the reachability ellipsoid relates to the exact reachability region. These additions aim to enhance the reader's understanding without requiring formal proof.
+\end{cmt}
+\rv {\news
+\begin{definition}\label{sec:ellipsoidal definition}
+Consider a robot $i$ starting from $q_{1}$ at time $t_1$ and reaching $q_{2}$ at time $t_2$. The \emph{reachability region} between $t_1$ and $t_2$ is defined as the set of points $q'$ in the free configuration space for which there exists a kinematically feasible trajectory containing $q'$.
+\end{definition}
+
+For simplicity, in this paper we consider only a maximum velocity constraint $v_{max}$; the reachability region for $q'$ can then be over-approximated by the following (the over-approximation is obtained by neglecting physical obstacles):
+\begin{definition}\label{def:Reachability}
+	The \emph{reachability ellipsoid $\cE$} is defined as the region $\mathcal{E}(q_1,q_2,t_{1},t_{2})=\{\tilde{q}\in\mathbb{R}^n: d(q_1,\tilde{q})+d(\tilde{q},q_2)<2a\}$, where $a=\frac{v_{max}}{2}(t_2-t_1)$.
+\end{definition}
+This region is an ellipsoid because it represents the set of points $q'$ whose sum of distances two \emph{foci} $q_1$ and $q_2$ is less than $2a$, where a is the major radius of the ellipsoid. }
+\begin{cmt}{}{}
+	Other grammar related comments.
+	\re We have carefully reviewed and corrected all listed grammar mistakes, as well as others that were not explicitly mentioned. 
+\end{cmt}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Rewiewer 2
 \newpage
 \section{Response to reviewer 2}
