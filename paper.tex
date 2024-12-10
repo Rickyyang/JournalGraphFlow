@@ -117,29 +117,13 @@ To give a concrete example of the cost $\varPhi$ and the set $\Omega$, we introd
 \end{example}
 \begin{figure}
   \centering
-  \subfloat[\new{Map exploration task.}\label{fig:illustration}]{\includegraphics[width = 0.45\linewidth,valign=c]{illustration figure_1}} 
-  \subfloat[Continuous world trajectory \label{fig:SecurityBreak}]{\includegraphics[width=0.45\linewidth,valign=c]{SecurityBreak_v2}}
+  \subfloat[\new{Map exploration task.}\label{fig:illustration}]{\includegraphics[width = 0.45\linewidth,, trim = 0.3cm 1.3cm 0.3cm 2cm,valign=c]{illustration figure_1}} 
+  \subfloat[Continuous world trajectory \label{fig:SecurityBreak}]{\includegraphics[width=0.45\linewidth, trim = 0.3cm 1.3cm 0.3cm 2cm, valign=c]{SecurityBreak_v2}}
   % \subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.45\linewidth]{Grid_world}}
   \caption{\new{(\ref{fig:illustration}) Illustration of a 3 robot map exploration task case. (\ref{fig:SecurityBreak}) The unsecured trajectory design optimized for a map exploration task. Potential security breaches, indicated by red dashed lines, highlight paths that could allow unauthorized access to forbidden regions.}}
 \end{figure}
 
-% To give a concrete example of the cost $\varPhi$ and the set $\Omega$, we introduce a representative application that will be used for all the simulations throughout the paper.
-
-% \begin{example}\label{example:map_exploration}
-% \new{Robots are tasked to navigate an unknown task space, collecting sensory data to reconstruct a field (see~\cref{fig:illustration}). The space is modeled as grid points, each with an associated value. The goal is to find paths that minimize uncertainty in reconstructing the field. Each grid point $j$ is associated with a Kalman Filter (KF) \cite{anderson2012optimal} to track uncertainty through its covariance $P_j$, updated based on the measurements taken by robots along the trajectory $\vq$, where measurement quality, modeled by a Gaussian radial basis function, is higher near the robot. The optimization objective $\varPhi(\vq)=\max_j P_j(\vq)$ is to minimize the maximum uncertainty (detailed in \cite{yang2020multi}).}
-% \end{example}
-% \begin{figure}
-%   \centering
-%   \subfloat[\new{Map exploration task.}\label{fig:illustration}]{\includegraphics[width = 0.45\linewidth]{illustration figure_1}} 
-%   \subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.45\linewidth]{Grid_world}}
-%   \caption{\new{(a) Grid world example of a task planned in an $8 \times 8$ grid world. Blue grids are obstacles, orange and green grids are forbidden regions.}}
-% \end{figure}
-
-% \begin{definition}\label{def:secured-plan}
-%   A multi-robot trajectory plan is secure again plan-deviation attacks if it ensures that any potential deviations to these forbidden regions will cause the corresponding robot to miss their next co-observation with other robots. 
-% \end{definition}
-
-{\news In the absence of further security requirements, the robots are expected to spread out and follow a boustrophedon pattern, efficiently exploring as much of the task space as possible (as illustrated in~\cref{fig:SecurityBreak}). This exploration strategy optimizes coverage and minimizes reconstruction uncertainty across the field. }To incorporate the security against malicious deviations (through co-observation and reachability analysis) as constraints in the optimal trajectory planning problem, we define the security as:
+{\news Ideally, robots are expected to spread out in a boustrophedon pattern to efficiently explore the task space, optimizing coverage and minimizing reconstruction uncertainty (\cref{fig:SecurityBreak}). To address potential threats, we adopt the \emph{physical masquerade attacks} framework from~\cite{wardega2019resilience}, where a compromised insider (robot) masquerading as a properly functioning robot, attempting to gain access to unauthorized locations without detection. The attacker leverages full knowledge of the motion plan and exploits the compromised robot to provide false self-reports to the central entity (CE). These malicious deviations remain undetected as long as the self-reports from uncompromised robots align with the motion plan. The corresponding security requirement can then be formally defined as:}
 \begin{definition}\label{def:secured-plan}
   A multi-robot trajectory plan is \new{secured against} plan-deviation attacks if it \new{ensures} that any potential deviations to these forbidden regions will cause the corresponding robot to miss their next co-observation with other robots. 
 \end{definition}
@@ -523,9 +507,9 @@ The simulation result, shown in Fig.~\ref{fig:ReachabilitySimulation}, displays 
 \begin{figure}
   \centering
   % \subfloat[Grid-world trajectory. \label{fig:Grid-example-application}]{\includegraphics[width=0.45\linewidth, trim = 2cm 0.5cm 0cm 2cm]{Kacper_result}}
-  \subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.45\linewidth,valign=c]{Grid_world}}
+  \subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.45\linewidth,trim =0cm 0cm 0cm 0cm, clip,valign=t]{Grid_world}}
   % \subfloat[Continuous world trajectory \label{fig:SecurityBreak}]{\includegraphics[width=0.45\linewidth,valign=c]{SecurityBreak_v2}}
-  \subfloat[Securd result \label{fig:ReachabilitySimulation}]{\includegraphics[width=0.52\linewidth,trim =2cm 1.5cm 2cm 1cm, clip,valign=c]{FinalResult}}
+  \subfloat[Securd result \label{fig:ReachabilitySimulation}]{\includegraphics[width=0.52\linewidth,trim =2cm 1.5cm 2cm 1.5cm, clip,valign=t]{FinalResult}}
   \caption{{\news Trajectory design a three-robot system based on the grid world result. Zone 1 is an obstacle, Zone 2 and Zone 3 are forbidden regions. (\ref{fig:Grid-example-application}) Result of the APMAPF algorithm in 8$\times$8 grid-world without map exploring objective. (\ref{fig:ReachabilitySimulation}) The secured trajectory with the incorporation of co-observation generated by APMAPF and additional reachability constraints.}}
   \label{fig:example-application}
 \end{figure}

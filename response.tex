@@ -52,7 +52,7 @@
 
 \newtheorem{constraint}{ADMM constraint}
 \newtheorem{example}{Example}
-\newcommand{\re}{\tcblower \underline{\textbf{Response:}}}
+\newcommand{\re}{\tcblower \underline{\textbf{Response:}}\quad}
 \newcommand{\rv}{{\large{\underline{\textbf{Revision:}}}}\quad}
 \usepackage[export]{adjustbox} 
 \usepackage[capitalise]{cleveref}
@@ -135,7 +135,10 @@ Ziqi Yang, Roberto Tron
 	% \subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.4	\linewidth]{Grid_world}}
 	\caption{\new{(2a) Illustration of a 3 robot map exploration task case. (2b) The unsecured trajectory design optimized for a map exploration task. Potential security breaches, indicated by red dashed lines, highlight paths that could allow unauthorized access to forbidden regions.}}
 \end{figure}
-{\news In the absence of further security requirements, the robots are expected to spread out and follow a boustrophedon pattern, efficiently exploring as much of the task space as possible (as illustrated in Fig.2b). This exploration strategy optimizes coverage and minimizes reconstruction uncertainty across the field. }
+{\news Ideally, robots are expected to spread out in a boustrophedon pattern to efficiently explore the task space, optimizing coverage and minimizing reconstruction uncertainty (\cref{fig:SecurityBreak}). To address potential threats, we adopt the \emph{physical masquerade attacks} framework from [2], where a compromised insider (robot) masquerading as a properly functioning robot, attempting to gain access to unauthorized locations without detection. The attacker leverages full knowledge of the motion plan and exploits the compromised robot to provide false self-reports to the central entity (CE). These malicious deviations remain undetected as long as the self-reports from uncompromised robots align with the motion plan. The corresponding security requirement can then be formally defined as:}
+\begin{definition}\label{def:secured-plan}
+  A multi-robot trajectory plan is \new{secured against} plan-deviation attacks if it \new{ensures} that any potential deviations to these forbidden regions will cause the corresponding robot to miss their next co-observation with other robots. 
+\end{definition}
 
 
 %%%%%%%%%%%%% Comment 1.2
@@ -452,6 +455,7 @@ In practical application, (4a) is solved iteratively via a nonlinear optimizatio
 	\re $d_{max}$ is the maximum distance between a pair of robots that the secure can be ensured through co-observation.
 \end{cmt}
 \setcounter{constraint}{0}
+\setcounter{equation}{6}
 \rv \begin{constraint}[Co-observation constraint]\label{constraint:coobservation}
 	\begin{align}
 	D(\vq) &= \overrightarrow{q_{aj}q_{bj}}, \label{eq:coobservation_constraint}\\
@@ -462,7 +466,7 @@ In practical application, (4a) is solved iteratively via a nonlinear optimizatio
 	\end{cases}
 	\end{align}
 	where $a,b$ are the indices of the pair of agents required for a mutual inspection, \new{$d_{max}$ is the maximum distance between a pair of robots that the secure can be ensured through co-observation.}
-	\end{constraint}
+	\end{constraint}	
 
 \begin{cmt}{}{}
 	In Definition 4, it is unclear that $\mathcal E$ is an ellipsoid. There is no definition of the function $d(\cdot,\cdot)$;
@@ -478,4 +482,143 @@ For simplicity, in this paper we consider only a maximum velocity constraint $v_
 	The \emph{reachability ellipsoid $\cE$} is defined as the region $\mathcal{E}(q_1,q_2,t_{1},t_{2})=\{\tilde{q}\in\mathbb{R}^n: d(q_1,\tilde{q})+d(\tilde{q},q_2)<2a\}$, where $a=\frac{v_{max}}{2}(t_2-t_1)$, and $d(\cdot,\cdot)$ denotes the Euclidean distance between two points.
 \end{definition}
 This region is an ellipsoid because it represents the set of points $q'$ whose sum of distances two \emph{foci} $q_1$ and $q_2$ is less than $2a$, where a is the major radius of the ellipsoid. }
+
+\begin{cmt}{}{}
+	It is unclear about how to ensure the security. Where is the attack?
+	\re We have added a detailed description of the attacker model in the revised manuscript, outlining how a compromised robot attempts to gain unauthorized access while masquerading as legitimate. The mechanisms for ensuring security are formally described in Definition 1 and further extended in Definition 4 and Remark 2, which outline the requirements and constraints necessary to detect and mitigate such attacks effectively.
+\end{cmt}
+\rv {\news Ideally, robots are expected to spread out in a boustrophedon pattern to efficiently explore the task space, optimizing coverage and minimizing reconstruction uncertainty (\cref{fig:SecurityBreak}). To address potential threats, we adopt the \emph{physical masquerade attacks} framework from [2], where a compromised insider (robot) masquerading as a properly functioning robot, attempting to gain access to unauthorized locations without detection. The attacker leverages full knowledge of the motion plan and exploits the compromised robot to provide false self-reports to the central entity (CE). These malicious deviations remain undetected as long as the self-reports from uncompromised robots align with the motion plan. The corresponding security requirement can then be formally defined as:}
+\setcounter{definition}{0}
+\begin{definition}\label{def:secured-plan}
+  A multi-robot trajectory plan is \new{secured against} plan-deviation attacks if it \new{ensures} that any potential deviations to these forbidden regions will cause the corresponding robot to miss their next co-observation with other robots. 
+\end{definition}
+\setcounter{definition}{3}
+\setcounter{remark}{1}
+
+{\news The condition that a reachability ellipsoid $\cE(q_1,q_2)$ does not intersect with any forbidden region is sufficient to secure the trajectory of the robot between $q_1$ and $q_2$ according to \cref{def:secured-plan}: any deviation to a point $p_o$ outside $\cE(q_1,q_2)$ will cause the robot to miss a potential observation at $p_2$, $t_2$. \cref{def:secured-plan} can then be restated as follows:
+\begin{definition}\label{rmk:revised-security}
+  A multi-robot trajectory is secured against plan-deviation attacks if there exists a co-observation plan such that the reachability region between each consecutive co-observation does not intersect with any forbidden regions.
+\end{definition}
+}
+
+{\news To ensure the security of the reference trajectory, the reachability region between consecutive checkpoints must avoid intersections with forbidden regions. This requirement can be formally stated as:
+\begin{remark}\label{rmk:checkpoints}
+  A set of checkpoints $V_{p}=\{ v_{p0}, \dots ,v_{pT}\}$ (arranged in ascending order of $t_{v_{pi}}$) can secure the reference trajectory for sub-team $p$, if $\mathcal{E}(q_{v_{pi}}, q_{v_{p(i+1)}}, t_{v_{pi}},t_{v_{p(i+1)}}) \intersect F = \emptyset$ for every $i$, where $F$ is the union of all forbidden regions.
+  \end{remark}
+}
+\begin{cmt}{}{}
+	Please check the reference format carefully.
+	\re Thank you for pointing this out. We have carefully reviewed and revised the reference format in the manuscript to ensure consistency and compliance with the journal's guidelines.
+\end{cmt}
+\newpage
+\section{Response to reviewer 3} 
+\begin{cmt}{}
+	Please check the grammar and typos, here are some within the first two pages:
+	\dots
+	I stop marking these typos after page 2, but please do a careful proof-read of your own paper. 
+	\re  We sincerely apologize for the grammatical mistakes in the initial submission and acknowledge the importance of presenting our work with clarity and professionalism. In the revised version, we have been extra careful to address all grammar issues and have implemented thorough proofreading to minimize similar mistakes in future submissions. We greatly appreciate your patience and constructive feedback, which have been invaluable in improving the quality of our manuscript.
+\end{cmt}
+\begin{cmt}{}{}
+	Some definitions and symbols are not clearly explained:
+	1) First paragraph of Sec 2: the dimension of $q$ should be $n_p*m*T$
+	right? Further, how is it aggregated? In what order?	
+	\re In the revised manuscript, we have clarified that the dimension of $q$ have been clearified and have further explained the aggregation process.
+\end{cmt}
+\rv {\news We denote the trajectory as $\vq_i = [q_{i0}\dots q_{iT}]\in\real{m\times T}$, where $q_{ij}\in\real{m}$ is the waypoint of agent $i$ in a $m$ dimensional state space, $T$ is the time horizon. For a total of $n_p$ robots, trajectories can be represented as an aggregated vector $\vq = \stack(\vq_1,\dots,\vq_{n_p})\in \real{m n_p\times T}$, where $\stack(\cdot)$ denotes the vertical stacking operation. }
+\begin{cmt}{}{}
+	Def 2: what is $\hat v_F$ and $\hat v_\epsilon$? Also $v_F$ and $v_e$ are defined later, so not proper to use here. 
+	\re We acknowledge that in Definition 2 (Definition 9 in the revised manuscript) $\hat v_F$ and $\hat v_\epsilon$ were typographical errors and have been corrected in the revised manuscript. Additionally, the terms $v_F$ and $v_e$ have been modified to ensure proper introduction and to avoid confusion.
+\end{cmt}
+\setcounter{definition}{8}
+\setcounter{equation}{41}
+\rv 
+{\news 
+\begin{definition} Let $\nu_1$ and $\nu_2$ be two unitary vectors ($\norm{\nu_1}=\norm{\nu_2}=1$). Define the normalized vector $u = \frac{\nu_1+\nu_2}{\norm{\nu_1+\nu_2}}$,
+	% \begin{equation}
+	%   u=\nu_1+\nu_2,\quad u =\frac{u'}{\norm{u'}}.
+	% \end{equation}
+  the \emph{Householder rotation} $H(\nu_1,\nu_2)$ is defined as
+	\begin{equation}\label{eq:H definition}
+	  H(\nu_1,\nu_2) = 2 u u\transpose-I.
+	\end{equation}
+  \end{definition}}
+
+  \begin{cmt}{}{}
+	3) What is the difference between lowercase letters and bold-type
+lowercase letters? If bold-type denotes vectors, then why $x(t)$ in
+eq(2), u, v's in eq (3) not in bold-type?  
+\re We apologize for the confusion regarding the notation. To address this, we have added additional clarification in the revised manuscript. Specifically, we use non-bold symbols to denote single-agent states (e.g. $q_{ij}$) and scalars, while bold symbols represent aggregated states of a single robot or multiple robots (e.g., $\vq$). This distinction has been made explicit to avoid further ambiguity.
+  \end{cmt}
+  \rv {\news 
+  \noindent\myparagraph{Notation} 
+  In this paper, we use non-bold symbols like to denote single-agent states (e.g. $q_{ij}$) and scalers, while bold symbols represent aggregated states of single robot and multiple robots (e.g. $\vq$). }
+  
+  \begin{cmt}{}{}
+3)	Def 3: the 'workspace' is not specified before. The function
+d(q1,q2) is not defined. Further, this def is confusing, do you want to
+say that the reachability region is the union of all trajectory states,
+such that starting from q(t1) = q1, you are able to reach q(t2) = q2
+while satisfying the speed constraints?  
+
+4) Def 4: what is $v_{maq}$? Why is the ellipsoid an
+over-approximation of reachability region? 
+\re Thank you for pointing out the issues on Definition 3 (Definition 2 in the new manuscript). In the revised manuscript, we have modified the term 'workspace' for clarity, refined the definition to avoid confusion, and added a detailed description of the function $ d(q_1, q_2)$, which represents the Euclidean distance between $q_1$  and  $q_2$ . These changes aim to ensure the definition accurately conveys that the reachability region is the union of all trajectory states satisfying the specified conditions.
+
+As for Defnintion 4 (Definition 3 in the new manuscript), we acknowledge that the term $v_{maq}$ as a typographical error, and it has been corrected to $v_{max}$ in the revised manuscript. Additionally, we have provided a more detailed explanation to clarify why the ellipsoid is an over-approximation of the reachability region. Specifically, it represents the set of points $q'$ whose sum of distances two foci $q_1$ and $q_2$ is less than $2a$, where a is the major radius of the ellipsoid.
+  \end{cmt}
+  \setcounter{definition}{1}
+  \rv {\news
+  \begin{definition}\label{sec:ellipsoidal definition}
+  Consider a robot $i$ starting from $q_{1}$ at time $t_1$ and reaching $q_{2}$ at time $t_2$. The \emph{reachability region} between $t_1$ and $t_2$ is defined as the set of points $q'$ in the free configuration space for which there exists a kinematically feasible trajectory containing $q'$.
+  \end{definition}
+  
+  For simplicity, in this paper we consider only a maximum velocity constraint $v_{max}$; the reachability region for $q'$ can then be over-approximated by the following (the over-approximation is obtained by neglecting physical obstacles):
+  \begin{definition}\label{def:Reachability}
+	  The \emph{reachability ellipsoid $\cE$} is defined as the region $\mathcal{E}(q_1,q_2,t_{1},t_{2})=\{\tilde{q}\in\mathbb{R}^n: d(q_1,\tilde{q})+d(\tilde{q},q_2)<2a\}$, where $a=\frac{v_{max}}{2}(t_2-t_1)$, and $d(\cdot,\cdot)$ denotes the Euclidean distance between two points.
+  \end{definition}
+  This region is an ellipsoid because it represents the set of points $q'$ whose sum of distances two \emph{foci} $q_1$ and $q_2$ is less than $2a$, where a is the major radius of the ellipsoid. }
+
+  \begin{cmt}{}{}
+	 Fig 3: legends are too small. 
+	\re We acknowledge that the legends and other aspects of the figures in the original manuscript were not clear. In the revised manuscript, we have addressed these issues by replotting the figures, including Figure 3, to ensure readability and clarity.
+  \end{cmt}
+  \rv \setcounter{figure}{1}
+  \begin{figure}[H]
+	  \centering
+	  \subfloat[\new{Map exploration task.}\label{fig:illustration}]{\includegraphics[width = 0.4\linewidth,valign=c]{illustration figure_1}} 
+	  \subfloat[Continuous world trajectory \label{fig:SecurityBreak}]{\includegraphics[width=0.4\linewidth,valign=c]{SecurityBreak_v2}}
+	  % \subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.4	\linewidth]{Grid_world}}
+	  \caption{\new{(2a) Illustration of a 3 robot map exploration task case. (2b) The unsecured trajectory design optimized for a map exploration task. Potential security breaches, indicated by red dashed lines, highlight paths that could allow unauthorized access to forbidden regions.}}
+  \end{figure}
+  \setcounter{figure}{3}
+  \begin{figure}[H]
+	\centering
+	% \subfloat[Grid-world trajectory. \label{fig:Grid-example-application}]{\includegraphics[width=0.4	\linewidth, trim = 2cm 0.5cm 0cm 2cm]{Kacper_result}}
+	\subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[width = 0.4	\linewidth,valign=c]{Grid_world}}
+	% \subfloat[Continuous world trajectory \label{fig:SecurityBreak}]{\includegraphics[width=0.4	\linewidth,valign=c]{SecurityBreak_v2}}
+	\subfloat[Securd result \label{fig:ReachabilitySimulation}]{\includegraphics[width=0.52\linewidth,trim =2cm 1.5cm 2cm 1cm, clip,valign=c]{FinalResult}}
+	\caption{{\news Trajectory design a three-robot system based on the grid world result. Zone 1 is an obstacle, Zone 2 and Zone 3 are forbidden regions. (\ref{fig:Grid-example-application}) Result of the APMAPF algorithm in 8$\times$8 grid-world without map exploring objective. (\ref{fig:ReachabilitySimulation}) The secured trajectory with the incorporation of co-observation generated by APMAPF and additional reachability constraints.}}
+	\label{fig:example-application}
+  \end{figure}
+  \begin{cmt}{}{}
+	4. The idea of the reachability ellipse seems very similar to another
+idea called 'safe flight corridor' from
+ "Liu, Sikang, et al. "Planning dynamically feasible trajectories for
+quadrotors using safe flight corridors in 3-d complex environments."
+IEEE Robotics and Automation Letters 2.3 (2017): 1688-1695." 
+What is this essential difference between these two methods? 
+\re Thank you for highlighting the potential similarity between the reachability ellipse and the Safe Flight Corridor (SFC) method. Our approach differs fundamentally in its purpose and application. Unlike the ellipsoids in IRIS and SFC, which are designed to approximate collision-free spaces, the reachability region in our method explicitly maps all reachable states given several known states (and regardless of collision) and is tailored to address security concerns.
+
+In the revised manuscript, we have included more detailed content to clarify this distinction and provide a comprehensive explanation of the differences between our approach and SFC.
+  \end{cmt}
+  \rv {\news Ellipsoids are also used in other path-planning methods like Iterative Regional Inflation by Semidefinite programming (IRIS) [24],[25] and the Safe Flight Corridor (SFC) [26],[27]. Differing from the reachability region that requires mapping all reachable states given several known states, the ellipsoids of IRIS and SFC focus on approximating the safe collision-free space rather than addressing security applications.}
+
+  {\news\noindent [24] R. Deits and R. Tedrake, “Computing large convex regions of obstacle- free space through semidefinite programming,” in Algorithmic Founda- tions of Robotics XI: Selected Contributions of the Eleventh International Workshop on the Algorithmic Foundations of Robotics. Springer, 2015, pp. 109–124.
+
+  \noindent[25] A. Ray, A. Pierson, and D. Rus, “Free-space ellipsoid graphs for multi- agent target monitoring,” in 2022 International Conference on Robotics and Automation (ICRA). IEEE, 2022, pp. 6860–6866.
+
+  \noindent[26] S. Liu, M. Watterson, K. Mohta, K. Sun, S. Bhattacharya, C. J. Taylor, and V. Kumar, “Planning dynamically feasible trajectories for quadrotors using safe flight corridors in 3-d complex environments,” IEEE Robotics and Automation Letters, vol. 2, no. 3, pp. 1688–1695, 2017.
+
+  \noindent[27] D. Fan, Q. Liu, C. Zhao, K. Guo, Z. Yang, X. Yu, and L. Guo, “Flying in narrow spaces: Prioritizing safety with disturbance-aware control,” IEEE Robotics and Automation Letters, 2024.
+  }
 \end{document}
