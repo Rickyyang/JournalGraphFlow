@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  12 DEC 2024 22:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  12 DEC 2024 22:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1243,12 +1243,12 @@ File: Figs//illustration figure_1.png Graphic file (type png)
 <use Figs//illustration figure_1.png>
 Package pdftex.def Info: Figs//illustration figure_1.png  used on input line 123.
 (pdftex.def)             Requested size: 113.39923pt x 98.2193pt.
-<Figs//SecurityBreak_v2.png, id=193, 1003.75pt x 1003.75pt>
-File: Figs//SecurityBreak_v2.png Graphic file (type png)
-<use Figs//SecurityBreak_v2.png>
-Package pdftex.def Info: Figs//SecurityBreak_v2.png  used on input line 124.
-(pdftex.def)             Requested size: 113.39923pt x 104.56874pt.
- [2 <./Figs//plan-deviation-v2.png> <./Figs//co-observ-v2.png> <./Figs//cross-traj-v2.png>] [3 <./Figs//illustration figure_1.png> <./Figs//SecurityBreak_v2.png (PNG copy)>]
+<Figs//SecurityBreak_v3.png, id=193, 501.7947pt x 501.7947pt>
+File: Figs//SecurityBreak_v3.png Graphic file (type png)
+<use Figs//SecurityBreak_v3.png>
+Package pdftex.def Info: Figs//SecurityBreak_v3.png  used on input line 124.
+(pdftex.def)             Requested size: 113.39923pt x 95.42717pt.
+ [2 <./Figs//plan-deviation-v2.png> <./Figs//co-observ-v2.png> <./Figs//cross-traj-v2.png>] [3 <./Figs//illustration figure_1.png> <./Figs//SecurityBreak_v3.png (PNG copy)>]
 <Figs//Reachability-v2.png, id=284, 437.74971pt x 307.9587pt>
 File: Figs//Reachability-v2.png Graphic file (type png)
 <use Figs//Reachability-v2.png>
@@ -1275,11 +1275,11 @@ File: Figs//Grid_world.pdf Graphic file (type pdf)
 <use Figs//Grid_world.pdf>
 Package pdftex.def Info: Figs//Grid_world.pdf  used on input line 513.
 (pdftex.def)             Requested size: 118.43983pt x 118.4403pt.
-<Figs//FinalResult-v2.png, id=374, 413.545pt x 390.45876pt>
+<Figs//FinalResult-v2.png, id=374, 416.9979pt x 394.5942pt>
 File: Figs//FinalResult-v2.png Graphic file (type png)
 <use Figs//FinalResult-v2.png>
 Package pdftex.def Info: Figs//FinalResult-v2.png  used on input line 515.
-(pdftex.def)             Requested size: 125.44006pt x 118.4403pt.
+(pdftex.def)             Requested size: 125.16396pt x 118.4403pt.
  [6 <./Figs//Grid_world.pdf> <./Figs//FinalResult-v2.png>]
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 576.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1pcr.fd
@@ -1369,7 +1369,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  119i,20n,111p,1551b,557s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (12 pages, 2042496 bytes).
+Output written on paper.pdf (12 pages, 2196998 bytes).
 PDF statistics:
  739 PDF objects out of 1000 (max. 8388607)
  619 compressed objects within 7 object streams
