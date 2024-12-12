@@ -66,18 +66,20 @@ We address security challenges in multi-robot systems (MRS) where adversaries ma
 
 
 \section{Introduction}\label{sec:introduction}
-Multi-robot systems (MRS) have found wide applications in various fields. Although offering numerous advantages, the distributed nature and dependence on network communication make the MRS vulnerable to cyber threats, such as unauthorized access, malicious attacks, and data manipulation \cite{brunner2010infiltrating}. This paper addresses a specific scenario in which robots are compromised by \new{physically masquerading} attackers and directed toward \emph{forbidden regions}, which may contain security-sensitive equipment or human workers. {\news A countermeasure to these \emph{plan-deviation attacks} \cite{wardega2019resilience, wardega2023byzantine, wardega2023hola} is to use the onboard sensing capabilities of the robots themselves to perform inter-robot \emph{co-observations} and detect unusual behavior.
+Multi-robot systems (MRS) have found wide applications in various fields. \new{Although offering numerous advantages, the distributed nature and dependence on network communication make the MRS vulnerable to cyber threats, such as unauthorized access, malicious attacks, and data manipulation \cite{brunner2010infiltrating}.} This paper addresses a specific scenario in which robots are compromised by \new{physically masquerading} attackers and directed toward \emph{forbidden regions}, which may contain security-sensitive equipment or human workers. {\news A countermeasure to these \emph{plan-deviation attacks} \cite{wardega2019resilience, wardega2023byzantine, wardega2023hola} is to use the onboard sensing capabilities of the robots themselves to perform inter-robot \emph{co-observations} and detect unusual behavior.
 These mutual observations establish a \emph{co-observation schedule} alongside the planned path, ensuring that any attempts by a compromised robot to violate safety constraints (such as transgressing into forbidden regions) would break the observation plan and be promptly detected.}
 
 A preliminary version of this approach is presented in \cite{yang2020multi,yang2021multi}. That work extended the grid-world solution from \cite{wardega2019resilience} to continuous configuration spaces, and incorporated the co-observation planning as constraints in \new{the alternating direction method of multipliers (ADMM)-based trajectory optimization solver to accommodate for more flexible objectives. However, such plans are not guaranteed to exist, and the secured trajectory always comes at the cost of overall system performance. As an extension of the previous works \cite{yang2020multi,yang2021multi}, we introduce reachability analysis and network flow to the security problem to find a balance between security and performance.}
-In this paper, we incorporate an additional reachability analysis during the planning phase, incorporating constraints based on sets of locations that agents could potentially reach, referred to as \emph{reachability regions}, as a novel perspective to the existing literature. This approach enforces an empty intersection between forbidden regions and the reachability region during trajectory optimization, preventing undetected attacks if an adversary gains control of the robots. We utilize an ellipsoidal boundary to constrain the search space and formulate the ellipsoid as the reachability region constraint. We present a mathematical formulation of the reachability regions \new{as spatio-temporal constraints} compatible with the solver in \cite{yang2020multi}. 
- we also address the feasibility and optimality challenges. For a MRS with unsecured optimal trajectories (without security constraints), we introduce redundant robots and formed them into \emph{sub-teams} with the original ones. These redundant robots are assigned to establish additional co-observations, termed \emph{cross-trajectory co-observations}, within and across different sub-teams. The proposed algorithm focuses on the movement plans for the additional robots, distinct from those dedicated to task objectives, indicating when they should stay with their current sub-team and when they should deviate to join another. This strategy allows sub-teams to preserve the optimal unsecured trajectories (as illustrated in \cref{fig:cross-traj-comparison-set}) without requiring the entire \emph{sub-team} to maintain close proximity to other teams during co-observation events. The cross-trajectory co-observation problem is transformed as a \new{Multi-Agent Pathfinding (MAPF)} problem on roadmap (represented as directed graph) and solved as a network flow problem \cite{yu2013multi}.
+
+In this paper, we incorporate additional reachability analysis during the planning phase, incorporating constraints based on sets of locations that agents could potentially reach, referred to as \emph{reachability regions}, as a novel perspective to the existing literature. This approach enforces an empty intersection between forbidden regions and the reachability region during trajectory optimization, preventing undetected attacks if an adversary gains control of the robots. We utilize an ellipsoidal boundary to constrain the search space and formulate the ellipsoid as the reachability region constraint. We present a mathematical formulation of the reachability regions \new{as spatio-temporal constraints} compatible with the solver in \cite{yang2020multi}. 
+
+\new{Furthermore, we address the feasibility and optimality challenges. For a MRS with unsecured optimal trajectories (without security constraints), we introduce redundant robots and formed them into \emph{sub-teams} with the original ones.} These redundant robots are assigned to establish additional co-observations, termed \emph{cross-trajectory co-observations}, within and across different sub-teams. The proposed algorithm focuses on the movement plans for the additional robots, distinct from those dedicated to task objectives, indicating when they should stay with their current sub-team and when they should deviate to join another. This strategy allows sub-teams to preserve the optimal unsecured trajectories (as illustrated in \cref{fig:cross-traj-comparison-set}) without requiring the entire \emph{sub-team} to maintain close proximity to other teams during co-observation events. The cross-trajectory co-observation problem is transformed as a \new{Multi-Agent Pathfinding (MAPF)} problem on roadmap (represented as directed graph) and solved as a network flow problem \cite{yu2013multi}.
 
 \begin{figure}
 	\centering
-    \subfloat[Plan-deviation attack\label{fig:example-plan-dev}]{\includegraphics[width = 0.32\linewidth]{plan-deviation}}
-    \subfloat[Co-observation \label{fig:example-co-observation}]{\includegraphics[width=0.32\linewidth]{co-observ}}
-    \subfloat[Cross-trajectory co-observation \label{fig:example-cross-traj}]{\includegraphics[width=0.32\linewidth]{cross-traj}}
+    \subfloat[Plan-deviation attack\label{fig:example-plan-dev}]{\includegraphics[width = 0.32\linewidth]{plan-deviation-v2}}
+    \subfloat[Co-observation \label{fig:example-co-observation}]{\includegraphics[width=0.32\linewidth]{co-observ-v2}}
+    \subfloat[Cross-trajectory co-observation \label{fig:example-cross-traj}]{\includegraphics[width=0.32\linewidth]{cross-traj-v2}}
     
     \caption{{\news \ref{fig:example-plan-dev} The attacker deviates the red robot into a forbidden region.\ref{fig:example-co-observation} Red and blue robots are scheduled to co-observe each other during the task, resulting in a new secured trajectory (solid lines) replacing the optimal ones (dashed line). \ref{fig:example-cross-traj} The blue team sends one robot to observe the red team (solid blue line) while having the rest of the robots follow the optimal trajectory.}\label{fig:cross-traj-comparison-set}}
 \end{figure}
@@ -174,7 +176,7 @@ Checking the primal residuals alongside the dual residuals
 after each iteration, the steps are reiterated until convergence when the primal and dual residuals are small, or divergence when primal and dual residuals remain large after a fixed number of iterations.
 {\news
 \begin{remark}
-In practical application, \eqref{eq:admm-mod-update-q} is solved iteratively via a nonlinear optimization solver such as \emph{fmincon} \rtron{Add ref}. The use of explicit gradients of the constraint functions (derived below) greatly enhances the solver's efficiency and accuracy (with respect to the use of numericall differentiation). At the same time, \eqref{eq:z-update} and~\eqref{eq:u-update} have closed form solutions.
+In practical application, \eqref{eq:admm-mod-update-q} is solved iteratively via a nonlinear optimization solver such as \emph{fmincon}~\cite{MATLAB:fmincon}. The use of explicit gradients of the constraint functions (derived below) greatly enhances the solver's efficiency and accuracy (with respect to the use of numericall differentiation). At the same time, \eqref{eq:z-update} and~\eqref{eq:u-update} have closed form solutions.
 \end{remark}
 }
 % \rtron{Maybe state here that (9a) is solved iteratively, while (9b) and (9c) are closed-form.}
@@ -267,11 +269,11 @@ For simplicity, in this paper we consider only a maximum velocity constraint $v_
 This region is an ellipsoid because it represents the set of points $q'$ whose sum of distances two \emph{foci} $q_1$ and $q_2$ is less than $2a$, where a is the major radius of the ellipsoid. }
  \begin{figure}
     \centering
-    \subfloat[Showcase of a reachability region\label{fig:EllipseConstraintExample}]{\includegraphics[width=0.47\linewidth, trim = 2cm 2.5cm 2cm 5cm]{Reachability}}
-    \subfloat[Point-ellipsoid constraint \label{fig:Ellipse-to-point}]{\includegraphics[width=0.47\linewidth, trim = 0.3cm 1.3cm 0.3cm 1.3cm, clip]{Ellipse2point}}
+    \subfloat[Showcase of a reachability region\label{fig:EllipseConstraintExample}]{\includegraphics[width=0.47\linewidth]{Reachability-v2}}
+    \subfloat[Point-ellipsoid constraint \label{fig:Ellipse-to-point}]{\includegraphics[width=0.47\linewidth]{Ellipse2point-v2}}
 
-    \subfloat[Plane-ellipse constraint \label{fig:Ellipse-to-plane}]{ \includegraphics[width=0.47\linewidth, trim = 0.3cm 1cm 0.3cm 1cm, clip]{Ellipse2line_V2}}
-    \subfloat[Polygon-ellipse constraint \label{fig:Ellipse-to-safezone}]{\includegraphics[width=0.47\linewidth,trim = 0cm 1cm 0.3cm 0.5cm, clip]{Ellipse2safezone_V2}}
+    \subfloat[Plane-ellipse constraint \label{fig:Ellipse-to-plane}]{ \includegraphics[width=0.47\linewidth]{Ellipse2line-v3}}
+    \subfloat[Polygon-ellipse constraint \label{fig:Ellipse-to-safezone}]{\includegraphics[width=0.47\linewidth]{Ellipse2safezone-v3}}
 
     \caption{\news (\ref{fig:EllipseConstraintExample}) The black line is the planned trajectory, $q_1$ and $q_2$ are two co-observed locations where the robot are expected at given time $t_1$ and $t_2$, dashed lines show a possible trajectory of a compromised robot during the unobserved period. The axis of global frame $\cF$ and canonical frame $\cF_{\cE}$ are shown as $x_{\cF}, y_{\cF}$ and $x_{\cE}, y_{\cE}$ respectively. 
     (\ref{fig:Ellipse-to-point}) For point-ellipsoid constraint, $q_{avoid}$ is projected to the areas outside the ellipsoid to $q_{p}$. 
@@ -510,8 +512,8 @@ The simulation result, shown in Fig.~\ref{fig:ReachabilitySimulation}, displays 
   % \subfloat[Grid-world trajectory. \label{fig:Grid-example-application}]{\includegraphics[width=0.45\linewidth, trim = 2cm 0.5cm 0cm 2cm]{Kacper_result}}
   \subfloat[\new{Grid world result.}\label{fig:Grid-example-application}]{\includegraphics[height = 0.47\linewidth,trim =0cm 0cm 0cm 0cm, clip,valign=t]{Grid_world}}
   % \subfloat[Continuous world trajectory \label{fig:SecurityBreak}]{\includegraphics[width=0.45\linewidth,valign=c]{SecurityBreak_v2}}
-  \subfloat[Secured result \label{fig:ReachabilitySimulation}]{\includegraphics[height=0.47\linewidth,trim =2cm 1.8cm 2cm 1.5cm, clip,valign=t]{FinalResult}}
-  \caption{{\news Trajectory design a three-robot system based on the grid world result. Zone 1 is an obstacle, Zone 2 and Zone 3 are forbidden regions. (\ref{fig:Grid-example-application}) Result of the APMAPF algorithm in $8\times8$ grid-world without the map exploring objective. (\ref{fig:ReachabilitySimulation}) The secured trajectory with the incorporation of co-observation generated by APMAPF and additional reachability constraints.}}
+  \subfloat[Secured result \label{fig:ReachabilitySimulation}]{\includegraphics[height=0.47\linewidth,valign=t]{FinalResult-v2}}
+  \caption{{\news Trajectory design a three-robot system based on the grid world result. Zone 1 is an obstacle, Zone 2 and Zone 3 are forbidden regions. (\ref{fig:Grid-example-application}) Result of the APMAPF algorithm in $8\times8$ grid-world without the map exploring objective. (\ref{fig:ReachabilitySimulation}) The secured trajectory with the incorporation of co-observation generated by APMAPF and additional reachability constraints. Attack attempts into forbidden region (red dashed line) will cause team 1 miss next scheduled co-observation.}}
   \label{fig:example-application}
 \end{figure}
 
@@ -582,14 +584,35 @@ Our objective here is to ascertain the existence of feasible paths instead of op
 \subsection{Checkpoint graph construction}\label{sec:security-checkpoint}
 
 In this section, we define and search for security checkpoints and how to use \rrtstar{} to construct the checkpoint graph $G_{q}$.
-A heuristic approach is provided to locate the checkpoints on given trajectories (an optimal solution would likely be NP-hard, while the approach below works well enough for our purpose). %with a toy example shown in Figure \ref{fig:checkpoint-generate}. 
+{\news We use a heuristic approach (~\cref{alg:graph}) to locate the checkpoints on given trajectories. \cref{alg:graph} is applied independently to each sub-team to generate their initial checkpoints.” While an optimal solution would likely be NP-hard, this approach works well enough for our purpose.} %with a toy example shown in Figure \ref{fig:checkpoint-generate}. 
 
-{\news \rtron{Use enumerate} We begin by adding the start and end locations $(q_{p}(t_0),t_0)$, $(q_{p}(t_2),t_2)$ to $V_{p}$, with $t_{0}=0$, $t_2=T$ as \emph{start} and \emph{end verticies}. Then, we search for the largest $t_{1} \in \{t_{0}+1, \dots ,t_{2}\}$ such that the reachability ellipsoid between $q_{p}(t_{0})$ and $q_{p}(t_{1})$ has no overlap with any of the forbidden areas, i.e. $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{1}), t_{0},t_{1})\intersect F = \emptyset$. Then $(q_{p}(t_{1}),t_1)$ is added to $V_{p}$. Simultaneously, we search backward to find $q_{p}(t_{3})$ with the smallest $t_{3}\in \{t_{1},\dots,t_{2}-1\} $ that meets the reachability requirement $\mathcal{E}(q_{p}(t_{2}),q_{p}(t_{3}),t_{2},t_{3}) \intersect F = \emptyset$. Then $(q_{p}(t_{3}),t_3)$ is added to $V_{p}$. Finally, we set $t_{0}\leftarrow t_{1}$, $t_{2}\leftarrow t_{3}$ and repeat the same process. The search is stopped when $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{2}),t_{0},t_{2}) \intersect F = \emptyset$ or $t_{0}>t_{2}$. A toy example is shown in \cref{fig:checkpoint-generate}. }
+% {\news
+%   \begin{enumerate}
+%   \item Initialization: Add the start and end locations $(q_{p}(t_0),t_0)$, $(q_{p}(t_2),t_2)$ to $V_{p}$, where $t_{0}=0$, $t_2=T$ as \emph{start} and \emph{end verticies}.
+%   \item Forward search: Find the largest $t_{1} \in \{t_{0}+1, \dots ,t_{2}\}$ such that the reachability ellipsoid $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{1}), t_{0},t_{1})$ does not overlap with any of the forbidden areas $F$. Once found, add $(q_{p}(t_{1}),t_1)$ to $V_{p}$.
+%   \item Backward search: Find the smallest $t_{3}\in \{t_{1},\dots,t_{2}-1\}$ such that the reachability ellipsoid $\mathcal{E}(q_{p}(t_{2}),q_{p}(t_{3}),t_{2},t_{3})$ does not overlap with any of the forbidden areas $F$. Once found, add $(q_{p}(t_{3}),t_3)$ to $V_{p}$.
+%   \item Update indices: $t_{0}\leftarrow t_{1}$, $t_{2}\leftarrow t_{3}$.
+%   \item Repeat the process until: $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{2}),t_{0},t_{2}) \intersect F = \emptyset$ or $t_{0}>t_{2}$
+% \end{enumerate}}
+
+  \begin{algorithm}\label{alg:graph}
+  \caption{Checkpoint Graph Initialization for Team $\cI_p$}
+  {\news \begin{algorithmic}[1]
+  \State \textbf{Initialization:} Add $(q_{p}(t_0),t_0)$ and $(q_{p}(t_2),t_2)$ to $V_{p}$, where $t_{0} = 0$ and $t_{2} = T$, as \emph{start} and \emph{end vertices}.
+  \While{$\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{2}),t_{0},t_{2}) \cap F \neq \emptyset$ \textbf{and} $t_{0} \leq t_{2}$}
+      \State \textbf{Forward Search:} Find the largest $t_{1} \in \{t_{0}+1, \dots, t_{2}\}$ such that $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{1}), t_{0},t_{1}) \cap F = \emptyset$. Then add $(q_{p}(t_{1}),t_{1})$ to $V_{p}$.
+      \State \textbf{Backward Search:} Find the smallest $t_{3}\in\{t_{1}, \dots, t_{2}-1\}$ such that $
+      \mathcal{E}(q_{p}(t_{2}),q_{p}(t_{3}), t_{2},t_{3}) \cap F = \emptyset.$ Then add $(q_{p}(t_{3}),t_{3})$ to $V_{p}$.
+      \State \textbf{Update Indices:} Set $t_{0} \leftarrow t_{1}$ and $t_{2} \leftarrow t_{3}$.
+  \EndWhile
+  \end{algorithmic}}
+  \end{algorithm}
+% {\news We begin by adding the start and end locations $(q_{p}(t_0),t_0)$, $(q_{p}(t_2),t_2)$ to $V_{p}$, with $t_{0}=0$, $t_2=T$ as \emph{start} and \emph{end verticies}. Then, we search for the largest $t_{1} \in \{t_{0}+1, \dots ,t_{2}\}$ such that the reachability ellipsoid between $q_{p}(t_{0})$ and $q_{p}(t_{1})$ has no overlap with any of the forbidden areas, i.e. $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{1}), t_{0},t_{1})\intersect F = \emptyset$. Then $(q_{p}(t_{1}),t_1)$ is added to $V_{p}$. Simultaneously, we search backward to find $q_{p}(t_{3})$ with the smallest $t_{3}\in \{t_{1},\dots,t_{2}-1\} $ that meets the reachability requirement $\mathcal{E}(q_{p}(t_{2}),q_{p}(t_{3}),t_{2},t_{3}) \intersect F = \emptyset$. Then $(q_{p}(t_{3}),t_3)$ is added to $V_{p}$. Finally, we set $t_{0}\leftarrow t_{1}$, $t_{2}\leftarrow t_{3}$ and repeat the same process. The search is stopped when $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{2}),t_{0},t_{2}) \intersect F = \emptyset$ or $t_{0}>t_{2}$. A toy example is shown in \cref{fig:checkpoint-generate}. }
 
 \begin{figure}
 	\centering
-    \subfloat[]{\includegraphics[width=0.45\linewidth,trim = 1.7cm 2cm 1cm 2.7cm, clip,valign=c]{SC_gen_1}}
-    \subfloat[]{\includegraphics[width=0.45\linewidth,trim = 1.7cm 2cm 1cm 2.7cm, clip,valign=c]{SC_gen_2}}
+    \subfloat[]{\includegraphics[width=0.45\linewidth,valign=c]{SC_gen_1-v2}}
+    \subfloat[]{\includegraphics[width=0.45\linewidth,valign=c]{SC_gen_2-v2}}
     \caption{\news{Checkpoint generation example}}\label{fig:checkpoint-generate}
 \end{figure}
 
@@ -634,8 +657,8 @@ Cross-trajectory edges $E_c = (v_1, v_2)$ define viable paths between two refere
 
 \begin{figure}[htbp]
     \centering
-  \subfloat[Cross-trajectory edge generation\label{fig:two-edges}]{\includegraphics[width=0.45\linewidth,trim = 0cm 0cm 0cm 0cm, clip, valign=c]{two_edges}}
-  \subfloat[Full checkpoint graph\label{fig:security-graph-generate}]{\includegraphics[width=0.45\linewidth,trim = 0cm 0cm 0cm 0.2cm, clip, valign=c]{security_graph}}
+  \subfloat[Cross-trajectory edge generation\label{fig:two-edges}]{\includegraphics[width=0.45\linewidth,valign=c]{two_edges-v2}}
+  \subfloat[Full checkpoint graph\label{fig:security-graph-generate}]{\includegraphics[width=0.45\linewidth,valign=c]{security_graph-v2}}
   \caption{{\news (\ref{fig:two-edges}) The latest departure node $q^{d}_{b}$ found for $v_{r1}$ and the earliest arrival node $q^{a}_{b}$ found for $v_{r3}$. (\ref{fig:security-graph-generate}) A full checkpoint graph, where circles are checkpoints $V_p$, triangles are connection nodes $V_c$, colored arrows (red and blue) are trajectory edges $E_t$ and black arrows are cross-trajectory edges $E_c$.}}  
 \end{figure}
 

@@ -44,17 +44,17 @@ K.~Wardega, M.~von Hippel, R.~Tron, C.~Nita-Rotaru, and W.~Li, ``Byzantine
   with co-observations and horizon-limiting announcements,'' \emph{arXiv
   preprint arXiv:2301.10704}, 2023.
 
-\bibitem{yang2021multi}
-Z.~Yang and R.~Tron, ``Multi-agent trajectory optimization against
-  plan-deviation attacks using co-observations and reachability constraints,''
-  in \emph{2021 60th IEEE Conference on Decision and Control (CDC)}.\hskip 1em
-  plus 0.5em minus 0.4em\relax IEEE, 2021, pp. 241--247.
-
 \bibitem{yang2020multi}
-------, ``Multi-agent path planning under observation schedule constraints,''
-  in \emph{2020 IEEE/RSJ International Conference on Intelligent Robots and
-  Systems (IROS)}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2020, pp.
-  6990--6997.
+Z.~Yang and R.~Tron, ``Multi-agent path planning under observation schedule
+  constraints,'' in \emph{2020 IEEE/RSJ International Conference on Intelligent
+  Robots and Systems (IROS)}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE,
+  2020, pp. 6990--6997.
+
+\bibitem{yang2021multi}
+------, ``Multi-agent trajectory optimization against plan-deviation attacks
+  using co-observations and reachability constraints,'' in \emph{2021 60th IEEE
+  Conference on Decision and Control (CDC)}.\hskip 1em plus 0.5em minus
+  0.4em\relax IEEE, 2021, pp. 241--247.
 
 \bibitem{yu2013multi}
 J.~Yu and S.~M. LaValle, ``Multi-agent path planning and network flow,'' in
@@ -187,6 +187,11 @@ S.~Boyd, N.~Parikh, E.~Chu, B.~Peleato, J.~Eckstein \emph{et~al.},
   direction method of multipliers,'' \emph{Foundations and
   Trends{\textregistered} in Machine learning}, vol.~3, no.~1, pp. 1--122,
   2011.
+
+\bibitem{MATLAB:fmincon}
+{The MathWorks, Inc.}, \emph{MATLAB Optimization Toolbox}, The MathWorks, Inc.,
+  Natick, Massachusetts, 2024, version R2024b,
+  \url{https://www.mathworks.com/products/optimization.html}.
 
 \bibitem{eberly}
 \BIBentryALTinterwordspacing
