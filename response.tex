@@ -236,7 +236,7 @@ Our solution demonstrates the potential of planning with reachability and co-obs
 	clear, is it a design choice to make the constraints less conservative
 	than setting a single ellipsoid with the start and goal point?
 	\re 
-	The reachability ellipsoids are designed to work in conjunction with the co-observation technique. Instead of using a single ellipsoid defined by the start and goal points, the trajectory is divided into smaller ellipsoids based on co-observation times. This approach ensures that the constraints are aligned with the co-observation schedule, reducing conservativeness while maintaining security guarantees. We also make modification to Definition 4 (Remark 1 in the original manuscript) to make this more clear.
+	The reachability ellipsoids are designed to work in conjunction with the co-observation technique. Instead of using a single ellipsoid defined by the start and goal points, the ellipsoid are defined by smaller ellipsoids between two consecutive co-observation times. This approach ensures that the constraints are aligned with the co-observation schedule, reducing conservativeness while maintaining security guarantees. We also make modification to Definition 4 (Remark 1 in the original manuscript) to make this more clear.
 \end{cmt}
 \rv
 {\news \setcounter{definition}{3}
@@ -333,7 +333,6 @@ constraints, but what if the environment is the opposite? Do you get
 infeasible solution? It is very skeptical that the author is making
 deliberate assumptions to make the example work in a special case.
 \re We acknowledge the limitation of the method proposed in Section II, as it relies on the specific setup, and a safe solution is not always guaranteed to exist. This limitation is explicitly discussed in the manuscript. The chosen result is deliberate, not to make the example work in a special case, but to illustrate that even when APMAPF finds a solution in the grid world, such a plan may fail to guarantee security when transformed into the continuous domain, requiring further manual adjustments. In the revised version, we have further emphasized these limitations and the challenges they aim to address in the simulation results.
-Corre
 \end{cmt}
 \vspace{0.1cm}
 \rv
@@ -350,7 +349,7 @@ Our solution demonstrates the potential of planning with reachability and co-obs
 	p 8 - A heuristic approach is provided (Algorithm 1); Is it
 	almost impossible for the reader to decipher this algorithm without any
 	explanations in words.
-\re	We have replaced the algorithm with a more detailed and understandable word-based explanation to improve readability and make the approach easier to follow.
+\re	We have replaced the algorithm with more detailed and understandable prose to improve readability and make the approach easier to follow.
 \end{cmt}
 \rv {\news We begin by adding the start and end locations $(q_{p}(t_0),t_0)$, $(q_{p}(t_2),t_2)$ to $V_{p}$, with $t_{0}=0$, $t_2=T$ as \emph{start} and \emph{end verticies}. Then, we search for the largest $t_{1} \in \{t_{0}+1, \dots ,t_{2}\}$ such that the reachability ellipsoid between $q_{p}(t_{0})$ and $q_{p}(t_{1})$ has no overlap with any of the forbidden areas, i.e. $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{1}), t_{0},t_{1})\intersect F = \emptyset$. Then $(q_{p}(t_{1}),t_1)$ is added to $V_{p}$. Simultaneously, we search backward to find $q_{p}(t_{3})$ with the smallest $t_{3}\in \{t_{1},\dots,t_{2}-1\} $ that meets the reachability requirement $\mathcal{E}(q_{p}(t_{2}),q_{p}(t_{3}),t_{2},t_{3}) \intersect F = \emptyset$. Then $(q_{p}(t_{3}),t_3)$ is added to $V_{p}$. Finally, we set $t_{0}\leftarrow t_{1}$, $t_{2}\leftarrow t_{3}$ and repeat the same process. The search is stopped when $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{2}),t_{0},t_{2}) \intersect F = \emptyset$ or $t_{0}>t_{2}$. A toy example is shown in \cref{fig:checkpoint-generate}. }
 
