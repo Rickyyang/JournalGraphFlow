@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  12 DEC 2024 22:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  12 DEC 2024 23:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1306,12 +1306,12 @@ File: Figs//SC_gen_2-v2.png Graphic file (type png)
 Package pdftex.def Info: Figs//SC_gen_2-v2.png  used on input line 615.
 (pdftex.def)             Requested size: 113.39923pt x 74.10477pt.
 [7]
-<Figs//two_edges-v2.png, id=430, 387.42209pt x 183.87683pt>
+<Figs//two_edges-v2.png, id=431, 387.42209pt x 183.87683pt>
 File: Figs//two_edges-v2.png Graphic file (type png)
 <use Figs//two_edges-v2.png>
 Package pdftex.def Info: Figs//two_edges-v2.png  used on input line 660.
 (pdftex.def)             Requested size: 113.39923pt x 53.81952pt.
-<Figs//security_graph-v2.png, id=431, 509.25139pt x 176.13712pt>
+<Figs//security_graph-v2.png, id=432, 509.25139pt x 176.13712pt>
 File: Figs//security_graph-v2.png Graphic file (type png)
 <use Figs//security_graph-v2.png>
 Package pdftex.def Info: Figs//security_graph-v2.png  used on input line 661.
@@ -1361,15 +1361,15 @@ Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 75730349A9B09FA1D9BAFECB7D98E6FC;2423.
  ) 
 Here is how much of TeX's memory you used:
- 40459 strings out of 478268
- 795976 string characters out of 5846348
+ 40461 strings out of 478268
+ 795990 string characters out of 5846348
  1183936 words of memory out of 5000000
  57222 multiletter control sequences out of 15000+600000
- 536187 words of font info for 422 fonts, out of 8000000 for 9000
+ 536290 words of font info for 423 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 119i,20n,111p,1551b,557s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 119i,20n,111p,1550b,557s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (12 pages, 2196998 bytes).
+Output written on paper.pdf (12 pages, 2196961 bytes).
 PDF statistics:
  739 PDF objects out of 1000 (max. 8388607)
  619 compressed objects within 7 object streams

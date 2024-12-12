@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  10 DEC 2024 17:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.7)  13 DEC 2024 00:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1232,6 +1232,24 @@ LaTeX Warning: Label `def:Reachability' multiply defined.
 LaTeX Warning: Label `def:Reachability@cref' multiply defined.
 
 
+LaTeX Warning: Label `fig:illustration' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:illustration' multiply defined.
+
+
+LaTeX Warning: Label `fig:illustration@cref' multiply defined.
+
+
+LaTeX Warning: Label `fig:SecurityBreak' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:SecurityBreak' multiply defined.
+
+
+LaTeX Warning: Label `fig:SecurityBreak@cref' multiply defined.
+
+
 LaTeX Warning: Label `def:secured-plan' multiply defined.
 
 
@@ -1242,6 +1260,30 @@ LaTeX Warning: Label `rmk:revised-security' multiply defined.
 
 
 LaTeX Warning: Label `rmk:revised-security@cref' multiply defined.
+
+
+LaTeX Warning: Label `fig:Grid-example-application' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:Grid-example-application' multiply defined.
+
+
+LaTeX Warning: Label `fig:Grid-example-application@cref' multiply defined.
+
+
+LaTeX Warning: Label `fig:ReachabilitySimulation' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:ReachabilitySimulation' multiply defined.
+
+
+LaTeX Warning: Label `fig:ReachabilitySimulation@cref' multiply defined.
+
+
+LaTeX Warning: Label `fig:example-application' multiply defined.
+
+
+LaTeX Warning: Label `fig:example-application@cref' multiply defined.
 
 
 LaTeX Warning: Label `rmk:checkpoints' multiply defined.
@@ -1467,167 +1509,220 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 <Figs//illustration figure_1.png, id=82, 906.38625pt x 864.22874pt>
 File: Figs//illustration figure_1.png Graphic file (type png)
 <use Figs//illustration figure_1.png>
-Package pdftex.def Info: Figs//illustration figure_1.png  used on input line 133.
-(pdftex.def)             Requested size: 200.30441pt x 190.98807pt.
-<Figs//SecurityBreak_v2.png, id=84, 1003.75pt x 1003.75pt>
-File: Figs//SecurityBreak_v2.png Graphic file (type png)
-<use Figs//SecurityBreak_v2.png>
-Package pdftex.def Info: Figs//SecurityBreak_v2.png  used on input line 134.
-(pdftex.def)             Requested size: 200.30441pt x 200.30228pt.
- [2 <./Figs//illustration figure_1.png> <./Figs//SecurityBreak_v2.png (PNG copy)>] [3] [4] [5]
+Package pdftex.def Info: Figs//illustration figure_1.png  used on input line 134.
+(pdftex.def)             Requested size: 225.34438pt x 195.19264pt.
+<Figs//SecurityBreak_v3.png, id=84, 501.7947pt x 501.7947pt>
+File: Figs//SecurityBreak_v3.png Graphic file (type png)
+<use Figs//SecurityBreak_v3.png>
+Package pdftex.def Info: Figs//SecurityBreak_v3.png  used on input line 135.
+(pdftex.def)             Requested size: 225.34438pt x 189.62822pt.
+ [2 <./Figs//illustration figure_1.png> <./Figs//SecurityBreak_v3.png (PNG copy)>] [3] [4] [5]
 pdfTeX warning (ext4): destination with the same identifier (name{subfigure.2.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.295 	\subfloat
-                [\new{Map exploration task.}\label{fig:illustration}]{\inclu...
+l.301 	\subfloat
+                [\new{Map exploration task}\label{fig:illustration}]{\includ...
 File: Figs//illustration figure_1.png Graphic file (type png)
 <use Figs//illustration figure_1.png>
-Package pdftex.def Info: Figs//illustration figure_1.png  used on input line 295.
-(pdftex.def)             Requested size: 200.30441pt x 190.98807pt.
+Package pdftex.def Info: Figs//illustration figure_1.png  used on input line 301.
+(pdftex.def)             Requested size: 225.34438pt x 195.19264pt.
 
 pdfTeX warning (ext4): destination with the same identifier (name{subfigure.2.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.296 	\subfloat
-                [Continuous world trajectory \label{fig:SecurityBreak}]{\inc...
-File: Figs//SecurityBreak_v2.png Graphic file (type png)
-<use Figs//SecurityBreak_v2.png>
-Package pdftex.def Info: Figs//SecurityBreak_v2.png  used on input line 296.
-(pdftex.def)             Requested size: 200.30441pt x 200.30228pt.
-<Figs//Grid_world.pdf, id=141, 228.02188pt x 228.02188pt>
+l.302 	\subfloat
+                [Continuous world trajectory\label{fig:SecurityBreak}]{\incl...
+File: Figs//SecurityBreak_v3.png Graphic file (type png)
+<use Figs//SecurityBreak_v3.png>
+Package pdftex.def Info: Figs//SecurityBreak_v3.png  used on input line 302.
+(pdftex.def)             Requested size: 225.34438pt x 189.62822pt.
+<Figs//Reachability-v2.png, id=149, 437.74971pt x 307.9587pt>
+File: Figs//Reachability-v2.png Graphic file (type png)
+<use Figs//Reachability-v2.png>
+Package pdftex.def Info: Figs//Reachability-v2.png  used on input line 308.
+(pdftex.def)             Requested size: 235.3619pt x 165.58095pt.
+<Figs//Ellipse2point-v2.png, id=150, 149.22417pt x 95.24472pt>
+File: Figs//Ellipse2point-v2.png Graphic file (type png)
+<use Figs//Ellipse2point-v2.png>
+Package pdftex.def Info: Figs//Ellipse2point-v2.png  used on input line 309.
+(pdftex.def)             Requested size: 235.3619pt x 150.22775pt.
+<Figs//Ellipse2line-v3.png, id=151, 150.68745pt x 112.60326pt>
+File: Figs//Ellipse2line-v3.png Graphic file (type png)
+<use Figs//Ellipse2line-v3.png>
+Package pdftex.def Info: Figs//Ellipse2line-v3.png  used on input line 311.
+(pdftex.def)             Requested size: 235.3619pt x 175.89401pt.
+<Figs//Ellipse2safezone-v3.png, id=152, 155.91716pt x 133.87839pt>
+File: Figs//Ellipse2safezone-v3.png Graphic file (type png)
+<use Figs//Ellipse2safezone-v3.png>
+Package pdftex.def Info: Figs//Ellipse2safezone-v3.png  used on input line 312.
+(pdftex.def)             Requested size: 235.3619pt x 202.10606pt.
+<Figs//Grid_world.pdf, id=161, 228.02188pt x 228.02188pt>
 File: Figs//Grid_world.pdf Graphic file (type pdf)
 <use Figs//Grid_world.pdf>
-Package pdftex.def Info: Figs//Grid_world.pdf  used on input line 304.
-(pdftex.def)             Requested size: 200.30441pt x 200.30846pt.
-Package epstopdf Info: Source file: <Figs//FinalResult.eps>
-(epstopdf)                    date: 2024-01-19 15:31:18
-(epstopdf)                    size: 103803 bytes
-(epstopdf)             Output file: <Figs//FinalResult-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-01-19 15:31:18
-(epstopdf)                    size: 105831 bytes
-(epstopdf)             Command: <repstopdf --outfile=Figs//FinalResult-eps-converted-to.pdf Figs//FinalResult.eps>
-(epstopdf)             \includegraphics on input line 306.
-Package epstopdf Info: Output file is already uptodate.
-<Figs//FinalResult-eps-converted-to.pdf, id=142, 677.53125pt x 602.25pt>
-File: Figs//FinalResult-eps-converted-to.pdf Graphic file (type pdf)
-<use Figs//FinalResult-eps-converted-to.pdf>
-Package pdftex.def Info: Figs//FinalResult-eps-converted-to.pdf  used on input line 306.
-(pdftex.def)             Requested size: 260.40186pt x 245.33844pt.
-<Figs//old_result_v2.png, id=148, 1003.75pt x 803.0pt>
+Package pdftex.def Info: Figs//Grid_world.pdf  used on input line 323.
+(pdftex.def)             Requested size: 235.36617pt x 235.3619pt.
+<Figs//FinalResult-v2.png, id=163, 416.9979pt x 394.5942pt>
+File: Figs//FinalResult-v2.png Graphic file (type png)
+<use Figs//FinalResult-v2.png>
+Package pdftex.def Info: Figs//FinalResult-v2.png  used on input line 325.
+(pdftex.def)             Requested size: 248.73083pt x 235.3619pt.
+ [6]
+<Figs//old_result_v2.png, id=174, 1003.75pt x 803.0pt>
 File: Figs//old_result_v2.png Graphic file (type png)
 <use Figs//old_result_v2.png>
-Package pdftex.def Info: Figs//old_result_v2.png  used on input line 313.
+Package pdftex.def Info: Figs//old_result_v2.png  used on input line 332.
 (pdftex.def)             Requested size: 200.30441pt x 162.71825pt.
-<Figs//old_result_graph_v2.png, id=150, 1692.3225pt x 803.0pt>
+<Figs//old_result_graph_v2.png, id=176, 1692.3225pt x 803.0pt>
 File: Figs//old_result_graph_v2.png Graphic file (type png)
 <use Figs//old_result_graph_v2.png>
-Package pdftex.def Info: Figs//old_result_graph_v2.png  used on input line 314.
+Package pdftex.def Info: Figs//old_result_graph_v2.png  used on input line 333.
 (pdftex.def)             Requested size: 200.30441pt x 104.78537pt.
- [6]
-<Figs//Traj_result_v3.png, id=164, 501.875pt x 401.5pt>
+ [7 <./Figs//Reachability-v2.png> <./Figs//Ellipse2point-v2.png> <./Figs//Ellipse2line-v3.png> <./Figs//Ellipse2safezone-v3.png>]
+<Figs//Traj_result_v3.png, id=198, 501.875pt x 401.5pt>
 File: Figs//Traj_result_v3.png Graphic file (type png)
 <use Figs//Traj_result_v3.png>
-Package pdftex.def Info: Figs//Traj_result_v3.png  used on input line 322.
+Package pdftex.def Info: Figs//Traj_result_v3.png  used on input line 341.
 (pdftex.def)             Requested size: 200.30441pt x 173.47656pt.
-<Figs//7-team-plan_v2.png, id=166, 1003.75pt x 803.0pt>
+<Figs//7-team-plan_v2.png, id=200, 1003.75pt x 803.0pt>
 File: Figs//7-team-plan_v2.png Graphic file (type png)
 <use Figs//7-team-plan_v2.png>
-Package pdftex.def Info: Figs//7-team-plan_v2.png  used on input line 324.
+Package pdftex.def Info: Figs//7-team-plan_v2.png  used on input line 343.
 (pdftex.def)             Requested size: 200.30441pt x 173.47656pt.
- [7 <./Figs//FinalResult-eps-converted-to.pdf> <./Figs//old_result_v2.png (PNG copy)> <./Figs//old_result_graph_v2.png (PNG copy)> <./Figs//Grid_world.pdf
-
-pdfTeX warning: pdflatex (file ./Figs//Grid_world.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->] [8 <./Figs//Traj_result_v3.png (PNG copy)> <./Figs//7-team-plan_v2.png (PNG copy)>]
-
-LaTeX Warning: Reference `fig:checkpoint-generate' on page 1 undefined on input line 355.
-
-[9] [10]
-pdfTeX warning (ext4): destination with the same identifier (name{definition.9}) has been already used, duplicate ignored
+ [8 <./Figs//Grid_world.pdf> <./Figs//old_result_v2.png (PNG copy)> <./Figs//old_result_graph_v2.png (PNG copy)> <./Figs//FinalResult-v2.png>] [9 <./Figs//Traj_result_v3.png (PNG copy)> <./Figs//7-team-plan_v2.png (PNG copy)>]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 375.
+<Figs//SC_gen_1-v2.png, id=241, 420.34592pt x 275.5601pt>
+File: Figs//SC_gen_1-v2.png Graphic file (type png)
+<use Figs//SC_gen_1-v2.png>
+Package pdftex.def Info: Figs//SC_gen_1-v2.png  used on input line 389.
+(pdftex.def)             Requested size: 225.34438pt x 147.72383pt.
+<Figs//SC_gen_2-v2.png, id=242, 423.54153pt x 276.78918pt>
+File: Figs//SC_gen_2-v2.png Graphic file (type png)
+<use Figs//SC_gen_2-v2.png>
+Package pdftex.def Info: Figs//SC_gen_2-v2.png  used on input line 390.
+(pdftex.def)             Requested size: 225.34438pt x 147.26773pt.
+ [10 <./Figs//SC_gen_1-v2.png> <./Figs//SC_gen_2-v2.png>] [11] [12]
+pdfTeX warning (ext4): destination with the same identifier (name{definition.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.434 \rv {\news \begin{definition}
-                                    Let $\nu_1$ and $\nu_2$ be two unitary v... [11] [12]
+l.522 \begin{definition}
+                        \label{sec:ellipsoidal definition}
+pdfTeX warning (ext4): destination with the same identifier (name{definition.3}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.527 \begin{definition}
+                        \label{def:Reachability} [13]
+pdfTeX warning (ext4): destination with the same identifier (name{subfigure.2.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.545   \subfloat
+                 [\new{Map exploration task.}\label{fig:illustration}]{\incl...
+File: Figs//illustration figure_1.png Graphic file (type png)
+<use Figs//illustration figure_1.png>
+Package pdftex.def Info: Figs//illustration figure_1.png  used on input line 545.
+(pdftex.def)             Requested size: 225.34438pt x 195.19264pt.
+
+pdfTeX warning (ext4): destination with the same identifier (name{subfigure.2.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.546   \subfloat
+                 [Continuous world trajectory \label{fig:SecurityBreak}]{\in...
+File: Figs//SecurityBreak_v3.png Graphic file (type png)
+<use Figs//SecurityBreak_v3.png>
+Package pdftex.def Info: Figs//SecurityBreak_v3.png  used on input line 546.
+(pdftex.def)             Requested size: 225.34438pt x 189.62822pt.
+
 pdfTeX warning (ext4): destination with the same identifier (name{definition.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.492 \begin{definition}
+l.553 \begin{definition}
                         \label{def:secured-plan}
 pdfTeX warning (ext4): destination with the same identifier (name{definition.4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.499 \begin{definition}
+l.562 \begin{definition}
                         \label{rmk:revised-security}
-pdfTeX warning (ext4): destination with the same identifier (name{remark.2}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.505 \begin{remark}
-                    \label{rmk:checkpoints} [13]
-pdfTeX warning (ext4): destination with the same identifier (name{definition.9}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.536 \begin{definition}
-                         Let $\nu_1$ and $\nu_2$ be two unitary vectors ($\n... [14]
-pdfTeX warning (ext4): destination with the same identifier (name{definition.2}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.571   \begin{definition}
-                          \label{sec:ellipsoidal definition}
-pdfTeX warning (ext4): destination with the same identifier (name{definition.3}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.576   \begin{definition}
-                          \label{def:Reachability}
-pdfTeX warning (ext4): destination with the same identifier (name{subfigure.2.1}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.588 	  \subfloat
-                  [\new{Map exploration task.}\label{fig:illustration}]{\inc...
-File: Figs//illustration figure_1.png Graphic file (type png)
-<use Figs//illustration figure_1.png>
-Package pdftex.def Info: Figs//illustration figure_1.png  used on input line 588.
-(pdftex.def)             Requested size: 200.30441pt x 190.98807pt.
-
-pdfTeX warning (ext4): destination with the same identifier (name{subfigure.2.2}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.589 	  \subfloat
-                  [Continuous world trajectory \label{fig:SecurityBreak}]{\i...
-File: Figs//SecurityBreak_v2.png Graphic file (type png)
-<use Figs//SecurityBreak_v2.png>
-Package pdftex.def Info: Figs//SecurityBreak_v2.png  used on input line 589.
-(pdftex.def)             Requested size: 200.30441pt x 200.30228pt.
-
 pdfTeX warning (ext4): destination with the same identifier (name{subfigure.4.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.597 	\subfloat
-                [\new{Grid world result.}\label{fig:Grid-example-application...
+l.570   \subfloat
+                 [\new{Grid world result}\label{fig:Grid-example-application...
 File: Figs//Grid_world.pdf Graphic file (type pdf)
 <use Figs//Grid_world.pdf>
-Package pdftex.def Info: Figs//Grid_world.pdf  used on input line 597.
-(pdftex.def)             Requested size: 200.30441pt x 200.30846pt.
+Package pdftex.def Info: Figs//Grid_world.pdf  used on input line 570.
+(pdftex.def)             Requested size: 235.36617pt x 235.3619pt.
 
 pdfTeX warning (ext4): destination with the same identifier (name{subfigure.4.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.599 	\subfloat
-                [Securd result \label{fig:ReachabilitySimulation}]{\includeg...
-Package epstopdf Info: Source file: <Figs//FinalResult.eps>
-(epstopdf)                    date: 2024-01-19 15:31:18
-(epstopdf)                    size: 103803 bytes
-(epstopdf)             Output file: <Figs//FinalResult-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-01-19 15:31:18
-(epstopdf)                    size: 105831 bytes
-(epstopdf)             Command: <repstopdf --outfile=Figs//FinalResult-eps-converted-to.pdf Figs//FinalResult.eps>
-(epstopdf)             \includegraphics on input line 599.
-Package epstopdf Info: Output file is already uptodate.
-File: Figs//FinalResult-eps-converted-to.pdf Graphic file (type pdf)
-<use Figs//FinalResult-eps-converted-to.pdf>
-Package pdftex.def Info: Figs//FinalResult-eps-converted-to.pdf  used on input line 599.
-(pdftex.def)             Requested size: 260.40186pt x 245.33844pt.
- [15] [16] 
+l.572   \subfloat
+                 [Secured result. \label{fig:ReachabilitySimulation}]{\inclu...
+File: Figs//FinalResult-v2.png Graphic file (type png)
+<use Figs//FinalResult-v2.png>
+Package pdftex.def Info: Figs//FinalResult-v2.png  used on input line 572.
+(pdftex.def)             Requested size: 248.73083pt x 235.3619pt.
+ [14]
+pdfTeX warning (ext4): destination with the same identifier (name{remark.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.580 \begin{remark}
+                    \label{rmk:checkpoints} [15]
+pdfTeX warning (ext4): destination with the same identifier (name{definition.9}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.615 \begin{definition}
+                         Let $\nu_1$ and $\nu_2$ be two unitary vectors ($\n... [16]
+pdfTeX warning (ext4): destination with the same identifier (name{definition.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.650   \begin{definition}
+                          \label{sec:ellipsoidal definition}
+pdfTeX warning (ext4): destination with the same identifier (name{definition.3}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.655   \begin{definition}
+                          \label{def:Reachability}
+pdfTeX warning (ext4): destination with the same identifier (name{subfigure.2.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.667 	\subfloat
+                [\new{Map exploration task}\label{fig:illustration}]{\includ...
+File: Figs//illustration figure_1.png Graphic file (type png)
+<use Figs//illustration figure_1.png>
+Package pdftex.def Info: Figs//illustration figure_1.png  used on input line 667.
+(pdftex.def)             Requested size: 225.34438pt x 195.19264pt.
+
+pdfTeX warning (ext4): destination with the same identifier (name{subfigure.2.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.668 	\subfloat
+                [Continuous world trajectory\label{fig:SecurityBreak}]{\incl...
+File: Figs//SecurityBreak_v3.png Graphic file (type png)
+<use Figs//SecurityBreak_v3.png>
+Package pdftex.def Info: Figs//SecurityBreak_v3.png  used on input line 668.
+(pdftex.def)             Requested size: 225.34438pt x 189.62822pt.
+
+pdfTeX warning (ext4): destination with the same identifier (name{subfigure.4.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.676 	\subfloat
+                [\new{Grid world result}\label{fig:Grid-example-application}...
+File: Figs//Grid_world.pdf Graphic file (type pdf)
+<use Figs//Grid_world.pdf>
+Package pdftex.def Info: Figs//Grid_world.pdf  used on input line 676.
+(pdftex.def)             Requested size: 235.36617pt x 235.3619pt.
+
+pdfTeX warning (ext4): destination with the same identifier (name{subfigure.4.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.678 	\subfloat
+                [Secured result. \label{fig:ReachabilitySimulation}]{\includ...
+File: Figs//FinalResult-v2.png Graphic file (type png)
+<use Figs//FinalResult-v2.png>
+Package pdftex.def Info: Figs//FinalResult-v2.png  used on input line 678.
+(pdftex.def)             Requested size: 248.73083pt x 235.3619pt.
+ [17] [18] 
 AED: pageslts setting LastPage 
-[17]
+[19]
 No complaints by nag.
 \c@pagesLTS.arabic.1.local.count=\count439
 
@@ -1641,27 +1736,24 @@ Package pageslts Info: Total number of pages is odd.
 
 (./response.aux)
 
-LaTeX Warning: There were undefined references.
-
-
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `response.out' has not changed.
 (rerunfilecheck)             Checksum: ECD750F261DBAB4D9780B9A6C1CFE4FD;690.
  ) 
 Here is how much of TeX's memory you used:
- 47667 strings out of 478268
- 968322 string characters out of 5846348
- 1397288 words of memory out of 5000000
- 64677 multiletter control sequences out of 15000+600000
- 515117 words of font info for 225 fonts, out of 8000000 for 9000
+ 47759 strings out of 478268
+ 970561 string characters out of 5846348
+ 1398286 words of memory out of 5000000
+ 64757 multiletter control sequences out of 15000+600000
+ 515567 words of font info for 229 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 119i,20n,111p,1308b,584s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 119i,20n,111p,1308b,593s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on response.pdf (17 pages, 1547815 bytes).
+Output written on response.pdf (19 pages, 1983559 bytes).
 PDF statistics:
- 393 PDF objects out of 1000 (max. 8388607)
- 279 compressed objects within 3 object streams
- 96 named destinations out of 1000 (max. 500000)
- 43305 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 459 PDF objects out of 1000 (max. 8388607)
+ 320 compressed objects within 4 object streams
+ 114 named destinations out of 1000 (max. 500000)
+ 43341 words of extra memory for PDF output out of 51595 (max. 10000000)
 
