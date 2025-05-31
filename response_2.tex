@@ -1,0 +1,184 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Academic Paper Response Letter. 
+% LaTeX Template
+% Version 1.0 (20/07/2023)
+% 
+% This template refers to the toolbox tutorial (in Chinese):
+% https://liam.page/2016/07/22/using-the-tcolorbox-package-to-create-a-new-theorem-environment/
+% Please refer to the tutorial for your customization. 
+% 
+% Template license: Creative Commons CC BY 4.0
+%
+% Author: Yuhan Xie
+% Contact email: yhxie0107@gmail.com
+% Any revision advice is welcome!
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass{article}
+%% Language and font encodings
+\input{preamble/common}
+\usepackage[english]{babel}
+\usepackage{times} % make the section title in Times New Roman
+
+\usepackage{booktabs}
+\usepackage{tabu}
+\usepackage[T1]{fontenc}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=2.5cm,bottom=2cm,left=1.7cm,right=1.7cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+% \usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+% \usepackage{subfigure}
+\usepackage{float}
+\usepackage{threeparttable} 
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{xcolor}
+\pagenumbering{arabic}
+
+\usepackage[most]{tcolorbox}
+\newcommand{\rrtstar}{$\texttt{RRT}^\texttt{*}$}
+\newcommand{\SubItem}[1]{
+    {\setlength\itemindent{15pt} \item[-] #1}
+}
+
+\newtheorem{constraint}{ADMM constraint}
+\newtheorem{example}{Example}
+\newcommand{\re}{\tcblower \underline{\textbf{Response:}}\quad}
+\newcommand{\rv}{{\large{\underline{\textbf{Revision:}}}}\quad}
+\usepackage[export]{adjustbox} 
+\usepackage[capitalise]{cleveref}
+\usepackage{xcolor}
+\newcommand{\new}[1]{\textcolor{blue}{#1}}
+\newcommand{\news}{\color{blue}}
+\graphicspath{{Figs/}}
+
+
+
+\begin{document}
+	
+
+\newtcbtheorem[auto counter, number within = section]{cmt}{Comment}{
+	colbacktitle = black!60!white, colframe = black!60!white,
+	colback = black!5!white,
+	fonttitle=\bfseries,%fontupper=\itshape,
+}{t}
+
+
+
+\noindent
+Dear Editor and Reviewers:
+
+\vspace{0.2cm}
+\noindent
+We would like to express our sincere gratitude to the Editor-in-Chief, Associate Editor, and anonymous reviewers for their time and constructive feedback throughout the review process. Following the acceptance of our manuscript, we have carefully addressed the remaining minor issues related to typos, formatting, and clarity. All necessary corrections have been made, and the updated changes are highlighted in \new{blue} for clarity. We appreciate the opportunity to further improve the manuscript and are confident that these refinements contribute to a more polished and readable final version.
+
+\vspace{0.2cm}
+\noindent
+Yours sincerely,
+
+\noindent
+Ziqi Yang, Roberto Tron
+
+\vspace{1cm}
+\begin{cmt*}{}{}
+Some minor formatting adjustments have been made to ensure that the overall content remains within the page limit. These changes are purely presentational and do not affect the technical content of the paper.
+\end{cmt*}
+\rv 
+\textbf{Appendix B}
+\setcounter{proposition}{2}
+\begin{proposition}\label{prop:HProperty}
+ {\news The matrix $H$ has the following properties:
+  \begin{enumerate}
+  \item\label{it:rotation} It is a rotation, i.e. (a) $H\transpose H=I$; (b) $\det(H)=1$
+  % \begin{enumerate}
+  %   \item\label{it:orthonormality} $H\transpose H=I$;
+  %   \item\label{it:determinant} $\det(H)=1$.
+  %   \end{enumerate}
+  \item\label{it:transformation} $\nu_2=H \nu_1$.
+  \end{enumerate}}
+\end{proposition}
+\begin{proof}
+ {\news For subclaim~\ref{it:rotation}a,  since $u\transpose u=1$:
+  \begin{equation}
+    H\transpose H=H^2=4uu\transpose u u\transpose - 4uu\transpose +I^2=I.
+  \end{equation}}
+\end{proof}
+\newpage
+\section{Response to reviewer 1}
+\begin{cmt*}{}{}
+We thank the reviewer for their time and constructive feedback during the review process. We are pleased that no further comments were raised and appreciate their role in helping improve the quality of the manuscript.
+\end{cmt*}
+\vspace{0.2cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Rewiewer 1
+\section{Response to reviewer 2} 
+\begin{cmt*}{}{}
+We sincerely thank the reviewer for their constructive comments during the initial review, which significantly contributed to improving the quality of this paper. We also appreciate the reviewer’s acknowledgment of the improvements made in the previous revision. In this final round, we have carefully addressed the additional comments raised and made the necessary corrections in the manuscript. Our detailed responses are provided below.
+\end{cmt*}
+\vspace{0.1cm}
+%%%%%%%%%%%%% Comment 1.0
+\begin{cmt}{}{}        %% use * when do not need enumerate
+1. There still are some typos, eg., 
+
+   a) in Fig 4, the legend is Region 1 and Region 2, but in the text,
+you use Zone1 and Zone2.
+
+   b) Sec 2D, first paragraph, $q^{\epsilon} \in F^{\epsilon}$?
+	\re All typos mentioned have been fixed.
+\end{cmt}
+\rv 
+\textbf{Section II.D}
+
+\newcommand{\oFE}{o}
+To use the definition of reachability ellipsoid from the section above as computational constraints for ADMM, we first apply a differentiable rigid body transformation to reposition the ellipse $\cE$ from the global frame $\cF$ to a canonical frame $\cF_\cE$, where the origin of $\cF_\cE$ is at the ellipsoid's center $\oFE = \frac{1}{2}(q_1+q_2)$, and the first axis of $\cF_\cE$ is aligned with the foci (see \cref{fig:EllipseConstraintExample} for an illustration). 
+From this definition, a unit vector along the first axis of the ellipsoid in the frames $\cF$ and $\cF_\cE$ is given by $\nu_\cF = \frac{q_2-q_1}{\norm{q_2-q_1}}$ and $\nu_\cE =[1,0,0]^T$, respectively.
+The full transformation from coordinates \new{$q^\cE\in\cF_\cE$} to $q\in\cF$, and its inverse, are then parametrized by a rotation $R^\cF_\cE$ and a translation $o^\cF_\cE$ as (we drop the subscript and superscript from $R^\cF_\cE$ and $o^\cF_\cE$ to simplify the notation):\setcounter{figure}{3}
+\begin{figure}[h]
+  \centering
+  \subfloat[Grid world result\label{fig:Grid-example-application}]{\includegraphics[height = 0.3\linewidth,trim =0cm 0cm 0cm 0cm, clip,valign=t]{Grid_world}}
+  \subfloat[Secured result \label{fig:ReachabilitySimulation}]{\includegraphics[height=0.3\linewidth,valign=t]{FinalResult-v2}}
+  \caption{ Trajectory design of a three-robot system based on the grid world result. \new{Region} 1 is an obstacle, \new{region} 2 and \new{region} 3 are forbidden regions. (\ref{fig:Grid-example-application}) Result of the APMAPF algorithm in $8\times8$ grid-world without the map exploring objective. (\ref{fig:ReachabilitySimulation}) The secured trajectory with the incorporation of co-observation generated by APMAPF and additional reachability constraints. Attack attempts into the forbidden region (red dashed line) will cause team 1 miss the next scheduled co-observation.}
+  \label{fig:example-application}
+\end{figure}
+
+
+\textbf{Section II.H}
+
+The simulation result, shown in Fig.~\ref{fig:ReachabilitySimulation}, displays reachability regions as black ellipsoids, demonstrating empty intersections with \new{region} 2 and 3. Explicit constraints between reachability regions and obstacles are not activated, assuming basic obstacle avoidance capabilities in robots. The intersections between obstacles and ellipsoids, as observed between agent 3 and \new{region} 1, are deemed tolerable. All constraints are satisfied, and agents have effectively spread across the map for optimal exploration tasks. 
+\begin{cmt}{}{}
+	2. In algorithm 1, what is the reason for using $t_0 + 1$ and $t_2 - 1$? 
+	
+	3. In Fig 5, no explanation is made in the caption
+\re The algorithm aims to find the furthest waypoint such that the reachability region between waypoint at $t_0$ and a later waypoint that does not intersect with any forbidden region. Since evaluating the reachability region between the same waypoint (e.g., $t_0$ to $t_0$) is not meaningful, we exclude such cases and begin the search from $t_0 +1$ The same logic applies in the reverse direction, where we stop at $t_2 -1$ instead of including $t_2$. For better readability, we reorder the sequence of the variables ($v_0$ to $v_3$) and add additional indicator in the illustration figure (Fig.5).
+\end{cmt}
+\rv
+\setcounter{figure}{4}
+\begin{algorithm}
+	\caption{Checkpoint Graph Initialization for Team $\cI_p$}\label{alg:graph}
+  \begin{algorithmic}[1]
+	{\news \State \textbf{Initialization:} Set $t_{0} \leftarrow 0$ and $t_{3} \leftarrow T$, and add $(q_{p}(t_0),t_0)$ and $(q_{p}(t_3),t_3)$ to $V_{p}$ as \emph{start} and \emph{end vertices}.
+	\While{$\mathcal{E}(q_{p}(t_{0}),q_{p}(t_3),t_{0},t_3) \cap F \neq \emptyset$ \textbf{and} $t_{0} \leq t_3$}
+		\State \textbf{Forward Search:} Find the largest $t_{1} \in \{t_{0}+1, \dots, t_3\}$ such that $\mathcal{E}(q_{p}(t_{0}),q_{p}(t_{1}), t_{0},t_{1}) \cap F = \emptyset$. Once found, add $(q_{p}(t_{1}),t_{1})$ to $V_{p}$.
+		\State \textbf{Backward Search:} Find the smallest $t_2\in\{t_{1}, \dots, t_3-1\}$ such that $
+		\mathcal{E}(q_{p}(t_3),q_{p}(t_2), t_3,t_2) \cap F = \emptyset.$ Once found, add $(q_{p}(t_2),t_2)$ to $V_{p}$.
+		\State \textbf{Update Indices:} Set $t_{0} \leftarrow t_{1}$ and $t_3 \leftarrow t_2$.
+	\EndWhile}
+	\end{algorithmic}
+	\end{algorithm}
+\begin{figure}[h]
+	\centering
+    \subfloat{\includegraphics[width=0.47\linewidth,valign=c]{SC_gen_1_v3}}
+    \subfloat{\includegraphics[width=0.47\linewidth,valign=c]{SC_gen_2_v3}}
+    \caption{\news Example of \cref{alg:graph}. Start at both ends, each trajectory finds the largest reachability region avoiding forbidden areas, then repeats the process on remaining segments to build secure checkpoints.}\label{fig:checkpoint-generate}
+\end{figure}
+
+
+\end{document}
